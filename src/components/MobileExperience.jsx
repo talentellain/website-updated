@@ -75,6 +75,8 @@ const MobileExperience = () => {
             <img 
               src={leftMockup} 
               alt="Our Works View" 
+              loading="lazy"
+              decoding="async"
               style={{ 
                 width: '100%', 
                 height: 'auto', 
@@ -111,6 +113,8 @@ const MobileExperience = () => {
             <img 
               src={frontMockup} 
               alt="Main Experience View" 
+              loading="lazy"
+              decoding="async"
               style={{ 
                 width: '100%', 
                 height: 'auto', 
@@ -149,6 +153,8 @@ const MobileExperience = () => {
             <img 
               src={rightMockup} 
               alt="Contact View" 
+              loading="lazy"
+              decoding="async"
               style={{ 
                 width: '100%', 
                 height: 'auto', 

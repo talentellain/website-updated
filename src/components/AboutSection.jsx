@@ -34,7 +34,13 @@ const ExpertiseCard = ({ imgSrc, title, description }) => (
     }}
   >
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-      <img src={imgSrc} alt={title} style={{ maxWidth: '90%', maxHeight: '170px', objectFit: 'contain' }} />
+      <img 
+        src={imgSrc} 
+        alt={title} 
+        loading="lazy"
+        decoding="async"
+        style={{ maxWidth: '90%', maxHeight: '170px', objectFit: 'contain' }} 
+      />
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', marginTop: '1.25rem' }}>
       <h3 style={{ fontSize: '1rem', fontWeight: 500, color: 'white', margin: 0, fontFamily: 'Inter, sans-serif' }}>{title}</h3>

@@ -13,6 +13,7 @@ import socialVideo9 from '../assets/social9.mp4';
 import jeetVideo from '../assets/video/jeet-insta-01.mp4';
 import samikshaVideo from '../assets/video/samiksha.mp4';
 import manishVideo from '../assets/video/manish-insta.mp4';
+import whatsappVideoPortfolio from '../assets/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
 
 export const servicesData = [
   {
@@ -196,14 +197,6 @@ export const servicesData = [
         alt: 'Cinematic brand story — professional video production by TalentElla'
       },
       { 
-        id: 'sm4',
-        title: 'Lifestyle Aesthetics', 
-        description: 'Curated lifestyle feed management with consistent brand voice and engagement growth.', 
-        type: 'video',
-        content: socialVideo4,
-        alt: 'Lifestyle aesthetics social media feed — curated content management by TalentElla agency India'
-      },
-      { 
         id: 'sm5',
         title: 'Motion Design Reel', 
         description: 'Abstract motion graphics for a creative agency portfolio showcase.', 
@@ -242,6 +235,14 @@ export const servicesData = [
         type: 'video',
         content: socialVideo9,
         alt: 'Minimalist premium content — high-end social media design by TalentElla creative agency India'
+      },
+      { 
+        id: 'sm10',
+        title: 'Creative Showcase', 
+        description: 'Exclusive creative production showcasing brand excellence and cinematic storytelling.', 
+        type: 'video',
+        content: whatsappVideoPortfolio,
+        alt: 'Creative brand showcase — premium video production by TalentElla'
       }
     ],
     plans: [

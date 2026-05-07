@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import dentwise from '../assets/dentwise.png';
 import k72 from '../assets/K72.png';
 import onepiece from '../assets/onepiece.png';
+import whatsappVideo from '../assets/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
 
 const projects = [
   {
@@ -53,6 +54,14 @@ const projects = [
     image: onepiece,
     link: 'https://one-piece-eight-henna.vercel.app/',
     alt: 'One Piece Legacy immersive storytelling website — narrative web experience by TalentElla content marketing agency India',
+  },
+  {
+    id: '07',
+    client: 'Creative Production',
+    desc: 'Cinematic brand storytelling and high-end video production showcasing creative excellence.',
+    video: whatsappVideo,
+    link: '#',
+    alt: 'Creative Production showcase — premium video by TalentElla',
   }
 ];
 
@@ -175,6 +184,7 @@ const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects }
               muted
               loop
               playsInline
+              preload="metadata"
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
           ) : (

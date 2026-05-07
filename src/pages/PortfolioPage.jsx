@@ -38,6 +38,8 @@ const HorizontalWork = () => {
                   transition={{ duration: 0.6 }}
                   src={project.image} 
                   alt={project.title} 
+                  loading="lazy"
+                  decoding="async"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.8))', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', padding: '3rem' }}>
@@ -164,10 +166,17 @@ const PortfolioPage = () => {
                   <video 
                     src={p.content} 
                     autoPlay muted loop playsInline 
+                    preload="metadata"
                     style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} 
                   />
                 ) : (
-                  <img src={p.image || p.thumbnail} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} />
+                  <img 
+                    src={p.image || p.thumbnail} 
+                    alt={p.title} 
+                    loading="lazy"
+                    decoding="async"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} 
+                  />
                 )}
                 <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem' }}>
                   <h4 style={{ margin: 0, fontWeight: 700 }}>{p.title}</h4>

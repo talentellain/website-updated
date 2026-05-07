@@ -121,16 +121,16 @@ const PortfolioCard = ({
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
           <img 
             src={item.content} 
             alt={item.title} 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             loading="lazy"
             decoding="async"
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
           />
         )}
 
@@ -325,6 +325,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
                     autoPlay 
                     muted 
                     loop 
+                    preload="metadata"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 ) : (
