@@ -90,7 +90,7 @@ const Footer = () => {
                 zIndex: 1
             }}></div>
 
-            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: 'auto', marginBottom: 'auto' }}>
+            <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', marginTop: 'auto', marginBottom: 'auto', paddingTop: '6vh' }}>
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -101,7 +101,7 @@ const Footer = () => {
                         The Next Step
                     </span>
                     <h2 
-                        style={{ fontSize: 'clamp(3rem, 10vw, 7rem)', marginBottom: '4rem', lineHeight: 1, fontWeight: 800, letterSpacing: '-0.02em', color: '#121212' }}
+                        style={{ fontSize: 'clamp(3rem, 10vw, 7rem)', marginBottom: '4rem', lineHeight: 1, fontWeight: 800, letterSpacing: '-0.02em', color: '#121212', fontFamily: 'Syne, sans-serif' }}
                     >
                         Ready to <br /> Scale?
                     </h2>

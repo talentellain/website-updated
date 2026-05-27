@@ -8,6 +8,8 @@ import logo from '../assets/talentella-logo.png';
 const PAGE_LINKS = { 
     HOME: '/',
     PORTFOLIO: '/portfolio',
+    APP: '/app-development',
+    BLOG: '/blog',
     WEBSITE: '/services/website-development',
     'SMM': '/services/social-media-management',
     IDENTITY: '/services/visual-identity-design'
@@ -37,19 +39,19 @@ const MobileMenuItem = ({ item, index, handleNavClick }) => {
                 width: '100%',
                 position: 'relative',
                 overflow: 'hidden',
-                padding: '2.5rem 0',
+                padding: '1.4rem 0',
                 color: isHovered ? '#000000' : 'white', 
                 backgroundColor: isHovered ? '#ffffff' : 'transparent',
                 textDecoration: 'none',
-                borderBottom: '1px solid rgba(255,255,255,0.2)',
-                borderTop: index === 0 ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                borderBottom: '1px solid rgba(255,255,255,0.08)',
+                borderTop: index === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
                 transition: 'background-color 0.4s ease, color 0.4s ease',
                 display: 'block',
                 cursor: 'pointer'
             }}
         >
             {/* Base Text (visible when not hovered) */}
-            <div style={{ opacity: isHovered ? 0 : 1, transition: 'opacity 0.3s ease', fontSize: 'clamp(2rem, 8vw, 3rem)', fontWeight: 600, letterSpacing: '0.05em' }}>
+            <div style={{ opacity: isHovered ? 0 : 1, transition: 'opacity 0.3s ease', fontSize: 'clamp(1.2rem, 5vw, 1.8rem)', fontWeight: 700, letterSpacing: '0.08em' }}>
                 {item}
             </div>
 
@@ -79,7 +81,7 @@ const MobileMenuItem = ({ item, index, handleNavClick }) => {
                     {/* Repeat exactly elements so we can scroll perfectly 50% */}
                     {[...Array(6)].map((_, i) => (
                         <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ fontSize: 'clamp(2rem, 8vw, 3rem)', fontWeight: 600, letterSpacing: '0.05em', margin: '0 1.5rem', color: '#000000' }}>{item}</span>
+                            <span style={{ fontSize: 'clamp(1.2rem, 5vw, 1.8rem)', fontWeight: 700, letterSpacing: '0.08em', margin: '0 1.5rem', color: '#000000' }}>{item}</span>
                             <div style={{
                                 width: '70px',
                                 height: '35px',
@@ -244,7 +246,7 @@ const Navbar = () => {
                     transition: 'all 0.4s ease'
                 }}
             >
-                {['HOME', 'PORTFOLIO', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
+                {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
                     const isPageLink = !!PAGE_LINKS[item];
                     return isPageLink ? (
                         <Link
@@ -365,8 +367,8 @@ const Navbar = () => {
                             <X size={36} />
                         </button>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', textAlign: 'center', marginTop: '4rem' }}>
-                            {['HOME', 'PORTFOLIO', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => (
+                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', textAlign: 'center', overflowY: 'auto', flex: 1, justifyContent: 'center' }}>
+                            {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => (
                                 PAGE_LINKS[item] ? (
                                     <Link
                                         key={item}
@@ -374,15 +376,16 @@ const Navbar = () => {
                                         onClick={() => setIsOpen(false)}
                                         style={{
                                             width: '100%',
-                                            padding: '2.5rem 0',
+                                            padding: '1.4rem 0',
                                             color: 'white',
                                             textDecoration: 'none',
-                                            borderBottom: '1px solid rgba(255,255,255,0.2)',
-                                            borderTop: index === 0 ? '1px solid rgba(255,255,255,0.2)' : 'none',
+                                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                                            borderTop: index === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
                                             display: 'block',
-                                            fontSize: 'clamp(2rem, 8vw, 3rem)',
-                                            fontWeight: 600,
-                                            letterSpacing: '0.05em',
+                                            fontSize: 'clamp(1.2rem, 5vw, 1.8rem)',
+                                            fontWeight: 700,
+                                            letterSpacing: '0.08em',
+                                            transition: 'color 0.3s ease',
                                         }}
                                     >
                                         {item}
@@ -397,6 +400,23 @@ const Navbar = () => {
                                 )
                             ))}
                         </div>
+                        <Link to="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); setIsOpen(false); }} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
+                            <motion.div
+                                whileTap={{ scale: 0.95 }}
+                                style={{
+                                    padding: '0.9rem 2rem',
+                                    fontSize: '0.8rem',
+                                    fontWeight: 800,
+                                    borderRadius: '100px',
+                                    textAlign: 'center',
+                                    letterSpacing: '0.08em',
+                                    backgroundColor: '#a78bfa',
+                                    color: '#000',
+                                }}
+                            >
+                                GET IN TOUCH
+                            </motion.div>
+                        </Link>
                     </motion.div>
                 )}
             </AnimatePresence>

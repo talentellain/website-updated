@@ -79,16 +79,16 @@ const Home = () => {
         <motion.section 
           className="sticky-section"
           style={{
-            backgroundColor: '#050508', 
-            borderTop: '1px solid rgba(255,255,255,0.05)',
+            backgroundColor: '#ffffff', 
+            borderTop: '1px solid rgba(0,0,0,0.06)',
             height: '100dvh',
             overflow: 'hidden'
           }}
         >
           <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '2vh 0' }}>
             <div style={{ textAlign: 'center', marginBottom: '4rem', padding: '0 5%' }}>
-              <h2 className="hero-title-shimmer" style={{ fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1 }}>Production Portfolio</h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', marginTop: '0.5rem', fontSize: '0.9rem', maxWidth: '600px', marginInline: 'auto' }}>A deep dive into our creative storytelling and visual craftsmanship.</p>
+              <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1, color: '#121212' }}>Production Portfolio</h2>
+              <p style={{ color: 'rgba(0,0,0,0.5)', marginTop: '0.5rem', fontSize: '0.9rem', maxWidth: '600px', marginInline: 'auto' }}>A deep dive into our creative storytelling and visual craftsmanship.</p>
             </div>
             <SocialMediaPortfolio portfolio={smmPortfolio} />
           </div>

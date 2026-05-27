@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Check, Code, Share2, Palette, Settings, Zap, ArrowUpRight, Shield, Database, LifeBuoy, Rocket, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, Check, Code, Share2, Palette, Settings, Zap, ArrowUpRight, Shield, Database, LifeBuoy, Rocket, ChevronDown, ChevronUp, Smartphone } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import SEO from '../components/SEO';
 import Footer from '../components/Footer';
@@ -12,7 +12,8 @@ const iconMap = {
   Share2,
   Palette,
   Settings,
-  Zap
+  Zap,
+  Smartphone
 };
 
 /* ──────────────────────────────────────────────
@@ -23,8 +24,9 @@ const ServiceCard = ({ s }) => {
   const displayTitle = s.title.toUpperCase().split(' ').map((word, idx) => (
     <React.Fragment key={idx}>{word}<br /></React.Fragment>
   ));
+  const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
   return (
-    <Link to={`/services/${s.id}`} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }}>
+    <Link to={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }}>
       <div className="modern-service-card" style={{ position: 'relative', height: '100%', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '24px' }}>
         <div className="card-giant-text">{displayTitle}</div>
         <div className="card-hover-content">
@@ -472,7 +474,8 @@ const ServicePage = () => {
       <Footer />
 
       <style>{`
-        .services-grid-new { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        .services-grid-new { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        @media (max-width: 1024px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .services-grid-new { grid-template-columns: 1fr; } }
         .modern-service-card { background-color: #ebeae4; min-height: 400px; transition: background-color 0.4s ease; }
         @media (max-width: 768px) { .modern-service-card { min-height: 250px !important; } }

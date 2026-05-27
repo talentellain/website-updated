@@ -56,7 +56,7 @@ const Features = () => {
   }, []);
 
   return (
-    <section style={{ backgroundColor: '#000', padding: isMobile ? '60px 0' : '120px 5%', overflow: 'hidden' }}>
+    <section style={{ backgroundColor: '#000', padding: isMobile ? '40px 0' : '80px 5% 100px 5%', transform: isMobile ? 'none' : 'translateY(-20px)', overflow: 'hidden', width: '100%' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         
         {/* Bento Grid Layout */}

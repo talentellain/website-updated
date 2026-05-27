@@ -150,7 +150,7 @@ const Contact = () => {
                 viewport={{ once: false }}
                 transition={{ duration: 1 }}
               >
-                <h2 className="text-[clamp(3rem,10vw,7.5rem)] font-black leading-[0.85] uppercase tracking-tighter text-white m-0">
+                <h2 className="text-[clamp(3rem,10vw,7.5rem)] font-black leading-[0.85] uppercase tracking-tighter text-white m-0" style={{ fontFamily: 'Syne, sans-serif' }}>
                   {["LET'S", "GET IN", "TOUCH"].map((line, lineIdx) => (
                     <motion.div 
                       key={lineIdx} 

@@ -8,6 +8,9 @@ import ScrollToTop from './components/ScrollToTop';
 
 const ServicePage = React.lazy(() => import('./pages/ServicePage'));
 const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
+const AppPage = React.lazy(() => import('./pages/AppPage'));
+const BlogPage = React.lazy(() => import('./pages/BlogPage'));
+const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage'));
 
 /** Redirect from old /service/:id to new /services/:id URL structure */
 function ServiceRedirect() {
@@ -29,6 +32,9 @@ function App() {
               {/* Clean URL structure: /services/website-development */}
               <Route path="/services/:id" element={<ServicePage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/app-development" element={<AppPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:id" element={<BlogPostPage />} />
               {/* Redirect old /service/:id URLs to /services/:id for SEO */}
               <Route path="/service/:id" element={<ServiceRedirect />} />
             </Routes>

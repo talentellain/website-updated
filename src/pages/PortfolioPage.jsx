@@ -1,12 +1,9 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Filter } from 'lucide-react';
 import SEO from '../components/SEO';
 import Footer from '../components/Footer';
 import { servicesData } from '../data/servicesData';
-import { Link } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-
-// Project Assets
 import onepieceImg from '../assets/onepiece.png';
 import k72Img from '../assets/K72.png';
 import dentwiseImg from '../assets/dentwise.png';
@@ -21,182 +18,368 @@ const allFeatured = [
   { id: 7, title: 'Ring Portfolio', category: 'UX/UI DESIGN', image: '/projects/rig.png', link: 'https://ring-portfolio.vercel.app/' },
 ];
 
+const categoryColors = {
+  'E-COMMERCE': '#aa3bff',
+  'BRAND IDENTITY': '#00d2ff',
+  'WEB DEVELOPMENT': '#ffcc00',
+  'ENTERPRISE': '#ff3b3b',
+  'CREATIVE DEV': '#3bffaa',
+  'MOTION DESIGN': '#ff8c3b',
+  'UX/UI DESIGN': '#a78bfa',
+};
+
+const FloatingParticles = () => {
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    size: Math.random() * 4 + 1,
+    duration: Math.random() * 6 + 4,
+    delay: Math.random() * 4,
+  }));
+
+  return (
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
+      {particles.map((p) => (
+        <motion.div
+          key={p.id}
+          style={{
+            position: 'absolute',
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            borderRadius: '50%',
+            backgroundColor: 'rgba(170, 59, 255, 0.3)',
+          }}
+          animate={{ y: [0, -30, 0], opacity: [0.2, 0.6, 0.2] }}
+          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: 'easeInOut' }}
+        />
+      ))}
+    </div>
+  );
+};
+
 const HorizontalWork = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-85%"]);
+  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-85%']);
+  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.onChange((v) => {
+      const idx = Math.round(v * (allFeatured.length - 1));
+      setActiveIndex(Math.min(idx, allFeatured.length - 1));
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress]);
 
   return (
     <section ref={targetRef} style={{ height: '600vh', position: 'relative', backgroundColor: '#050505' }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <motion.div style={{ x, display: 'flex', gap: '4vw', padding: '0 5%' }}>
-          {allFeatured.map((project) => (
-            <div key={project.id} style={{ width: '70vw', flexShrink: 0, position: 'relative' }}>
-              <div style={{ position: 'relative', height: '60vh', width: '100%', overflow: 'hidden', borderRadius: '12px' }}>
-                <motion.img 
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.6 }}
-                  src={project.image} 
-                  alt={project.title} 
+          {allFeatured.map((project, i) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1, duration: 0.7 }}
+              style={{ width: '70vw', flexShrink: 0, position: 'relative' }}
+            >
+              <div style={{
+                position: 'relative',
+                height: '60vh',
+                width: '100%',
+                overflow: 'hidden',
+                borderRadius: '20px',
+                border: '1px solid rgba(255,255,255,0.06)',
+                boxShadow: activeIndex === i ? '0 20px 60px rgba(170,59,255,0.15)' : 'none',
+                transition: 'box-shadow 0.5s ease',
+              }}>
+                <motion.img
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  src={project.image}
+                  alt={project.title}
                   loading="lazy"
                   decoding="async"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent, rgba(0,0,0,0.8))', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', padding: '3rem' }}>
-                  <div>
-                    <span style={{ fontSize: '0.8rem', color: '#a78bfa', fontWeight: 800, letterSpacing: '0.2em' }}>{project.category}</span>
-                    <h3 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', color: 'white', fontWeight: 900, margin: '0.5rem 0' }}>{project.title}</h3>
-                  </div>
-                  
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
-                    <motion.div
-                      whileHover={{ scale: 1.05, backgroundColor: 'white', color: 'black' }}
-                      style={{ 
-                        padding: '1rem 2rem', 
-                        borderRadius: '100px', 
-                        border: '1px solid white', 
-                        color: 'white', 
-                        fontSize: '0.8rem', 
-                        fontWeight: 800,
-                        letterSpacing: '0.05em',
-                        transition: 'all 0.3s ease'
-                      }}
-                    >
-                      VISIT LIVE
-                    </motion.div>
-                  </a>
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, transparent 70%)',
+                  display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '3rem',
+                }}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                  >
+                    <div style={{
+                      display: 'inline-block',
+                      padding: '0.3rem 1rem',
+                      borderRadius: '100px',
+                      backgroundColor: `${categoryColors[project.category]}22`,
+                      border: `1px solid ${categoryColors[project.category]}44`,
+                      marginBottom: '0.8rem',
+                    }}>
+                      <span style={{ fontSize: '0.65rem', color: categoryColors[project.category], fontWeight: 800, letterSpacing: '0.15em' }}>
+                        {project.category}
+                      </span>
+                    </div>
+                    <h3 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', color: 'white', fontWeight: 900, margin: '0.3rem 0', letterSpacing: '-0.02em' }}>
+                      {project.title}
+                    </h3>
+                  </motion.div>
+
+                  <motion.a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 6 }}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: '0.6rem',
+                      color: 'rgba(255,255,255,0.7)', fontSize: '0.8rem', fontWeight: 600,
+                      textDecoration: 'none', marginTop: '1rem', cursor: 'pointer',
+                      width: 'fit-content',
+                    }}
+                  >
+                    View Project <ArrowUpRight size={14} />
+                  </motion.a>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
+      </div>
+
+      <div style={{
+        position: 'fixed', bottom: '3rem', left: '50%', transform: 'translateX(-50%)',
+        display: 'flex', alignItems: 'center', gap: '0.6rem', zIndex: 10,
+      }}>
+        {allFeatured.map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? '#aa3bff' : 'rgba(255,255,255,0.2)' }}
+            style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }}
+          />
+        ))}
       </div>
     </section>
   );
 };
 
+const categories = ['ALL', 'WEB DEVELOPMENT', 'BRAND IDENTITY', 'E-COMMERCE', 'MOTION DESIGN', 'UX/UI DESIGN', 'CREATIVE DEV'];
+
 const PortfolioPage = () => {
   const smmPortfolio = servicesData.find(s => s.id === 'social-media-management')?.portfolio || [];
+  const [activeFilter, setActiveFilter] = useState('ALL');
+  const [hoveredId, setHoveredId] = useState(null);
+
+  const filtered = activeFilter === 'ALL'
+    ? smmPortfolio
+    : smmPortfolio.filter(p => (p.category || 'Production').toUpperCase() === activeFilter);
 
   return (
     <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif' }}>
-      <SEO 
+      <SEO
         pageTitle="Immersive Portfolio | TalentElla Agency"
         description="Experience the future of digital marketing. Explore our award-winning work in branding, development, and social media."
       />
-      <Navbar />
 
-      {/* Hero Section */}
       <section style={{ height: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ 
-          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
-          background: 'radial-gradient(circle at 50% 50%, rgba(114, 38, 255, 0.15) 0%, transparent 70%)',
-          zIndex: 0
+        <FloatingParticles />
+        <div style={{
+          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+          background: 'radial-gradient(circle at 30% 50%, rgba(170, 59, 255, 0.12) 0%, transparent 60%), radial-gradient(circle at 70% 50%, rgba(0, 210, 255, 0.06) 0%, transparent 50%)',
+          zIndex: 1,
         }} />
-        
-        <div style={{ position: 'relative', zIndex: 1, textAlign: 'center', padding: '0 5%' }}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span style={{ fontSize: '0.8rem', color: '#a78bfa', fontWeight: 800, letterSpacing: '0.4em', textTransform: 'uppercase', display: 'block', marginBottom: '2rem' }}>[ curated showcase ]</span>
-            <h1 style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 900, letterSpacing: '-0.05em', lineHeight: 0.9, margin: 0, textTransform: 'uppercase' }}>
+
+        <div style={{ position: 'relative', zIndex: 2, textAlign: 'center', padding: '0 5%' }}>
+          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              style={{ fontSize: '0.75rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.4em', textTransform: 'uppercase', display: 'block', marginBottom: '1.5rem' }}
+            >
+              [ curated showcase ]
+            </motion.span>
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ fontSize: 'clamp(3rem, 10vw, 8rem)', fontWeight: 900, letterSpacing: '-0.05em', lineHeight: 0.9, margin: 0, textTransform: 'uppercase' }}
+            >
               Impactful<br />Works.
-            </h1>
+            </motion.h1>
           </motion.div>
-          
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '4rem', maxWidth: '1400px', marginInline: 'auto' }}>
-            <motion.p 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem', maxWidth: '300px', textAlign: 'left', lineHeight: 1.6 }}
-            >
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginTop: '3rem', maxWidth: '1200px', marginInline: 'auto' }}
+          >
+            <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem', maxWidth: '300px', textAlign: 'left', lineHeight: 1.6 }}>
               We don't just create assets; we build legacies. Every pixel is a promise of performance.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.6 }}
-              style={{ textAlign: 'right' }}
-            >
-              <span style={{ fontSize: '4rem', fontWeight: 900, color: 'rgba(255,255,255,0.1)', display: 'block' }}>2026</span>
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em' }}>REDEFINING EXCELLENCE</span>
-            </motion.div>
-          </div>
+            </p>
+            <div style={{ textAlign: 'right' }}>
+              <span style={{ fontSize: '3.5rem', fontWeight: 900, color: 'rgba(170,59,255,0.08)', display: 'block', lineHeight: 1, letterSpacing: '-0.03em' }}>2026</span>
+              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.25)', letterSpacing: '0.15em' }}>REDEFINING EXCELLENCE</span>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Scroll Indicator */}
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          style={{ position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)', opacity: 0.5 }}
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2.5, ease: 'easeInOut' }}
+          style={{ position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)', opacity: 0.4, zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}
         >
-          <div style={{ width: '1px', height: '60px', background: 'linear-gradient(to bottom, white, transparent)' }} />
+          <span style={{ fontSize: '0.55rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>Scroll</span>
+          <div style={{ width: '1px', height: '40px', background: 'linear-gradient(to bottom, #aa3bff, transparent)' }} />
         </motion.div>
       </section>
 
-      {/* Main Works - Horizontal Scroll */}
       <HorizontalWork />
 
-      {/* Project Grid - High Density */}
-      <section style={{ padding: '20vh 5%', backgroundColor: '#000' }}>
+      <section style={{ padding: '15vh 5% 20vh', backgroundColor: '#000', position: 'relative' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-          <div style={{ marginBottom: '6rem' }}>
-            <h2 style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', fontWeight: 900, marginBottom: '1rem' }}>The Archive</h2>
-            <div style={{ width: '100px', height: '4px', backgroundColor: '#a78bfa' }} />
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ marginBottom: '4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem' }}
+          >
+            <div>
+              <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>The Archive</span>
+              <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em' }}>All Projects</h2>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+              <Filter size={12} color="rgba(255,255,255,0.3)" />
+              <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em' }}>{filtered.length} PROJECTS</span>
+            </div>
+          </motion.div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '2rem' }}>
-            {smmPortfolio.map((p, i) => (
-              <motion.div 
-                key={i}
-                whileHover={{ y: -10 }}
-                style={{ 
-                  aspectRatio: '16/9', 
-                  backgroundColor: 'rgba(255,255,255,0.02)', 
-                  borderRadius: '16px',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  overflow: 'hidden',
-                  position: 'relative'
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '4rem' }}
+          >
+            {categories.map((cat) => (
+              <motion.button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                style={{
+                  padding: '0.5rem 1.2rem',
+                  borderRadius: '100px',
+                  border: `1px solid ${activeFilter === cat ? '#aa3bff' : 'rgba(255,255,255,0.1)'}`,
+                  backgroundColor: activeFilter === cat ? 'rgba(170,59,255,0.15)' : 'transparent',
+                  color: activeFilter === cat ? '#aa3bff' : 'rgba(255,255,255,0.5)',
+                  fontSize: '0.7rem',
+                  fontWeight: 700,
+                  letterSpacing: '0.08em',
+                  cursor: 'pointer',
+                  transition: 'all 0.3s ease',
                 }}
               >
-                {p.type === 'video' ? (
-                  <video 
-                    src={p.content} 
-                    autoPlay muted loop playsInline 
-                    preload="metadata"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} 
-                  />
-                ) : (
-                  <img 
-                    src={p.image || p.thumbnail} 
-                    alt={p.title} 
-                    loading="lazy"
-                    decoding="async"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.6 }} 
-                  />
-                )}
-                <div style={{ position: 'absolute', bottom: '1.5rem', left: '1.5rem', right: '1.5rem' }}>
-                  <h4 style={{ margin: 0, fontWeight: 700 }}>{p.title}</h4>
-                  <p style={{ margin: '0.5rem 0 0', fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)' }}>{p.category || 'Production'}</p>
-                </div>
-              </motion.div>
+                {cat === 'ALL' ? 'All' : cat.split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ')}
+              </motion.button>
             ))}
-          </div>
+          </motion.div>
+
+          <AnimatePresence mode="wait">
+            {filtered.length === 0 ? (
+              <motion.div
+                key="empty"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{ textAlign: 'center', padding: '6rem 0', color: 'rgba(255,255,255,0.3)' }}
+              >
+                No projects match this category yet.
+              </motion.div>
+            ) : (
+              <motion.div
+                key={activeFilter}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.5rem' }}
+              >
+                {filtered.map((p, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ delay: i * 0.05, duration: 0.5 }}
+                    onMouseEnter={() => setHoveredId(i)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    whileHover={{ y: -8 }}
+                    style={{
+                      aspectRatio: '4/3',
+                      backgroundColor: 'rgba(255,255,255,0.02)',
+                      borderRadius: '16px',
+                      border: hoveredId === i ? '1px solid rgba(170,59,255,0.3)' : '1px solid rgba(255,255,255,0.05)',
+                      overflow: 'hidden',
+                      position: 'relative',
+                      cursor: 'pointer',
+                      transition: 'border-color 0.4s ease',
+                    }}
+                  >
+                    {p.type === 'video' ? (
+                      <video src={p.content} autoPlay muted loop playsInline preload="metadata"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: hoveredId === i ? 0.9 : 0.5, transition: 'opacity 0.5s ease' }}
+                      />
+                    ) : (
+                      <img src={p.image || p.thumbnail} alt={p.title} loading="lazy" decoding="async"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: hoveredId === i ? 0.9 : 0.5, transition: 'opacity 0.5s ease' }}
+                      />
+                    )}
+
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      background: hoveredId === i
+                        ? 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 80%)'
+                        : 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%)',
+                      transition: 'background 0.4s ease',
+                      display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem',
+                    }}>
+                      <motion.div
+                        animate={{ y: hoveredId === i ? 0 : 5 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <span style={{ fontSize: '0.6rem', color: '#aa3bff', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                          {p.category || 'Production'}
+                        </span>
+                        <h4 style={{ margin: '0.3rem 0 0', fontWeight: 700, fontSize: '1.1rem' }}>{p.title}</h4>
+                      </motion.div>
+
+                      <motion.div
+                        initial={false}
+                        animate={{ opacity: hoveredId === i ? 1 : 0, y: hoveredId === i ? 0 : 10 }}
+                        transition={{ duration: 0.3 }}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.8rem' }}
+                      >
+                        <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)' }}>View project</span>
+                        <ArrowUpRight size={12} color="rgba(255,255,255,0.6)" />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
       <Footer />
-      
-      <style>{`
-        .accent-gradient {
-          background: linear-gradient(90deg, #a78bfa, #8763df);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-      `}</style>
     </div>
   );
 };

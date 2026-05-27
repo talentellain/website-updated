@@ -80,7 +80,7 @@ const Hero = () => {
             <div style={{ position: 'relative', maxWidth: '1600px', width: '100%', margin: '0 auto', height: '100%', transformStyle: 'preserve-3d' }}>
               <div className="hero-title-block" style={{ 
                 position: 'absolute', 
-                top: '36%',
+                top: '31%',
                 left: '50%', 
                 transform: 'translate(-50%, -50%)', 
                 width: '100%', 
@@ -91,29 +91,31 @@ const Hero = () => {
                 textAlign: 'center',
                 padding: '0 5%'
               }}>
-                <div 
+                <h2
                   ref={addToContentRefs}
                   className="accent-gradient"
                   style={{ fontWeight: 800, letterSpacing: '0.4em', fontSize: 'clamp(0.6rem, 1.5vw, 0.85rem)', marginBottom: '1rem', display: 'block', textTransform: 'uppercase' }}
                 >
                   The Future of Marketing
-                </div>
+                </h2>
                 
-                {/* SEO: Single H1 with primary keyword used naturally */}
-                <h1 
+                {/* Branding text — not a heading */}
+                <div 
                   ref={titleWrapRef}
                   className="hero-title-3d"
                   style={{ 
-                    fontSize: 'clamp(2.2rem, 8.5vw, 12rem)', 
+                    fontSize: 'clamp(2rem, 8vw, 12rem)', 
                     marginBottom: '0',
                     lineHeight: 0.85,
                     fontWeight: 900,
-                    letterSpacing: '-0.02em',
-                    paddingBottom: '0.1em'
+                    letterSpacing: '0.01em',
+                    paddingBottom: '0.1em',
+                    fontFamily: 'Syne, sans-serif',
+                    whiteSpace: 'nowrap'
                   }}
                 >
-                  TALENTELLA
-                </h1>
+                  TALENT <span style={{ margin: '0 0.2em' }}></span>ELLA
+                </div>
               </div>
             </div>
           </div>
@@ -162,9 +164,9 @@ const Hero = () => {
                   pointerEvents: 'auto'
                 }}
               >
-                <h2 style={{ fontSize: 'clamp(0.75rem, 2.5vw, 1rem)', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
+                <h1 style={{ fontSize: 'clamp(0.75rem, 2.5vw, 1rem)', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
                   India's 360° Marketing Agency
-                </h2>
+                </h1>
                 <p style={{ 
                   fontFamily: "'Outfit', sans-serif",
                   fontSize: 'clamp(0.75rem, 2vw, 0.95rem)', 
@@ -173,7 +175,7 @@ const Hero = () => {
                   fontWeight: 400,
                   color: 'rgba(255, 255, 255, 0.6)'
                 }}>
-                   TalentElla is a full-service digital marketing agency offering integrated marketing solutions — from brand development and social media marketing to lead generation and influencer marketing across India.
+                   TalentElla is a full-service digital marketing and web development agency offering branding, social media marketing, website development, UI/UX design, SEO, and scalable digital solutions for startups and businesses across India.
                 </p>
                 
                 {/* SEO CTA Button */}
@@ -218,9 +220,9 @@ const Hero = () => {
                 }}
               >
                 <div style={{ textAlign: 'right' }}>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
+                  <h2 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
                     Integrated Marketing Solutions
-                  </h3>
+                  </h2>
                   <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.6)', margin: 0, lineHeight: 1.6 }}>
                     Est. 2026. Elevating brands through omnichannel marketing solutions — blending online and offline strategies for maximum impact across India.
                   </p>
@@ -302,7 +304,7 @@ const Hero = () => {
              flex-direction: column !important;
              align-items: center !important;
           }
-          .hero-description-mobile h2 {
+          .hero-description-mobile h1 {
              font-size: 0.8rem !important;
           }
           .hero-description-mobile p {

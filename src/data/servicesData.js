@@ -17,6 +17,69 @@ import whatsappVideoPortfolio from '../assets/video/WhatsApp Video 2026-05-07 at
 
 export const servicesData = [
   {
+    id: 'app-development',
+    title: 'App Development',
+    icon: 'Smartphone',
+    description: 'Native & cross-platform mobile applications crafted for seamless user experience and maximum business growth.',
+    seo: {
+      pageTitle: 'Custom Mobile App Development Agency India',
+      metaDescription: 'TalentElla is India\'s custom mobile app development agency. High-performance React Native & Flutter apps built for iOS & Android. Starting ₹15,000.',
+      keywords: 'mobile app development agency, custom app development services, React Native apps, Flutter mobile applications, Android iOS developer India, human-centric app design',
+      primaryKeyword: 'mobile app development agency',
+    },
+    answerBlock: {
+      question: 'What is Custom Mobile App Development?',
+      answer: 'Custom mobile app development is the process of creating tailored software applications that run on mobile devices. At TalentElla, our custom mobile app development services prioritize human-centric design, robust architecture, and cross-platform flexibility with React Native and Flutter, ensuring your brand stands out and scales seamlessly in the competitive digital landscape.',
+    },
+    faqs: [
+      {
+        question: 'Which platform will my app be built on?',
+        answer: 'We use React Native and Flutter for cross-platform apps to maximize reach while minimizing cost. Native Android (Kotlin) or iOS (Swift) development is also available for custom enterprise-grade plans.'
+      },
+      {
+        question: 'How much does custom mobile app development cost?',
+        answer: 'At TalentElla, custom app development starts from ₹15,000 for a basic MVP (Minimum Viable Product). Professional packages with extensive integrations start at ₹40,000, and fully custom enterprise-grade apps begin at ₹80,000.'
+      },
+      {
+        question: 'Do you offer ongoing post-launch support?',
+        answer: 'Yes, we provide comprehensive post-launch support and maintenance. Our packages include 1 to 6 months of free support (depending on the plan selected) to handle bug fixes, security updates, and performance optimizations.'
+      }
+    ],
+    relatedServices: ['website-development', 'social-media-management'],
+    subItems: [
+      { title: 'Cross-Platform Applications', description: 'Leveraging React Native and Flutter to deliver beautiful, native-feeling apps for both iOS and Android from a single codebase.' },
+      { title: 'User-Centric UI/UX', description: 'Designing intuitive, high-fidelity app interfaces that optimize user flows, engagement, and conversion rates.' },
+      { title: 'Robust Backend Integration', description: 'Connecting your mobile apps with secure APIs, cloud databases, and real-time synchronization systems.' }
+    ],
+    portfolio: [],
+    plans: [
+      { 
+        name: 'MVP App', 
+        subtitle: 'For early validation',
+        price: '₹15,000', 
+        billing: 'one-time',
+        features: ['Up to 5 Screens', 'React Native / Flutter', 'Basic Firebase Auth', 'Standard UI Design', '1 Month Support'],
+        priceNum: 15000
+      },
+      { 
+        name: 'Business App', 
+        subtitle: 'For growing companies',
+        price: '₹40,000', 
+        billing: 'one-time',
+        features: ['Up to 10 Screens', 'Custom API Integration', 'Payment Gateway Sync', 'Premium Custom UI/UX', '3 Months Support'],
+        priceNum: 40000
+      },
+      { 
+        name: 'Enterprise App', 
+        subtitle: 'For custom products',
+        price: '₹80,000', 
+        billing: 'one-time',
+        features: ['Unlimited Screens', 'Custom Backend & Admin Panel', 'Advanced Analytics Dashboard', 'Dedicated Architecture', '6 Months Support'],
+        priceNum: 80000
+      }
+    ]
+  },
+  {
     id: 'website-development',
     title: 'Website Development',
     icon: 'Code',
