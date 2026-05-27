@@ -3,8 +3,18 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Calendar, Clock, Tag } from 'lucide-react';
 import SEO from '../components/SEO';
-import Footer from '../components/Footer';
 import { blogPosts, blogCategories } from '../data/blogData';
+
+const catColors = {
+  'Digital Marketing': '#a78bfa',
+  'Web Development': '#60a5fa',
+  'Social Media': '#f472b6',
+  'Branding': '#34d399',
+  'SEO': '#fbbf24',
+  'App Development': '#818cf8',
+  'Influencer Marketing': '#fb923c',
+  'Lead Generation': '#2dd4bf',
+};
 
 const BlogCard = ({ post, index }) => (
   <motion.div
@@ -23,31 +33,42 @@ const BlogCard = ({ post, index }) => (
   >
     <Link to={`/blog/${post.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
       <div style={{
-        aspectRatio: '16/9',
-        backgroundColor: '#111',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(135deg, rgba(167,139,250,0.2), rgba(196,181,253,0.1))',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          aspectRatio: '16/9',
+          backgroundColor: '#0a0a0a',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'relative',
+          overflow: 'hidden',
         }}>
-          <span style={{ fontSize: '3rem', fontWeight: 900, color: 'rgba(255,255,255,0.05)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Blog</span>
+          <div style={{
+            position: 'absolute', inset: 0,
+            background: `linear-gradient(135deg, ${catColors[post.category] || 'rgba(167,139,250,0.2)'} 0%, transparent 70%)`,
+          }} />
+          <div style={{
+            position: 'absolute', bottom: '-10%', right: '-5%',
+            fontSize: 'clamp(5rem, 15vw, 10rem)',
+            fontWeight: 900,
+            color: 'rgba(255,255,255,0.03)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.05em',
+            lineHeight: 1,
+            userSelect: 'none',
+            pointerEvents: 'none',
+          }}>
+            {post.title.split(' ').slice(0, 2).map(w => w[0]).join('')}
+          </div>
+          <div style={{
+            position: 'absolute', top: '1rem', left: '1rem',
+            padding: '0.3rem 0.8rem', borderRadius: '100px',
+            background: `${catColors[post.category] || 'rgba(167,139,250,0.15)'}20`,
+            border: `1px solid ${catColors[post.category] || 'rgba(167,139,250,0.25)'}40`,
+            fontSize: '0.55rem', fontWeight: 700, color: catColors[post.category] || '#a78bfa',
+            letterSpacing: '0.08em', textTransform: 'uppercase',
+          }}>
+            {post.category}
+          </div>
         </div>
-        <div style={{
-          position: 'absolute', top: '1rem', left: '1rem',
-          padding: '0.3rem 0.8rem', borderRadius: '100px',
-          background: 'rgba(167,139,250,0.15)', border: '1px solid rgba(167,139,250,0.25)',
-          fontSize: '0.55rem', fontWeight: 700, color: '#a78bfa', letterSpacing: '0.08em',
-          textTransform: 'uppercase',
-        }}>
-          {post.category}
-        </div>
-      </div>
       <div style={{ padding: '1.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.8rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.35)' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
@@ -192,7 +213,7 @@ const BlogPage = () => {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 };

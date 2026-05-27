@@ -80,7 +80,7 @@ const Hero = () => {
             <div style={{ position: 'relative', maxWidth: '1600px', width: '100%', margin: '0 auto', height: '100%', transformStyle: 'preserve-3d' }}>
               <div className="hero-title-block" style={{ 
                 position: 'absolute', 
-                top: '31%',
+                top: '36%',
                 left: '50%', 
                 transform: 'translate(-50%, -50%)', 
                 width: '100%', 

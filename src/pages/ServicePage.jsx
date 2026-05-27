@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowLeft, Check, Code, Share2, Palette, Settings, Zap, ArrowUpRight, Shield, Database, LifeBuoy, Rocket, ChevronDown, ChevronUp, Smartphone } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import SEO from '../components/SEO';
-import Footer from '../components/Footer';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -471,7 +471,7 @@ const ServicePage = () => {
       </section>
       
       <RelatedServices currentId={id} isMobile={isMobile} />
-      <Footer />
+      
 
       <style>{`
         .services-grid-new { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }

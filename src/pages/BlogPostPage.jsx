@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
 import SEO from '../components/SEO';
-import Footer from '../components/Footer';
 import { blogPosts } from '../data/blogData';
 
 const BlogPostPage = () => {
@@ -35,6 +34,23 @@ const BlogPostPage = () => {
         pageTitle={post.title}
         description={post.excerpt}
         keywords={post.tags.join(', ')}
+        schema={{
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          'headline': post.title,
+          'description': post.excerpt,
+          'author': {
+            '@type': 'Organization',
+            'name': 'TalentElla',
+            'url': 'https://talentella.in',
+          },
+          'datePublished': post.date,
+          'image': post.image,
+          'publisher': {
+            '@type': 'Organization',
+            'name': 'TalentElla',
+          },
+        }}
       />
 
       <article style={{ maxWidth: '800px', margin: '0 auto', padding: isMobile ? '100px 5% 60px' : '120px 5% 80px' }}>
@@ -66,11 +82,20 @@ const BlogPostPage = () => {
 
           <div style={{
             aspectRatio: '16/9', borderRadius: '20px', overflow: 'hidden',
-            backgroundColor: '#111', marginBottom: '3rem',
+            backgroundColor: '#0a0a0a', marginBottom: '3rem',
+            position: 'relative',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'linear-gradient(135deg, rgba(170,59,255,0.15), rgba(0,210,255,0.08))',
+            background: `linear-gradient(135deg, rgba(170,59,255,0.15), rgba(0,210,255,0.08))`,
           }}>
-            <span style={{ fontSize: '4rem', fontWeight: 900, color: 'rgba(255,255,255,0.03)', textTransform: 'uppercase' }}>Blog</span>
+            <div style={{
+              position: 'absolute', bottom: '-8%', right: '-3%',
+              fontSize: 'clamp(3rem, 12vw, 8rem)',
+              fontWeight: 900, color: 'rgba(255,255,255,0.03)',
+              textTransform: 'uppercase', userSelect: 'none', pointerEvents: 'none',
+              lineHeight: 1,
+            }}>
+              {post.title.split(' ').slice(0, 2).map(w => w[0]).join('')}
+            </div>
           </div>
 
           <div style={{
@@ -111,7 +136,7 @@ const BlogPostPage = () => {
         </motion.div>
       </article>
 
-      <Footer />
+      
     </div>
   );
 };

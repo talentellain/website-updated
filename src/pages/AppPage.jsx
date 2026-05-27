@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, Check, Smartphone, Monitor, Infinity } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
-import Footer from '../components/Footer';
+
 
 const plans = [
   {
@@ -349,7 +349,7 @@ const AppPage = () => {
         </div>
       </section>
 
-      <Footer />
+      
     </div>
   );
 };
