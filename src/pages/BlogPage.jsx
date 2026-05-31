@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Calendar, Clock, Tag } from 'lucide-react';
 import SEO from '../components/SEO';
+import InteractiveHero from '../components/InteractiveHero';
 import { blogPosts, blogCategories } from '../data/blogData';
 
 const catColors = {
@@ -115,50 +116,16 @@ const BlogPage = () => {
         keywords="digital marketing blog India, marketing tips, SEO guide, social media strategy, web development guide, branding tips India"
       />
 
-      <section style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: isMobile ? '80px 5% 30px' : '100px 5% 50px', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 30% 40%, rgba(167,139,250,0.1) 0%, transparent 60%), radial-gradient(circle at 70% 60%, rgba(196,181,253,0.05) 0%, transparent 50%)', pointerEvents: 'none' }} />
-        
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)', backgroundSize: '40px 40px', pointerEvents: 'none', maskImage: 'radial-gradient(circle at center, black, transparent 80%)', WebkitMaskImage: 'radial-gradient(circle at center, black, transparent 80%)' }}></div>
+      <InteractiveHero 
+        bgText="BLOG"
+        tagline1="TALENTELLA"
+        tagline2="INSIGHTS & GUIDES"
+        heading="THE BLOG"
+        cursiveOverlay="Read"
+        description="EXPERT INSIGHTS, ACTIONABLE GUIDES, AND THE LATEST TRENDS IN DIGITAL MARKETING, WEB DEVELOPMENT, AND BRANDING.\nEXPLORE OUR COMPREHENSIVE BLOG TO STAY AHEAD OF INDUSTRY TRENDS."
+      />
 
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} style={{ textAlign: 'center', maxWidth: '800px', position: 'relative', zIndex: 2 }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.4rem 1.2rem', borderRadius: '100px', backgroundColor: 'rgba(167,139,250,0.1)', border: '1px solid rgba(167,139,250,0.2)', marginBottom: '1.5rem' }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#a78bfa', boxShadow: '0 0 10px #a78bfa' }}></div>
-            <span style={{ fontSize: '0.65rem', color: '#a78bfa', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase' }}>Insights & Guides</span>
-          </div>
-
-          <h1 style={{ fontSize: isMobile ? 'clamp(2.5rem, 10vw, 3.5rem)' : 'clamp(3.5rem, 7vw, 5.5rem)', fontWeight: 900, letterSpacing: '-0.04em', lineHeight: 1, margin: 0, textTransform: 'uppercase' }}>
-            THE TALENTELLA <br />
-            <span style={{ background: 'linear-gradient(to right, #a78bfa, #c4b5fd)', WebkitBackgroundClip: 'text', backgroundClip: 'text', WebkitTextFillColor: 'transparent', fontSize: '1.2em' }}>BLOG</span>
-          </h1>
-          
-          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.1rem', maxWidth: '600px', margin: '1.5rem auto 0', lineHeight: 1.6, fontWeight: 300 }}>
-            Expert insights, actionable guides, and the latest trends in digital marketing, web development, branding, and beyond.
-          </p>
-          <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: '0.85rem', lineHeight: 1.6, maxWidth: '700px', margin: '1rem auto 0' }}>
-            Explore our comprehensive digital marketing blog featuring deep dives into SEO strategies, social media marketing, content creation, and modern web design. Our expert articles are crafted to help businesses and startups stay ahead of industry trends, optimize their online presence, and achieve measurable growth.
-          </p>
-
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2.5rem', justifyContent: 'center', flexDirection: isMobile ? 'column' : 'row' }}>
-            <motion.button 
-              whileHover={{ scale: 1.05 }} 
-              onClick={() => window.scrollTo({ top: window.innerHeight * 0.9, behavior: 'smooth' })} 
-              style={{ width: isMobile ? '100%' : 'auto', padding: '0.8rem 2.2rem', borderRadius: '100px', background: 'linear-gradient(135deg, #a78bfa, #c4b5fd)', color: '#000', border: 'none', fontWeight: 800, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', fontSize: '0.85rem' }}
-            >
-              Start Reading <ArrowUpRight size={16} />
-            </motion.button>
-            <Link to="/#contact" style={{ textDecoration: 'none' }}>
-              <motion.button 
-                whileHover={{ scale: 1.05 }} 
-                style={{ width: isMobile ? '100%' : 'auto', padding: '0.8rem 2.2rem', borderRadius: '100px', background: 'transparent', color: '#fff', border: '1px solid rgba(255,255,255,0.2)', fontWeight: 700, cursor: 'pointer', fontSize: '0.85rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-              >
-                Subscribe
-              </motion.button>
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      <section style={{ padding: isMobile ? '0 5% 50px' : '0 5% 70px' }}>
+      <section style={{ padding: isMobile ? '50px 5% 50px' : '80px 5% 70px' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -173,16 +140,18 @@ const BlogPage = () => {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 style={{
-                  padding: '0.5rem 1.2rem',
+                  padding: '0.6rem 1.4rem',
                   borderRadius: '100px',
-                  border: `1px solid ${activeCategory === cat ? '#a78bfa' : 'rgba(255,255,255,0.1)'}`,
-                  backgroundColor: activeCategory === cat ? 'rgba(167,139,250,0.15)' : 'transparent',
-                  color: activeCategory === cat ? '#a78bfa' : 'rgba(255,255,255,0.5)',
-                  fontSize: '0.7rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.05em',
+                  border: `1px solid ${activeCategory === cat ? '#aa3bff' : 'rgba(255,255,255,0.15)'}`,
+                  backgroundColor: activeCategory === cat ? '#aa3bff' : 'rgba(255,255,255,0.02)',
+                  color: activeCategory === cat ? '#ffffff' : 'rgba(255,255,255,0.6)',
+                  fontSize: '0.75rem',
+                  fontWeight: 800,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.1em',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
+                  boxShadow: activeCategory === cat ? '0 0 15px rgba(170, 59, 255, 0.4)' : 'none',
                 }}
               >
                 {cat}

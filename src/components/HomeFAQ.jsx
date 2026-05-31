@@ -1,118 +1,152 @@
-import React, { useRef, useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-
-const FAQItem = ({ faq, index, isOpen, onToggle, isMobile }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }} 
-    whileInView={{ opacity: 1, y: 0 }} 
-    viewport={{ once: true }} 
-    transition={{ delay: index * 0.06 }} 
-    style={{ borderBottom: '1px solid rgba(0,0,0,0.06)', overflow: 'hidden' }}
-  >
-    <motion.button 
-      onClick={onToggle} 
-      whileHover={{ backgroundColor: 'rgba(0,0,0,0.02)' }}
-      aria-expanded={isOpen} 
-      aria-controls={`faq-answer-${index}`} 
-      id={`faq-question-${index}`} 
-      style={{ 
-        width: '100%', 
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
-        padding: '0.85rem 0.5rem', 
-        background: 'none', 
-        border: 'none', 
-        cursor: 'pointer', 
-        color: '#121212', 
-        textAlign: 'left', 
-        gap: '1rem',
-        borderRadius: '8px',
-        transition: 'background-color 0.2s ease'
-      }}
-    >
-      <h3 style={{ fontSize: isMobile ? '1.1rem' : '0.975rem', fontWeight: 700, margin: 0, lineHeight: 1.4, flex: 1, letterSpacing: '-0.01em' }}>{faq.question}</h3>
-      <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.3 }} style={{ flexShrink: 0, color: '#8763df' }}><ChevronDown size={isMobile ? 22 : 18} /></motion.div>
-    </motion.button>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`} initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} style={{ overflow: 'hidden' }}>
-          <p style={{ color: '#555', fontSize: isMobile ? '0.95rem' : '0.875rem', lineHeight: 1.6, padding: '0 0.5rem 0.65rem', margin: 0, maxWidth: '800px' }}>{faq.answer}</p>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </motion.div>
-);
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const HomeFAQ = ({ faqs }) => {
-  const [openIndex, setOpenIndex] = useState(-1);
-  const outerRef = useRef(null);
-  const contentWrapRef = useRef(null);
-  
-  const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start start', 'end end'] });
-  const borderRad = useTransform(scrollYProgress, [0, 0.1], ['60px', '0px']);
-  const contentY = useTransform(scrollYProgress, [0.1, 0.9], ['0%', '-40%']);
-
+  const [openIndex, setOpenIndex] = useState(0);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
+  if (!faqs || faqs.length === 0) return null;
+
   return (
-    <div 
-      id="faq" 
-      ref={outerRef} 
-      className="sticky-outer"
-      style={{ 
-        zIndex: 70, 
-        minHeight: '200vh', 
-      }}
-    >
-      <section
-        className="sticky-section"
-        style={{ 
-          backgroundColor: '#f5f5f0', 
-          borderTop: '1px solid rgba(0,0,0,0.05)', 
-          height: '100dvh',
-          display: 'flex',
-          alignItems: 'center',
-          padding: isMobile ? '14vh 5%' : '12vh 5%'
-        }}
-      >
-        <div 
-          ref={contentWrapRef}
-          style={{ width: '100%', maxWidth: '820px', margin: '0 auto' }}
-        >
-          <div style={{ maxWidth: '820px', width: '100%', margin: '0 auto' }}>
-            <div style={{ textAlign: 'center', marginBottom: 'clamp(1rem, 3vh, 2rem)' }}>
-              <motion.span 
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="accent-gradient" 
-                style={{ fontWeight: 800, letterSpacing: '0.25em', textTransform: 'uppercase', fontSize: isMobile ? '0.75rem' : '0.6rem', display: 'block', marginBottom: '0.75rem' }}
-              >
-                Inquiry & Support
-              </motion.span>
-              <motion.h2 
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} 
-                style={{ fontSize: isMobile ? 'clamp(1.8rem, 6vw, 2.5rem)' : 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 900, marginBottom: '0.4rem', color: '#121212', letterSpacing: '-0.02em' }}
-              >
-                Common Inquiries
-              </motion.h2>
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} 
-                style={{ color: '#666', fontSize: '0.85rem', maxWidth: '480px', margin: '0 auto', lineHeight: 1.5 }}
-              >
-                Find answers to specific brand strategy questions here.
-              </motion.p>
-            </div>
-
-            <div style={{ borderTop: '1px solid rgba(0,0,0,0.08)' }}>
-              {faqs.map((faq, idx) => (
-                <FAQItem key={idx} faq={faq} index={idx} isOpen={openIndex === idx} onToggle={() => setOpenIndex(openIndex === idx ? -1 : idx)} isMobile={isMobile} />
-              ))}
-            </div>
-
-          </div>
+    <section id="faq" style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#f5f5f0', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+      <div style={{ 
+        maxWidth: '1400px', 
+        margin: '0 auto', 
+        display: 'flex', 
+        flexDirection: isMobile ? 'column' : 'row', 
+        gap: isMobile ? '3rem' : '8rem', 
+        alignItems: 'flex-start',
+        padding: isMobile ? '0 5%' : '0' 
+      }}>
+        {/* Left Column: Title & CTA */}
+        <div style={{ 
+          flex: isMobile ? 'none' : '1.5', 
+          width: '100%',
+          position: isMobile ? 'static' : 'sticky', 
+          top: '100px',
+          textAlign: isMobile ? 'center' : 'left',
+          marginBottom: isMobile ? '2rem' : '0'
+        }}>
+          <span style={{ 
+            fontWeight: 800, 
+            letterSpacing: '0.25em', 
+            textTransform: 'uppercase', 
+            fontSize: '0.65rem', 
+            display: 'block', 
+            marginBottom: '0.75rem',
+            color: '#8763df'
+          }}>
+            Inquiry & Support
+          </span>
+          <h2 style={{ 
+            fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', 
+            fontWeight: 900, 
+            lineHeight: 0.9, 
+            color: '#121212', 
+            margin: '0 0 1.2rem 0', 
+            textTransform: 'uppercase', 
+            letterSpacing: '-0.04em',
+            wordBreak: isMobile ? 'break-word' : 'normal',
+            overflowWrap: isMobile ? 'break-word' : 'normal',
+            whiteSpace: isMobile ? 'normal' : 'nowrap'
+          }}>
+            QUESTIONS<br /><span style={{ color: '#8763df' }}>ANSWERED</span>
+          </h2>
+          <p style={{ 
+            color: '#555', 
+            fontSize: '0.9rem', 
+            lineHeight: 1.5, 
+            marginBottom: '2rem', 
+            maxWidth: isMobile ? '100%' : '300px',
+            margin: isMobile ? '0 auto 2rem auto' : '0 0 2rem 0'
+          }}>
+            Have a specific query? Our experts are here to provide the clarity you need.
+          </p>
+          <Link to="/#contact" style={{ textDecoration: 'none' }}>
+            <motion.button 
+              whileHover={{ scale: 1.05, backgroundColor: '#7652cc' }}
+              style={{ 
+                padding: isMobile ? '1rem 2.2rem' : '1rem 2rem', 
+                borderRadius: '100px', 
+                background: '#8763df', 
+                color: '#fff', 
+                border: 'none', 
+                fontWeight: 800, 
+                fontSize: '0.8rem',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                letterSpacing: '0.05em',
+                transition: '0.3s ease',
+                margin: isMobile ? '0 auto' : '0'
+              }}
+            >
+              Ask a Question
+            </motion.button>
+          </Link>
         </div>
-      </section>
-    </div>
+
+        {/* Right Column: Accordion */}
+        <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+          {faqs.map((faq, idx) => (
+            <div key={idx} style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+              <button 
+                onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} 
+                style={{ 
+                  width: '100%', 
+                  display: 'flex', 
+                  justifyContent: 'space-between', 
+                  alignItems: 'center', 
+                  padding: isMobile ? '2.2rem 0' : '2rem 0', 
+                  background: 'none', 
+                  border: 'none', 
+                  cursor: 'pointer', 
+                  color: '#121212', 
+                  textAlign: 'left' 
+                }}
+              >
+                <h3 style={{ 
+                  fontSize: isMobile ? '0.9rem' : '0.95rem', 
+                  fontWeight: 800, 
+                  margin: 0, 
+                  color: openIndex === idx ? '#8763df' : '#121212',
+                  textTransform: 'uppercase',
+                  maxWidth: '85%',
+                  transition: '0.3s ease',
+                  lineHeight: 1.4
+                }}>
+                  {faq.question}
+                </h3>
+                <span style={{ fontSize: '1.2rem', color: openIndex === idx ? '#8763df' : 'rgba(0,0,0,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
+                  {openIndex === idx ? '−' : '+'}
+                </span>
+              </button>
+              <AnimatePresence>
+                {openIndex === idx && (
+                  <motion.div 
+                    initial={{ height: 0, opacity: 0 }} 
+                    animate={{ height: 'auto', opacity: 1 }} 
+                    exit={{ height: 0, opacity: 0 }} 
+                    style={{ overflow: 'hidden' }}
+                  >
+                    <p style={{ 
+                      color: '#555', 
+                      fontSize: '0.9rem', 
+                      lineHeight: 1.6, 
+                      paddingBottom: isMobile ? '2.2rem' : '2rem', 
+                      margin: 0,
+                      maxWidth: '100%'
+                    }}>
+                      {faq.answer}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

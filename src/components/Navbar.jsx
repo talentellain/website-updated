@@ -169,9 +169,10 @@ const Navbar = () => {
 
     const textColor = isDarkTheme ? '#000000' : '#ffffff';
     const borderColor = isDarkTheme ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.1)';
-    const glassBg = isDarkTheme ? 'rgba(255, 255, 255, 0.5)' : 'rgba(0, 0, 0, 0.4)';
+    const glassBg = isDarkTheme ? 'rgba(255, 255, 255, 0.9)' : 'rgba(5, 5, 5, 0.85)';
 
     return (
+        <>
         <motion.nav 
             initial={{ y: -100 }}
             animate={{ y: 0 }}
@@ -182,165 +183,171 @@ const Navbar = () => {
                 left: 0, 
                 width: '100%', 
                 zIndex: 1000, 
-                padding: '1.2rem 5%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                backgroundColor: glassBg,
+                borderBottom: `1px solid ${borderColor}`,
+                backdropFilter: 'blur(20px)',
+                WebkitBackdropFilter: 'blur(20px)',
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
         >
-            {/* Logo */}
-            <Link 
-                to="/" 
-                onClick={(e) => {
-                    if (location.pathname === '/') {
-                        e.preventDefault();
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        window.scrollTo(0, 0);
-                    }
-                }} 
-                style={{ textDecoration: 'none' }}
-            >
-                <motion.div 
-                    style={{ 
-                        display: 'flex',
-                        alignItems: 'center',
-                        cursor: 'pointer',
-                        pointerEvents: 'auto'
-                    }}
+            <div style={{
+                maxWidth: '1400px',
+                margin: '0 auto',
+                padding: '0.8rem 5%',
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '100%'
+            }}>
+                {/* Logo */}
+                <Link 
+                    to="/" 
+                    onClick={(e) => {
+                        if (location.pathname === '/') {
+                            e.preventDefault();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        } else {
+                            window.scrollTo(0, 0);
+                        }
+                    }} 
+                    style={{ textDecoration: 'none' }}
                 >
-                    <img 
-                      src={logo} 
-                      alt="Talent Ella Logo" 
-                      fetchpriority="high"
-                      decoding="async"
-                      style={{ 
-                        height: '45px',
-                        width: 'auto',
-                        mixBlendMode: isDarkTheme ? 'multiply' : 'screen',
-                        filter: isDarkTheme ? 'contrast(1.2)' : 'none',
-                        borderRadius: '6px'
-                      }} 
-                    />
-                </motion.div>
-            </Link>
-
-            {/* Navigation Card */}
-            <motion.div 
-                animate={{ 
-                    backgroundColor: glassBg,
-                    borderColor: borderColor,
-                    backdropFilter: 'blur(30px)',
-                    boxShadow: isDarkTheme ? '0 10px 40px rgba(0,0,0,0.05)' : '0 10px 40px rgba(0,0,0,0.2)'
-                }}
-                className="glass-card hidden-mobile"
-                style={{ 
-                    position: 'relative',
-                    display: 'flex', 
-                    gap: '2.5rem', 
-                    padding: '0.4rem 2rem', 
-                    borderRadius: '100px',
-                    border: '1px solid',
-                    pointerEvents: 'auto',
-                    transition: 'all 0.4s ease'
-                }}
-            >
-                {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
-                    const isPageLink = !!PAGE_LINKS[item];
-                    return isPageLink ? (
-                        <Link
-                            key={item}
-                            to={PAGE_LINKS[item]}
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                            style={{
-                                position: 'relative',
-                                fontSize: '0.75rem',
-                                fontWeight: 800,
-                                letterSpacing: '0.12em',
-                                color: textColor,
-                                opacity: hoveredIndex === index ? 1 : 0.8,
-                                transition: 'opacity 0.3s ease',
-                                cursor: 'pointer',
-                                textDecoration: 'none',
-                                padding: '0.2rem 0'
-                            }}
-                        >
-                            {item}
-                            {hoveredIndex === index && (
-                                <motion.div
-                                    layoutId="nav-underline"
-                                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                                    style={{ position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '2px', backgroundColor: '#7226FF', borderRadius: '2px' }}
-                                />
-                            )}
-                        </Link>
-                    ) : (
-                        <motion.a
-                            key={item}
-                            href={`#${item.toLowerCase()}`}
-                            onClick={(e) => handleNavClick(e, item.toLowerCase())}
-                            onHoverStart={() => setHoveredIndex(index)}
-                            onHoverEnd={() => setHoveredIndex(null)}
-                            style={{
-                                position: 'relative',
-                                fontSize: '0.75rem',
-                                fontWeight: 800,
-                                letterSpacing: '0.12em',
-                                color: textColor,
-                                opacity: hoveredIndex === index ? 1 : 0.8,
-                                transition: 'opacity 0.3s ease',
-                                cursor: 'pointer',
-                                textDecoration: 'none',
-                                padding: '0.2rem 0'
-                            }}
-                        >
-                            {item}
-                            {hoveredIndex === index && (
-                                <motion.div
-                                    layoutId="nav-underline"
-                                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                                    style={{ position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '2px', backgroundColor: '#7226FF', borderRadius: '2px' }}
-                                />
-                            )}
-                        </motion.a>
-                    );
-                })}
-            </motion.div>
-
-            {/* Action Button */}
-            <div className="hidden-mobile" style={{ pointerEvents: 'auto' }}>
-                <Link to="/#contact" onClick={(e) => handleNavClick(e, 'contact')} style={{ textDecoration: 'none' }}>
                     <motion.div 
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                      style={{ 
-                          padding: '0.8rem 2rem', 
-                          fontSize: '0.8rem', 
-                          fontWeight: 800,
-                          borderRadius: '100px',
-                          display: 'inline-flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          letterSpacing: '0.05em',
-                          backgroundColor: isDarkTheme ? '#0a0a0c' : '#ffffff',
-                          color: isDarkTheme ? '#ffffff' : '#0a0a0c',
-                          boxShadow: isDarkTheme ? '0 10px 30px rgba(0,0,0,0.15)' : 'none',
-                          transition: 'background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease'
-                      }}
+                        style={{ 
+                            display: 'flex',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                            pointerEvents: 'auto'
+                        }}
                     >
-                        GET IN TOUCH
+                        <img 
+                          src={logo} 
+                          alt="Talent Ella Logo" 
+                          fetchpriority="high"
+                          decoding="async"
+                          style={{ 
+                            height: '40px',
+                            width: 'auto',
+                            mixBlendMode: isDarkTheme ? 'multiply' : 'screen',
+                            filter: isDarkTheme ? 'contrast(1.2)' : 'none',
+                            borderRadius: '6px'
+                          }} 
+                        />
                     </motion.div>
                 </Link>
-            </div>
 
-            {/* Mobile Hamburger Icon */}
-            <div className="show-mobile" style={{ pointerEvents: 'auto' }}>
-               <button onClick={toggleMenu} style={{ background: 'none', border: 'none', color: textColor, cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                   <Menu size={32} />
-               </button>
+                {/* Navigation Menu */}
+                <div 
+                    className="hidden-mobile"
+                    style={{ 
+                        display: 'flex', 
+                        gap: '2rem', 
+                        alignItems: 'center',
+                        pointerEvents: 'auto',
+                    }}
+                >
+                    {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
+                        const isPageLink = !!PAGE_LINKS[item];
+                        const isActive = isPageLink ? location.pathname === PAGE_LINKS[item] : false;
+                        const activeColor = '#a78bfa';
+                        const linkColor = isActive ? activeColor : textColor;
+                        const linkOpacity = isActive ? 1 : (hoveredIndex === index ? 1 : 0.7);
+
+                        return isPageLink ? (
+                            <Link
+                                key={item}
+                                to={PAGE_LINKS[item]}
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                                style={{
+                                    position: 'relative',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 800,
+                                    letterSpacing: '0.12em',
+                                    color: linkColor,
+                                    opacity: linkOpacity,
+                                    transition: 'opacity 0.3s ease, color 0.3s ease',
+                                    cursor: 'pointer',
+                                    textDecoration: 'none',
+                                    padding: '0.5rem 0'
+                                }}
+                            >
+                                {item}
+                                {hoveredIndex === index && (
+                                    <motion.div
+                                        layoutId="nav-underline"
+                                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                                        style={{ position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '2px', backgroundColor: activeColor, borderRadius: '2px' }}
+                                    />
+                                )}
+                            </Link>
+                        ) : (
+                            <motion.a
+                                key={item}
+                                href={`#${item.toLowerCase()}`}
+                                onClick={(e) => handleNavClick(e, item.toLowerCase())}
+                                onHoverStart={() => setHoveredIndex(index)}
+                                onHoverEnd={() => setHoveredIndex(null)}
+                                style={{
+                                    position: 'relative',
+                                    fontSize: '0.75rem',
+                                    fontWeight: 800,
+                                    letterSpacing: '0.12em',
+                                    color: linkColor,
+                                    opacity: linkOpacity,
+                                    transition: 'opacity 0.3s ease, color 0.3s ease',
+                                    cursor: 'pointer',
+                                    textDecoration: 'none',
+                                    padding: '0.5rem 0'
+                                }}
+                            >
+                                {item}
+                                {hoveredIndex === index && (
+                                    <motion.div
+                                        layoutId="nav-underline"
+                                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                                        style={{ position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '2px', backgroundColor: activeColor, borderRadius: '2px' }}
+                                    />
+                                )}
+                            </motion.a>
+                        );
+                    })}
+                </div>
+
+                {/* Action Button */}
+                <div className="hidden-mobile" style={{ pointerEvents: 'auto' }}>
+                    <Link to="/#contact" onClick={(e) => handleNavClick(e, 'contact')} style={{ textDecoration: 'none' }}>
+                        <motion.div 
+                          whileHover={{ scale: 1.05, y: -1, boxShadow: '0 8px 20px rgba(167, 139, 250, 0.2)' }}
+                          whileTap={{ scale: 0.98 }}
+                          style={{ 
+                              padding: '0.65rem 1.6rem', 
+                              fontSize: '0.75rem', 
+                              fontWeight: 800,
+                              borderRadius: '100px',
+                              display: 'inline-flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                              letterSpacing: '0.05em',
+                              backgroundColor: isDarkTheme ? '#121212' : '#ffffff',
+                              color: isDarkTheme ? '#ffffff' : '#121212',
+                              border: isDarkTheme ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
+                              transition: 'all 0.3s ease'
+                          }}
+                        >
+                            GET IN TOUCH
+                        </motion.div>
+                    </Link>
+                </div>
+
+                {/* Mobile Hamburger Icon */}
+                <div className="show-mobile" style={{ pointerEvents: 'auto' }}>
+                   <button onClick={toggleMenu} style={{ background: 'none', border: 'none', color: textColor, cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                       <Menu size={28} />
+                   </button>
+                </div>
             </div>
+        </motion.nav>
 
             {/* Mobile Fullscreen Menu Overlay */}
             <AnimatePresence>
@@ -368,8 +375,9 @@ const Navbar = () => {
                         </button>
                         
                         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', textAlign: 'center', overflowY: 'auto', flex: 1, justifyContent: 'center' }}>
-                            {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => (
-                                PAGE_LINKS[item] ? (
+                            {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
+                                const isActive = PAGE_LINKS[item] ? location.pathname === PAGE_LINKS[item] : false;
+                                return PAGE_LINKS[item] ? (
                                     <Link
                                         key={item}
                                         to={PAGE_LINKS[item]}
@@ -377,7 +385,7 @@ const Navbar = () => {
                                         style={{
                                             width: '100%',
                                             padding: '1.4rem 0',
-                                            color: 'white',
+                                            color: isActive ? '#a78bfa' : 'white',
                                             textDecoration: 'none',
                                             borderBottom: '1px solid rgba(255,255,255,0.08)',
                                             borderTop: index === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
@@ -397,8 +405,8 @@ const Navbar = () => {
                                         index={index}
                                         handleNavClick={handleNavClick}
                                     />
-                                )
-                            ))}
+                                );
+                            })}
                         </div>
                         <Link to="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); setIsOpen(false); }} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
                             <motion.div
@@ -420,7 +428,7 @@ const Navbar = () => {
                     </motion.div>
                 )}
             </AnimatePresence>
-        </motion.nav>
+        </>
     );
 };
 

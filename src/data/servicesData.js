@@ -381,7 +381,8 @@ export const servicesData = [
       { title: 'Brand Guidelines', description: 'Comprehensive bibles ensuring your brand looks perfect and professional everywhere.' },
       { title: 'Marketing Assets', description: 'Premium templates for social, print, and digital that keep your message consistent.' },
       { title: 'Typography & Color Palette', description: 'Psychologically-tuned color and type choices that evoke the right emotions.' },
-      { title: 'Iconography Systems', description: 'Custom-crafted visual language that simplifies complex ideas into stunning graphics.' }
+      { title: 'Iconography Systems', description: 'Custom-crafted visual language that simplifies complex ideas into stunning graphics.' },
+      { title: 'Brand Stationery', description: 'Professional physical touchpoints including business cards, letterheads, and premium packaging design.' }
     ],
     portfolio: [
       { 
