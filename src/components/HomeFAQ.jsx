@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const HomeFAQ = ({ faqs }) => {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState(null);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
   if (!faqs || faqs.length === 0) return null;

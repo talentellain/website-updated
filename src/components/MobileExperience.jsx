@@ -56,7 +56,7 @@ const MobileExperience = () => {
           overflow: 'hidden',
           position: 'relative',
           padding: isMobile ? '10px' : '0 2%',
-          height: isMobile ? '380px' : 'auto',
+          height: isMobile ? '480px' : 'auto',
           borderRadius: isMobile ? '32px' : '0'
         }}>
           <motion.div
@@ -96,7 +96,7 @@ const MobileExperience = () => {
           overflow: 'hidden',
           position: 'relative',
           padding: isMobile ? '10px' : '0 2%',
-          height: isMobile ? '380px' : 'auto',
+          height: isMobile ? '260px' : 'auto',
           borderRadius: isMobile ? '32px' : '0'
         }}>
           <motion.div
@@ -134,7 +134,7 @@ const MobileExperience = () => {
           overflow: 'hidden',
           position: 'relative',
           padding: isMobile ? '10px' : '0 2%',
-          height: isMobile ? '380px' : 'auto',
+          height: isMobile ? '480px' : 'auto',
           borderRadius: isMobile ? '32px' : '0'
         }}>
           <motion.div

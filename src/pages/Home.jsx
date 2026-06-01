@@ -70,7 +70,7 @@ const Home = () => {
       </div>
 
       {/* About Section - Normal Scroll (No overlapping effect), needs zIndex to render above sticky background */}
-      <div style={{ position: 'relative', zIndex: 41 }}>
+      <div id="about" style={{ position: 'relative', zIndex: 41 }}>
         <AboutSection />
       </div>
 

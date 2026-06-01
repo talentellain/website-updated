@@ -138,9 +138,12 @@ const Navbar = () => {
                 { id: 'footer', isLight: true },
                 { id: 'contact', isLight: false },
                 { id: 'faq', isLight: true },
-                { id: 'why-talentella', isLight: false },
                 { id: 'process', isLight: true },
-                { id: 'projects', isLight: false },
+                { id: 'why-talentella', isLight: false },
+                { id: 'production-portfolio', isLight: true },
+                { id: 'about', isLight: false },
+                { id: 'mobile-showcase', isLight: true },
+                { id: 'features', isLight: false },
                 { id: 'services', isLight: true },
                 { id: 'hero', isLight: false },
             ];
@@ -148,13 +151,13 @@ const Navbar = () => {
             let overLight = false;
             
             for (let i = 0; i < sections.length; i++) {
-                const sectionEl = document.getElementById(sections[i].id);
-                if (sectionEl) {
-                    const rect = sectionEl.getBoundingClientRect();
-                    if (rect.top <= 100) {
-                        overLight = sections[i].isLight;
-                        break;
-                    }
+                let sectionEl = document.getElementById(sections[i].id);
+                if (!sectionEl) continue;
+                const stickyInner = sectionEl.querySelector('.sticky-section');
+                const rect = (stickyInner || sectionEl).getBoundingClientRect();
+                if (rect.top <= 100) {
+                    overLight = sections[i].isLight;
+                    break;
                 }
             }
             
