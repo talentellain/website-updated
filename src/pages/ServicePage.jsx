@@ -276,7 +276,7 @@ const RelatedServices = ({ currentId, isMobile }) => {
 const PricingCard = ({ plan, idx, isMobile }) => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
-  const isPopular = idx === 1;
+  const isPopular = plan.popular;
   
   return (
     <motion.div 
@@ -316,12 +316,12 @@ const PricingCard = ({ plan, idx, isMobile }) => {
 
       <div style={{ marginBottom: '1rem' }}>
         <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{plan.name}</h3>
-        <p style={{ color: '#a78bfa', fontSize: '0.65rem', fontWeight: 600, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Perfect for growth</p>
+        <p style={{ color: '#a78bfa', fontSize: '0.65rem', fontWeight: 600, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.subtitle}</p>
       </div>
 
       <div style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'baseline' }}>
         <span style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 900, letterSpacing: '-0.02em' }}>{plan.price}</span>
-        <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: 600, marginLeft: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>/ one-time</span>
+        <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: 600, marginLeft: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.billing}</span>
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>

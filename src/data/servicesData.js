@@ -165,28 +165,31 @@ export const servicesData = [
     ],
     plans: [
       { 
-        name: 'Basic', 
-        subtitle: 'For small businesses',
-        price: '₹5,000', 
+        name: 'Starter Website', 
+        subtitle: 'Perfect for startups and local businesses.',
+        price: '₹5,999', 
         billing: 'one-time',
-        features: ['5 Page Responsive Website', 'Mobile Optimization', 'Contact Form', 'Basic SEO Setup', '1 Month Support'],
-        priceNum: 5000
+        features: ['Up to 5 Pages', 'Responsive Design', 'Mobile Optimization', 'Contact Form', 'Basic SEO Setup', 'WhatsApp Integration', 'Google Maps Integration', 'Fast Loading Website', 'SSL Setup', '1 Month Support'],
+        priceNum: 5999,
+        popular: false
       },
       { 
-        name: 'Professional', 
-        subtitle: 'For growing businesses',
-        price: '₹20,000', 
+        name: 'Growth Website', 
+        subtitle: 'Perfect for growing businesses.',
+        price: '₹19,999', 
         billing: 'one-time',
-        features: ['10 Page Custom Website', 'CMS Integration', 'Payment Gateway', 'Advanced SEO + Analytics', '3 Months Support'],
-        priceNum: 20000
+        features: ['Up to 10 Pages', 'Custom Website Design', 'CMS Integration', 'Blog Setup', 'Advanced SEO Setup', 'Analytics Integration', 'WhatsApp & Contact Forms', 'Lead Capture Forms', 'Performance Optimization', '3 Months Support'],
+        priceNum: 19999,
+        popular: true
       },
       { 
-        name: 'Enterprise', 
-        subtitle: 'For large organizations',
-        price: '₹40,000', 
+        name: 'Premium Website', 
+        subtitle: 'Complete business website solution.',
+        price: '₹39,999', 
         billing: 'one-time',
-        features: ['Responsive+ 3D', 'E-commerce Platform', 'Custom Integrations', 'Priority Support', '6 Months Support'],
-        priceNum: 40000
+        features: ['Unlimited Pages', 'Premium Custom Design', 'Advanced Animations', 'CMS Integration', 'E-Commerce Functionality', 'Payment Gateway Integration', 'Custom Integrations', 'Advanced SEO Optimization', 'Analytics Dashboard', 'Speed Optimization', 'Security Hardening', 'Priority Support', '6 Months Support', 'Source Code Ownership'],
+        priceNum: 39999,
+        popular: false
       }
     ]
   },
@@ -311,28 +314,31 @@ export const servicesData = [
     plans: [
       { 
         name: 'Starter', 
-        subtitle: 'Perfect for startups',
-        price: '₹10,000', 
+        subtitle: 'Perfect for businesses building their online presence.',
+        price: '₹9,999', 
         billing: '/month',
-        features: ['2 Platforms (IG + FB)', '12 Posts/Month', '7 Reels/Month', 'Basic Graphic Design', 'Monthly Report'],
-        priceNum: 10000
+        features: ['2 Platforms (Instagram + Facebook)', 'Content Strategy', '12 Posts/Month', '7 Reels/Month', 'Basic Graphic Design', 'Video Editing', 'Copywriting & Captions', 'Account Management', 'Monthly Performance Report'],
+        priceNum: 9999,
+        popular: false
       },
       { 
         name: 'Growth', 
-        subtitle: 'For scaling brands',
-        price: '₹20,000', 
+        subtitle: 'Perfect for brands focused on growth and engagement.',
+        price: '₹19,999', 
         billing: '/month',
-        features: ['4 Platforms (All Major)', '24 Posts/Month','12 Reels/Month', 'Premium Graphics + Reels', 'Community Management', 'Weekly Analytics'],
-        priceNum: 20000
+        features: ['4 Platforms (Instagram, Facebook, LinkedIn, X)', 'Advanced Content Strategy', 'Monthly Content Calendar', '24 Posts/Month', '12 Reels/Month', 'Premium Graphic Design', 'Advanced Video Editing', 'Professional Copywriting', 'Account Management', 'Community Management', 'Audience Engagement', 'Meta Ads Management', 'Retargeting Ads', 'Weekly Analytics', 'Monthly Performance Report'],
+        priceNum: 19999,
+        popular: true
       },
       { 
         name: 'Premium', 
-        subtitle: 'Full-service solution',
-        price: '₹35,000', 
+        subtitle: 'Complete 360° Social Media Growth Solution.',
+        price: '₹34,999', 
         billing: '/month',
-        features: ['All Platforms', '24 Posts + Videos', 'Video Production','20 Reels/Month', 'Paid Ads Management', 'Dedicated Manager'],
-        priceNum: 35000
-      }
+        features: ['Full Social Media Management', 'Advanced Content Strategy', 'Monthly Content Calendar', 'Instagram Reels', 'Posts & Carousels', 'Stories Management', 'Short-Form Video Creation', 'Premium Graphic Design', 'Social Media Creatives', 'Promotional Banners', 'Brand-Focused Designs', 'Advanced Video Editing', 'Motion Graphics', 'Trending Content Adaptation', 'Professional Copywriting', 'Captions & Hooks', 'Hashtag Research', 'Multi-Platform Account Management', 'Community Management', 'Comment & DM Management', 'Audience Engagement', 'Organic Growth Strategies', 'Influencer Collaborations', 'Meta Ads (Facebook & Instagram)', 'Lead Generation Campaigns', 'Retargeting Ads', 'Monthly Reports', 'Performance Tracking', 'Strategy Optimization', 'Dedicated Account Manager'],
+        priceNum: 34999,
+        popular: false
+      },
     ]
   },
   {
@@ -411,26 +417,29 @@ export const servicesData = [
       { 
         name: 'Logo Package', 
         subtitle: 'Quick brand start',
-        price: '₹3,000', 
+        price: '₹2,999', 
         billing: 'one-time',
-        features: ['2 Logo Concepts', '2 Revision Rounds', 'All File Formats', 'Color Variations', 'Business Card Design'],
-        priceNum: 3000
+        features: ['2 Logo Concepts', '2 Revision Rounds', 'Color Variations', 'All File Formats (PNG, SVG, PDF, AI)', 'Business Card Design'],
+        priceNum: 2999,
+        popular: false
       },
       { 
         name: 'Brand Identity', 
         subtitle: 'Complete brand system',
-        price: '₹10,000', 
+        price: '₹9,999', 
         billing: 'one-time',
-        features: ['4 Logo Concepts', 'Brand Guidelines Book', 'Color + Typography System', 'Stationery Design', 'Social Media Templates', '4 Revisions'],
-        priceNum: 10000
+        features: ['4 Logo Concepts', 'Brand Strategy Session', 'Color Palette System', 'Typography System', 'Brand Voice & Tone', 'Brand Guidelines Book', 'Business Card Design', 'Letterhead Design', 'Social Media Templates', '4 Revisions'],
+        priceNum: 9999,
+        popular: true
       },
       { 
         name: 'Complete Rebrand', 
         subtitle: 'Total transformation',
-        price: '₹30,000', 
+        price: '₹29,999', 
         billing: 'one-time',
-        features: ['6 Logo Concepts', 'Complete Brand Guidelines', 'Business Card & Letterhead', 'Social Media Kit (10 Posts)', 'Presentation Template', '1 Month Free Support'],
-        priceNum: 30000
+        features: ['6 Logo Concepts', 'Complete Brand Strategy', 'Brand Positioning', 'Full Brand Guidelines', 'Color & Typography System', 'Business Card & Letterhead', 'Email Signature', 'Social Media Kit (10 Posts)', 'Presentation Template', 'Company Profile Design', 'Brand Voice & Messaging', '1 Month Free Support'],
+        priceNum: 29999,
+        popular: false
       }
     ]
   }

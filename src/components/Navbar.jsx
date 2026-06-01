@@ -246,7 +246,7 @@ const Navbar = () => {
                         pointerEvents: 'auto',
                     }}
                 >
-                    {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
+                            {['HOME', 'WEBSITE', 'SMM', 'IDENTITY', 'APP', 'PORTFOLIO', 'BLOG'].map((item, index) => {
                         const isPageLink = !!PAGE_LINKS[item];
                         const isActive = isPageLink ? location.pathname === PAGE_LINKS[item] : false;
                         const activeColor = '#a78bfa';
@@ -375,7 +375,7 @@ const Navbar = () => {
                         </button>
                         
                         <div style={{ display: 'flex', flexDirection: 'column', width: '100%', textAlign: 'center', overflowY: 'auto', flex: 1, justifyContent: 'center' }}>
-                            {['HOME', 'PORTFOLIO', 'APP', 'BLOG', 'WEBSITE', 'SMM', 'IDENTITY'].map((item, index) => {
+                    {['HOME', 'WEBSITE', 'SMM', 'IDENTITY', 'APP', 'PORTFOLIO', 'BLOG'].map((item, index) => {
                                 const isActive = PAGE_LINKS[item] ? location.pathname === PAGE_LINKS[item] : false;
                                 return PAGE_LINKS[item] ? (
                                     <Link
