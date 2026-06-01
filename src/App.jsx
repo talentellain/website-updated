@@ -9,6 +9,7 @@ import ScrollToTop from './components/ScrollToTop';
 const ServicePage = React.lazy(() => import('./pages/ServicePage'));
 const PortfolioPage = React.lazy(() => import('./pages/PortfolioPage'));
 const AppPage = React.lazy(() => import('./pages/AppPage'));
+const AboutPage = React.lazy(() => import('./pages/AboutPage'));
 const BlogPage = React.lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage'));
 
@@ -30,6 +31,7 @@ function App() {
           <React.Suspense fallback={<div style={{ height: '100vh', backgroundColor: '#000' }} />}>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<AboutPage />} />
               {/* Clean URL structure: /services/website-development */}
               <Route path="/services/:id" element={<ServicePage />} />
               <Route path="/portfolio" element={<PortfolioPage />} />

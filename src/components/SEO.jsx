@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 
 const SITE_NAME = 'TalentElla';
 const SITE_URL = 'https://talentella.in';
@@ -11,7 +12,7 @@ const SEO = ({
   pageTitle = '',
   description = 'TalentElla is India\'s leading 360° marketing agency offering brand development, social media marketing, influencer marketing, lead generation & integrated marketing solutions.',
   keywords = '360 degree marketing agency, full service digital marketing agency, brand development agency, social media marketing agency India, influencer marketing agency, lead generation agency, integrated marketing solutions, content marketing agency',
-  url = SITE_URL,
+  url,
   image = DEFAULT_IMAGE,
   type = 'website',
   schema = null,
@@ -20,9 +21,13 @@ const SEO = ({
   serviceSchema = null,
   noindex = false,
 }) => {
+  const location = useLocation();
+  // Derive canonical from current route if not explicitly provided
+  const resolvedUrl = url || `${SITE_URL}${location.pathname}`;
+  const canonicalUrl = resolvedUrl === SITE_URL ? `${SITE_URL}/` : resolvedUrl;
+
   // Format: "TalentElla | [Page Topic] — 360° Marketing Agency"
   const formattedTitle = title || (pageTitle ? `${SITE_NAME} | ${pageTitle} — ${TITLE_SUFFIX}` : `${SITE_NAME} — ${TITLE_SUFFIX}`);
-  const canonicalUrl = url.endsWith('/') ? url : `${url}/`;
 
   // BreadcrumbList schema
   const breadcrumbSchema = breadcrumbs ? {
