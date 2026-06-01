@@ -8,7 +8,7 @@ const Hero = () => {
   const heroWrapperRef = useRef(null);
   const titleWrapRef = useRef(null);
   const mountainRef = useRef(null);
-  const contentRefs = useRef([]);
+  const contentRefs = useRef([]); 
 
   // Reset array on render to avoid stale refs
   contentRefs.current = [];
@@ -114,7 +114,7 @@ const Hero = () => {
                     whiteSpace: 'nowrap'
                   }}
                 >
-                  TALENT <span style={{ margin: '0 0.2em' }}></span>ELLA
+                  TALENTELLA
                 </div>
               </div>
             </div>
