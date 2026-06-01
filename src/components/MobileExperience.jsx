@@ -13,16 +13,15 @@ const MobileExperience = () => {
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
-  // Top-level hooks (must always be called in the same order)
-  const leftYTransform = useTransform(scrollYProgress, [0, 0.5], [250, -190]);
-  const leftOpacityTransform = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const leftYTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.5], isMobile ? [0, 0] : [250, -190]);
+  const leftOpacityTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.2], isMobile ? [1, 1] : [0, 1]);
   
-  const centerScaleTransform = useTransform(scrollYProgress, [0.3, 0.6], [1, 1.3]);
-  const centerYTransform = useTransform(scrollYProgress, [0.1, 0.6], [250, 190]);
-  const centerOpacityTransform = useTransform(scrollYProgress, [0.1, 0.3], [0, 1]);
+  const centerScaleTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0.3, 0.6], isMobile ? [1, 1] : [1, 1.3]);
+  const centerYTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0.1, 0.6], isMobile ? [0, 0] : [250, 190]);
+  const centerOpacityTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0.1, 0.3], isMobile ? [1, 1] : [0, 1]);
 
-  const rightYTransform = useTransform(scrollYProgress, [0.2, 0.7], [250, -410]);
-  const rightOpacityTransform = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
+  const rightYTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0.2, 0.7], isMobile ? [0, 0] : [250, -410]);
+  const rightOpacityTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0.2, 0.4], isMobile ? [1, 1] : [0, 1]);
 
   return (
     <section 

@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import WAVES from 'vanta/dist/vanta.waves.min';
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
 const VantaBackground = () => {
   const [vantaEffect, setVantaEffect] = useState(null);
   const vantaRef = useRef(null);
 
   useEffect(() => {
-    // Vanta expects THREE to be on window
+    if (isMobile) return;
+
     window.THREE = THREE;
 
     if (!vantaEffect && vantaRef.current) {

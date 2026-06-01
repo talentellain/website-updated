@@ -46,11 +46,13 @@ const reviewsData = [
   }
 ];
 
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
 const ReviewCard = ({ review }) => (
   <motion.div
-    whileHover={{ scale: 1.02, borderColor: 'rgba(114, 38, 255, 0.4)', boxShadow: '0 15px 35px rgba(114, 38, 255, 0.1)' }}
+    whileHover={isMobile ? {} : { scale: 1.02, borderColor: 'rgba(114, 38, 255, 0.4)', boxShadow: '0 15px 35px rgba(114, 38, 255, 0.1)' }}
     style={{
-      minWidth: '320px',
+      minWidth: isMobile ? '280px' : '320px',
       padding: '1.25rem',
       backgroundColor: '#ffffff',
       border: '1px solid rgba(114, 38, 255, 0.08)',
@@ -89,6 +91,9 @@ const ReviewCard = ({ review }) => (
   </motion.div>
 );
 
+const repeatCount = isMobile ? 2 : 5;
+const repeated = [...Array(repeatCount)].flatMap(() => reviewsData);
+
 const ReviewsSection = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -96,16 +101,15 @@ const ReviewsSection = () => {
     offset: ["start end", "end start"]
   });
 
-  // Alternating row movements - High Velocity
-  const row1X = useTransform(scrollYProgress, [0, 1], [0, -2800]);
-  const row2X = useTransform(scrollYProgress, [0, 1], [-2800, 0]);
-  const row3X = useTransform(scrollYProgress, [0, 1], [0, -2800]);
+  const row1X = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 1], isMobile ? [0, 0] : [0, -2800]);
+  const row2X = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 1], isMobile ? [0, 0] : [-2800, 0]);
+  const row3X = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 1], isMobile ? [0, 0] : [0, -2800]);
 
   const { scrollYProgress: borderScroll } = useScroll({
     target: containerRef,
     offset: ["start end", "start start"]
   });
-  const borderRad = useTransform(borderScroll, [0, 1], ["80px", "0px"]);
+  const borderRad = useTransform(borderScroll, isMobile ? [0, 1] : [0, 1], isMobile ? ["0px", "0px"] : ["80px", "0px"]);
 
   return (
     <motion.section 
@@ -116,7 +120,7 @@ const ReviewsSection = () => {
         zIndex: 50,
         borderTopLeftRadius: borderRad,
         borderTopRightRadius: borderRad,
-        minHeight: '200vh', 
+        minHeight: isMobile ? 'auto' : '200vh', 
         boxShadow: '0 -60px 150px rgba(114, 38, 255, 0.08), 0 -20px 40px rgba(0,0,0,0.03)',
         backgroundImage: `
           radial-gradient(circle at 10% 10%, rgba(114, 38, 255, 0.04) 0%, transparent 40%),
@@ -158,19 +162,19 @@ const ReviewsSection = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem', padding: '1vh 0' }}>
           <motion.div style={{ display: 'flex', x: row1X }}>
-            {[...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData].map((review, i) => (
+            {repeated.map((review, i) => (
               <ReviewCard key={`row1-${i}`} review={review} />
             ))}
           </motion.div>
 
           <motion.div style={{ display: 'flex', x: row2X }}>
-            {[...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData].map((review, i) => (
+            {repeated.map((review, i) => (
               <ReviewCard key={`row2-${i}`} review={review} />
             ))}
           </motion.div>
 
           <motion.div style={{ display: 'flex', x: row3X }}>
-            {[...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData].map((review, i) => (
+            {repeated.map((review, i) => (
               <ReviewCard key={`row3-${i}`} review={review} />
             ))}
           </motion.div>

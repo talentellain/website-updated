@@ -1,12 +1,38 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Instagram, Linkedin, Mail, ArrowUpRight } from 'lucide-react';
+import { Instagram, Linkedin, Mail, ArrowUpRight, MessageCircle } from 'lucide-react';
 import { gsap } from 'gsap';
-import { useNavigate } from 'react-router-dom';
+
+const PHONE = '9709667244';
+const WHATSAPP_NUMBER = `91${PHONE}`;
+
+const planLabels = {
+  'website-development': 'Website Development',
+  'social-media-management': 'Social Media Management',
+  'visual-identity-design': 'Visual Identity Design',
+  'app-development': 'App Development',
+};
+
+const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
 const Footer = () => {
-    const navigate = useNavigate();
     const buttonRef = useRef(null);
     const containerRef = useRef(null);
+
+    const params = useMemo(() => {
+      const search = typeof window !== 'undefined' ? window.location.search : '';
+      const sp = new URLSearchParams(search);
+      const service = sp.get('service');
+      const plan = sp.get('plan');
+      return { service, plan };
+    }, []);
+
+    const serviceLabel = planLabels[params.service] || '';
+    const planText = params.plan ? `${params.plan} Plan` : '';
+    const msg = params.service
+      ? `Hi TalentElla! I'm interested in your ${serviceLabel} — ${planText}. Can you share more details?`
+      : "Hi TalentElla! I'm ready to scale my business. Can you help?";
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "start start"]
@@ -15,7 +41,7 @@ const Footer = () => {
 
     useEffect(() => {
         const btn = buttonRef.current;
-        if (!btn) return;
+        if (!btn || isMobile) return;
 
         const handleMouseMove = (e) => {
             const { clientX, clientY } = e;
@@ -47,19 +73,6 @@ const Footer = () => {
             btn.removeEventListener('mouseleave', handleMouseLeave);
         };
     }, []);
-
-    const handleStartProject = () => {
-        // If already on home page, just scroll to contact
-        if (window.location.pathname === '/') {
-            document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            // Navigate to home, then scroll after page loads
-            navigate('/');
-            setTimeout(() => {
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-            }, 500);
-        }
-    };
 
     return (
         <motion.footer id="footer" ref={containerRef} style={{ 
@@ -109,26 +122,33 @@ const Footer = () => {
 
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <div ref={buttonRef} style={{ display: 'inline-block' }}>
-                        <motion.button 
-                            className="btn-primary" 
-                            onClick={handleStartProject}
+                        <motion.a
+                            href={whatsappUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
                             style={{ 
                                 padding: 'clamp(1rem, 3vw, 1.8rem) clamp(2rem, 5vw, 4.5rem)', 
                                 fontSize: 'clamp(1rem, 2vw, 1.25rem)',
                                 borderRadius: '100px',
-                                background: '#121212',
-                                color: '#ffffff',
+                                background: '#25D366',
+                                color: '#000',
                                 border: 'none',
                                 fontWeight: 800,
-                                display: 'flex',
+                                display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '1rem',
-                                boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
-                                cursor: 'pointer'
+                                boxShadow: '0 20px 40px rgba(37,211,102,0.3)',
+                                cursor: 'pointer',
+                                textDecoration: 'none',
+                                letterSpacing: '0.02em',
+                                transition: 'all 0.3s ease',
                             }}
                         >
-                            Start a Project <ArrowUpRight size={24} />
-                        </motion.button>
+                            <MessageCircle size={26} /> Chat on WhatsApp <ArrowUpRight size={24} />
+                        </motion.a>
                     </div>
                 </div>
             </div>

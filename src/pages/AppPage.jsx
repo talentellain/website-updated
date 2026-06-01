@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Check, Smartphone, Monitor, Infinity, ShieldCheck, Zap, Users, Code, Share2, Palette, Settings } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 import { servicesData } from '../data/servicesData';
@@ -206,6 +206,7 @@ const RelatedServices = ({ currentId, isMobile }) => {
 };
 
 const AppPage = () => {
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
 
@@ -360,10 +361,18 @@ const AppPage = () => {
                       ))}
                     </ul>
 
-                    <Link to="/#contact" style={{ textDecoration: 'none', marginTop: 'auto' }}>
+                    <div style={{ marginTop: 'auto' }}>
                       <motion.button
                         whileHover={{ scale: 1.02, backgroundColor: isPopular ? '#c4b5fd' : '#ffffff', color: isPopular ? '#000' : '#000' }}
                         whileTap={{ scale: 0.98 }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate('/');
+                          setTimeout(() => {
+                            const el = document.getElementById('footer');
+                            if (el) el.scrollIntoView({ behavior: 'smooth' });
+                          }, 600);
+                        }}
                         style={{
                           width: '100%',
                           padding: '0.6rem 1rem',
@@ -385,7 +394,7 @@ const AppPage = () => {
                       >
                         Start Project <ArrowUpRight size={18} />
                       </motion.button>
-                    </Link>
+                    </div>
                   </motion.div>
                 )}
 

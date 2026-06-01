@@ -273,7 +273,7 @@ const RelatedServices = ({ currentId, isMobile }) => {
 /* ──────────────────────────────────────────────
    Pricing Card
    ────────────────────────────────────────────── */
-const PricingCard = ({ plan, idx, isMobile }) => {
+const PricingCard = ({ plan, idx, isMobile, serviceId }) => {
   const navigate = useNavigate();
   const [isExpanded, setIsExpanded] = useState(false);
   const isPopular = plan.popular;
@@ -348,11 +348,18 @@ const PricingCard = ({ plan, idx, isMobile }) => {
               ))}
             </ul>
 
-            <Link to="/#contact" style={{ textDecoration: 'none', marginTop: 'auto' }}>
+            <div style={{ marginTop: 'auto' }}>
               <motion.button
                 whileHover={{ scale: 1.02, backgroundColor: isPopular ? '#9955ff' : '#ffffff', color: isPopular ? '#fff' : '#000' }}
                 whileTap={{ scale: 0.98 }}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate('/');
+                  setTimeout(() => {
+                    const el = document.getElementById('footer');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }, 600);
+                }}
                 style={{
                   width: '100%',
                   padding: '0.6rem 1rem',
@@ -374,7 +381,7 @@ const PricingCard = ({ plan, idx, isMobile }) => {
               >
                 Start Project <ArrowUpRight size={18} />
               </motion.button>
-            </Link>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -501,7 +508,7 @@ const ServicePage = () => {
             
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 850, marginTop: '0.4rem' }}>Transparent Investment</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile} />)}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile} serviceId={id} />)}</div>
         </div>
       </section>
 

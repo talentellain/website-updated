@@ -12,6 +12,7 @@ const AppPage = React.lazy(() => import('./pages/AppPage'));
 const BlogPage = React.lazy(() => import('./pages/BlogPage'));
 const BlogPostPage = React.lazy(() => import('./pages/BlogPostPage'));
 
+
 /** Redirect from old /service/:id to new /services/:id URL structure */
 function ServiceRedirect() {
   const { id } = useParams();
