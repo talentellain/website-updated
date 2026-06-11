@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React from 'react';
+ 
+import { motion } from 'framer-motion';
 
 const formulas = [
   { label: 'CREATIVITY', color: '#a78bfa' },
@@ -43,9 +44,6 @@ const engagementLevels = [
 ];
 
 const WhyTalentElla = () => {
-  const outerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start end', 'start start'] });
-  const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024;
 
   return (

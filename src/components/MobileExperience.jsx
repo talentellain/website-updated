@@ -72,7 +72,7 @@ const MobileExperience = () => {
             }}
           >
             <img 
-              src={leftMockup} 
+              src={leftMockup?.src || leftMockup} 
               alt="Our Works View" 
               loading="lazy"
               decoding="async"
@@ -110,7 +110,7 @@ const MobileExperience = () => {
             }}
           >
             <img 
-              src={frontMockup} 
+              src={frontMockup?.src || frontMockup} 
               alt="Main Experience View" 
               loading="lazy"
               decoding="async"
@@ -150,7 +150,7 @@ const MobileExperience = () => {
             }}
           >
             <img 
-              src={rightMockup} 
+              src={rightMockup?.src || rightMockup} 
               alt="Contact View" 
               loading="lazy"
               decoding="async"

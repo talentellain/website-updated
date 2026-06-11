@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const HomeFAQ = ({ faqs }) => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -63,7 +63,7 @@ const HomeFAQ = ({ faqs }) => {
           }}>
             Have a specific query? Our experts are here to provide the clarity you need.
           </p>
-          <Link to="/#contact" style={{ textDecoration: 'none' }}>
+          <Link href="/#contact" style={{ textDecoration: 'none' }} scroll={false}>
             <motion.button 
               whileHover={{ scale: 1.05, backgroundColor: '#7652cc' }}
               style={{ 

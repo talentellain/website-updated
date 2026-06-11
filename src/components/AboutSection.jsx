@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Users, Award, Briefcase } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import aiImg from '../assets/Expert-in/ai-png.png';
 import uiImg from '../assets/Expert-in/ui-png.png';
 import webdevImg from '../assets/Expert-in/webdev-png.png';
@@ -60,7 +60,7 @@ const ExpertiseCard = ({ imgSrc, title, description }) => (
   >
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: 1 }}>
       <img 
-        src={imgSrc} 
+        src={imgSrc?.src || imgSrc} 
         alt={title} 
         loading="lazy"
         decoding="async"
@@ -169,7 +169,7 @@ const AboutSection = () => {
                 <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', lineHeight: 1.85, margin: 0, fontFamily: 'Inter, sans-serif' }}>
                   We take the time to deeply understand your business, allowing us to execute on your mission most effectively and craft strategies that resonate with your audience.
                 </p>
-                <Link to="/#contact" style={{ textDecoration: 'none' }}>
+                <Link href="/#contact" style={{ textDecoration: 'none' }} scroll={false}>
                   <motion.div whileHover={{ x: 8, gap: '1.2rem' }} style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginTop: '0.5rem', cursor: 'pointer' }}>
                     <span style={{ color: '#a78bfa', fontSize: '0.9rem', fontWeight: 600, fontFamily: 'Inter, sans-serif', letterSpacing: '0.02em' }}>Read more</span>
                     <div style={{ width: '34px', height: '34px', borderRadius: '50%', border: '1px solid rgba(167,139,250,0.3)', background: 'rgba(167,139,250,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.3s ease' }}>
@@ -217,7 +217,7 @@ const AboutSection = () => {
                 </h2>
               </motion.div>
 
-              <Link to="/#contact" style={{ textDecoration: 'none' }}>
+              <Link href="/#contact" style={{ textDecoration: 'none' }} scroll={false}>
                 <motion.button whileHover={{ scale: 1.04, backgroundColor: 'rgba(167,139,250,0.1)' }} whileTap={{ scale: 0.96 }} style={{ padding: isMobile ? '1.1rem 3.5rem' : '0.9rem 2.8rem', borderRadius: '100px', backgroundColor: 'transparent', border: '1px solid rgba(167,139,250,0.3)', color: '#a78bfa', fontSize: isMobile ? '1rem' : '0.9rem', cursor: 'pointer', fontWeight: 600, fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap', letterSpacing: '0.02em', transition: 'all 0.3s ease' }}>
                   Let's work!
                 </motion.button>

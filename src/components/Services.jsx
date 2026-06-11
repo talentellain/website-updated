@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Code, Share2, Palette, Settings, Zap, Smartphone, ArrowUpRight } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 
@@ -30,7 +30,7 @@ const ServiceCard = ({ s, index }) => {
   const num = serviceNumbers[s.id] || `0${index + 1}`;
 
   return (
-    <Link to={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }} aria-label={`Learn about TalentElla's ${s.title} services`}>
+    <Link href={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }} aria-label={`Learn about TalentElla's ${s.title} services`}>
       <div className="modern-service-card" style={{ position: 'relative', height: '100%', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '28px' }}>
         {/* Top Header inside Card */}
         <div className="card-top-header" style={{ position: 'absolute', top: '2rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 3, transition: 'opacity 0.4s ease' }}>

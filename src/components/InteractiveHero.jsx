@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const InteractiveHero = ({
   bgText = 'PORTFOLIO',
@@ -91,7 +91,7 @@ const InteractiveHero = ({
               <div style={{ display: 'flex', gap: '2rem' }}>
                 {links.map((link, idx) => (
                   link.url.startsWith('/') || link.url.startsWith('#') ? (
-                    <Link key={idx} to={link.url} style={{ color: '#fff', fontSize: '0.7rem', fontWeight: 700, textDecoration: 'underline', letterSpacing: '0.1em' }}>
+                    <Link key={idx} href={link.url} style={{ color: '#fff', fontSize: '0.7rem', fontWeight: 700, textDecoration: 'underline', letterSpacing: '0.1em' }}>
                       {link.text}
                     </Link>
                   ) : (

@@ -1,7 +1,10 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 import logo from '../assets/talentella-logo.png';
 
 // Nav items that are anchor-scroll vs page links
@@ -103,8 +106,8 @@ const Navbar = () => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation();
+    const router = useRouter();
+    const location = { pathname: usePathname() };
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -113,7 +116,7 @@ const Navbar = () => {
             e.preventDefault();
             if (location.pathname !== '/') {
                 // Navigate to home and then trigger scroll
-                navigate('/');
+                router.push('/');
                 setTimeout(() => {
                     const el = document.getElementById(targetId);
                     if (el) {
@@ -204,7 +207,7 @@ const Navbar = () => {
             }}>
                 {/* Logo */}
                 <Link 
-                    to="/" 
+                    href="/" 
                     onClick={(e) => {
                         if (location.pathname === '/') {
                             e.preventDefault();
@@ -224,9 +227,9 @@ const Navbar = () => {
                         }}
                     >
                         <img 
-                          src={logo} 
+                          src={logo?.src || logo} 
                           alt="Talent Ella Logo" 
-                          fetchpriority="high"
+                          fetchPriority="high"
                           decoding="async"
                           style={{ 
                             height: '40px',
@@ -259,7 +262,7 @@ const Navbar = () => {
                         return isPageLink ? (
                             <Link
                                 key={item}
-                                to={PAGE_LINKS[item]}
+                                href={PAGE_LINKS[item]}
                                 onMouseEnter={() => setHoveredIndex(index)}
                                 onMouseLeave={() => setHoveredIndex(null)}
                                 style={{
@@ -319,7 +322,7 @@ const Navbar = () => {
 
                 {/* Action Button */}
                 <div className="hidden-mobile" style={{ pointerEvents: 'auto' }}>
-                    <Link to="/#contact" onClick={(e) => handleNavClick(e, 'contact')} style={{ textDecoration: 'none' }}>
+                        <Link href="/#contact" onClick={(e) => handleNavClick(e, 'contact')} scroll={false} style={{ textDecoration: 'none' }}>
                         <motion.div 
                           whileHover={{ scale: 1.05, y: -1, boxShadow: '0 8px 20px rgba(167, 139, 250, 0.2)' }}
                           whileTap={{ scale: 0.98 }}
@@ -383,7 +386,7 @@ const Navbar = () => {
                                 return PAGE_LINKS[item] ? (
                                     <Link
                                         key={item}
-                                        to={PAGE_LINKS[item]}
+                                        href={PAGE_LINKS[item]}
                                         onClick={() => setIsOpen(false)}
                                         style={{
                                             width: '100%',
@@ -411,7 +414,7 @@ const Navbar = () => {
                                 );
                             })}
                         </div>
-                        <Link to="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); setIsOpen(false); }} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
+                        <Link href="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); setIsOpen(false); }} scroll={false} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
                             <motion.div
                                 whileTap={{ scale: 0.95 }}
                                 style={{

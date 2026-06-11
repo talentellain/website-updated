@@ -1,136 +1,10 @@
-import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useLocation } from 'react-router-dom';
+'use client';
 
-const SITE_NAME = 'TalentElla';
-const SITE_URL = 'https://talentella.in';
-const DEFAULT_IMAGE = `${SITE_URL}/logo.jpg`;
-const TITLE_SUFFIX = '360° Marketing Agency India';
-
-const SEO = ({
-  title,
-  pageTitle = '',
-  description = 'TalentElla is India\'s leading 360° marketing agency offering brand development, social media marketing, influencer marketing, lead generation & integrated marketing solutions.',
-  keywords = '360 degree marketing agency, full service digital marketing agency, brand development agency, social media marketing agency India, influencer marketing agency, lead generation agency, integrated marketing solutions, content marketing agency',
-  url,
-  image = DEFAULT_IMAGE,
-  type = 'website',
-  schema = null,
-  breadcrumbs = null,
-  faqSchema = null,
-  serviceSchema = null,
-  noindex = false,
-}) => {
-  const location = useLocation();
-  // Derive canonical from current route if not explicitly provided
-  const resolvedUrl = url || `${SITE_URL}${location.pathname}`;
-  const canonicalUrl = resolvedUrl === SITE_URL ? `${SITE_URL}/` : resolvedUrl;
-
-  // Format: "TalentElla | [Page Topic] — 360° Marketing Agency"
-  const formattedTitle = title || (pageTitle ? `${SITE_NAME} | ${pageTitle} — ${TITLE_SUFFIX}` : `${SITE_NAME} — ${TITLE_SUFFIX}`);
-
-  // BreadcrumbList schema
-  const breadcrumbSchema = breadcrumbs ? {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    'itemListElement': breadcrumbs.map((item, index) => ({
-      '@type': 'ListItem',
-      'position': index + 1,
-      'name': item.name,
-      'item': item.url,
-    })),
-  } : null;
-
-  useEffect(() => {
-    const linkEn = document.createElement('link');
-    linkEn.rel = 'alternate';
-    linkEn.hreflang = 'en-IN';
-    linkEn.href = canonicalUrl;
-    
-    const linkX = document.createElement('link');
-    linkX.rel = 'alternate';
-    linkX.hreflang = 'x-default';
-    linkX.href = canonicalUrl;
-    
-    document.head.appendChild(linkEn);
-    document.head.appendChild(linkX);
-    
-    return () => {
-      if (document.head.contains(linkEn)) document.head.removeChild(linkEn);
-      if (document.head.contains(linkX)) document.head.removeChild(linkX);
-    };
-  }, [canonicalUrl]);
-
-  return (
-    <Helmet>
-      {/* Primary Meta */}
-      <title>{formattedTitle}</title>
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      <meta name="author" content="TalentElla" />
-      <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
-      <link rel="canonical" href={canonicalUrl} />
-
-      {/* Resource Hints */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      
-      {/* Critical Asset Preloads */}
-      <link rel="preload" href="/fg.png" as="image" fetchpriority="high" />
-      <link rel="preload" href="/bg5.png" as="image" fetchpriority="high" />
-
-      {/* Open Graph */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={canonicalUrl} />
-      <meta property="og:title" content={formattedTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:locale" content="en_IN" />
-
-      {/* Twitter Card */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={canonicalUrl} />
-      <meta name="twitter:title" content={formattedTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-
-      {/* Geo-targeting */}
-      <meta name="geo.region" content="IN" />
-      <meta name="geo.placename" content="India" />
-
-      {/* BreadcrumbList Schema */}
-      {breadcrumbSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(breadcrumbSchema)}
-        </script>
-      )}
-
-      {/* FAQPage Schema */}
-      {faqSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(faqSchema)}
-        </script>
-      )}
-
-      {/* Service Schema */}
-      {serviceSchema && (
-        <script type="application/ld+json">
-          {JSON.stringify(serviceSchema)}
-        </script>
-      )}
-
-      {/* Additional Schema */}
-      {schema && (
-        <script type="application/ld+json">
-          {JSON.stringify(schema)}
-        </script>
-      )}
-    </Helmet>
-  );
-};
+/**
+ * SEO utility — schema generators for Next.js Metadata API.
+ * Page-level SEO is handled via Next.js `metadata` / `generateMetadata` exports.
+ * This component renders nothing.
+ */
 
 /**
  * Generates FAQPage schema markup
@@ -177,5 +51,7 @@ export const generateServiceSchema = (service) => ({
     'offerCount': service.offers.count,
   } : undefined,
 });
+
+const SEO = () => null;
 
 export default SEO;

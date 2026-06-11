@@ -1,7 +1,11 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
+ 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Check, Smartphone, Monitor, Infinity, ShieldCheck, Zap, Users, Code, Share2, Palette, Settings } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { ArrowUpRight, Check, Smartphone, Monitor, Infinity as InfinityIcon, ShieldCheck, Zap, Users, Code, Share2, Palette, Settings } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 import { servicesData } from '../data/servicesData';
@@ -81,7 +85,7 @@ const perks = [
   { icon: ShieldCheck, label: 'Secure by Design', desc: 'Enterprise-grade security and data protection.' },
   { icon: Monitor, label: 'Modern Tech Stack', desc: 'Built with React Native, Flutter, and Node.js.' },
   { icon: Users, label: 'User-Centric UI/UX', desc: 'Intuitive interfaces that your users will love.' },
-  { icon: Infinity, label: 'Ongoing Support', desc: 'Continuous bug fixes & reliable maintenance.' },
+  { icon: InfinityIcon, label: 'Ongoing Support', desc: 'Continuous bug fixes & reliable maintenance.' },
 ];
 
 const faqs = [
@@ -178,7 +182,7 @@ const ServiceCard = ({ s }) => {
   ));
   const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
   return (
-    <Link to={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }}>
+    <Link href={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }}>
       <div className="modern-service-card" style={{ position: 'relative', height: '100%', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '24px' }}>
         <div className="card-giant-text">{displayTitle}</div>
         <div className="card-hover-content">
@@ -206,7 +210,7 @@ const RelatedServices = ({ currentId, isMobile }) => {
 };
 
 const AppPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isMobile, setIsMobile] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(null);
 
@@ -367,7 +371,7 @@ const AppPage = () => {
                         whileTap={{ scale: 0.98 }}
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate('/');
+                          router.push('/');
                           setTimeout(() => {
                             const el = document.getElementById('footer');
                             if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -419,7 +423,7 @@ const AppPage = () => {
             <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '2rem', maxWidth: isMobile ? '100%' : '300px', margin: isMobile ? '0 auto 2rem auto' : '0 0 2rem 0' }}>
               Have a specific query? Our experts are here to provide the clarity you need.
             </p>
-            <Link to="/#contact" style={{ textDecoration: 'none' }}>
+            <Link href="/#contact" style={{ textDecoration: 'none' }}>
               <motion.button whileHover={{ scale: 1.05, backgroundColor: '#c4b5fd' }} style={{ padding: isMobile ? '1rem 2.2rem' : '1rem 2rem', borderRadius: '100px', background: '#a78bfa', color: '#000', border: 'none', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '0.05em', transition: '0.3s ease', margin: isMobile ? '0 auto' : '0' }}>
                 Ask a Question
               </motion.button>

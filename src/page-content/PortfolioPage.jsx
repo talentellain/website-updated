@@ -1,13 +1,14 @@
+'use client';
+
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence, useMotionValue } from 'framer-motion';
+// eslint-disable-next-line no-unused-vars
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Filter } from 'lucide-react';
-import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 
 import { servicesData } from '../data/servicesData';
 import onepieceImg from '../assets/onepiece.png';
 import k72Img from '../assets/K72.png';
-import dentwiseImg from '../assets/dentwise.png';
 
 const allFeatured = [
   { id: 1, title: 'Symetra Main', category: 'ENTERPRISE', image: '/projects/image copy.png', link: 'https://www.simetratech.com' },
@@ -32,14 +33,19 @@ const categoryColors = {
 };
 
 const FloatingParticles = () => {
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 6 + 4,
-    delay: Math.random() * 4,
-  }));
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setParticles(Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 4 + 1,
+      duration: Math.random() * 6 + 4,
+      delay: Math.random() * 4,
+    })));
+  }, []);
 
   return (
     <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
@@ -69,7 +75,6 @@ const remainingFeatured = allFeatured.slice(3);
 const HorizontalWork = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
-  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -116,7 +121,7 @@ const HorizontalWork = () => {
                 <motion.img
                   whileHover={isMobile ? {} : { scale: 1.08 }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  src={project.image}
+                  src={project.image?.src || project.image}
                   alt={project.title}
                   loading="lazy"
                   decoding="async"
@@ -253,7 +258,7 @@ const RemainingWork = () => {
                   textDecoration: 'none',
                 }}
               >
-                <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={p.image?.src || p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 <div style={{
                   position: 'absolute', inset: 0,
                   background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)',
@@ -300,10 +305,6 @@ const PortfolioPage = () => {
 
   return (
     <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif' }}>
-      <SEO
-        pageTitle="Immersive Portfolio | TalentElla Agency"
-        description="Experience the future of digital marketing. Explore our award-winning work in branding, development, and social media."
-      />
 
       <InteractiveHero 
         bgText="PORTFOLIO"
@@ -429,7 +430,7 @@ const PortfolioPage = () => {
                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.08)' : 'scale(1)' }}
                       />
                     ) : (
-                      <img src={imgSrc} alt={projectTitle} loading="lazy" decoding="async"
+                      <img src={imgSrc?.src || imgSrc} alt={projectTitle} loading="lazy" decoding="async"
                         style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.08)' : 'scale(1)' }}
                       />
                     )}

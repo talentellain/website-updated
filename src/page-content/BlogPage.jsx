@@ -1,8 +1,10 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
+ 
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { ArrowUpRight, Calendar, Clock, Tag } from 'lucide-react';
-import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 import { blogPosts, blogCategories } from '../data/blogData';
 
@@ -32,7 +34,7 @@ const BlogCard = ({ post, index }) => (
       transition: 'border-color 0.3s ease',
     }}
   >
-    <Link to={`/blog/${post.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
+    <Link href={`/blog/${post.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
       <div style={{
           aspectRatio: '16/9',
           backgroundColor: '#0a0a0a',
@@ -110,11 +112,6 @@ const BlogPage = () => {
 
   return (
     <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif', minHeight: '100vh' }}>
-      <SEO
-        pageTitle="Blog — Digital Marketing Insights & Guides"
-        description="Expert insights on digital marketing, web development, SEO, social media, branding, and app development. TalentElla's blog helps Indian businesses grow online."
-        keywords="digital marketing blog India, marketing tips, SEO guide, social media strategy, web development guide, branding tips India"
-      />
 
       <InteractiveHero 
         bgText="BLOG"

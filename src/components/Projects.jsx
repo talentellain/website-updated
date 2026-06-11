@@ -217,7 +217,7 @@ const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects, 
             />
           ) : (
             <motion.img
-              src={project.image}
+              src={project.image?.src || project.image}
               animate={{ scale: imgHovered ? 1.06 : 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}

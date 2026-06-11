@@ -24,10 +24,10 @@ const Hero = () => {
       const tl = gsap.timeline();
 
       // Initial setups for GSAP
-      gsap.set(titleWrapRef.current, { opacity: 0, y: 60, scale: 1.1 });
-      gsap.set(heroWrapperRef.current, { scale: 1.05 }); 
-      gsap.set(mountainRef.current, { y: '25%' }); 
-      gsap.set(contentRefs.current, { opacity: 0, y: 40 });
+      if (titleWrapRef.current) gsap.set(titleWrapRef.current, { opacity: 0, y: 60, scale: 1.1 });
+      if (heroWrapperRef.current) gsap.set(heroWrapperRef.current, { scale: 1.05 }); 
+      if (mountainRef.current) gsap.set(mountainRef.current, { y: '25%' }); 
+      if (contentRefs.current.length) gsap.set(contentRefs.current, { opacity: 0, y: 40 });
 
       tl.to(titleWrapRef.current, {
         opacity: 1,
@@ -146,8 +146,8 @@ const Hero = () => {
           {/* LAYER 30: Intro and Content Over Mountain */}
           <div style={{ position: 'absolute', zIndex: 30, top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
             {/* Priority Hit: Ensures the browser prioritized these large assets immediately */}
-            <img src="/bg5.png" style={{ display: 'none' }} fetchpriority="high" decoding="async" loading="eager" alt="" />
-            <img src="/fg.png" style={{ display: 'none' }} fetchpriority="high" decoding="async" loading="eager" alt="" />
+            <img src="/bg5.png" style={{ display: 'none' }} fetchPriority="high" decoding="async" loading="eager" alt="" />
+            <img src="/fg.png" style={{ display: 'none' }} fetchPriority="high" decoding="async" loading="eager" alt="" />
             
             <div style={{ position: 'relative', maxWidth: '1600px', width: '100%', margin: '0 auto', height: '100%' }}>
               

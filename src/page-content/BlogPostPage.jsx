@@ -1,8 +1,11 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
+ 
 import { motion } from 'framer-motion';
-import { Link, useParams } from 'react-router-dom';
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { ArrowLeft, Calendar, Clock, Tag } from 'lucide-react';
-import SEO from '../components/SEO';
 import { blogPosts } from '../data/blogData';
 
 const BlogPostPage = () => {
@@ -23,38 +26,16 @@ const BlogPostPage = () => {
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#050505', color: 'white', padding: '2rem', textAlign: 'center' }}>
         <h1 style={{ fontSize: '3rem', fontWeight: 900, marginBottom: '1rem' }}>404</h1>
         <p style={{ color: 'rgba(255,255,255,0.5)', marginBottom: '2rem' }}>Post not found.</p>
-        <Link to="/blog" style={{ color: '#aa3bff', textDecoration: 'none', fontWeight: 700 }}>← Back to Blog</Link>
+        <Link href="/blog" style={{ color: '#aa3bff', textDecoration: 'none', fontWeight: 700 }}>← Back to Blog</Link>
       </div>
     );
   }
 
   return (
     <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif', minHeight: '100vh' }}>
-      <SEO
-        pageTitle={post.title}
-        description={post.excerpt}
-        keywords={post.tags.join(', ')}
-        schema={{
-          '@context': 'https://schema.org',
-          '@type': 'Article',
-          'headline': post.title,
-          'description': post.excerpt,
-          'author': {
-            '@type': 'Organization',
-            'name': 'TalentElla',
-            'url': 'https://talentella.in',
-          },
-          'datePublished': post.date,
-          'image': post.image,
-          'publisher': {
-            '@type': 'Organization',
-            'name': 'TalentElla',
-          },
-        }}
-      />
 
       <article style={{ maxWidth: '800px', margin: '0 auto', padding: isMobile ? '100px 5% 60px' : '120px 5% 80px' }}>
-        <Link to="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#aa3bff', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', marginBottom: '2rem' }}>
+        <Link href="/blog" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: '#aa3bff', textDecoration: 'none', fontWeight: 600, fontSize: '0.85rem', marginBottom: '2rem' }}>
           <ArrowLeft size={16} /> Back to Blog
         </Link>
 
@@ -120,7 +101,7 @@ const BlogPostPage = () => {
           </div>
 
           <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center' }}>
-            <Link to="/blog" style={{
+            <Link href="/blog" style={{
               padding: '0.9rem 2rem', borderRadius: '100px',
               border: '1px solid rgba(255,255,255,0.15)', color: 'white',
               textDecoration: 'none', fontWeight: 700, fontSize: '0.85rem',

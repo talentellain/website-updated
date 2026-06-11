@@ -98,9 +98,9 @@ const Contact = () => {
     setStatus('loading');
     setValidationError('');
 
-    const serviceId  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceId  = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey  = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
     // 4. Sanitize all fields before sending
     const templateParams = {

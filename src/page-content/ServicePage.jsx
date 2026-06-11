@@ -1,11 +1,15 @@
+'use client';
+
 import React from 'react';
 import { ArrowLeft, Check, Code, Share2, Palette, Settings, Zap, ArrowUpRight, Shield, Database, LifeBuoy, Rocket, ChevronDown, ChevronUp, Smartphone } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 
+ 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 const iconMap = {
@@ -27,7 +31,7 @@ const ServiceCard = ({ s }) => {
   ));
   const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
   return (
-    <Link to={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }}>
+    <Link href={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }}>
       <div className="modern-service-card" style={{ position: 'relative', height: '100%', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '24px' }}>
         <div className="card-giant-text">{displayTitle}</div>
         <div className="card-hover-content">
@@ -273,8 +277,8 @@ const RelatedServices = ({ currentId, isMobile }) => {
 /* ──────────────────────────────────────────────
    Pricing Card
    ────────────────────────────────────────────── */
-const PricingCard = ({ plan, idx, isMobile, serviceId }) => {
-  const navigate = useNavigate();
+const PricingCard = ({ plan, idx, isMobile }) => {
+  const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
   const isPopular = plan.popular;
   
@@ -354,7 +358,7 @@ const PricingCard = ({ plan, idx, isMobile, serviceId }) => {
                 whileTap={{ scale: 0.98 }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate('/');
+                  router.push('/');
                   setTimeout(() => {
                     const el = document.getElementById('footer');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -400,8 +404,7 @@ const PricingCard = ({ plan, idx, isMobile, serviceId }) => {
    ────────────────────────────────────────────── */
 const ServicePage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const service = servicesData.find(s => s.id === id);
+    const service = servicesData.find(s => s.id === id);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 968 : false);
 
   useEffect(() => {
@@ -430,7 +433,7 @@ const ServicePage = () => {
         ]}
       />
 
-      <TechMarquee serviceId={id} />
+      <TechMarquee  />
 
       <ExpertInsightSection service={service} isMobile={isMobile} />
 
@@ -508,7 +511,7 @@ const ServicePage = () => {
             
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 850, marginTop: '0.4rem' }}>Transparent Investment</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile} serviceId={id} />)}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile}  />)}</div>
         </div>
       </section>
 
