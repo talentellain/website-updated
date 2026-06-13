@@ -437,20 +437,20 @@ const PortfolioPage = () => {
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
                 style={{
-                  columns: isMobile ? '2' : '3',
-                  columnGap: isMobile ? '0.75rem' : '1.25rem',
-                  columnFill: 'balance',
+                  display: 'grid',
+                  gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+                  gap: isMobile ? '0.75rem' : '1.25rem',
+                  alignItems: 'start',
                 }}
               >
                 {filtered.map((p, i) => (
-                  <div key={p.id || i} style={{ breakInside: 'avoid', marginBottom: isMobile ? '0.75rem' : '1.25rem' }}>
-                    <PortfolioCard
-                      p={p}
-                      index={i}
-                      setSelectedVideo={setSelectedVideo}
-                      isMobile={isMobile}
-                    />
-                  </div>
+                  <PortfolioCard
+                    key={p.id || i}
+                    p={p}
+                    index={i}
+                    setSelectedVideo={setSelectedVideo}
+                    isMobile={isMobile}
+                  />
                 ))}
               </motion.div>
             )}
