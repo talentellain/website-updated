@@ -1,6 +1,7 @@
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 const PortfolioCard = ({ 
   item, 
@@ -285,104 +286,107 @@ const SocialMediaPortfolio = ({ portfolio }) => {
       </motion.button>
 
       {/* Pop-out Modal */}
-      <AnimatePresence>
-        {selectedId && selectedItem && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedId(null)}
-              style={{ 
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {selectedId && selectedItem && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedId(null)}
+                style={{ 
+                  position: 'fixed', 
+                  inset: 0, 
+                  backgroundColor: 'rgba(0,0,0,0.95)', 
+                  backdropFilter: 'blur(20px)',
+                  zIndex: 9999 
+                }}
+              />
+              <div style={{ 
                 position: 'fixed', 
                 inset: 0, 
-                backgroundColor: 'rgba(0,0,0,0.95)', 
-                backdropFilter: 'blur(20px)',
-                zIndex: 1000 
-              }}
-            />
-            <div style={{ 
-              position: 'fixed', 
-              inset: 0, 
-              zIndex: 1001, 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              pointerEvents: 'none',
-              padding: '2rem'
-            }}>
-              <motion.div
-                layoutId={selectedId}
-                style={{ 
-                  width: '90%', 
-                  maxWidth: '450px', 
-                  aspectRatio: '9/16',
-                  borderRadius: '32px',
-                  overflow: 'hidden',
-                  backgroundColor: '#111',
-                  pointerEvents: 'auto',
-                  position: 'relative',
-                  boxShadow: '0 40px 100px rgba(0,0,0,1)'
-                }}
-              >
-                {selectedItem.type === 'video' ? (
-                  <video 
-                    src={selectedItem.content} 
-                    autoPlay 
-                    muted 
-                    loop 
-                    preload="metadata"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <img src={selectedItem.content} alt={selectedItem.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                )}
-                
-                {/* Modal Close Button */}
-                <button 
-                  onClick={() => setSelectedId(null)}
-                  style={{
-                    position: 'absolute',
-                    top: '1.5rem',
-                    right: '1.5rem',
-                    width: '40px',
-                    height: '40px',
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(0,0,0,0.5)',
-                    border: '1px solid rgba(255,255,255,0.2)',
-                    color: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    cursor: 'pointer',
-                    backdropFilter: 'blur(10px)'
-                  }}
-                >
-                  <X size={20} />
-                </button>
-
-                {/* Modal Content Info */}
+                zIndex: 10000, 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                pointerEvents: 'none',
+                padding: '2rem'
+              }}>
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    padding: '2.5rem',
-                    background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%)'
+                  layoutId={selectedId}
+                  style={{ 
+                    width: '90%', 
+                    maxWidth: '450px', 
+                    aspectRatio: '9/16',
+                    borderRadius: '32px',
+                    overflow: 'hidden',
+                    backgroundColor: '#111',
+                    pointerEvents: 'auto',
+                    position: 'relative',
+                    boxShadow: '0 40px 100px rgba(0,0,0,1)'
                   }}
                 >
-                  <h3 style={{ color: 'white', margin: 0, fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.02em' }}>{selectedItem.title}</h3>
-                  <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', marginTop: '0.75rem', lineHeight: 1.5 }}>{selectedItem.description}</p>
+                  {selectedItem.type === 'video' ? (
+                    <video 
+                      src={selectedItem.content} 
+                      autoPlay 
+                      muted 
+                      loop 
+                      preload="metadata"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <img src={selectedItem.content} alt={selectedItem.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  )}
+                  
+                  {/* Modal Close Button */}
+                  <button 
+                    onClick={() => setSelectedId(null)}
+                    style={{
+                      position: 'absolute',
+                      top: '1.5rem',
+                      right: '1.5rem',
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(0,0,0,0.5)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      color: 'white',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      cursor: 'pointer',
+                      backdropFilter: 'blur(10px)'
+                    }}
+                  >
+                    <X size={20} />
+                  </button>
+
+                  {/* Modal Content Info */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    style={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      padding: '2.5rem',
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 100%)'
+                    }}
+                  >
+                    <h3 style={{ color: 'white', margin: 0, fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.02em' }}>{selectedItem.title}</h3>
+                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', marginTop: '0.75rem', lineHeight: 1.5 }}>{selectedItem.description}</p>
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            </div>
-          </>
-        )}
-      </AnimatePresence>
+              </div>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </div>
   );
 };
