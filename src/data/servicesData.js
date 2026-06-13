@@ -1,19 +1,18 @@
 import techstart from '../assets/techstart.png';
 import vibeshop from '../assets/vibeshop.png';
 import globalInsights from '../assets/global_insights.png';
-import socialVideo from '../assets/social.mp4';
-import socialVideo2 from '../assets/social2.mp4';
-import socialVideo3 from '../assets/social3.mp4';
-import socialVideo4 from '../assets/social4.mp4';
-import socialVideo5 from '../assets/social5.mp4';
-import socialVideo6 from '../assets/social6.mp4';
-import socialVideo7 from '../assets/social7.mp4';
-import socialVideo8 from '../assets/social8.mp4';
-import socialVideo9 from '../assets/social9.mp4';
-import jeetVideo from '../assets/video/jeet-insta-01.mp4';
 import samikshaVideo from '../assets/video/samiksha.mp4';
-import manishVideo from '../assets/video/manish-insta.mp4';
 import whatsappVideoPortfolio from '../assets/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
+
+// New high-quality videos (Hosted on Cloudinary)
+const carSpaVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350012/talentella_portfolio/esbp2dmjr8ik1md9czsl.mp4";
+const sjxteVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350299/talentella_portfolio/djv1xuyiegcaurnz2xnl.mp4";
+const sjxteVideo2 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350071/talentella_portfolio/z64e0uvd2wbf4ez9xeh6.mp4";
+const sjxteVideo3 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350105/talentella_portfolio/emhltxgwjj7dhpkpliaq.mp4";
+const sjxteVideo4 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350139/talentella_portfolio/gk2kmzgfmmi5zzcgqqbt.mp4";
+const sjxteVideo5 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350188/talentella_portfolio/nvvovzjt15ct6nyku8zj.mp4";
+const sjxteVideo6 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350236/talentella_portfolio/qw8qhq07si0b2szo6x3z.mp4";
+const tecVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350333/talentella_portfolio/iph3qv1mxgurh6dmxpjv.mp4";
 
 export const servicesData = [
   {
@@ -239,74 +238,92 @@ export const servicesData = [
     ],
     portfolio: [
       { 
-        id: 'sm1',
-        title: 'Elite Fitness Reel', 
-        description: 'Dynamic fitness content capturing high-intensity training and performance storytelling.', 
-        type: 'video',
-        content: manishVideo,
-        alt: 'Fitness production reel — high-energy gym content created by TalentElla agency'
-      },
-      { 
         id: 'sm2',
         title: 'Fashion Showcase', 
         description: 'Elegant streetwear and fashion production with trend-focused visual aesthetics.', 
         type: 'video',
+        category: 'VIDEO SHOOTING',
         content: samikshaVideo,
         alt: 'Fashion production reel — creative lifestyle content by TalentElla'
       },
       { 
-        id: 'sm3',
-        title: 'Creative Cinematic', 
-        description: 'Compelling brand storytelling through cinematic visuals and artistic direction.', 
+        id: 'sm4',
+        title: 'Car Spa Commercial', 
+        description: 'Premium automotive aesthetic showcase with high-end detailing and visual dynamic style.', 
         type: 'video',
-        content: jeetVideo,
-        alt: 'Cinematic brand story — professional video production by TalentElla'
+        category: 'VIDEO SHOOTING',
+        content: carSpaVideo,
+        alt: 'Car Spa Commercial - premium automotive visual content by TalentElla'
       },
       { 
         id: 'sm5',
-        title: 'Motion Design Reel', 
-        description: 'Abstract motion graphics for a creative agency portfolio showcase.', 
+        title: 'SJxTE Creative Reel', 
+        description: 'Collaborative showcase capturing trending brand aesthetics and youth energy.', 
         type: 'video',
-        content: socialVideo5,
-        alt: 'Motion design creative reel — dynamic social media content by TalentElla marketing agency'
+        category: 'INSTAGRAM REELS',
+        content: sjxteVideo,
+        alt: 'SJxTE Creative Reel - brand partnership content by TalentElla'
       },
       { 
         id: 'sm6',
-        title: 'Fashion Trend Set', 
-        description: 'Seasonal trend coordination with influencer partnerships and community engagement.', 
+        title: 'SJxTE Brand Campaign', 
+        description: 'Bold promotional aesthetics with vibrant lighting and dynamic editing.', 
         type: 'video',
-        content: socialVideo6,
-        alt: 'Fashion trend coordination — seasonal social media strategy by TalentElla India'
+        category: 'SMM CAMPAIGN',
+        content: sjxteVideo2,
+        alt: 'SJxTE Brand Campaign - social first promotional campaign by TalentElla'
       },
       { 
         id: 'sm7',
-        title: 'Tech Influence', 
-        description: 'B2B influencer strategy driving thought leadership and lead generation.', 
+        title: 'SJxTE Storytelling', 
+        description: 'High engagement brand story utilizing micro-narratives and trendy audio pacing.', 
         type: 'video',
-        content: socialVideo7,
-        alt: 'B2B tech influencer strategy — lead generation social media campaign by TalentElla agency'
+        category: 'VIDEO EDITING',
+        content: sjxteVideo3,
+        alt: 'SJxTE Storytelling - cinematic social media narrative by TalentElla'
       },
       { 
         id: 'sm8',
-        title: 'Brand Story Reel', 
-        description: 'Narrative-driven content for maximum brand impact and emotional connection.', 
+        title: 'SJxTE Cinematic', 
+        description: 'Professional visual styling featuring moody color grades and high fidelity shots.', 
         type: 'video',
-        content: socialVideo8,
-        alt: 'Brand storytelling reel — narrative content creation by TalentElla social media marketing agency India'
+        category: 'VIDEO SHOOTING',
+        content: sjxteVideo4,
+        alt: 'SJxTE Cinematic - premium social content by TalentElla'
       },
       { 
         id: 'sm9',
-        title: 'Minimalist Content', 
-        description: 'Clean, sophisticated visuals for high-end clients with premium content aesthetics.', 
+        title: 'SJxTE Aesthetics', 
+        description: 'Vibrant streetwear visual presentation styled for maximum social platform reach.', 
         type: 'video',
-        content: socialVideo9,
-        alt: 'Minimalist premium content — high-end social media design by TalentElla creative agency India'
+        category: 'INSTAGRAM REELS',
+        content: sjxteVideo5,
+        alt: 'SJxTE Aesthetics - fashion streetwear reel by TalentElla'
+      },
+      { 
+        id: 'sm11',
+        title: 'SJxTE Behind the Scenes', 
+        description: 'Behind the scenes production look with organic lifestyle framing and team synergy.', 
+        type: 'video',
+        category: 'SMM CAMPAIGN',
+        content: sjxteVideo6,
+        alt: 'SJxTE Behind the Scenes - authentic brand creation story by TalentElla'
+      },
+      { 
+        id: 'sm12',
+        title: 'TEC Brand Showcase', 
+        description: 'Clean product highlight and corporate identity production styled for high-end clients.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: tecVideo,
+        alt: 'TEC Brand Showcase - premium business portfolio content by TalentElla'
       },
       { 
         id: 'sm10',
         title: 'Creative Showcase', 
         description: 'Exclusive creative production showcasing brand excellence and cinematic storytelling.', 
         type: 'video',
+        category: 'VIDEO EDITING',
         content: whatsappVideoPortfolio,
         alt: 'Creative brand showcase — premium video production by TalentElla'
       }

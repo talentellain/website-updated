@@ -105,7 +105,7 @@ const Services = () => {
 
         .services-grid-new { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vh; }
         @media (max-width: 1200px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); gap: 2vh; } }
-        @media (max-width: 768px) { .services-grid-new { grid-template-columns: 1fr; gap: 1rem; } }
+        @media (max-width: 768px) { .services-grid-new { display: flex !important; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; gap: 1rem; padding: 0 5vw; scrollbar-width: none; } .services-grid-new::-webkit-scrollbar { display: none; } .services-grid-new > * { flex: 0 0 calc(100vw - 10vw); scroll-snap-align: center; min-height: 220px; } }
 
         .modern-service-card { 
           background-color: #ebeae4; 

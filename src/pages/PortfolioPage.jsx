@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence, useMotionValue } from 'framer-motion';
-import { ArrowUpRight, Filter } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Play, X } from 'lucide-react';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 
@@ -29,43 +29,16 @@ const categoryColors = {
   'CREATIVE DEV': '#3bffaa',
   'MOTION DESIGN': '#ff8c3b',
   'UX/UI DESIGN': '#a78bfa',
-};
-
-const FloatingParticles = () => {
-  const particles = Array.from({ length: 30 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    size: Math.random() * 4 + 1,
-    duration: Math.random() * 6 + 4,
-    delay: Math.random() * 4,
-  }));
-
-  return (
-    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0 }}>
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          style={{
-            position: 'absolute',
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            borderRadius: '50%',
-            backgroundColor: 'rgba(170, 59, 255, 0.3)',
-          }}
-          animate={{ y: [0, -30, 0], opacity: [0.2, 0.6, 0.2] }}
-          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: 'easeInOut' }}
-        />
-      ))}
-    </div>
-  );
+  'INSTAGRAM REELS': '#ff3b8a',
+  'VIDEO SHOOTING': '#00d2ff',
+  'VIDEO EDITING': '#aa3bff',
+  'SMM CAMPAIGN': '#ffcc00',
 };
 
 const top3Featured = allFeatured.slice(0, 3);
 const remainingFeatured = allFeatured.slice(3);
 
+/* ─── Horizontal Scroll Section ───────────────────────────────────── */
 const HorizontalWork = () => {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: targetRef });
@@ -127,67 +100,37 @@ const HorizontalWork = () => {
                   background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)',
                   display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: isMobile ? '2rem 1.5rem' : '4rem',
                 }}>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 + i * 0.1 }}
-                  >
+                  <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }}>
                     <div style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      padding: '0.4rem 1.2rem',
-                      borderRadius: '100px',
+                      display: 'inline-flex', alignItems: 'center',
+                      padding: '0.4rem 1.2rem', borderRadius: '100px',
                       backgroundColor: `${categoryColors[project.category]}15`,
-                      backdropFilter: 'blur(12px)',
-                      WebkitBackdropFilter: 'blur(12px)',
-                      border: `1px solid ${categoryColors[project.category]}55`,
+                      backdropFilter: 'blur(12px)', border: `1px solid ${categoryColors[project.category]}55`,
                       marginBottom: '1rem',
-                      boxShadow: `0 8px 32px 0 rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05)`
                     }}>
                       <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: categoryColors[project.category], marginRight: '8px', boxShadow: `0 0 10px ${categoryColors[project.category]}` }} />
                       <span style={{ fontSize: '0.65rem', color: categoryColors[project.category], fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
                         {project.category}
                       </span>
                     </div>
-                    <h3 style={{ 
-                      fontSize: isMobile ? '2rem' : 'clamp(2.5rem, 4vw, 4.5rem)', 
-                      color: 'white', 
-                      fontWeight: 800, 
-                      margin: '0', 
-                      letterSpacing: '-0.03em',
-                      lineHeight: 1.1,
-                      textShadow: '0 10px 30px rgba(0,0,0,0.5)'
-                    }}>
+                    <h3 style={{ fontSize: isMobile ? '2rem' : 'clamp(2.5rem, 4vw, 4.5rem)', color: 'white', fontWeight: 800, margin: '0', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
                       {project.title}
                     </h3>
                   </motion.div>
-
                   <motion.a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={project.link} target="_blank" rel="noopener noreferrer"
                     whileHover={{ x: 5, backgroundColor: 'rgba(255,255,255,0.15)' }}
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: '0.8rem',
                       color: '#fff', fontSize: '0.85rem', fontWeight: 600,
                       textDecoration: 'none', marginTop: '2rem', cursor: 'pointer',
-                      width: 'fit-content',
-                      padding: '0.8rem 1.5rem',
-                      borderRadius: '100px',
-                      backgroundColor: 'rgba(255,255,255,0.08)',
-                      backdropFilter: 'blur(10px)',
-                      WebkitBackdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      transition: 'all 0.3s ease'
+                      width: 'fit-content', padding: '0.8rem 1.5rem', borderRadius: '100px',
+                      backgroundColor: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255,255,255,0.1)', transition: 'all 0.3s ease'
                     }}
                   >
-                    View Project 
-                    <div style={{
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      width: '24px', height: '24px', borderRadius: '50%',
-                      backgroundColor: categoryColors[project.category],
-                      color: '#000'
-                    }}>
+                    View Project
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '24px', height: '24px', borderRadius: '50%', backgroundColor: categoryColors[project.category], color: '#000' }}>
                       <ArrowUpRight size={14} strokeWidth={3} />
                     </div>
                   </motion.a>
@@ -196,17 +139,9 @@ const HorizontalWork = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        <div style={{
-          position: 'absolute', bottom: isMobile ? '1.5rem' : '3rem', left: '50%', transform: 'translateX(-50%)',
-          display: 'flex', alignItems: 'center', gap: '0.6rem', zIndex: 10,
-        }}>
+        <div style={{ position: 'absolute', bottom: isMobile ? '1.5rem' : '3rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '0.6rem', zIndex: 10 }}>
           {top3Featured.map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? '#aa3bff' : 'rgba(255,255,255,0.2)' }}
-              style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }}
-            />
+            <motion.div key={i} animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? '#aa3bff' : 'rgba(255,255,255,0.2)' }} style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }} />
           ))}
         </div>
       </div>
@@ -214,89 +149,194 @@ const HorizontalWork = () => {
   );
 };
 
-const RemainingWork = () => {
-  return (
-    <section style={{ padding: '10vh 5%', backgroundColor: '#000' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          style={{ marginBottom: '4rem' }}
-        >
-          <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
-        </motion.div>
-        
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: '2rem' }}>
-          {remainingFeatured.map((p, i) => {
-            const catColor = categoryColors[p.category] || '#aa3bff';
-            return (
-              <motion.a
-                key={i}
-                href={p.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                whileHover={{ y: -8 }}
-                style={{
-                  aspectRatio: '4/3',
-                  backgroundColor: 'rgba(255,255,255,0.02)',
-                  borderRadius: '16px',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  overflow: 'hidden',
-                  position: 'relative',
-                  display: 'block',
-                  textDecoration: 'none',
-                }}
-              >
-                <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                <div style={{
-                  position: 'absolute', inset: 0,
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)',
-                  display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem',
-                }}>
-                  <span style={{
-                    display: 'inline-block',
-                    padding: '0.25rem 0.7rem',
-                    borderRadius: '100px',
-                    backgroundColor: `${catColor}1a`,
-                    border: `1px solid ${catColor}33`,
-                    fontSize: '0.55rem', color: catColor, fontWeight: 800,
-                    letterSpacing: '0.12em', textTransform: 'uppercase',
-                    marginBottom: '0.5rem',
-                    width: 'fit-content',
-                  }}>
-                    {p.category}
-                  </span>
-                  <h4 style={{ margin: '0.2rem 0 0', fontWeight: 800, fontSize: '1.15rem', color: 'white' }}>
-                    {p.title}
-                  </h4>
-                </div>
-              </motion.a>
-            );
-          })}
-        </div>
+/* ─── Rest of Websites ─────────────────────────────────────────────── */
+const RemainingWork = () => (
+  <section style={{ padding: '10vh 5%', backgroundColor: '#000' }}>
+    <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
+        <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
+        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
+      </motion.div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: '2rem' }}>
+        {remainingFeatured.map((p, i) => {
+          const catColor = categoryColors[p.category] || '#aa3bff';
+          return (
+            <motion.a key={i} href={p.link} target="_blank" rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: i * 0.1, duration: 0.5 }} whileHover={{ y: -8 }}
+              style={{ aspectRatio: '4/3', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', position: 'relative', display: 'block', textDecoration: 'none' }}
+            >
+              <img src={p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
+                <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
+                  {p.category}
+                </span>
+                <h4 style={{ margin: '0.2rem 0 0', fontWeight: 800, fontSize: '1.15rem', color: 'white' }}>{p.title}</h4>
+              </div>
+            </motion.a>
+          );
+        })}
       </div>
-    </section>
+    </div>
+  </section>
+);
+
+/* ─── Hover Video (plays on hover, shows frame as thumbnail) ──────── */
+const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isHovered) {
+        videoRef.current.play().catch(() => {});
+      } else {
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0.5;
+      }
+    }
+  }, [isHovered]);
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) {
+      if (!isHovered) videoRef.current.currentTime = 0.5;
+      if (onDimensionsLoaded) onDimensionsLoaded(videoRef.current.videoWidth, videoRef.current.videoHeight);
+    }
+  };
+
+  return (
+    <video
+      ref={videoRef} src={src} muted loop playsInline preload="metadata"
+      onLoadedMetadata={handleLoadedMetadata}
+      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
+    />
   );
 };
 
+/* ─── Single Portfolio Card ─────────────────────────────────────────── */
+const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState('3/4');   // default portrait
+  const [orientationKnown, setOrientationKnown] = useState(false);
 
+  const catColor = categoryColors[p.category] || '#aa3bff';
+  const isVideo = p.type === 'video';
+  const projectLink = p.link || p.url || '#';
+  const projectTitle = p.title || 'Project';
+  const imgSrc = p.image || p.thumbnail;
 
-const categories = ['ALL', 'WEB DEVELOPMENT', 'BRAND IDENTITY', 'E-COMMERCE', 'ENTERPRISE', 'MOTION DESIGN', 'UX/UI DESIGN', 'CREATIVE DEV'];
+  const handleDimensions = (w, h) => {
+    if (!orientationKnown) {
+      setAspectRatio(w > h ? '16/9' : '3/4');
+      setOrientationKnown(true);
+    }
+  };
 
+  return (
+    <motion.div
+      onClick={(e) => { if (isVideo) { e.preventDefault(); setSelectedVideo({ ...p, aspectRatio }); } }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.08 }}
+      transition={{ delay: Math.min(index * 0.05, 0.4), duration: 0.5 }}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      style={{
+        aspectRatio: aspectRatio,
+        backgroundColor: '#0a0a0a',
+        borderRadius: isMobile ? '16px' : '12px',
+        border: isHovered ? `1px solid ${catColor}88` : '1px solid rgba(255,255,255,0.07)',
+        overflow: 'hidden',
+        position: 'relative',
+        cursor: isVideo ? 'pointer' : 'default',
+        transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1)',
+        boxShadow: isHovered ? `0 20px 50px ${catColor}22` : 'none',
+        transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
+      }}
+    >
+      {isVideo ? (
+        <HoverVideo src={p.content} isHovered={isHovered} onDimensionsLoaded={handleDimensions} />
+      ) : (
+        <img src={imgSrc} alt={projectTitle} loading="lazy" decoding="async"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
+        />
+      )}
+
+      {/* Gradient overlay */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: isHovered
+          ? 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 80%)'
+          : 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 55%, transparent 100%)',
+        transition: 'background 0.5s ease',
+        display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+        padding: isMobile ? '1.2rem' : '1.5rem',
+      }}>
+        <span style={{
+          display: 'inline-block', padding: '0.25rem 0.65rem', borderRadius: '4px',
+          border: `1px solid ${catColor}99`, fontSize: '0.55rem', color: catColor,
+          fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase',
+          marginBottom: '0.5rem', width: 'fit-content',
+        }}>
+          {p.category || 'Production'}
+        </span>
+        <h4 style={{ margin: 0, fontWeight: 900, fontSize: isMobile ? '1rem' : '1.15rem', lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '-0.01em', color: 'white' }}>
+          {projectTitle}
+        </h4>
+        {isVideo && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '0.5rem', opacity: isMobile ? 0.7 : (isHovered ? 1 : 0), transition: 'opacity 0.3s ease' }}>
+            <Play size={11} color={catColor} fill={catColor} />
+            <span style={{ fontSize: '0.65rem', color: catColor, fontWeight: 600 }}>Play video</span>
+          </div>
+        )}
+      </div>
+
+      {/* Play icon top-right on hover */}
+      {isVideo && (
+        <motion.div
+          animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.8 }}
+          transition={{ duration: 0.25 }}
+          style={{
+            position: 'absolute', top: '0.85rem', right: '0.85rem',
+            width: 36, height: 36, borderRadius: '50%',
+            backgroundColor: `${catColor}25`, backdropFilter: 'blur(6px)',
+            border: `1px solid ${catColor}55`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}
+        >
+          <Play size={14} color={catColor} fill={catColor} />
+        </motion.div>
+      )}
+    </motion.div>
+  );
+};
+
+/* ─── Categories for filter ─────────────────────────────────────────── */
+const VIDEO_CATEGORIES = ['ALL', 'INSTAGRAM REELS', 'VIDEO SHOOTING', 'VIDEO EDITING', 'SMM CAMPAIGN'];
+
+/* ─── Main Page ─────────────────────────────────────────────────────── */
 const PortfolioPage = () => {
   const smmPortfolio = servicesData.find(s => s.id === 'social-media-management')?.portfolio || [];
   const [activeFilter, setActiveFilter] = useState('ALL');
-  const [hoveredId, setHoveredId] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // Close modal on Escape key
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') setSelectedVideo(null); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const filtered = activeFilter === 'ALL'
     ? smmPortfolio
-    : smmPortfolio.filter(p => (p.category || 'Production').toUpperCase() === activeFilter);
+    : smmPortfolio.filter(p => (p.category || '').toUpperCase() === activeFilter);
 
   return (
     <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif' }}>
@@ -305,62 +345,59 @@ const PortfolioPage = () => {
         description="Experience the future of digital marketing. Explore our award-winning work in branding, development, and social media."
       />
 
-      <InteractiveHero 
+      <InteractiveHero
         bgText="PORTFOLIO"
         tagline1="TALENTELLA"
         tagline2="PORTFOLIO PAGE"
         heading="IMPACTFUL"
         cursiveOverlay="Works"
-        description={"CURRENTLY SHOWCASING OUR MOST IMPACTFUL PROJECTS.\nFOR MORE INFORMATION AND ADDITIONAL DETAILS, PLEASE CONTACT US."}
+        description={"CURRENTLY SHOWCASE OUR MOST IMPACTFUL PROJECTS.\nFOR MORE INFORMATION AND ADDITIONAL DETAILS, PLEASE CONTACT US."}
       />
 
       <HorizontalWork />
       <RemainingWork />
 
-      <section style={{ padding: '15vh 5% 20vh', backgroundColor: '#000', position: 'relative' }}>
+      {/* ── SMM / Video Creatives Section ─────────────────────────── */}
+      <section style={{ padding: isMobile ? '10vh 4% 16vh' : '15vh 5% 20vh', backgroundColor: '#000', position: 'relative' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+
+          {/* Header row */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ marginBottom: '4rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '2rem' }}
+            initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            style={{ marginBottom: isMobile ? '2.5rem' : '3.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}
           >
             <div>
-             
-              <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.8)' }}>
-                All Projects
+              <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.6rem' }}>
+                SMM · Reels · Videos
+              </span>
+              <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}>
+                All Creatives
               </h2>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px' }}>
-              <Filter size={14} color="rgba(255,255,255,0.5)" />
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', fontWeight: 600 }}>{filtered.length} PROJECTS</span>
+              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', fontWeight: 600 }}>{filtered.length} CREATIVES</span>
             </div>
           </motion.div>
 
+          {/* Filter pills */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '4rem' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: isMobile ? '2.5rem' : '4rem' }}
           >
-            {categories.map((cat) => (
+            {VIDEO_CATEGORIES.map((cat) => (
               <motion.button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                whileHover={{ scale: 1.04 }}
-                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
                 style={{
-                  padding: '0.6rem 1.4rem',
+                  padding: isMobile ? '0.5rem 1rem' : '0.6rem 1.4rem',
                   borderRadius: '4px',
                   border: `1px solid ${activeFilter === cat ? '#aa3bff' : 'rgba(255,255,255,0.1)'}`,
-                  backgroundColor: activeFilter === cat ? 'rgba(170,59,255,0.1)' : 'transparent',
+                  backgroundColor: activeFilter === cat ? 'rgba(170,59,255,0.12)' : 'transparent',
                   color: activeFilter === cat ? '#fff' : 'rgba(255,255,255,0.4)',
-                  fontSize: '0.75rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.15em',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
+                  fontSize: isMobile ? '0.7rem' : '0.75rem',
+                  fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase',
+                  cursor: 'pointer', transition: 'all 0.3s ease',
                   boxShadow: activeFilter === cat ? '0 0 20px rgba(170,59,255,0.2)' : 'none',
                 }}
               >
@@ -369,138 +406,108 @@ const PortfolioPage = () => {
             ))}
           </motion.div>
 
+          {/* Grid — masonry-like: portrait cards are narrower, landscape are wider */}
           <AnimatePresence mode="wait">
             {filtered.length === 0 ? (
-              <motion.div
-                key="empty"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                style={{ textAlign: 'center', padding: '6rem 0', color: 'rgba(255,255,255,0.3)' }}
-              >
+              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                style={{ textAlign: 'center', padding: '6rem 0', color: 'rgba(255,255,255,0.3)' }}>
                 No projects match this category yet.
               </motion.div>
             ) : (
               <motion.div
                 key={activeFilter}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: '1.5rem' }}
+                style={{
+                  columns: isMobile ? '2' : '3',
+                  columnGap: isMobile ? '0.75rem' : '1.25rem',
+                  columnFill: 'balance',
+                }}
               >
-                {filtered.map((p, i) => {
-                  const catColor = categoryColors[p.category] || '#aa3bff';
-                  const isHovered = hoveredId === i;
-                  const projectLink = p.link || p.url || '#';
-                  const projectTitle = p.title || 'Project';
-                  const imgSrc = p.image || p.thumbnail;
-                  return (
-                  <motion.a
-                    key={i}
-                    href={projectLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.1 }}
-                    transition={{ delay: i * 0.05, duration: 0.5 }}
-                    onMouseEnter={() => setHoveredId(i)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    whileHover={{ y: -8 }}
-                    style={{
-                      aspectRatio: '16/9',
-                      backgroundColor: 'rgba(255,255,255,0.02)',
-                      borderRadius: '8px',
-                      border: isHovered ? `1px solid ${catColor}88` : '1px solid rgba(255,255,255,0.08)',
-                      overflow: 'hidden',
-                      position: 'relative',
-                      cursor: 'pointer',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      display: 'block',
-                      transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                      boxShadow: isHovered ? `0 15px 40px ${catColor}33` : 'none',
-                      transform: isHovered ? 'translateY(-8px)' : 'translateY(0)',
-                    }}
-                  >
-                    {p.type === 'video' ? (
-                      <video src={p.content} autoPlay muted loop playsInline preload="metadata"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.08)' : 'scale(1)' }}
-                      />
-                    ) : (
-                      <img src={imgSrc} alt={projectTitle} loading="lazy" decoding="async"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.08)' : 'scale(1)' }}
-                      />
-                    )}
-
-                    <div style={{
-                      position: 'absolute', inset: 0,
-                      background: isHovered
-                        ? `linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 50%, transparent 80%)`
-                        : 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%)',
-                      transition: 'background 0.5s ease',
-                      display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '2rem',
-                    }}>
-                      <span style={{
-                        display: 'inline-block',
-                        padding: '0.3rem 0.8rem',
-                        borderRadius: '4px',
-                        backgroundColor: 'transparent',
-                        border: `1px solid ${catColor}`,
-                        fontSize: '0.6rem', color: catColor, fontWeight: 700,
-                        letterSpacing: '0.2em', textTransform: 'uppercase',
-                        marginBottom: '1rem',
-                        width: 'fit-content',
-                      }}>
-                        {p.category || 'Production'}
-                      </span>
-
-                      <motion.h4
-                        animate={{ y: isHovered ? 0 : 10, opacity: isHovered ? 1 : 0.8 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        style={{ margin: '0', fontWeight: 900, fontSize: '1.4rem', lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '-0.02em', color: 'white' }}
-                      >
-                        {projectTitle}
-                      </motion.h4>
-
-                      <motion.div
-                        initial={false}
-                        animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 8 }}
-                        transition={{ duration: 0.3 }}
-                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.6rem' }}
-                      >
-                        <span style={{ fontSize: '0.7rem', color: catColor, fontWeight: 600 }}>View project</span>
-                        <ArrowUpRight size={12} color={catColor} />
-                      </motion.div>
-                    </div>
-
-                    {isHovered && (
-                      <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        style={{
-                          position: 'absolute', top: '1rem', right: '1rem',
-                          width: 36, height: 36, borderRadius: '50%',
-                          backgroundColor: `${catColor}22`,
-                          backdropFilter: 'blur(4px)',
-                          border: `1px solid ${catColor}44`,
-                          display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        }}
-                      >
-                        <ArrowUpRight size={14} color={catColor} />
-                      </motion.div>
-                    )}
-                  </motion.a>
-                  );
-                })}
+                {filtered.map((p, i) => (
+                  <div key={p.id || i} style={{ breakInside: 'avoid', marginBottom: isMobile ? '0.75rem' : '1.25rem' }}>
+                    <PortfolioCard
+                      p={p}
+                      index={i}
+                      setSelectedVideo={setSelectedVideo}
+                      isMobile={isMobile}
+                    />
+                  </div>
+                ))}
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </section>
 
-      
+      {/* ── Video Modal ──────────────────────────────────────────────── */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
+            style={{
+              position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.92)',
+              backdropFilter: 'blur(16px)', zIndex: 9999,
+              display: 'flex', justifyContent: 'center', alignItems: 'center',
+              padding: isMobile ? '1rem' : '2rem',
+            }}
+            onClick={() => setSelectedVideo(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.88, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.88, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                // Landscape → wide, portrait → tall
+                ...(selectedVideo.aspectRatio === '16/9'
+                  ? { width: isMobile ? '95vw' : 'min(90vw, 1000px)', aspectRatio: '16/9' }
+                  : { height: isMobile ? '85vh' : '90vh', maxHeight: '900px', aspectRatio: '3/4' }),
+                maxWidth: '100%',
+                backgroundColor: '#0a0a0c', borderRadius: '20px',
+                overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.9)',
+                position: 'relative',
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <video
+                src={selectedVideo.content}
+                autoPlay controls preload="auto"
+                style={{ width: '100%', height: '100%', objectFit: 'contain', backgroundColor: '#000' }}
+              />
+
+              {/* Close button */}
+              <button
+                onClick={() => setSelectedVideo(null)}
+                style={{
+                  position: 'absolute', top: '0.85rem', right: '0.85rem',
+                  backgroundColor: 'rgba(0,0,0,0.65)', border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white', width: '40px', height: '40px', borderRadius: '50%',
+                  cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center',
+                  zIndex: 10, transition: 'background-color 0.2s',
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(170,59,255,0.8)'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.65)'}
+              >
+                <X size={18} />
+              </button>
+
+              {/* Title overlay at bottom */}
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0,
+                padding: '2rem 1.5rem 1.5rem',
+                background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
+                pointerEvents: 'none',
+              }}>
+                <span style={{ fontSize: '0.6rem', color: categoryColors[selectedVideo.category] || '#aa3bff', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+                  {selectedVideo.category}
+                </span>
+                <h3 style={{ margin: '0.25rem 0 0', fontSize: isMobile ? '1.1rem' : '1.4rem', fontWeight: 900, letterSpacing: '-0.02em' }}>
+                  {selectedVideo.title}
+                </h3>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
