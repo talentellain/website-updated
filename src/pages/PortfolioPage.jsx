@@ -490,20 +490,7 @@ const PortfolioPage = () => {
                 <X size={18} />
               </button>
 
-              {/* Title overlay at bottom */}
-              <div style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0,
-                padding: '2rem 1.5rem 1.5rem',
-                background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)',
-                pointerEvents: 'none',
-              }}>
-                <span style={{ fontSize: '0.6rem', color: categoryColors[selectedVideo.category] || '#aa3bff', fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                  {selectedVideo.category}
-                </span>
-                <h3 style={{ margin: '0.25rem 0 0', fontSize: isMobile ? '1.1rem' : '1.4rem', fontWeight: 900, letterSpacing: '-0.02em' }}>
-                  {selectedVideo.title}
-                </h3>
-              </div>
+
             </motion.div>
           </motion.div>
         )}
