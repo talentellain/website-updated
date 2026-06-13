@@ -4,6 +4,19 @@ import frontMockup from '../assets/screen/front-png.png';
 import leftMockup from '../assets/screen/left-png.png';
 import rightMockup from '../assets/screen/right screeen.png';
 
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
+
 const MobileExperience = () => {
   const containerRef = React.useRef(null);
   const { scrollYProgress } = useScroll({
@@ -11,7 +24,7 @@ const MobileExperience = () => {
     offset: ["start end", "end start"]
   });
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const isMobile = useMobileDetection();
 
   const leftYTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.5], isMobile ? [0, 0] : [250, -190]);
   const leftOpacityTransform = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 0.2], isMobile ? [1, 1] : [0, 1]);

@@ -155,7 +155,7 @@ const Navbar = () => {
                 if (!sectionEl) continue;
                 const stickyInner = sectionEl.querySelector('.sticky-section');
                 const rect = (stickyInner || sectionEl).getBoundingClientRect();
-                if (rect.top <= 100) {
+                if (rect.top <= 60) {
                     overLight = sections[i].isLight;
                     break;
                 }
@@ -172,7 +172,7 @@ const Navbar = () => {
 
     const textColor = isDarkTheme ? '#000000' : '#ffffff';
     const borderColor = isDarkTheme ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.1)';
-    const glassBg = isDarkTheme ? 'rgba(255, 255, 255, 0.9)' : 'rgba(5, 5, 5, 0.85)';
+    const glassBg = isDarkTheme ? '#ffffff' : 'rgba(5, 5, 5, 0.85)';
 
     return (
         <>
@@ -188,8 +188,8 @@ const Navbar = () => {
                 zIndex: 1000, 
                 backgroundColor: glassBg,
                 borderBottom: `1px solid ${borderColor}`,
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
+                backdropFilter: isDarkTheme ? 'none' : 'blur(20px)',
+                WebkitBackdropFilter: isDarkTheme ? 'none' : 'blur(20px)',
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
         >

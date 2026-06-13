@@ -3,6 +3,7 @@ import vibeshop from '../assets/vibeshop.png';
 import globalInsights from '../assets/global_insights.png';
 import samikshaVideo from '../assets/video/samiksha.mp4';
 import whatsappVideoPortfolio from '../assets/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
+import video0609 from '../assets/video/0609-copy.mp4';
 
 // New high-quality videos (Hosted on Cloudinary)
 const carSpaVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350012/talentella_portfolio/esbp2dmjr8ik1md9czsl.mp4";
@@ -335,6 +336,15 @@ export const servicesData = [
         category: 'VIDEO EDITING',
         content: whatsappVideoPortfolio,
         alt: 'Creative brand showcase — premium video production by TalentElla'
+      },
+      { 
+        id: 'sm14',
+        title: 'Dynamic Brand Reel', 
+        description: 'High-energy brand production reel showcasing cinematic motion, bold visuals, and compelling storytelling.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: video0609,
+        alt: 'Dynamic brand reel — cinematic video production by TalentElla'
       }
     ],
     plans: [

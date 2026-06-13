@@ -3,6 +3,19 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
+
 
 // ── Security helpers ──────────────────────────────────────────────
 const RATE_LIMIT_KEY = 'te_contact_submissions';
@@ -123,7 +136,7 @@ const Contact = () => {
   };
 
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const isMobile = useMobileDetection();
 
   return (
     <div id="contact" ref={outerRef} className="sticky-outer" style={{ zIndex: 80 }}>

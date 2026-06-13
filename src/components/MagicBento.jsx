@@ -515,7 +515,7 @@ const MagicBento = ({
             padding: 0;
           }
           
-          @media (min-width: 600px) {
+          @media (min-width: 769px) {
             .card-responsive {
               grid-template-columns: repeat(2, 1fr);
             }
@@ -604,17 +604,18 @@ const MagicBento = ({
             text-overflow: ellipsis;
           }
           
-          @media (max-width: 599px) {
+          @media (max-width: 768px) {
             .card-responsive {
               grid-template-columns: 1fr;
               width: 100%;
               margin: 0 auto;
               padding: 0;
+              gap: 1rem;
             }
             
             .card-responsive .card {
               width: 100%;
-              min-height: 180px;
+              min-height: 200px;
             }
           }
         `}

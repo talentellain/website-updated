@@ -60,12 +60,25 @@ const ServiceCard = ({ s, index }) => {
   );
 };
 
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
+
 const Services = () => {
   const outerRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start end', 'start start'] });
   
   const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const isMobile = useMobileDetection();
 
   return (
     <>
@@ -116,7 +129,7 @@ const Services = () => {
         }
         @media (max-width: 768px) { 
           .modern-service-card { 
-            min-height: 180px !important; 
+            min-height: 240px !important; 
             border-radius: 24px !important; 
           } 
         }

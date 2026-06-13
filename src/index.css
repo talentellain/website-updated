@@ -57,12 +57,43 @@ body {
   position: relative;
 }
 
+@media (max-width: 768px) {
+  .flex-col-mobile {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+}
+
 /* Typography */
+h1 {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+}
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+h3 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+h4, h5, h6 {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--heading);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
+}
+
+/* Base touch targets for mobile accessibility */
+button, a, input, select, textarea {
+  min-height: 44px;
+  min-width: 44px;
+}
+/* Ensure inline elements don't get forced to 44px height inappropriately unless they are block/inline-block */
+a {
+  min-height: auto;
+  min-width: auto;
 }
 
 .text-gradient {
@@ -805,3 +836,50 @@ video {
     background-color: rgba(0, 0, 0, 0.95) !important;
   }
 }
+
+/* ── Hero Landing Optimizations ─────────────────────────────────────── */
+
+/* Stat pills: hover glow lift */
+.hero-stat-pill {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+.hero-stat-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(170, 59, 255, 0.2);
+  border-color: rgba(170, 59, 255, 0.35) !important;
+}
+
+/* Eyebrow badge pulse ring */
+@keyframes badge-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(170, 59, 255, 0.4); }
+  50%       { box-shadow: 0 0 0 6px rgba(170, 59, 255, 0); }
+}
+.hero-badge-pulse {
+  animation: badge-pulse 3s ease-in-out infinite;
+}
+
+/* Ghost CTA hover — border brightens */
+.hero-ghost-cta:hover {
+  border-color: rgba(170, 59, 255, 0.6) !important;
+  background: rgba(170, 59, 255, 0.1) !important;
+}
+
+/* Marquee: GPU compositing hint */
+.hero-marquee-track {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Mobile: stats pills wrap nicely */
+@media (max-width: 480px) {
+  .hero-stats-row {
+    gap: 0.4rem !important;
+  }
+  .hero-stat-pill {
+    min-width: 78px !important;
+    padding: 0.5rem 0.9rem !important;
+  }
+}
+

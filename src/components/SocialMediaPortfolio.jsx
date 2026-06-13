@@ -2,6 +2,19 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};
+
 const PortfolioCard = ({ 
   item, 
   index, 
@@ -60,7 +73,7 @@ const PortfolioCard = ({
   // Ensure video plays on mount/update
   useEffect(() => {
     if (videoRef.current) {
-      const isMobileDevice = typeof window !== 'undefined' && window.innerWidth <= 768;
+      const isMobileDevice = window.innerWidth <= 768; // simple check on effect run
       if (isActive && !isMobileDevice) {
         videoRef.current.play().catch(e => console.log("Autoplay blocked:", e));
       } else {
@@ -89,7 +102,7 @@ const PortfolioCard = ({
       }}
       style={{ 
         position: 'absolute',
-        width: 'clamp(200px, 40vw, 280px)',
+        width: 'clamp(240px, 70vw, 280px)',
         aspectRatio: '1/1.3',
         zIndex: 10 - Math.abs(diff),
         filter: selectedId && selectedId !== item.id ? 'blur(10px) brightness(0.3)' : 'none',
