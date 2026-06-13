@@ -215,7 +215,7 @@ const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
 /* ─── Single Portfolio Card ─────────────────────────────────────────── */
 const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState('3/4');   // default portrait
+  const [aspectRatio, setAspectRatio] = useState('4/5');   // default portrait
   const [orientationKnown, setOrientationKnown] = useState(false);
 
   const catColor = categoryColors[p.category] || '#aa3bff';
@@ -226,7 +226,7 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
 
   const handleDimensions = (w, h) => {
     if (!orientationKnown) {
-      setAspectRatio(w > h ? '16/9' : '3/4');
+      setAspectRatio(w > h ? '16/9' : '4/5');
       setOrientationKnown(true);
     }
   };
@@ -478,7 +478,7 @@ const PortfolioPage = () => {
                 // Landscape → wide, portrait → tall
                 ...(selectedVideo.aspectRatio === '16/9'
                   ? { width: isMobile ? '95vw' : 'min(90vw, 1000px)', aspectRatio: '16/9' }
-                  : { width: isMobile ? 'min(90vw, 450px)' : '450px', aspectRatio: '3/4', maxHeight: '85vh' }),
+                  : { width: isMobile ? 'min(90vw, 450px)' : '450px', aspectRatio: selectedVideo.aspectRatio || '4/5', maxHeight: '85vh' }),
                 maxWidth: '100%',
                 backgroundColor: '#0a0a0c', borderRadius: '20px',
                 overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.9)',
