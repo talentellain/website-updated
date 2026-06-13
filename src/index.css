@@ -768,3 +768,40 @@ html.lenis {
     scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
     overscroll-behavior: contain;
 }
+
+/* ── GPU Compositing Optimization ──────────────────────────────────────
+   Promoting sticky sections and animated elements to their own GPU layer
+   prevents expensive main-thread paints during scroll. */
+.sticky-section {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Only use will-change for framer-motion items that are actively animating */
+.sticky-outer,
+[data-framer-portal-host] {
+  isolation: isolate;
+}
+
+/* Videos: ensure hardware acceleration */
+video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Disable expensive background-attachment: fixed on all mobile devices
+   (causes repaints on every scroll tick in most mobile browsers) */
+@media (max-width: 768px) {
+  .black-purple-gradient {
+    background-attachment: scroll !important;
+  }
+
+  /* Disable backdrop-filter in modals on mobile — very expensive on low-end devices */
+  [style*="backdrop-filter: blur"] {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(0, 0, 0, 0.95) !important;
+  }
+}

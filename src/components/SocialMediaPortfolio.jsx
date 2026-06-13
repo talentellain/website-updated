@@ -60,9 +60,14 @@ const PortfolioCard = ({
   // Ensure video plays on mount/update
   useEffect(() => {
     if (videoRef.current) {
+      const isMobileDevice = typeof window !== 'undefined' && window.innerWidth <= 768;
+      if (isActive && !isMobileDevice) {
         videoRef.current.play().catch(e => console.log("Autoplay blocked:", e));
+      } else {
+        videoRef.current.pause();
+      }
     }
-  }, [item.content]);
+  }, [item.content, isActive]);
 
   if (!isVisible && !isActive) return null;
 
@@ -117,7 +122,7 @@ const PortfolioCard = ({
             ref={videoRef}
             src={item.content}
             poster={item.thumbnail}
-            autoPlay
+            autoPlay={isActive && (typeof window !== 'undefined' && window.innerWidth > 768)}
             muted
             loop
             playsInline

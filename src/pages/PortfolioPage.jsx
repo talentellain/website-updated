@@ -253,7 +253,25 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
         transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
       }}
     >
-      {isVideo ? (
+      {isVideo && isMobile ? (
+        <div style={{
+          width: '100%',
+          height: '100%',
+          background: `linear-gradient(135deg, #080611 0%, ${catColor}18 100%)`,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <div style={{
+            width: 48, height: 48, borderRadius: '50%',
+            backgroundColor: `${catColor}20`, backdropFilter: 'blur(8px)',
+            border: `1px solid ${catColor}50`,
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          }}>
+            <Play size={18} color={catColor} fill={catColor} style={{ marginLeft: 2 }} />
+          </div>
+        </div>
+      ) : isVideo ? (
         <HoverVideo src={p.content} isHovered={isHovered} onDimensionsLoaded={handleDimensions} />
       ) : (
         <img src={imgSrc} alt={projectTitle} loading="lazy" decoding="async"
@@ -460,11 +478,14 @@ const PortfolioPage = () => {
                 // Landscape → wide, portrait → tall
                 ...(selectedVideo.aspectRatio === '16/9'
                   ? { width: isMobile ? '95vw' : 'min(90vw, 1000px)', aspectRatio: '16/9' }
-                  : { height: isMobile ? '85vh' : '90vh', maxHeight: '900px', aspectRatio: '3/4' }),
+                  : { width: isMobile ? 'min(90vw, 450px)' : '450px', aspectRatio: '3/4', maxHeight: '85vh' }),
                 maxWidth: '100%',
                 backgroundColor: '#0a0a0c', borderRadius: '20px',
                 overflow: 'hidden', boxShadow: '0 40px 100px rgba(0,0,0,0.9)',
                 position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
               onClick={(e) => e.stopPropagation()}
             >

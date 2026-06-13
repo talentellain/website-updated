@@ -56,6 +56,7 @@ const LazyVideo = ({ src, poster, isVisible }) => {
 const VideoSection = () => {
   const containerRef = useRef(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [hoveredId, setHoveredId] = useState(null);
   
   // Create rounded border animation
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'start start'] });
@@ -146,6 +147,8 @@ const VideoSection = () => {
               <motion.div
                 layoutId={`video-card-${video.id}`}
                 onClick={() => setSelectedVideo(video)}
+                onMouseEnter={() => !isMobile && setHoveredId(video.id)}
+                onMouseLeave={() => !isMobile && setHoveredId(null)}
                 role="button"
                 tabIndex={0}
                 aria-label={`Play ${video.title}`}
@@ -177,7 +180,7 @@ const VideoSection = () => {
                   cursor: 'pointer',
                 }}
               >
-                {video.videoSrc ? (
+                {video.videoSrc && !isMobile && (diff === 0 || hoveredId === video.id) ? (
                   <LazyVideo 
                     src={video.videoSrc}
                     poster={video.src}
@@ -236,15 +239,17 @@ const VideoSection = () => {
               aria-modal="true"
               aria-label={`Now playing: ${selectedVideo.title}`}
               style={{
-                height: '90vh', // Take up most of the screen vertically
-                maxHeight: '900px',
-                maxWidth: '100%',
+                width: 'min(90vw, 450px)',
                 aspectRatio: '9/16', // Instagram Reels Portrait Aspect Ratio
+                maxHeight: '85vh',
                 backgroundColor: '#0a0a0c',
                 borderRadius: '24px',
                 overflow: 'hidden',
                 boxShadow: '0 40px 100px rgba(0,0,0,0.8)',
-                position: 'relative'
+                position: 'relative',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
               onClick={(e) => e.stopPropagation()} // Don't close when clicking the video itself
             >
