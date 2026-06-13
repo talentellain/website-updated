@@ -123,6 +123,7 @@ const PortfolioCard = ({
             src={item.content}
             poster={item.thumbnail}
             autoPlay={isActive && (typeof window !== 'undefined' && window.innerWidth > 768)}
+            onLoadedMetadata={(e) => { if (!isActive) e.target.currentTime = 0.5; }}
             muted
             loop
             playsInline
