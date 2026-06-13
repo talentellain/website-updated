@@ -319,6 +319,15 @@ export const servicesData = [
         alt: 'TEC Brand Showcase - premium business portfolio content by TalentElla'
       },
       { 
+        id: 'sm13',
+        title: 'SJxTE Social Campaign', 
+        description: 'Vibrant streetwear campaign combining modern storytelling and cinematic movement.', 
+        type: 'video',
+        category: 'SMM CAMPAIGN',
+        content: "https://res.cloudinary.com/dqauqcgli/video/upload/v1781352267/talentella_portfolio/wpqxz7ssule2nn1s0fcj.mp4",
+        alt: 'SJxTE Social Campaign - youth brand promotion content by TalentElla'
+      },
+      { 
         id: 'sm10',
         title: 'Creative Showcase', 
         description: 'Exclusive creative production showcasing brand excellence and cinematic storytelling.', 
