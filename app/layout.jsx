@@ -1,8 +1,14 @@
 import './globals.css'
 import ClientLayout from './client-layout'
 
+const SITE_URL = 'https://talentella.in'
+
 export const metadata = {
-  title: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
+    template: '%s | TalentElla',
+  },
   description: "TalentElla is India's leading 360° marketing agency offering brand development, social media marketing, influencer marketing, lead generation & integrated marketing solutions. Get a free strategy call today.",
   keywords: '360 degree marketing agency, full service digital marketing agency, brand development agency, social media marketing agency India, influencer marketing agency, lead generation agency, integrated marketing solutions, content marketing agency, talent management marketing agency, online offline marketing agency',
   authors: [{ name: 'TalentElla' }],
@@ -11,15 +17,21 @@ export const metadata = {
     icon: '/logo.jpg',
     apple: '/logo.jpg',
   },
+  alternates: {
+    canonical: SITE_URL + '/',
+    languages: {
+      'en-IN': SITE_URL + '/',
+    },
+  },
   openGraph: {
     type: 'website',
-    url: 'https://talentella.in/',
+    url: SITE_URL + '/',
     title: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
     description: "TalentElla is India's leading 360° marketing agency. Brand development, social media marketing, influencer marketing, lead generation & integrated marketing solutions — all under one roof.",
     siteName: 'TalentElla',
     images: [
       {
-        url: 'https://talentella.in/logo.jpg',
+        url: SITE_URL + '/logo.jpg',
         width: 1200,
         height: 1200,
       },
@@ -30,7 +42,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
     description: "India's full-service 360° marketing agency — brand development, social media, influencer marketing, lead gen & integrated solutions. Book a free consultation.",
-    images: ['https://talentella.in/logo.jpg'],
+    images: [SITE_URL + '/logo.jpg'],
   },
   other: {
     'geo.region': 'IN',
@@ -38,6 +50,12 @@ export const metadata = {
     'msapplication-TileColor': '#0a0a0c',
     'theme-color': '#0a0a0c',
   },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#0a0a0c',
 }
 
 export default function RootLayout({ children }) {
