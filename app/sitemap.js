@@ -37,12 +37,15 @@ export default async function sitemap() {
     },
   ]
 
-  const servicePages = servicesData.map((s) => ({
-    url: `${SITE_URL}/services/${s.id}`,
-    lastModified: '2026-06-01',
-    changeFrequency: 'monthly',
-    priority: 0.9,
-  }))
+  const redirectingIds = ['app-development'] // these have dedicated pages
+  const servicePages = servicesData
+    .filter((s) => !redirectingIds.includes(s.id))
+    .map((s) => ({
+      url: `${SITE_URL}/services/${s.id}`,
+      lastModified: '2026-06-01',
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    }))
 
   const blogPostPages = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.id}`,
