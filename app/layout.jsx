@@ -113,8 +113,8 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.google.com" />
         <link rel="dns-prefetch" href="https://www.gstatic.com" />
-        <link rel="preload" as="image" href="/bg5.png" fetchPriority="high" />
-        <link rel="preload" as="image" href="/fg.png" fetchPriority="high" />
+        <link rel="preload" as="image" href="/bg5.webp" fetchPriority="high" type="image/webp" />
+        <link rel="preload" as="image" href="/fg.webp" fetchPriority="high" type="image/webp" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

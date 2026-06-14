@@ -1,6 +1,12 @@
-const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+import { useEffect, useState } from 'react';
 
 const StaticBackground = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 768);
+  }, []);
+
   return (
     <div
       style={{
@@ -11,7 +17,7 @@ const StaticBackground = () => {
         height: '100%',
         zIndex: 0,
         backgroundColor: '#000',
-        backgroundImage: `url('/bg5.png')`,
+        backgroundImage: `url('/bg5.webp')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: isMobile ? 'scroll' : 'fixed',
