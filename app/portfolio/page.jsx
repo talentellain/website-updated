@@ -2,7 +2,7 @@ import PortfolioPageContent from '../../src/page-content/PortfolioPage'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export const metadata = {
   title: 'Immersive Portfolio | TalentElla Agency',

@@ -37,7 +37,7 @@ export const generateServiceSchema = (service) => ({
   'provider': {
     '@type': 'Organization',
     'name': 'TalentElla',
-    'url': 'https://talentella.in',
+    'url': 'https://www.talentella.in',
   },
   'areaServed': {
     '@type': 'Country',

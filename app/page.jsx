@@ -3,7 +3,7 @@ import { homepageFAQs } from '../src/data/servicesData'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export const metadata = {
   title: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',

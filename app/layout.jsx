@@ -1,7 +1,7 @@
 import './globals.css'
 import ClientLayout from './client-layout'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -64,8 +64,8 @@ export default function RootLayout({ children }) {
     '@type': 'Organization',
     'name': 'TalentElla',
     'alternateName': 'TalentElla Marketing Agency',
-    'url': 'https://talentella.in',
-    'logo': 'https://talentella.in/logo.png',
+    'url': 'https://www.talentella.in',
+    'logo': 'https://www.talentella.in/logo.png',
     'description': "TalentElla is India's leading 360° marketing agency providing full-service digital marketing, brand development, social media management, influencer marketing, lead generation, and integrated marketing solutions.",
     'email': 'talentella.in@gmail.com',
     'foundingDate': '2026',
@@ -89,8 +89,8 @@ export default function RootLayout({ children }) {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     'name': 'TalentElla',
-    'image': 'https://talentella.in/logo.png',
-    'url': 'https://talentella.in',
+    'image': 'https://www.talentella.in/logo.png',
+    'url': 'https://www.talentella.in',
     'email': 'talentella.in@gmail.com',
     'description': 'Full-service 360° marketing agency in India offering brand development, social media marketing, influencer marketing, lead generation, and integrated marketing solutions.',
     'address': {

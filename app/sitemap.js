@@ -1,7 +1,7 @@
 import { servicesData } from '../src/data/servicesData'
 import { blogPosts } from '../src/data/blogData'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export default async function sitemap() {
   const staticPages = [

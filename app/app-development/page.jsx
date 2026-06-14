@@ -2,7 +2,7 @@ import AppPageContent from '../../src/page-content/AppPage'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export const metadata = {
   title: 'App Development Services | TalentElla — React Native & Flutter',

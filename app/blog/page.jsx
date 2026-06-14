@@ -2,7 +2,7 @@ import BlogPageContent from '../../src/page-content/BlogPage'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export const metadata = {
   title: 'Blog | TalentElla — Digital Marketing Insights & Guides',

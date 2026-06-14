@@ -3,7 +3,7 @@ import { servicesData } from '../../../src/data/servicesData'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export function generateMetadata({ params }) {
   const service = servicesData.find((s) => s.id === params.id)

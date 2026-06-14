@@ -2,7 +2,7 @@ import AboutPageContent from '../../src/page-content/AboutPage'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export const metadata = {
   title: 'About Us | TalentElla — 360° Marketing Agency India',

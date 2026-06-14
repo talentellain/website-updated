@@ -3,7 +3,7 @@ import { blogPosts } from '../../../src/data/blogData'
 
 export const dynamic = 'force-dynamic'
 
-const SITE_URL = 'https://talentella.in'
+const SITE_URL = 'https://www.talentella.in'
 
 export function generateMetadata({ params }) {
   const post = blogPosts.find((p) => p.id === params.id)
