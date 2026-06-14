@@ -95,7 +95,7 @@ export const servicesData = [
     // ── GEO: Answer-first block ──
     answerBlock: {
       question: 'What is Website Development?',
-      answer: 'Website development is the process of designing, building, and maintaining websites and web applications. At TalentElla, we create custom, high-performance websites using modern technologies like React, Next.js, and Node.js — optimized for speed, SEO, and conversions. Our full-service digital marketing agency in India delivers responsive designs that work seamlessly across all devices, starting from ₹5,000.',
+      answer: 'Website development is the process of designing, building, and maintaining websites and web applications. At TalentElla, we create custom, high-performance websites using modern technologies like React, Next.js, and Node.js — optimized for speed, SEO, and conversions. Our full-service digital marketing agency in India delivers responsive designs that work seamlessly across all devices, starting from ₹5,999.',
     },
     // ── FAQs with FAQPage schema ──
     faqs: [

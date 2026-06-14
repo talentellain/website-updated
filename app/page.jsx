@@ -1,4 +1,5 @@
 import HomePage from '../src/page-content/Home'
+import { homepageFAQs } from '../src/data/servicesData'
 
 export const dynamic = 'force-dynamic'
 
@@ -22,6 +23,44 @@ export const metadata = {
   },
 }
 
+function generateFAQSchema(faqs) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+}
+
+function generateBreadcrumbSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL + '/' },
+    ],
+  }
+}
+
 export default function Home() {
-  return <HomePage />
+  const schemas = [
+    generateFAQSchema(homepageFAQs),
+    generateBreadcrumbSchema(),
+  ]
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+      />
+      <HomePage />
+    </>
+  )
 }
