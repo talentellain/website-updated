@@ -49,7 +49,7 @@ export default async function sitemap() {
 
   const blogPostPages = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.id}`,
-    lastModified: post.date || '2026-06-01',
+    lastModified: new Date(post.date).toISOString().split('T')[0],
     changeFrequency: 'monthly',
     priority: 0.6,
   }))
