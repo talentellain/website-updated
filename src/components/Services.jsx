@@ -62,10 +62,10 @@ const ServiceCard = ({ s, index }) => {
 
 const Services = () => {
   const outerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start end', 'start start'] });
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const { scrollYProgress } = useScroll({ target: isMobile ? undefined : outerRef, offset: ['start end', 'start start'] });
   
   const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
   return (
     <>

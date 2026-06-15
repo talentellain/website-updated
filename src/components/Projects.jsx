@@ -260,18 +260,18 @@ const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects, 
 const Projects = () => {
   const containerRef = useRef(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: isMobile ? undefined : containerRef,
     offset: ['start start', 'end end'],
   });
 
   const { scrollYProgress: borderScrollProgress } = useScroll({
-    target: containerRef,
+    target: isMobile ? undefined : containerRef,
     offset: ['start end', 'start start'],
   });
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   const borderProgress = useTransform(borderScrollProgress, [0, 1], ['60px', '0px']);
 
   React.useEffect(() => {

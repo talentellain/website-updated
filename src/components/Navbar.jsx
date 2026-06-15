@@ -108,6 +108,7 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
     const location = { pathname: usePathname() };
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -201,8 +202,8 @@ const Navbar = () => {
                 zIndex: 1000, 
                 backgroundColor: glassBg,
                 borderBottom: `1px solid ${borderColor}`,
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
+                backdropFilter: isMobile ? 'none' : 'blur(20px)',
+                WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
             }}
         >

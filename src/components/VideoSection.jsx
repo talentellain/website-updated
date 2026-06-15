@@ -57,14 +57,14 @@ const VideoSection = () => {
   const containerRef = useRef(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
   
-  // Create rounded border animation
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'start start'] });
+  // Create rounded border animation — skip tracking on mobile
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const { scrollYProgress } = useScroll({ target: isMobile ? undefined : containerRef, offset: ['start end', 'start start'] });
   const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
   
   // Track if this section is visible to determine if videos should play
   const isSectionInView = useInView(containerRef, { margin: "200px 0px" });
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
   return (
     <div className="sticky-outer" ref={containerRef} style={{ zIndex: 60 }}>

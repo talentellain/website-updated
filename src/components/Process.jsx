@@ -26,9 +26,9 @@ const steps = [
 
 const Process = () => {
   const outerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start end', 'start start'] });
-  const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const { scrollYProgress } = useScroll({ target: isMobile ? undefined : outerRef, offset: ['start end', 'start start'] });
+  const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
   return (
     <div id="process" ref={outerRef} className="sticky-outer" style={{ zIndex: 50 }}>
       <motion.section
@@ -94,7 +94,7 @@ const Process = () => {
                       borderRadius: '24px', 
                       border: '1px solid rgba(255,255,255,0.05)',
                       overflow: 'hidden',
-                      backdropFilter: 'blur(8px)'
+                      backdropFilter: isMobile ? 'none' : 'blur(8px)'
                     }}
                   >
                     {/* Oversized Outlined Number */}

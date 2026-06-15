@@ -48,7 +48,8 @@ const checkRateLimit = () => {
 
 const Contact = () => {
   const outerRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: outerRef, offset: ['start end', 'start start'] });
+  const isMobileScroll = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const { scrollYProgress } = useScroll({ target: isMobileScroll ? undefined : outerRef, offset: ['start end', 'start start'] });
   const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
 
 

@@ -97,19 +97,19 @@ const repeated = [...Array(repeatCount)].flatMap(() => reviewsData);
 const ReviewsSection = () => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
+    target: isMobile ? undefined : containerRef,
     offset: ["start end", "end start"]
   });
 
-  const row1X = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 1], isMobile ? [0, 0] : [0, -2800]);
-  const row2X = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 1], isMobile ? [0, 0] : [-2800, 0]);
-  const row3X = useTransform(scrollYProgress, isMobile ? [0, 1] : [0, 1], isMobile ? [0, 0] : [0, -2800]);
+  const row1X = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -2800]);
+  const row2X = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [-2800, 0]);
+  const row3X = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, -2800]);
 
   const { scrollYProgress: borderScroll } = useScroll({
-    target: containerRef,
+    target: isMobile ? undefined : containerRef,
     offset: ["start end", "start start"]
   });
-  const borderRad = useTransform(borderScroll, isMobile ? [0, 1] : [0, 1], isMobile ? ["0px", "0px"] : ["80px", "0px"]);
+  const borderRad = useTransform(borderScroll, [0, 1], isMobile ? ["0px", "0px"] : ["80px", "0px"]);
 
   return (
     <motion.section 
