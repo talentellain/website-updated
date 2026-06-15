@@ -132,7 +132,9 @@ const Navbar = () => {
                 }
             }
         }
-        if (isOpen) setIsOpen(false);
+        if (isOpen) {
+            setTimeout(() => setIsOpen(false), 150);
+        }
     };
 
     // Keep the theme detection logic
@@ -398,7 +400,7 @@ const Navbar = () => {
                                     <Link
                                         key={item}
                                         href={PAGE_LINKS[item]}
-                                        onClick={() => setIsOpen(false)}
+                                        onClick={() => setTimeout(() => setIsOpen(false), 150)}
                                         style={{
                                             width: '100%',
                                             padding: '1.4rem 0',
@@ -425,7 +427,7 @@ const Navbar = () => {
                                 );
                             })}
                         </div>
-                        <Link href="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); setIsOpen(false); }} scroll={false} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
+                        <Link href="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); }} scroll={false} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
                             <motion.div
                                 whileTap={{ scale: 0.95 }}
                                 style={{

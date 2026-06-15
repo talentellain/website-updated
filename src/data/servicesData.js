@@ -243,6 +243,7 @@ export const servicesData = [
     portfolio: [
       { 
         id: 'sm2',
+        orientation: 'portrait',
         title: 'Fashion Showcase', 
         description: 'Elegant streetwear and fashion production with trend-focused visual aesthetics.', 
         type: 'video',
@@ -252,6 +253,7 @@ export const servicesData = [
       },
       { 
         id: 'sm4',
+        orientation: 'portrait',
         title: 'Car Spa Commercial', 
         description: 'Premium automotive aesthetic showcase with high-end detailing and visual dynamic style.', 
         type: 'video',
@@ -261,6 +263,7 @@ export const servicesData = [
       },
       { 
         id: 'sm5',
+        orientation: 'portrait',
         title: 'SJxTE Creative Reel', 
         description: 'Collaborative showcase capturing trending brand aesthetics and youth energy.', 
         type: 'video',
@@ -270,6 +273,7 @@ export const servicesData = [
       },
       { 
         id: 'sm6',
+        orientation: 'portrait',
         title: 'SJxTE Brand Campaign', 
         description: 'Bold promotional aesthetics with vibrant lighting and dynamic editing.', 
         type: 'video',
@@ -279,6 +283,7 @@ export const servicesData = [
       },
       { 
         id: 'sm7',
+        orientation: 'portrait',
         title: 'SJxTE Storytelling', 
         description: 'High engagement brand story utilizing micro-narratives and trendy audio pacing.', 
         type: 'video',
@@ -288,6 +293,7 @@ export const servicesData = [
       },
       { 
         id: 'sm8',
+        orientation: 'portrait',
         title: 'SJxTE Cinematic', 
         description: 'Professional visual styling featuring moody color grades and high fidelity shots.', 
         type: 'video',
@@ -297,6 +303,7 @@ export const servicesData = [
       },
       { 
         id: 'sm9',
+        orientation: 'portrait',
         title: 'SJxTE Aesthetics', 
         description: 'Vibrant streetwear visual presentation styled for maximum social platform reach.', 
         type: 'video',
@@ -306,6 +313,10 @@ export const servicesData = [
       },
       { 
         id: 'sm11',
+        orientation: 'portrait',
+        title: 'SJxTE Behind the Scenes', 
+        description: 'Behind the scenes production look with organic lifestyle framing and team synergy.', 
+        orientation: 'portrait',
         title: 'SJxTE Behind the Scenes', 
         description: 'Behind the scenes production look with organic lifestyle framing and team synergy.', 
         type: 'video',
@@ -315,6 +326,7 @@ export const servicesData = [
       },
       { 
         id: 'sm12',
+        orientation: 'portrait',
         title: 'TEC Brand Showcase', 
         description: 'Clean product highlight and corporate identity production styled for high-end clients.', 
         type: 'video',
@@ -324,6 +336,7 @@ export const servicesData = [
       },
       { 
         id: 'sm13',
+        orientation: 'landscape',
         title: 'SJxTE Social Campaign', 
         description: 'Vibrant streetwear campaign combining modern storytelling and cinematic movement.', 
         type: 'video',
@@ -333,6 +346,7 @@ export const servicesData = [
       },
       { 
         id: 'sm10',
+        orientation: 'landscape',
         title: 'Creative Showcase', 
         description: 'Exclusive creative production showcasing brand excellence and cinematic storytelling.', 
         type: 'video',
@@ -342,8 +356,6 @@ export const servicesData = [
       },
       { 
         id: 'sm14',
-        title: 'Dynamic Brand Reel', 
-        description: 'High-energy brand production reel showcasing cinematic motion, bold visuals, and compelling storytelling.', 
         type: 'video',
         category: 'VIDEO SHOOTING',
         content: video0609,
@@ -351,6 +363,7 @@ export const servicesData = [
       },
       { 
         id: 'sm15',
+        orientation: 'landscape',
         title: 'Banaras Cinematic', 
         description: 'Cinematic travel and cultural exploration showcasing vibrant heritage.', 
         type: 'video',
@@ -360,6 +373,7 @@ export const servicesData = [
       },
       { 
         id: 'sm16',
+        orientation: 'portrait',
         title: 'Duke 250 Dynamic', 
         description: 'High-energy automotive presentation with dynamic movement and aesthetic grading.', 
         type: 'video',

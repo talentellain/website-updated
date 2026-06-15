@@ -211,7 +211,8 @@ const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
 
 const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [aspectRatio, setAspectRatio] = useState('4/5');
+  const initialAspectRatio = p.orientation === 'landscape' ? '16/9' : '4/5';
+  const [aspectRatio, setAspectRatio] = useState(initialAspectRatio);
   const [orientationKnown, setOrientationKnown] = useState(false);
 
   const catColor = categoryColors[p.category] || '#aa3bff';
@@ -347,6 +348,9 @@ const PortfolioPage = () => {
     ? smmPortfolio
     : smmPortfolio.filter(p => (p.category || '').toUpperCase() === activeFilter);
 
+  const landscapeVideos = filtered.filter(p => p.orientation === 'landscape');
+  const portraitVideos = filtered.filter(p => p.orientation !== 'landscape');
+
   return (
     <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif' }}>
       <SEO
@@ -422,22 +426,38 @@ const PortfolioPage = () => {
                 key={activeFilter}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-                  gap: isMobile ? '0.75rem' : '1.25rem',
-                  alignItems: 'start',
-                }}
               >
-                {filtered.map((p, i) => (
-                  <PortfolioCard
-                    key={p.id || i}
-                    p={p}
-                    index={i}
-                    setSelectedVideo={setSelectedVideo}
-                    isMobile={isMobile}
-                  />
-                ))}
+                {landscapeVideos.length > 0 && (
+                  <div style={{ marginBottom: isMobile ? '3rem' : '4rem' }}>
+                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Cinematic & Landscape</h3>
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
+                      gap: isMobile ? '1rem' : '1.5rem',
+                      alignItems: 'start',
+                    }}>
+                      {landscapeVideos.map((p, i) => (
+                        <PortfolioCard key={p.id || i} p={p} index={i} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {portraitVideos.length > 0 && (
+                  <div>
+                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Reels & Portrait</h3>
+                    <div style={{
+                      display: 'grid',
+                      gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+                      gap: isMobile ? '0.75rem' : '1.25rem',
+                      alignItems: 'start',
+                    }}>
+                      {portraitVideos.map((p, i) => (
+                        <PortfolioCard key={p.id || i} p={p} index={landscapeVideos.length + i} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
