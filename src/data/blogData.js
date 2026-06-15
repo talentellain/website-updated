@@ -460,6 +460,111 @@ export const blogPosts = [
       <p>At TalentElla, we combine all these strategies into integrated campaigns that deliver measurable results. Our lead generation services start at ₹10,000/month.</p>
     `
   },
+  {
+    id: 'core-web-vitals-seo-2026',
+    title: 'Core Web Vitals & Technical SEO in 2026: The Ultimate Checklist',
+    excerpt: 'Technical SEO is evolving. Learn how to optimize your Core Web Vitals, improve page speed, and ensure your website meets Google\'s strict performance requirements in 2026.',
+    category: 'SEO',
+    readTime: '8 min read',
+    date: 'June 10, 2026',
+    image: '/blog/core-web-vitals.jpg',
+    author: 'TalentElla Team',
+    tags: ['Technical SEO', 'Core Web Vitals', 'Page Speed', 'Google Algorithm Update', 'SEO Agency India'],
+    content: `
+      <p>Google's emphasis on user experience has reached new heights. In 2026, passing the Core Web Vitals assessment isn't just a recommendation—it's a strict requirement for ranking on the first page.</p>
+
+      <h2>What Are Core Web Vitals in 2026?</h2>
+      <p>Google has refined its metrics to focus entirely on user-centric performance:</p>
+      <ul>
+        <li><strong>Largest Contentful Paint (LCP):</strong> Measures loading performance. Aim for under 2.5 seconds.</li>
+        <li><strong>Interaction to Next Paint (INP):</strong> Measures responsiveness. Aim for under 200 milliseconds.</li>
+        <li><strong>Cumulative Layout Shift (CLS):</strong> Measures visual stability. Aim for less than 0.1.</li>
+      </ul>
+
+      <h2>How to Optimize Your Technical SEO</h2>
+      <p>Start by auditing your website using Google Search Console and PageSpeed Insights. Focus on these critical areas:</p>
+      <ul>
+        <li><strong>Server Response Times:</strong> Upgrade your hosting or implement Edge caching/CDNs to ensure fast Time to First Byte (TTFB).</li>
+        <li><strong>Next-Gen Image Formats:</strong> Always use WebP or AVIF formats. Implement lazy-loading for off-screen images.</li>
+        <li><strong>JavaScript Execution:</strong> Heavy JavaScript is the primary cause of poor INP. Defer non-critical scripts and break up long tasks.</li>
+        <li><strong>CSS Optimization:</strong> Inline critical CSS and remove unused stylesheets to prevent render-blocking.</li>
+      </ul>
+
+      <h2>Mobile-First Indexing is Absolute</h2>
+      <p>If your site isn't perfectly optimized for mobile devices, your desktop rankings will suffer. Ensure responsive design, tap-friendly elements, and fast mobile loading speeds.</p>
+
+      <p>Need a technical SEO audit? The development team at TalentElla specializes in building Next.js and React websites that guarantee perfect Core Web Vitals scores.</p>
+    `
+  },
+  {
+    id: 'ai-search-generative-experience-seo',
+    title: 'Adapting to AI Search: SEO Strategies for SGE and AI Overviews',
+    excerpt: 'With Google\'s AI Overviews (SGE) dominating search results, traditional SEO is changing. Discover how to optimize your content to appear in AI-generated answers.',
+    category: 'SEO',
+    readTime: '7 min read',
+    date: 'June 2, 2026',
+    image: '/blog/ai-search-seo.jpg',
+    author: 'TalentElla Team',
+    tags: ['AI Search', 'SGE', 'Google AI Overviews', 'Future of SEO', 'Content Strategy'],
+    content: `
+      <p>The integration of Generative AI into search engines has fundamentally changed how users find information. Google's Search Generative Experience (SGE) and AI Overviews now answer complex questions directly at the top of the SERP.</p>
+
+      <h2>The Shift from Keywords to Entities</h2>
+      <p>AI search engines don't just look for keyword matches; they understand concepts, entities, and the relationships between them. Your content needs to be structured around topics, not just isolated keywords.</p>
+
+      <h2>How to Optimize for AI Overviews (SGE)</h2>
+      <p>To increase your chances of being cited in an AI overview, you must structure your content meticulously:</p>
+      <ul>
+        <li><strong>Answer Questions Directly:</strong> Use a Question-and-Answer format. Provide a concise, clear answer immediately after the heading, then elaborate.</li>
+        <li><strong>Use Structured Data:</strong> Implement robust Schema markup (FAQ, Article, Product, Organization) so the AI can easily parse your data.</li>
+        <li><strong>Focus on Information Gain:</strong> AI models prefer citing sources that provide unique data, original research, or expert perspectives that aren't available elsewhere.</li>
+        <li><strong>Conversational Tone:</strong> Since many AI searches are voice-driven or conversational, match that natural language in your long-tail keyword strategy.</li>
+      </ul>
+
+      <h2>The Importance of Brand Mentions</h2>
+      <p>AI models learn from the broader web. The more your brand is mentioned across authoritative sites, forums, and PR channels, the more likely the AI will recommend you. This makes Digital PR an essential part of modern SEO.</p>
+
+      <p>At TalentElla, our content strategists are already helping brands adapt to the AI search era. Stay ahead of the curve by upgrading your SEO strategy today.</p>
+    `
+  },
+  {
+    id: 'e-e-a-t-seo-guidelines',
+    title: 'Mastering E-E-A-T: The Secret to Surviving Google Updates',
+    excerpt: 'Experience, Expertise, Authoritativeness, and Trustworthiness (E-E-A-T) are the pillars of modern SEO. Learn how to establish your brand as an undeniable authority.',
+    category: 'SEO',
+    readTime: '6 min read',
+    date: 'May 28, 2026',
+    image: '/blog/eeat-seo.jpg',
+    author: 'TalentElla Team',
+    tags: ['E-E-A-T', 'SEO Guidelines', 'Content Quality', 'Brand Authority', 'Digital Marketing'],
+    content: `
+      <p>With the rise of AI-generated content, Google relies heavily on E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) to differentiate high-quality human insights from generic machine text.</p>
+
+      <h2>Breaking Down E-E-A-T</h2>
+      <ul>
+        <li><strong>Experience:</strong> Does the creator have first-hand experience with the topic? (e.g., actually using a product before reviewing it).</li>
+        <li><strong>Expertise:</strong> Does the author possess the necessary knowledge or credentials?</li>
+        <li><strong>Authoritativeness:</strong> Is the website recognized as a go-to source in its industry?</li>
+        <li><strong>Trustworthiness:</strong> Is the website secure, accurate, and transparent? (This is the most important pillar).</li>
+      </ul>
+
+      <h2>Actionable Ways to Improve E-E-A-T</h2>
+      
+      <h3>1. Create Detailed Author Bios</h3>
+      <p>Don't publish anonymous content. Create dedicated author pages detailing credentials, links to social profiles (like LinkedIn), and past publications. Show Google that a real expert wrote the article.</p>
+
+      <h3>2. Leverage First-Hand Experience</h3>
+      <p>Use words like "In our experience," "When we tested," and include original photographs or data. First-hand experience is the one thing AI cannot fake.</p>
+
+      <h3>3. Build Trust Signals</h3>
+      <p>Ensure your website has clear contact information, a transparent privacy policy, easy-to-find customer service details, and an SSL certificate. Display reviews and testimonials prominently.</p>
+
+      <h3>4. Earn High-Quality Backlinks</h3>
+      <p>Authoritativeness is largely determined by who links to you. Focus on digital PR to earn mentions from authoritative news sites, industry associations, and educational institutions.</p>
+
+      <p>Building E-E-A-T takes time, but it builds an SEO moat around your business. Need help establishing your brand's authority? Contact TalentElla's SEO specialists.</p>
+    `
+  }
 ];
 
 export const blogCategories = [

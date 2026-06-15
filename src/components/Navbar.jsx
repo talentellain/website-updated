@@ -136,7 +136,9 @@ const Navbar = () => {
 
     // Keep the theme detection logic
     useEffect(() => {
-        const handleScroll = () => {
+        let ticking = false;
+
+        const checkTheme = () => {
             const sections = [
                 { id: 'footer', isLight: true },
                 { id: 'contact', isLight: false },
@@ -165,10 +167,18 @@ const Navbar = () => {
             }
             
             setIsDarkTheme(overLight);
+            ticking = false;
         };
 
-        window.addEventListener('scroll', handleScroll);
-        handleScroll();
+        const handleScroll = () => {
+            if (!ticking) {
+                window.requestAnimationFrame(checkTheme);
+                ticking = true;
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        checkTheme();
         
         return () => window.removeEventListener('scroll', handleScroll);
     }, [location.pathname]);

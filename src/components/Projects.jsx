@@ -210,7 +210,7 @@ const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects, 
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               animate={{ scale: imgHovered ? 1.06 : 1 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               style={{ width: '100%', height: '100%', objectFit: 'cover' }}

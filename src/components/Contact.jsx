@@ -314,22 +314,24 @@ const Contact = () => {
 
 
                 {/* Submit Button */}
+                {/* Submit Button */}
                 <button 
                   type="submit"
                   disabled={status === 'loading'}
-                  className="mt-2 flex items-center justify-between w-full bg-white text-black rounded-full transition-all duration-300 hover:bg-neutral-200 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
-                  style={{ padding: '20px 32px 20px 42px' }}
+                  className="group relative mt-4 flex items-center justify-between w-full overflow-hidden rounded-full transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed border border-white/20 bg-transparent hover:bg-white hover:border-white"
+                  style={{ padding: '14px 20px 14px 28px' }}
                 >
-                  <span className="text-sm md:text-base font-black tracking-[0.25em] uppercase">
+                  <span className="relative z-10 text-sm font-bold tracking-[0.2em] uppercase text-white group-hover:text-black transition-colors duration-300">
                     {status === 'loading' ? 'Transmitting...' : 'Send Inquiry'}
                   </span>
-                  {status === 'loading' ? (
-                    <Loader2 className="animate-spin text-black" size={24} />
-                  ) : (
-                    <div className="bg-black text-white p-3 rounded-full flex items-center justify-center">
-                      <Send size={18} />
-                    </div>
-                  )}
+                  
+                  <div className="relative z-10 bg-white text-black p-2.5 rounded-full flex items-center justify-center transition-all duration-500 group-hover:bg-black group-hover:text-white">
+                    {status === 'loading' ? (
+                      <Loader2 className="animate-spin" size={16} />
+                    ) : (
+                      <Send size={16} className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    )}
+                  </div>
                 </button>
               </form>
             </motion.div>

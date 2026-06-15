@@ -42,10 +42,16 @@ const Hero = () => {
         ease: 'power2.inOut',
       }, '-=0.4')
       .to(mountainRef.current, {
-        y: '0%',
-        duration: 2.2,
-        ease: 'power2.inOut',
-      }, '<')
+        keyframes: [
+          { x: -10, duration: 0.1 },
+          { x: 10, duration: 0.1 },
+          { x: -10, duration: 0.1 },
+          { x: 10, duration: 0.1 },
+          { x: -10, duration: 0.1 },
+          { x: 10, duration: 0.1 },
+          { x: 0, y: '0%', duration: 0.6, ease: 'expo.out' }
+        ],
+      }, 0)
       .to(contentRefs.current, {
         opacity: 1,
         y: 0,

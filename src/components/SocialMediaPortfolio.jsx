@@ -57,12 +57,16 @@ const PortfolioCard = ({
     // Removed pause and reset to keep videos playing
   };
 
-  // Ensure video plays on mount/update
+  // Ensure video plays on mount/update if visible
   useEffect(() => {
     if (videoRef.current) {
-        videoRef.current.play().catch(e => console.log("Autoplay blocked:", e));
+        if (isVisible) {
+            videoRef.current.play().catch(e => console.log("Autoplay blocked:", e));
+        } else {
+            videoRef.current.pause();
+        }
     }
-  }, [item.content]);
+  }, [item.content, isVisible]);
 
   if (!isVisible && !isActive) return null;
 
@@ -117,11 +121,10 @@ const PortfolioCard = ({
             ref={videoRef}
             src={item.content}
             poster={item.thumbnail}
-            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="none"
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
         ) : (
@@ -329,7 +332,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 ) : (
-                  <img src={selectedItem.content} alt={selectedItem.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={selectedItem.content} alt={selectedItem.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
                 )}
                 
                 {/* Modal Close Button */}
