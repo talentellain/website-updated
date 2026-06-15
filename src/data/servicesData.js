@@ -4,6 +4,8 @@ import globalInsights from '../assets/global_insights.png';
 import samikshaVideo from '../assets/video/samiksha.mp4';
 import whatsappVideoPortfolio from '../assets/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
 import video0609 from '../assets/video/0609-copy.mp4';
+import banarasVideo from '../assets/video/Banaras2.mp4';
+import dukeVideo from '../assets/video/Duke250.mp4';
 
 /* ── Cloudinary Video URLs ────────────────────────────────────────── */
 const carSpaVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350012/talentella_portfolio/esbp2dmjr8ik1md9czsl.mp4";
@@ -346,6 +348,24 @@ export const servicesData = [
         category: 'VIDEO SHOOTING',
         content: video0609,
         alt: 'Dynamic brand reel — cinematic video production by TalentElla'
+      },
+      { 
+        id: 'sm15',
+        title: 'Banaras Cinematic', 
+        description: 'Cinematic travel and cultural exploration showcasing vibrant heritage.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: banarasVideo,
+        alt: 'Banaras cinematic video — travel and culture production by TalentElla'
+      },
+      { 
+        id: 'sm16',
+        title: 'Duke 250 Dynamic', 
+        description: 'High-energy automotive presentation with dynamic movement and aesthetic grading.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: dukeVideo,
+        alt: 'Duke 250 dynamic video — automotive video production by TalentElla'
       }
     ],
     plans: [
