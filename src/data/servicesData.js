@@ -1,12 +1,12 @@
 import techstart from '../assets/techstart.png';
 import vibeshop from '../assets/vibeshop.png';
 import globalInsights from '../assets/global_insights.png';
-const samikshaVideo = '/video/samiksha.mp4';
-const whatsappVideoPortfolio = '/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
-const video0609 = '/video/0609.mp4';
-const banarasVideo = '/video/Banaras2.mp4';
-const dukeVideo = '/video/Duke250.mp4';
-const video0617 = '/video/0617.mp4';
+const samikshaVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781860560/talentella_portfolio/samiksha.mp4";
+const whatsappVideoPortfolio = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781860562/talentella_portfolio/whatsapp_portfolio.mp4";
+const video0609 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781860565/talentella_portfolio/video_0609.mp4";
+const banarasVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781860596/talentella_portfolio/banaras2.mp4";
+const dukeVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781860610/talentella_portfolio/duke250.mp4";
+const video0617 = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781860638/talentella_portfolio/video_0617.mp4";
 
 /* ── Cloudinary Video URLs ────────────────────────────────────────── */
 const carSpaVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350012/talentella_portfolio/esbp2dmjr8ik1md9czsl.mp4";
