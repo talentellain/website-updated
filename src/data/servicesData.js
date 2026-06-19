@@ -243,6 +243,45 @@ export const servicesData = [
     ],
     portfolio: [
       { 
+        id: 'sm12',
+        orientation: 'portrait',
+        title: 'TEC Brand Showcase', 
+        description: 'Clean product highlight and corporate identity production styled for high-end clients.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: tecVideo,
+        alt: 'TEC Brand Showcase - premium business portfolio content by TalentElla'
+      },
+      { 
+        id: 'sm14',
+        orientation: 'portrait',
+        title: 'Project',
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: video0609,
+        alt: 'Dynamic brand reel — cinematic video production by TalentElla'
+      },
+      { 
+        id: 'sm16',
+        orientation: 'portrait',
+        title: 'Duke 250 Dynamic', 
+        description: 'High-energy automotive presentation with dynamic movement and aesthetic grading.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: dukeVideo,
+        alt: 'Duke 250 dynamic video — automotive video production by TalentElla'
+      },
+      { 
+        id: 'sm17',
+        orientation: 'portrait',
+        title: '0617 Creative Project', 
+        description: 'Dynamic visual presentation with aesthetic grading.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: video0617,
+        alt: '0617 creative video production by TalentElla'
+      },
+      { 
         id: 'sm2',
         orientation: 'portrait',
         title: 'Fashion Showcase', 
@@ -326,16 +365,6 @@ export const servicesData = [
         alt: 'SJxTE Behind the Scenes - authentic brand creation story by TalentElla'
       },
       { 
-        id: 'sm12',
-        orientation: 'portrait',
-        title: 'TEC Brand Showcase', 
-        description: 'Clean product highlight and corporate identity production styled for high-end clients.', 
-        type: 'video',
-        category: 'VIDEO SHOOTING',
-        content: tecVideo,
-        alt: 'TEC Brand Showcase - premium business portfolio content by TalentElla'
-      },
-      { 
         id: 'sm13',
         orientation: 'landscape',
         title: 'SJxTE Social Campaign', 
@@ -356,13 +385,6 @@ export const servicesData = [
         alt: 'Creative brand showcase — premium video production by TalentElla'
       },
       { 
-        id: 'sm14',
-        type: 'video',
-        category: 'VIDEO SHOOTING',
-        content: video0609,
-        alt: 'Dynamic brand reel — cinematic video production by TalentElla'
-      },
-      { 
         id: 'sm15',
         orientation: 'landscape',
         title: 'Banaras Cinematic', 
@@ -371,26 +393,6 @@ export const servicesData = [
         category: 'VIDEO SHOOTING',
         content: banarasVideo,
         alt: 'Banaras cinematic video — travel and culture production by TalentElla'
-      },
-      { 
-        id: 'sm16',
-        orientation: 'portrait',
-        title: 'Duke 250 Dynamic', 
-        description: 'High-energy automotive presentation with dynamic movement and aesthetic grading.', 
-        type: 'video',
-        category: 'VIDEO SHOOTING',
-        content: dukeVideo,
-        alt: 'Duke 250 dynamic video — automotive video production by TalentElla'
-      },
-      { 
-        id: 'sm17',
-        orientation: 'portrait',
-        title: '0617 Creative Project', 
-        description: 'Dynamic visual presentation with aesthetic grading.', 
-        type: 'video',
-        category: 'VIDEO SHOOTING',
-        content: video0617,
-        alt: '0617 creative video production by TalentElla'
       }
     ],
     plans: [

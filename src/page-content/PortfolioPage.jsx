@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, useInView } from 'framer-motion';
 import { ArrowUpRight, Play, X } from 'lucide-react';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
@@ -180,10 +180,12 @@ const RemainingWork = () => (
 );
 
 const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
+  const containerRef = useRef(null);
   const videoRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "200px" });
 
   useEffect(() => {
-    if (videoRef.current) {
+    if (videoRef.current && isInView) {
       if (isHovered) {
         videoRef.current.play().catch(() => {});
       } else {
@@ -191,7 +193,7 @@ const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
         videoRef.current.currentTime = 0.5;
       }
     }
-  }, [isHovered]);
+  }, [isHovered, isInView]);
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
@@ -201,11 +203,15 @@ const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
   };
 
   return (
-    <video
-      ref={videoRef} src={src} muted loop playsInline preload="metadata"
-      onLoadedMetadata={handleLoadedMetadata}
-      style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
-    />
+    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+      {isInView && (
+        <video
+          ref={videoRef} src={src} muted loop playsInline preload="metadata"
+          onLoadedMetadata={handleLoadedMetadata}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
+        />
+      )}
+    </div>
   );
 };
 
@@ -448,7 +454,7 @@ const PortfolioPage = () => {
                     <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Reels & Portrait</h3>
                     <div style={{
                       display: 'grid',
-                      gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+                      gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
                       gap: isMobile ? '0.75rem' : '1.25rem',
                       alignItems: 'start',
                     }}>
