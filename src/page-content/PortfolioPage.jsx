@@ -190,20 +190,28 @@ const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
         videoRef.current.play().catch(() => {});
       } else {
         videoRef.current.pause();
-        videoRef.current.currentTime = 0.5;
+        if (videoRef.current.readyState >= 1) {
+          try {
+            videoRef.current.currentTime = 0.5;
+          } catch(e) {}
+        }
       }
     }
   }, [isHovered, isInView]);
 
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
-      if (!isHovered) videoRef.current.currentTime = 0.5;
+      if (!isHovered) {
+        try {
+          videoRef.current.currentTime = 0.5;
+        } catch(e) {}
+      }
       if (onDimensionsLoaded) onDimensionsLoaded(videoRef.current.videoWidth, videoRef.current.videoHeight);
     }
   };
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+    <div ref={containerRef} style={{ width: '100%', height: '100%', backgroundColor: '#050505' }}>
       {isInView && (
         <video
           ref={videoRef} src={src} muted loop playsInline preload="metadata"

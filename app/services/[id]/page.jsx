@@ -5,8 +5,9 @@ export const dynamic = 'force-dynamic'
 
 const SITE_URL = 'https://www.talentella.in'
 
-export function generateMetadata({ params }) {
-  const service = servicesData.find((s) => s.id === params.id)
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const service = servicesData.find((s) => s.id === resolvedParams.id)
   if (!service) return {}
 
   const pageTitle = service.seo?.pageTitle || service.title
@@ -61,8 +62,9 @@ function generateFAQSchema(faqs) {
   }
 }
 
-export default function ServicePage({ params }) {
-  const service = servicesData.find((s) => s.id === params.id)
+export default async function ServicePage({ params }) {
+  const resolvedParams = await params;
+  const service = servicesData.find((s) => s.id === resolvedParams.id)
   if (!service) return <ServicePageContent />
 
   const schemas = [generateServiceSchema(service, params.id)]

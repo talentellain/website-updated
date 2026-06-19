@@ -5,8 +5,9 @@ export const dynamic = 'force-dynamic'
 
 const SITE_URL = 'https://www.talentella.in'
 
-export function generateMetadata({ params }) {
-  const post = blogPosts.find((p) => p.id === params.id)
+export async function generateMetadata({ params }) {
+  const resolvedParams = await params;
+  const post = blogPosts.find((p) => p.id === resolvedParams.id)
   if (!post) return {}
 
   return {
@@ -62,8 +63,9 @@ function generateArticleSchema(post) {
   }
 }
 
-export default function BlogPost({ params }) {
-  const post = blogPosts.find((p) => p.id === params.id)
+export default async function BlogPost({ params }) {
+  const resolvedParams = await params;
+  const post = blogPosts.find((p) => p.id === resolvedParams.id)
   if (!post) return <BlogPostPageContent />
 
   const articleSchema = generateArticleSchema(post)
