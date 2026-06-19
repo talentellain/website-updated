@@ -77,7 +77,11 @@ const Services = () => {
             borderTopLeftRadius: isMobile ? '0px' : borderRad, 
             borderTopRightRadius: isMobile ? '0px' : borderRad, 
             borderTop: '1px solid rgba(0,0,0,0.06)', 
-            height: isMobile ? 'auto' : '100dvh' 
+            height: isMobile ? 'auto' : '100dvh',
+            minHeight: isMobile ? '100dvh' : 'auto',
+            display: isMobile ? 'flex' : 'block',
+            flexDirection: isMobile ? 'column' : 'initial',
+            justifyContent: isMobile ? 'center' : 'initial'
           }}
         >
           <div className="services-container-inner" style={{ width: '100%', height: isMobile ? 'auto' : '100%', overflowY: isMobile ? 'visible' : 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -89,7 +93,7 @@ const Services = () => {
                 Full-service 360° marketing solutions — brand development, social media marketing, and integrated digital strategies.
               </motion.p>
             </div>
-            <div className={`services-grid-new ${isMobile ? 'services-grid-mobile-scroll' : ''}`} style={{ width: '100%' }}>
+            <div className="services-grid-new">
               {servicesData.map((s, index) => <ServiceCard key={s.id} s={s} index={index} />)}
             </div>
           </div>
@@ -103,9 +107,30 @@ const Services = () => {
         .services-container-inner { padding: 12vh 2% 8vh; }
         @media (max-width: 768px) { .services-container-inner { padding: 8vh 2.5% 6vh !important; } }
 
-        .services-grid-new { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vh; }
+        .services-grid-new { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vh; width: 100%; }
         @media (max-width: 1200px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); gap: 2vh; } }
-        @media (max-width: 768px) { .services-grid-new { grid-template-columns: 1fr; gap: 1rem; } }
+        
+        /* Mobile Horizontal Scroll */
+        @media (max-width: 768px) { 
+          .services-grid-new { 
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            gap: 1.2rem !important;
+            width: 100vw !important;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 1.5rem 2rem 1.5rem !important;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+          }
+          .services-grid-new::-webkit-scrollbar {
+            display: none;
+          }
+        }
 
         .modern-service-card { 
           background-color: #ebeae4; 
@@ -114,24 +139,12 @@ const Services = () => {
           border: 1px solid rgba(0, 0, 0, 0.04);
           box-shadow: 0 15px 35px rgba(0, 0, 0, 0.015);
         }
-        @media (max-width: 768px) { 
-          .modern-service-card { 
-            min-height: 180px !important; 
-            border-radius: 24px !important; 
-          } 
-        }
         
         .modern-service-card:hover { 
           background: linear-gradient(135deg, #7c3aed, #a78bfa); 
           border-color: rgba(167, 139, 250, 0.3);
           box-shadow: 0 30px 60px rgba(124, 58, 237, 0.25);
           transform: translateY(-8px);
-        }
-        @media (max-width: 768px) {
-          .modern-service-card:hover {
-            transform: none !important;
-            background: linear-gradient(135deg, #7c3aed, #a78bfa) !important;
-          }
         }
 
         .card-giant-text { 
@@ -149,15 +162,6 @@ const Services = () => {
           z-index: 2; 
           width: 100%; 
           text-align: center; 
-        }
-        @media (max-width: 768px) { 
-          .card-giant-text { 
-            font-size: 1.3rem !important; 
-            text-align: left !important;
-            left: 2rem !important;
-            transform: translate(0, -50%) !important;
-            width: auto !important;
-          } 
         }
         
         .modern-service-card:hover .card-giant-text { 
@@ -180,24 +184,6 @@ const Services = () => {
           transform: rotate(45deg);
         }
 
-        @media (max-width: 768px) {
-          .card-top-header {
-            top: 1.2rem !important;
-            left: 2rem !important;
-            right: 2rem !important;
-          }
-          .card-bottom-cta {
-            bottom: 1.2rem !important;
-            right: 2rem !important;
-            width: 32px !important;
-            height: 32px !important;
-          }
-          .card-bottom-cta svg {
-            width: 14px !important;
-            height: 14px !important;
-          }
-        }
-
         .card-hover-content { 
           opacity: 0; 
           transform: translateY(30px) scale(0.95); 
@@ -214,24 +200,6 @@ const Services = () => {
           opacity: 1; 
           transform: translateY(0) scale(1); 
           transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s; 
-        }
-        @media (max-width: 768px) {
-          .card-hover-content {
-            align-items: flex-start !important;
-            text-align: left !important;
-            padding: 0 2rem !important;
-            gap: 0.2rem !important;
-            transform: translateY(15px) scale(0.98) !important;
-          }
-          .modern-service-card:hover .card-hover-content {
-            transform: translateY(0) scale(1) !important;
-          }
-          .blob-icon-wrapper {
-            display: none !important;
-          }
-          .explore-btn-wrap {
-            display: none !important;
-          }
         }
 
         .blob-icon-wrapper { 
@@ -260,6 +228,74 @@ const Services = () => {
           margin: 0; 
           opacity: 0.9;
         }
+
+        /* --- MOBILE OVERRIDES --- */
+        @media (max-width: 768px) {
+          /* Target the Link wrapper (direct flex child) for sizing */
+          .services-grid-new > a {
+            flex: 0 0 80% !important;
+            scroll-snap-align: center !important;
+            max-width: 80vw !important;
+            height: 200px !important;
+            display: block !important;
+          }
+          .modern-service-card {
+            min-height: 200px !important;
+            height: 100% !important;
+            border-radius: 16px !important;
+            background: #ebeae4 !important;
+            border: 1px solid rgba(0, 0, 0, 0.04) !important;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
+          }
+          .modern-service-card:hover {
+            transform: none !important;
+            background: #ebeae4 !important;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
+          }
+          .card-top-header {
+            top: 1.2rem !important;
+            left: 1.5rem !important;
+            right: 1.5rem !important;
+          }
+          .modern-service-card:hover .card-top-header {
+            opacity: 1 !important;
+          }
+          .card-giant-text {
+            font-size: 1.3rem !important;
+            text-align: left !important;
+            left: 1.5rem !important;
+            transform: translate(0, -50%) !important;
+            width: auto !important;
+          }
+          .modern-service-card:hover .card-giant-text {
+            left: 1.5rem !important;
+            transform: translate(0, -50%) !important;
+            opacity: 1 !important;
+          }
+          .card-bottom-cta {
+            bottom: 1.2rem !important;
+            right: 1.5rem !important;
+            width: 34px !important;
+            height: 34px !important;
+          }
+          .card-bottom-cta svg {
+            width: 14px !important;
+            height: 14px !important;
+          }
+          .modern-service-card:hover .card-bottom-cta {
+            background-color: transparent !important;
+            border-color: rgba(0,0,0,0.08) !important;
+            transform: none !important;
+          }
+          .modern-service-card:hover .cta-arrow-icon {
+            color: rgba(0,0,0,0.5) !important;
+            transform: none !important;
+          }
+          .card-hover-content {
+            display: none !important;
+          }
+        }
+
       `}</style>
     </>
   );

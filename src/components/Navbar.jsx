@@ -106,9 +106,21 @@ const Navbar = () => {
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isNavigating, setIsNavigating] = useState(false);
     const router = useRouter();
     const location = { pathname: usePathname() };
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth <= 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+
+    useEffect(() => {
+        setIsNavigating(false);
+    }, [location.pathname]);
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -276,6 +288,11 @@ const Navbar = () => {
                             <Link
                                 key={item}
                                 href={PAGE_LINKS[item]}
+                                onClick={() => {
+                                    if (location.pathname !== PAGE_LINKS[item]) {
+                                        setIsNavigating(true);
+                                    }
+                                }}
                                 onMouseEnter={() => setHoveredIndex(index)}
                                 onMouseLeave={() => setHoveredIndex(null)}
                                 style={{
@@ -400,7 +417,12 @@ const Navbar = () => {
                                     <Link
                                         key={item}
                                         href={PAGE_LINKS[item]}
-                                        onClick={() => setTimeout(() => setIsOpen(false), 150)}
+                                        onClick={() => {
+                                            if (location.pathname !== PAGE_LINKS[item]) {
+                                                setIsNavigating(true);
+                                            }
+                                            setTimeout(() => setIsOpen(false), 150);
+                                        }}
                                         style={{
                                             width: '100%',
                                             padding: '1.4rem 0',
@@ -445,6 +467,29 @@ const Navbar = () => {
                             </motion.div>
                         </Link>
                     </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Navigation Loading Progress Bar */}
+            <AnimatePresence>
+                {isNavigating && (
+                    <motion.div
+                        initial={{ scaleX: 0, opacity: 1 }}
+                        animate={{ scaleX: 1, opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 2, ease: "linear" }}
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            height: '3px',
+                            backgroundColor: '#a78bfa',
+                            transformOrigin: 'left',
+                            zIndex: 9999,
+                            boxShadow: '0 0 10px #a78bfa'
+                        }}
+                    />
                 )}
             </AnimatePresence>
         </>

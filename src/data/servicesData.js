@@ -6,6 +6,7 @@ const whatsappVideoPortfolio = '/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.m
 const video0609 = '/video/0609-copy.mp4';
 const banarasVideo = '/video/Banaras2.mp4';
 const dukeVideo = '/video/Duke250.mp4';
+const video0617 = '/video/0617 (2).mp4';
 
 /* ── Cloudinary Video URLs ────────────────────────────────────────── */
 const carSpaVideo = "https://res.cloudinary.com/dqauqcgli/video/upload/v1781350012/talentella_portfolio/esbp2dmjr8ik1md9czsl.mp4";
@@ -380,6 +381,16 @@ export const servicesData = [
         category: 'VIDEO SHOOTING',
         content: dukeVideo,
         alt: 'Duke 250 dynamic video — automotive video production by TalentElla'
+      },
+      { 
+        id: 'sm17',
+        orientation: 'portrait',
+        title: '0617 Creative Project', 
+        description: 'Dynamic visual presentation with aesthetic grading.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: video0617,
+        alt: '0617 creative video production by TalentElla'
       }
     ],
     plans: [
