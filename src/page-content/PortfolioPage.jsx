@@ -155,16 +155,20 @@ const RemainingWork = () => (
         <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
         <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
       </motion.div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: '2rem' }}>
-        {remainingFeatured.map((p, i) => {
+      <div style={{ overflow: 'hidden', width: '100%', paddingBottom: '2rem', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', paddingLeft: 'max(5%, calc(50vw - 700px))', paddingRight: 'max(5%, calc(50vw - 700px))' }}>
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+          style={{ display: 'flex', gap: '2rem', width: 'max-content' }}
+        >
+        {[...remainingFeatured, ...remainingFeatured].map((p, i) => {
           const catColor = categoryColors[p.category] || '#aa3bff';
           return (
-            <motion.a key={i} href={p.link} target="_blank" rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: i * 0.1, duration: 0.5 }} whileHover={{ y: -8 }}
-              style={{ aspectRatio: '4/3', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', position: 'relative', display: 'block', textDecoration: 'none' }}
+            <motion.a key={`${p.id || i}-${i}`} href={p.link} target="_blank" rel="noopener noreferrer"
+              whileHover={{ y: -8 }}
+              style={{ width: 'min(85vw, 350px)', flexShrink: 0, aspectRatio: '4/3', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', position: 'relative', display: 'block', textDecoration: 'none' }}
             >
-              <img src={p.image?.src || p.image} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={p.image?.src || p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
                 <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
                   {p.category}
@@ -174,6 +178,7 @@ const RemainingWork = () => (
             </motion.a>
           );
         })}
+        </motion.div>
       </div>
     </div>
   </section>
@@ -444,15 +449,22 @@ const PortfolioPage = () => {
                 {landscapeVideos.length > 0 && (
                   <div style={{ marginBottom: isMobile ? '3rem' : '4rem' }}>
                     <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Cinematic & Landscape</h3>
-                    <div style={{
-                      display: 'grid',
-                      gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)',
-                      gap: isMobile ? '1rem' : '1.5rem',
-                      alignItems: 'start',
-                    }}>
-                      {landscapeVideos.map((p, i) => (
-                        <PortfolioCard key={p.id || i} p={p} index={i} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
-                      ))}
+                    <div style={{ overflow: 'hidden', width: '100%', paddingBottom: '1rem', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', paddingLeft: 'max(5%, calc(50vw - 700px))', paddingRight: 'max(5%, calc(50vw - 700px))' }}>
+                      <motion.div
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{ ease: "linear", duration: 25, repeat: Infinity }}
+                        style={{
+                          display: 'flex',
+                          gap: isMobile ? '1rem' : '1.5rem',
+                          width: 'max-content',
+                        }}
+                      >
+                        {[...landscapeVideos, ...landscapeVideos].map((p, i) => (
+                          <div key={`${p.id || i}-${i}`} style={{ width: isMobile ? '85vw' : '400px', flexShrink: 0 }}>
+                            <PortfolioCard p={p} index={i} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
+                          </div>
+                        ))}
+                      </motion.div>
                     </div>
                   </div>
                 )}

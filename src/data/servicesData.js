@@ -393,6 +393,16 @@ export const servicesData = [
         category: 'VIDEO SHOOTING',
         content: banarasVideo,
         alt: 'Banaras cinematic video — travel and culture production by TalentElla'
+      },
+      { 
+        id: 'sm18',
+        orientation: 'landscape',
+        title: 'NGF Final Cut', 
+        description: 'Creative video production showcasing brand excellence.', 
+        type: 'video',
+        category: 'VIDEO EDITING',
+        content: '/video/NGF Final Cut.mp4',
+        alt: 'NGF Final Cut video production by TalentElla'
       }
     ],
     plans: [
