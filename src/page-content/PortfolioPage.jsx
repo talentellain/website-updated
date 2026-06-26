@@ -371,21 +371,31 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
       }}
     >
       {isVideo && isMobile ? (
-        <div style={{
-          width: '100%',
-          height: '100%',
-          background: `linear-gradient(135deg, #080611 0%, ${catColor}18 100%)`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
+        <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+          <video
+            src={p.content}
+            muted
+            playsInline
+            preload="metadata"
+            onLoadedMetadata={(e) => handleDimensions(e.target.videoWidth, e.target.videoHeight)}
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
           <div style={{
-            width: 48, height: 48, borderRadius: '50%',
-            backgroundColor: `${catColor}20`, backdropFilter: 'blur(8px)',
-            border: `1px solid ${catColor}50`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}>
-            <Play size={18} color={catColor} fill={catColor} style={{ marginLeft: 2 }} />
+            <div style={{
+              width: 48, height: 48, borderRadius: '50%',
+              backgroundColor: `${catColor}20`, backdropFilter: 'blur(8px)',
+              border: `1px solid ${catColor}50`,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <Play size={18} color={catColor} fill={catColor} style={{ marginLeft: 2 }} />
+            </div>
           </div>
         </div>
       ) : isVideo ? (
