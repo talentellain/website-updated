@@ -401,7 +401,7 @@ export const servicesData = [
         description: 'Creative video production showcasing brand excellence.', 
         type: 'video',
         category: 'VIDEO EDITING',
-        content: '/video/NGF Final Cut.mp4',
+        content: '/video/ngf-final-cut.mp4',
         alt: 'NGF Final Cut video production by TalentElla'
       }
     ],

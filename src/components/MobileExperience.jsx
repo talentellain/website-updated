@@ -81,7 +81,7 @@ const MobileExperience = () => {
                 height: 'auto', 
                 maxHeight: isMobile ? 'none' : '150vh', 
                 objectFit: 'contain',
-                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.8))'
+                filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.08))'
               }} 
             />
           </motion.div>
@@ -119,7 +119,7 @@ const MobileExperience = () => {
                 height: 'auto', 
                 maxHeight: isMobile ? 'none' : '160vh', 
                 objectFit: 'contain',
-                filter: 'drop-shadow(0 40px 80px rgba(0,0,0,0.8))'
+                filter: 'drop-shadow(0 25px 50px rgba(0,0,0,0.12))'
               }} 
             />
           </motion.div>
@@ -159,7 +159,7 @@ const MobileExperience = () => {
                 height: 'auto', 
                 maxHeight: isMobile ? 'none' : '150vh',
                 objectFit: 'contain',
-                filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.8))'
+                filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.08))'
               }} 
             />
           </motion.div>

@@ -148,41 +148,142 @@ const HorizontalWork = () => {
   );
 };
 
-const RemainingWork = () => (
-  <section style={{ padding: '10vh 5%', backgroundColor: '#000' }}>
-    <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-      <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-        <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
-        <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
-      </motion.div>
-      <div style={{ overflow: 'hidden', width: '100%', paddingBottom: '2rem', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', paddingLeft: 'max(5%, calc(50vw - 700px))', paddingRight: 'max(5%, calc(50vw - 700px))' }}>
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ ease: "linear", duration: 30, repeat: Infinity }}
-          style={{ display: 'flex', gap: '2rem', width: 'max-content' }}
-        >
-        {[...remainingFeatured, ...remainingFeatured].map((p, i) => {
-          const catColor = categoryColors[p.category] || '#aa3bff';
-          return (
-            <motion.a key={`${p.id || i}-${i}`} href={p.link} target="_blank" rel="noopener noreferrer"
-              whileHover={{ y: -8 }}
-              style={{ width: 'min(85vw, 350px)', flexShrink: 0, aspectRatio: '4/3', backgroundColor: 'rgba(255,255,255,0.02)', borderRadius: '16px', border: '1px solid rgba(255,255,255,0.05)', overflow: 'hidden', position: 'relative', display: 'block', textDecoration: 'none' }}
-            >
-              <img src={p.image?.src || p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
-                <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
-                  {p.category}
-                </span>
-                <h4 style={{ margin: '0.2rem 0 0', fontWeight: 800, fontSize: '1.15rem', color: 'white' }}>{p.title}</h4>
-              </div>
-            </motion.a>
-          );
-        })}
+const RemainingWork = () => {
+  const containerRef = useRef(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const isDragging = useRef(false);
+
+  const handleMouseDown = (e) => {
+    setIsMouseDown(true);
+    isDragging.current = false;
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseDown(false);
+    setIsHovered(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMouseDown) return;
+    e.preventDefault();
+    isDragging.current = true;
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 1.8; // scroll speed multiplier
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleLinkClick = (e) => {
+    if (isDragging.current) {
+      e.preventDefault();
+    }
+  };
+
+  const handleScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const halfWidth = container.scrollWidth / 2;
+    if (container.scrollLeft >= halfWidth) {
+      container.scrollLeft -= halfWidth;
+    } else if (container.scrollLeft <= 0) {
+      container.scrollLeft += halfWidth;
+    }
+  };
+
+  useEffect(() => {
+    let animationFrameId;
+    const speed = 0.8; // pixels per frame
+
+    const tick = () => {
+      const container = containerRef.current;
+      if (container && !isMouseDown && !isHovered) {
+        container.scrollLeft += speed;
+      }
+      animationFrameId = requestAnimationFrame(tick);
+    };
+
+    animationFrameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isMouseDown, isHovered]);
+
+  return (
+    <section style={{ padding: '10vh 5%', backgroundColor: '#000' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
+          <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
+          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
         </motion.div>
+        <div 
+          ref={containerRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setIsHovered(true)}
+          onScroll={handleScroll}
+          style={{ 
+            overflowX: 'auto', 
+            width: '100%', 
+            paddingBottom: '2rem', 
+            marginLeft: 'calc(-50vw + 50%)', 
+            marginRight: 'calc(-50vw + 50%)', 
+            paddingLeft: 'max(5%, calc(50vw - 700px))', 
+            paddingRight: 'max(5%, calc(50vw - 700px))',
+            cursor: isMouseDown ? 'grabbing' : 'grab',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            WebkitOverflowScrolling: 'touch'
+          }}
+        >
+          <div style={{ display: 'flex', gap: '2rem', width: 'max-content' }}>
+            {[...remainingFeatured, ...remainingFeatured].map((p, i) => {
+              const catColor = categoryColors[p.category] || '#aa3bff';
+              return (
+                <motion.a 
+                  key={`${p.id || i}-${i}`} 
+                  href={p.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={handleLinkClick}
+                  whileHover={{ y: -8 }}
+                  style={{ 
+                    width: 'min(85vw, 350px)', 
+                    flexShrink: 0, 
+                    aspectRatio: '4/3', 
+                    backgroundColor: 'rgba(255,255,255,0.02)', 
+                    borderRadius: '16px', 
+                    border: '1px solid rgba(255,255,255,0.05)', 
+                    overflow: 'hidden', 
+                    position: 'relative', 
+                    display: 'block', 
+                    textDecoration: 'none',
+                    userSelect: 'none'
+                  }}
+                >
+                  <img src={p.image?.src || p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
+                    <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
+                      {p.category}
+                    </span>
+                    <h4 style={{ margin: '0.2rem 0 0', fontWeight: 800, fontSize: '1.15rem', color: 'white' }}>{p.title}</h4>
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
   const containerRef = useRef(null);
@@ -342,6 +443,109 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
   );
 };
 
+const LandscapeMarquee = ({ videos, setSelectedVideo, isMobile }) => {
+  const containerRef = useRef(null);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const isDragging = useRef(false);
+
+  const handleMouseDown = (e) => {
+    setIsMouseDown(true);
+    isDragging.current = false;
+    setStartX(e.pageX - containerRef.current.offsetLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsMouseDown(false);
+    setIsHovered(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMouseDown) return;
+    e.preventDefault();
+    isDragging.current = true;
+    const x = e.pageX - containerRef.current.offsetLeft;
+    const walk = (x - startX) * 1.8;
+    containerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleScroll = () => {
+    const container = containerRef.current;
+    if (!container) return;
+    const halfWidth = container.scrollWidth / 2;
+    if (container.scrollLeft >= halfWidth) {
+      container.scrollLeft -= halfWidth;
+    } else if (container.scrollLeft <= 0) {
+      container.scrollLeft += halfWidth;
+    }
+  };
+
+  useEffect(() => {
+    let animationFrameId;
+    const speed = 0.8;
+
+    const tick = () => {
+      const container = containerRef.current;
+      if (container && !isMouseDown && !isHovered) {
+        container.scrollLeft += speed;
+      }
+      animationFrameId = requestAnimationFrame(tick);
+    };
+
+    animationFrameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isMouseDown, isHovered]);
+
+  return (
+    <div 
+      ref={containerRef}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={handleMouseLeave}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onScroll={handleScroll}
+      style={{ 
+        overflowX: 'auto', 
+        width: '100%', 
+        paddingBottom: '1rem', 
+        marginLeft: 'calc(-50vw + 50%)', 
+        marginRight: 'calc(-50vw + 50%)', 
+        paddingLeft: 'max(5%, calc(50vw - 700px))', 
+        paddingRight: 'max(5%, calc(50vw - 700px))',
+        cursor: isMouseDown ? 'grabbing' : 'grab',
+        scrollbarWidth: 'none',
+        msOverflowStyle: 'none',
+        WebkitOverflowScrolling: 'touch'
+      }}
+    >
+      <div style={{ display: 'flex', gap: isMobile ? '1rem' : '1.5rem', width: 'max-content' }}>
+        {[...videos, ...videos].map((p, i) => (
+          <div 
+            key={`${p.id || i}-${i}`} 
+            style={{ width: isMobile ? '85vw' : '400px', flexShrink: 0 }}
+            onClickCapture={(e) => {
+              if (isDragging.current) {
+                e.stopPropagation();
+                e.preventDefault();
+              }
+            }}
+          >
+            <PortfolioCard p={p} index={i} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const VIDEO_CATEGORIES = ['ALL', 'INSTAGRAM REELS', 'VIDEO SHOOTING', 'VIDEO EDITING', 'SMM CAMPAIGN'];
 
 const PortfolioPage = () => {
@@ -449,23 +653,7 @@ const PortfolioPage = () => {
                 {landscapeVideos.length > 0 && (
                   <div style={{ marginBottom: isMobile ? '3rem' : '4rem' }}>
                     <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Cinematic & Landscape</h3>
-                    <div style={{ overflow: 'hidden', width: '100%', paddingBottom: '1rem', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', paddingLeft: 'max(5%, calc(50vw - 700px))', paddingRight: 'max(5%, calc(50vw - 700px))' }}>
-                      <motion.div
-                        animate={{ x: ["0%", "-50%"] }}
-                        transition={{ ease: "linear", duration: 25, repeat: Infinity }}
-                        style={{
-                          display: 'flex',
-                          gap: isMobile ? '1rem' : '1.5rem',
-                          width: 'max-content',
-                        }}
-                      >
-                        {[...landscapeVideos, ...landscapeVideos].map((p, i) => (
-                          <div key={`${p.id || i}-${i}`} style={{ width: isMobile ? '85vw' : '400px', flexShrink: 0 }}>
-                            <PortfolioCard p={p} index={i} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
-                          </div>
-                        ))}
-                      </motion.div>
-                    </div>
+                    <LandscapeMarquee videos={landscapeVideos} setSelectedVideo={setSelectedVideo} isMobile={isMobile} />
                   </div>
                 )}
 

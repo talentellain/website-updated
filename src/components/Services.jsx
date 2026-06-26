@@ -105,30 +105,22 @@ const Services = () => {
         @media (min-width: 769px) { :root { --mobile-rad: borderRad; } }
 
         .services-container-inner { padding: 12vh 2% 8vh; }
-        @media (max-width: 768px) { .services-container-inner { padding: 8vh 2.5% 6vh !important; } }
+        @media (max-width: 768px) { .services-container-inner { padding: 3vh 4% 1vh !important; } }
 
         .services-grid-new { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vh; width: 100%; }
         @media (max-width: 1200px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); gap: 2vh; } }
         
-        /* Mobile Horizontal Scroll */
+        /* Mobile Vertical Stack */
         @media (max-width: 768px) { 
           .services-grid-new { 
             display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            overflow-x: auto !important;
-            scroll-snap-type: x mandatory !important;
-            gap: 1.2rem !important;
-            width: 100vw !important;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 0 1.5rem 2rem 1.5rem !important;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;
+            flex-direction: column !important;
+            gap: 0.8rem !important;
+            width: 100% !important;
+            padding: 0 1rem 2rem 1rem !important;
           }
-          .services-grid-new::-webkit-scrollbar {
-            display: none;
+          .services-header {
+            margin-bottom: 1.5rem !important;
           }
         }
 
@@ -233,14 +225,12 @@ const Services = () => {
         @media (max-width: 768px) {
           /* Target the Link wrapper (direct flex child) for sizing */
           .services-grid-new > a {
-            flex: 0 0 80% !important;
-            scroll-snap-align: center !important;
-            max-width: 80vw !important;
-            height: 200px !important;
+            width: 100% !important;
+            height: 130px !important;
             display: block !important;
           }
           .modern-service-card {
-            min-height: 200px !important;
+            min-height: 130px !important;
             height: 100% !important;
             border-radius: 16px !important;
             background: #ebeae4 !important;
@@ -253,34 +243,35 @@ const Services = () => {
             box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
           }
           .card-top-header {
-            top: 1.2rem !important;
-            left: 1.5rem !important;
-            right: 1.5rem !important;
+            top: 0.7rem !important;
+            left: 1.2rem !important;
+            right: 1.2rem !important;
           }
           .modern-service-card:hover .card-top-header {
             opacity: 1 !important;
           }
           .card-giant-text {
-            font-size: 1.3rem !important;
+            font-size: 1.1rem !important;
             text-align: left !important;
-            left: 1.5rem !important;
-            transform: translate(0, -50%) !important;
+            left: 1.2rem !important;
+            transform: translate(0, -35%) !important;
             width: auto !important;
+            top: 55% !important;
           }
           .modern-service-card:hover .card-giant-text {
-            left: 1.5rem !important;
-            transform: translate(0, -50%) !important;
+            left: 1.2rem !important;
+            transform: translate(0, -35%) !important;
             opacity: 1 !important;
           }
           .card-bottom-cta {
-            bottom: 1.2rem !important;
-            right: 1.5rem !important;
-            width: 34px !important;
-            height: 34px !important;
+            bottom: 0.7rem !important;
+            right: 1.2rem !important;
+            width: 28px !important;
+            height: 28px !important;
           }
           .card-bottom-cta svg {
-            width: 14px !important;
-            height: 14px !important;
+            width: 12px !important;
+            height: 12px !important;
           }
           .modern-service-card:hover .card-bottom-cta {
             background-color: transparent !important;
