@@ -64,7 +64,7 @@ const HorizontalWork = () => {
   }, [scrollYProgress]);
 
   return (
-    <section ref={targetRef} style={{ height: '300vh', position: 'relative', backgroundColor: '#000' }}>
+    <section ref={targetRef} style={{ height: '300vh', position: 'relative', background: 'radial-gradient(circle at 20% 30%, rgba(170, 59, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(0, 210, 255, 0.08) 0%, transparent 50%), #0a0a0c' }}>
       <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <motion.div style={{ x, display: 'flex', gap: isMobile ? '4vw' : '4vw', padding: '0 5%' }}>
           {top3Featured.map((project, i) => (
@@ -215,7 +215,7 @@ const RemainingWork = () => {
   }, [isMouseDown, isHovered]);
 
   return (
-    <section style={{ padding: '10vh 5%', backgroundColor: '#000' }}>
+    <section style={{ padding: '10vh 5%', background: 'radial-gradient(circle at 80% 20%, rgba(170, 59, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(0, 210, 255, 0.06) 0%, transparent 50%), #0a0a0c', borderTop: '1px solid rgba(255,255,255,0.03)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
           <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
