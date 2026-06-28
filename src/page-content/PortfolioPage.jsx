@@ -2,7 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence, useInView } from 'framer-motion';
-import { ArrowUpRight, Play, X } from 'lucide-react';
+import Image from 'next/image';
+import { ArrowUpRight, Play, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 import { servicesData } from '../data/servicesData';
@@ -12,13 +13,15 @@ import k72Img from '../assets/K72.png';
 const allFeatured = [
   { id: 1, title: 'Symetra Main', category: 'ENTERPRISE', image: '/projects/image copy.png', link: 'https://www.simetratech.com' },
   { id: 2, title: 'Zobiit', category: 'WEB DEVELOPMENT', image: '/projects/zobiit.png', link: 'https://zobiit.com' },
-  { id: 3, title: 'Digniteq', category: 'BRAND IDENTITY', image: '/projects/digniteq.png', link: 'https://www.digniteq.in' },
-  { id: 4, title: 'Thrifty Clothing', category: 'WEB DEVELOPMENT', image: '/projects/image.png', link: 'https://thrifty-clothing-frontend.vercel.app/home' },
-  { id: 5, title: 'K27 Animation', category: 'BRAND IDENTITY', image: k72Img, link: 'https://react-animated-web-l9i8.vercel.app/' },
-  { id: 6, title: 'Adidas Concept', category: 'MOTION DESIGN', image: '/projects/addidas.png', link: 'https://addidas-animated.vercel.app/' },
-  { id: 7, title: 'One Piece', category: 'E-COMMERCE', image: onepieceImg, link: 'https://one-piece-eight-henna.vercel.app/' },
-  { id: 8, title: 'Astro Portfolio', category: 'CREATIVE DEV', image: '/projects/astro-portfolio.png', link: 'https://astro-portfolio-opal-ten.vercel.app/' },
-  { id: 9, title: 'Ring Portfolio', category: 'UX/UI DESIGN', image: '/projects/rig.png', link: 'https://ring-portfolio.vercel.app/' },
+  { id: 3, title: 'One Piece OG', category: 'E-COMMERCE', image: '/thubnail-website/image.png', link: 'https://one-piece-og.vercel.app/' },
+  { id: 4, title: 'Trenvity', category: 'CREATIVE DEV', image: '/thubnail-website/image copy.png', link: 'https://trenvity.vercel.app/' },
+  { id: 5, title: 'Thrifty Clothing', category: 'WEB DEVELOPMENT', image: '/projects/image.png', link: 'https://thrifty-clothing-frontend.vercel.app/home' },
+  { id: 6, title: 'K27 Animation', category: 'BRAND IDENTITY', image: k72Img, link: 'https://react-animated-web-l9i8.vercel.app/' },
+  { id: 7, title: 'Adidas Concept', category: 'MOTION DESIGN', image: '/projects/addidas.png', link: 'https://addidas-animated.vercel.app/' },
+  { id: 8, title: 'One Piece', category: 'E-COMMERCE', image: onepieceImg, link: 'https://one-piece-eight-henna.vercel.app/' },
+  { id: 9, title: 'Astro Portfolio', category: 'CREATIVE DEV', image: '/projects/astro-portfolio.png', link: 'https://astro-portfolio-opal-ten.vercel.app/' },
+  { id: 10, title: 'Ring Portfolio', category: 'UX/UI DESIGN', image: '/projects/rig.png', link: 'https://ring-portfolio.vercel.app/' },
+  { id: 11, title: 'Digniteq', category: 'BRAND IDENTITY', image: '/projects/digniteq.png', link: 'https://www.digniteq.in' },
 ];
 
 const categoryColors = {
@@ -35,8 +38,8 @@ const categoryColors = {
   'SMM CAMPAIGN': '#ffcc00',
 };
 
-const top3Featured = allFeatured.slice(0, 3);
-const remainingFeatured = allFeatured.slice(3);
+const top4Featured = allFeatured.slice(0, 4);
+const remainingFeatured = allFeatured.slice(4);
 
 const HorizontalWork = () => {
   const targetRef = useRef(null);
@@ -52,22 +55,36 @@ const HorizontalWork = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const scrollDistance = isMobile ? '-190vw' : '-148vw';
-  const x = useTransform(scrollYProgress, [0, 1], ['0vw', scrollDistance]);
+  const scrollDistance = isMobile ? '-279vw' : '-222vw';
+  const x = useTransform(progress, [0, 1], ['0vw', scrollDistance]);
 
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((v) => {
-      const idx = Math.round(v * (top3Featured.length - 1));
-      setActiveIndex(Math.min(idx, top3Featured.length - 1));
+    const unsubscribe = progress.onChange((v) => {
+      const idx = Math.round(v * (top4Featured.length - 1));
+      setActiveIndex(Math.min(idx, top4Featured.length - 1));
     });
     return () => unsubscribe();
-  }, [scrollYProgress]);
+  }, [progress]);
+
+  const activeProject = top4Featured[activeIndex] || top4Featured[0];
+  const activeColor = categoryColors[activeProject.category] || '#aa3bff';
 
   return (
-    <section ref={targetRef} style={{ height: '300vh', position: 'relative', background: 'radial-gradient(circle at 20% 30%, rgba(170, 59, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(0, 210, 255, 0.08) 0%, transparent 50%), #0a0a0c' }}>
-      <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
+    <section ref={targetRef} style={{ height: '300vh', position: 'relative', background: '#0a0a0c' }}>
+      {/* Dynamic Ambient Glow */}
+      <div 
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: `radial-gradient(circle at ${isMobile ? '50% 30%' : '30% 40%'}, ${activeColor}1e 0%, transparent 65%), radial-gradient(circle at ${isMobile ? '50% 70%' : '75% 60%'}, ${activeColor}10 0%, transparent 50%)`,
+          transition: 'background 1s cubic-bezier(0.2, 0.8, 0.2, 1)',
+          pointerEvents: 'none',
+          zIndex: 0
+        }} 
+      />
+      <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden', zIndex: 1 }}>
         <motion.div style={{ x, display: 'flex', gap: isMobile ? '4vw' : '4vw', padding: '0 5%' }}>
-          {top3Featured.map((project, i) => (
+          {top4Featured.map((project, i) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
@@ -80,31 +97,38 @@ const HorizontalWork = () => {
                 height: isMobile ? '60vw' : '75vh',
                 width: '100%',
                 overflow: 'hidden',
-                borderRadius: isMobile ? '16px' : '20px',
-                border: activeIndex === i ? `1px solid ${categoryColors[project.category]}44` : '1px solid rgba(255,255,255,0.06)',
-                boxShadow: activeIndex === i ? `0 20px 60px ${categoryColors[project.category]}22` : 'none',
-                transition: 'all 0.5s ease',
+                borderRadius: isMobile ? '16px' : '24px',
+                border: activeIndex === i ? `1px solid ${categoryColors[project.category]}55` : '1px solid rgba(255,255,255,0.06)',
+                boxShadow: activeIndex === i ? `0 30px 70px ${categoryColors[project.category]}22` : 'none',
+                transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
               }}>
-                <motion.img
-                  whileHover={isMobile ? {} : { scale: 1.08 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  src={project.image?.src || project.image}
-                  alt={project.title}
-                  loading="lazy"
-                  decoding="async"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                />
+                <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
+                  <motion.div
+                    whileHover={isMobile ? {} : { scale: 1.05 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ position: 'relative', width: '100%', height: '100%' }}
+                  >
+                    <Image
+                      src={project.image?.src || project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 85vw, 70vw"
+                      style={{ objectFit: 'cover' }}
+                      priority={i === 0}
+                    />
+                  </motion.div>
+                </div>
                 <div style={{
                   position: 'absolute', inset: 0,
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 40%, transparent 100%)',
+                  background: 'linear-gradient(to top, rgba(10,10,12,0.98) 0%, rgba(10,10,12,0.4) 50%, transparent 100%)',
                   display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: isMobile ? '2rem 1.5rem' : '4rem',
                 }}>
                   <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }}>
                     <div style={{
                       display: 'inline-flex', alignItems: 'center',
                       padding: '0.4rem 1.2rem', borderRadius: '100px',
-                      backgroundColor: `${categoryColors[project.category]}15`,
-                      backdropFilter: 'blur(12px)', border: `1px solid ${categoryColors[project.category]}55`,
+                      backgroundColor: `${categoryColors[project.category]}1a`,
+                      backdropFilter: 'blur(12px)', border: `1px solid ${categoryColors[project.category]}44`,
                       marginBottom: '1rem',
                     }}>
                       <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: categoryColors[project.category], marginRight: '8px', boxShadow: `0 0 10px ${categoryColors[project.category]}` }} />
@@ -112,20 +136,20 @@ const HorizontalWork = () => {
                         {project.category}
                       </span>
                     </div>
-                    <h3 style={{ fontSize: isMobile ? '2rem' : 'clamp(2.5rem, 4vw, 4.5rem)', color: 'white', fontWeight: 800, margin: '0', letterSpacing: '-0.03em', lineHeight: 1.1 }}>
+                    <h3 style={{ fontSize: isMobile ? '2rem' : 'clamp(2.5rem, 4vw, 4.5rem)', color: 'white', fontWeight: 900, margin: '0', letterSpacing: '-0.03em', lineHeight: 1.1, textShadow: '0 4px 20px rgba(0,0,0,0.5)' }}>
                       {project.title}
                     </h3>
                   </motion.div>
                   <motion.a
                     href={project.link} target="_blank" rel="noopener noreferrer"
-                    whileHover={{ x: 5, backgroundColor: 'rgba(255,255,255,0.15)' }}
+                    whileHover={{ scale: 1.03, backgroundColor: 'rgba(255,255,255,0.12)', boxShadow: `0 0 20px ${categoryColors[project.category]}33` }}
                     style={{
                       display: 'inline-flex', alignItems: 'center', gap: '0.8rem',
                       color: '#fff', fontSize: '0.85rem', fontWeight: 600,
                       textDecoration: 'none', marginTop: '2rem', cursor: 'pointer',
-                      width: 'fit-content', padding: '0.8rem 1.5rem', borderRadius: '100px',
-                      backgroundColor: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(10px)',
-                      border: '1px solid rgba(255,255,255,0.1)', transition: 'all 0.3s ease'
+                      width: 'fit-content', padding: '0.8rem 1.6rem', borderRadius: '100px',
+                      backgroundColor: 'rgba(255,255,255,0.06)', backdropFilter: 'blur(10px)',
+                      border: '1px solid rgba(255,255,255,0.1)', transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
                     }}
                   >
                     View Project
@@ -139,8 +163,8 @@ const HorizontalWork = () => {
           ))}
         </motion.div>
         <div style={{ position: 'absolute', bottom: isMobile ? '1.5rem' : '3rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '0.6rem', zIndex: 10 }}>
-          {top3Featured.map((_, i) => (
-            <motion.div key={i} animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? '#aa3bff' : 'rgba(255,255,255,0.2)' }} style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }} />
+          {top4Featured.map((_, i) => (
+            <motion.div key={i} animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? activeColor : 'rgba(255,255,255,0.2)' }} style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }} />
           ))}
         </div>
       </div>
@@ -155,6 +179,7 @@ const RemainingWork = () => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const isDragging = useRef(false);
+  const scrollTimeoutRef = useRef(null);
 
   const handleMouseDown = (e) => {
     setIsMouseDown(true);
@@ -187,15 +212,21 @@ const RemainingWork = () => {
     }
   };
 
-  const handleScroll = () => {
-    const container = containerRef.current;
-    if (!container) return;
-    const halfWidth = container.scrollWidth / 2;
-    if (container.scrollLeft >= halfWidth) {
-      container.scrollLeft -= halfWidth;
-    } else if (container.scrollLeft <= 0) {
-      container.scrollLeft += halfWidth;
+  const handleArrowClick = (direction) => {
+    setIsHovered(true);
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    
+    if (containerRef.current) {
+      const offset = direction === 'left' ? -382 : 382;
+      containerRef.current.scrollTo({
+        left: containerRef.current.scrollLeft + offset,
+        behavior: 'smooth'
+      });
     }
+
+    scrollTimeoutRef.current = setTimeout(() => {
+      setIsHovered(false);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -205,22 +236,76 @@ const RemainingWork = () => {
     const tick = () => {
       const container = containerRef.current;
       if (container && !isMouseDown && !isHovered) {
-        container.scrollLeft += speed;
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (container.scrollLeft >= maxScroll - 1) {
+          container.scrollLeft = 0; // Wrap back to the beginning
+        } else {
+          container.scrollLeft += speed;
+        }
       }
       animationFrameId = requestAnimationFrame(tick);
     };
 
     animationFrameId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(animationFrameId);
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
   }, [isMouseDown, isHovered]);
 
   return (
     <section style={{ padding: '10vh 5%', background: 'transparent' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
-          <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
-        </motion.div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', gap: '1rem' }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
+          </motion.div>
+          <div style={{ display: 'flex', gap: '0.8rem', flexShrink: 0 }}>
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.08)', borderColor: 'rgba(255, 255, 255, 0.2)' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleArrowClick('left')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                color: 'white',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+              aria-label="Scroll left"
+            >
+              <ChevronLeft size={20} />
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.08)', borderColor: 'rgba(255, 255, 255, 0.2)' }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleArrowClick('right')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '48px',
+                height: '48px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid rgba(255, 255, 255, 0.08)',
+                color: 'white',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+              aria-label="Scroll right"
+            >
+              <ChevronRight size={20} />
+            </motion.button>
+          </div>
+        </div>
         <div 
           ref={containerRef}
           onMouseDown={handleMouseDown}
@@ -228,7 +313,6 @@ const RemainingWork = () => {
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
           onMouseEnter={() => setIsHovered(true)}
-          onScroll={handleScroll}
           style={{ 
             overflowX: 'auto', 
             width: '100%', 
@@ -244,7 +328,7 @@ const RemainingWork = () => {
           }}
         >
           <div style={{ display: 'flex', gap: '2rem', width: 'max-content' }}>
-            {[...remainingFeatured, ...remainingFeatured].map((p, i) => {
+            {remainingFeatured.map((p, i) => {
               const catColor = categoryColors[p.category] || '#aa3bff';
               return (
                 <motion.a 
@@ -268,7 +352,13 @@ const RemainingWork = () => {
                     userSelect: 'none'
                   }}
                 >
-                  <img src={p.image?.src || p.image} alt={p.title} loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', pointerEvents: 'none' }} />
+                  <Image
+                    src={p.image?.src || p.image}
+                    alt={p.title}
+                    fill
+                    sizes="(max-width: 768px) 85vw, 350px"
+                    style={{ objectFit: 'cover', pointerEvents: 'none' }}
+                  />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
                     <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
                       {p.category}
@@ -283,6 +373,18 @@ const RemainingWork = () => {
       </div>
     </section>
   );
+};
+
+const getPosterUrl = (videoUrl) => {
+  if (!videoUrl) return '';
+  if (videoUrl.includes('cloudinary.com')) {
+    let posterUrl = videoUrl.replace(/\.mp4$/, '.jpg');
+    if (posterUrl.includes('/video/upload/')) {
+      posterUrl = posterUrl.replace('/video/upload/', '/video/upload/so_1.0/');
+    }
+    return posterUrl;
+  }
+  return '';
 };
 
 const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
@@ -320,7 +422,7 @@ const HoverVideo = ({ src, isHovered, onDimensionsLoaded }) => {
     <div ref={containerRef} style={{ width: '100%', height: '100%', backgroundColor: '#050505' }}>
       {isInView && (
         <video
-          ref={videoRef} src={src} muted loop playsInline preload="metadata"
+          ref={videoRef} src={src} poster={getPosterUrl(src)} muted loop playsInline preload="metadata"
           onLoadedMetadata={handleLoadedMetadata}
           style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
         />
@@ -374,6 +476,7 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
         <div style={{ width: '100%', height: '100%', position: 'relative' }}>
           <video
             src={p.content}
+            poster={getPosterUrl(p.content)}
             muted
             playsInline
             preload="metadata"
@@ -401,8 +504,12 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
       ) : isVideo ? (
         <HoverVideo src={p.content} isHovered={isHovered} onDimensionsLoaded={handleDimensions} />
       ) : (
-        <img src={imgSrc?.src || imgSrc} alt={projectTitle} loading="lazy" decoding="async"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
+        <Image
+          src={imgSrc?.src || imgSrc}
+          alt={projectTitle}
+          fill
+          sizes="(max-width: 768px) 100vw, 400px"
+          style={{ objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
         />
       )}
 
