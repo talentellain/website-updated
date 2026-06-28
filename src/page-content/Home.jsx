@@ -17,7 +17,7 @@ import AboutSection from '../components/AboutSection';
 import { servicesData, homepageFAQs } from '../data/servicesData';
 
 const Home = () => {
-  const smmPortfolio = servicesData.find(s => s.id === 'social-media-management')?.portfolio || [];
+  const smmPortfolio = (servicesData.find(s => s.id === 'social-media-management')?.portfolio || []).slice(0, 6);
 
   return (
     <main>
