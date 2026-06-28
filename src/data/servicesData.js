@@ -282,6 +282,16 @@ export const servicesData = [
         alt: '0617 creative video production by TalentElla'
       },
       { 
+        id: 'sm19',
+        orientation: 'portrait',
+        title: '0626 Creative Project', 
+        description: 'Dynamic visual presentation with aesthetic grading.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: '/video/0626.mp4',
+        alt: '0626 creative video production by TalentElla'
+      },
+      { 
         id: 'sm2',
         orientation: 'portrait',
         title: 'Fashion Showcase', 
