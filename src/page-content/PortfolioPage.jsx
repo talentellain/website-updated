@@ -215,7 +215,7 @@ const RemainingWork = () => {
   }, [isMouseDown, isHovered]);
 
   return (
-    <section style={{ padding: '10vh 5%', background: 'radial-gradient(circle at 80% 20%, rgba(170, 59, 255, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(0, 210, 255, 0.06) 0%, transparent 50%), #0a0a0c', borderTop: '1px solid rgba(255,255,255,0.03)' }}>
+    <section style={{ padding: '10vh 5%', background: 'transparent' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ marginBottom: '4rem' }}>
           <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
