@@ -3,9 +3,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const formulas = [
-  { label: 'CREATIVITY', color: '#a78bfa' },
+  { label: 'CREATIVITY', color: '#AC58E9' },
   { label: 'PRECISION', color: '#fff' },
-  { label: 'RESULTS', color: '#ffcc00' }
+  { label: 'RESULTS', color: '#AC58E9' }
 ];
 
 const weBring = [
@@ -150,23 +150,23 @@ const WhyTalentElla = () => {
                     }}
                   >
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      {isMobile && <span style={{ fontSize: '0.5rem', color: 'rgba(167,139,250,0.6)', letterSpacing: '0.1em' }}>/WE BRING</span>}
+                      {isMobile && <span style={{ fontSize: '0.5rem', color: 'rgba(172, 88, 233,0.6)', letterSpacing: '0.1em' }}>/WE BRING</span>}
                       <span style={{ fontWeight: 800, color: 'white', fontSize: isMobile ? '0.9rem' : '0.75rem' }}>{item.title}</span>
                     </div>
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      {isMobile && <span style={{ fontSize: '0.5rem', color: 'rgba(167,139,250,0.6)', letterSpacing: '0.1em' }}>/WHY</span>}
+                      {isMobile && <span style={{ fontSize: '0.5rem', color: 'rgba(172, 88, 233,0.6)', letterSpacing: '0.1em' }}>/WHY</span>}
                       <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: isMobile ? '0.85rem' : '0.75rem', lineHeight: 1.4 }}>{item.why}</span>
                     </div>
 
                     <div style={{ display: isMobile ? 'grid' : 'flex', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                        {isMobile && <span style={{ fontSize: '0.5rem', color: 'rgba(167,139,250,0.6)', letterSpacing: '0.1em' }}>/EXPERIENCE</span>}
+                        {isMobile && <span style={{ fontSize: '0.5rem', color: 'rgba(172, 88, 233,0.6)', letterSpacing: '0.1em' }}>/EXPERIENCE</span>}
                         <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: isMobile ? '0.85rem' : '0.75rem' }}>{item.experience}</span>
                       </div>
                       {isMobile && (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                          <span style={{ fontSize: '0.5rem', color: 'rgba(167,139,250,0.6)', letterSpacing: '0.1em' }}>/APPROACH</span>
+                          <span style={{ fontSize: '0.5rem', color: 'rgba(172, 88, 233,0.6)', letterSpacing: '0.1em' }}>/APPROACH</span>
                           <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.85rem', lineHeight: 1.4 }}>{item.approach}</span>
                         </div>
                       )}
@@ -189,7 +189,7 @@ const WhyTalentElla = () => {
                         pointerEvents: 'none',
                         transition: 'all 0.4s ease',
                         zIndex: 10,
-                        background: 'linear-gradient(45deg, #a78bfa, #ffcc00)',
+                        background: 'linear-gradient(45deg, #AC58E9, #AC58E9)',
                         borderRadius: '8px',
                         boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
                       }}></div>

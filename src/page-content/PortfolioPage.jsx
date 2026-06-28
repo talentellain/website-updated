@@ -25,17 +25,17 @@ const allFeatured = [
 ];
 
 const categoryColors = {
-  'E-COMMERCE': '#aa3bff',
-  'BRAND IDENTITY': '#00d2ff',
-  'WEB DEVELOPMENT': '#ffcc00',
-  'ENTERPRISE': '#ff3b3b',
-  'CREATIVE DEV': '#3bffaa',
-  'MOTION DESIGN': '#ff8c3b',
-  'UX/UI DESIGN': '#a78bfa',
-  'INSTAGRAM REELS': '#ff3b8a',
-  'VIDEO SHOOTING': '#00d2ff',
-  'VIDEO EDITING': '#aa3bff',
-  'SMM CAMPAIGN': '#ffcc00',
+  'E-COMMERCE': '#AC58E9',
+  'BRAND IDENTITY': '#AC58E9',
+  'WEB DEVELOPMENT': '#AC58E9',
+  'ENTERPRISE': '#AC58E9',
+  'CREATIVE DEV': '#AC58E9',
+  'MOTION DESIGN': '#AC58E9',
+  'UX/UI DESIGN': '#AC58E9',
+  'INSTAGRAM REELS': '#AC58E9',
+  'VIDEO SHOOTING': '#AC58E9',
+  'VIDEO EDITING': '#AC58E9',
+  'SMM CAMPAIGN': '#AC58E9',
 };
 
 const top4Featured = allFeatured.slice(0, 4);

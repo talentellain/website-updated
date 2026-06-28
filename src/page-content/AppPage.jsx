@@ -127,12 +127,12 @@ const TechMarquee = () => {
               <div key={j} style={{ display: 'flex', alignItems: 'center', cursor: 'default' }}>
                 <span 
                   style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', transition: 'all 0.3s ease' }}
-                  onMouseOver={(e) => { e.target.style.color = '#fff'; e.target.style.WebkitTextStroke = '0px'; e.target.style.textShadow = '0 0 20px rgba(167, 139, 250, 0.5)'; }} 
+                  onMouseOver={(e) => { e.target.style.color = '#fff'; e.target.style.WebkitTextStroke = '0px'; e.target.style.textShadow = '0 0 20px rgba(172, 88, 233, 0.5)'; }} 
                   onMouseOut={(e) => { e.target.style.color = 'transparent'; e.target.style.WebkitTextStroke = '1.5px rgba(255,255,255,0.3)'; e.target.style.textShadow = 'none'; }}
                 >
                   {tech}
                 </span>
-                <span style={{ color: '#a78bfa', margin: '0 3vw', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900 }}>*</span>
+                <span style={{ color: '#AC58E9', margin: '0 3vw', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900 }}>*</span>
               </div>
             ))}
           </div>
@@ -145,12 +145,12 @@ const TechMarquee = () => {
 const ExpertInsightSection = ({ isMobile }) => {
   return (
     <section style={{ padding: isMobile ? '60px 5%' : '100px 8%', backgroundColor: '#050508', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(167,139,250,0.03) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(172, 88, 233,0.03) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
       <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '2.5rem' }}>
-            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#a78bfa', boxShadow: '0 0 15px #a78bfa' }}></div>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#a78bfa', letterSpacing: '0.4em', textTransform: 'uppercase' }}>Expert Perspective</span>
+            <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#AC58E9', boxShadow: '0 0 15px #AC58E9' }}></div>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#AC58E9', letterSpacing: '0.4em', textTransform: 'uppercase' }}>Expert Perspective</span>
           </div>
           <div itemScope itemType="https://schema.org/Answer" itemProp="acceptedAnswer">
             <h2 itemProp="text" style={{ color: 'white', fontSize: 'clamp(1.3rem, 3.5vw, 2.2rem)', lineHeight: 1.5, fontWeight: 500, margin: 0, fontFamily: '"Playfair Display", serif', fontStyle: 'italic' }}>"Building an app isn't just about writing code; it's about crafting an intuitive experience that solves real problems and scales seamlessly with your business. We prioritize human-centric design, robust architecture, and continuous innovation to ensure your product thrives in a highly competitive digital landscape."</h2>
@@ -197,10 +197,10 @@ const ServiceCard = ({ s }) => {
 const RelatedServices = ({ currentId, isMobile }) => {
   const related = servicesData.filter(s => s.id !== currentId);
   return (
-    <section style={{ padding: isMobile ? '80px 5% 20px' : '140px 5% 20px', backgroundColor: '#f5f5f0', color: '#000', textAlign: 'center' }}>
+    <section style={{ padding: isMobile ? '80px 5% 20px' : '140px 5% 20px', backgroundColor: '#000000', color: '#ffffff', textAlign: 'center' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#121212', marginBottom: '1rem' }}>EXPLORE MORE SERVICES</h2>
-        <p style={{ color: '#4a4a4a', fontSize: '1rem', marginBottom: '4rem', fontWeight: 500 }}>Discover more ways we can help you grow your brand.</p>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>EXPLORE MORE SERVICES</h2>
+        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', marginBottom: '4rem', fontWeight: 500 }}>Discover more ways we can help you grow your brand.</p>
         <div className="services-grid-new" style={{ width: '100%' }}>
           {related.map(s => <ServiceCard key={s.id} s={s} />)}
         </div>
@@ -256,7 +256,7 @@ const AppPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15 }}
-                whileHover={isMobile ? {} : { y: -5, backgroundColor: 'rgba(167, 139, 250, 0.08)', borderColor: 'rgba(167, 139, 250, 0.3)' }}
+                whileHover={isMobile ? {} : { y: -5, backgroundColor: 'rgba(172, 88, 233, 0.08)', borderColor: 'rgba(172, 88, 233, 0.3)' }}
                 style={{
                   gridColumn: isMobile ? 'none' : (i === 0 || i === 3 || i === 4) ? 'span 2' : 'span 1',
                   minWidth: isMobile ? '85%' : 'auto',
@@ -275,7 +275,7 @@ const AppPage = () => {
                 }}
               >
                 <div style={{ position: 'absolute', top: '1rem', right: '1.2rem', fontSize: '1.5rem', fontWeight: 900, color: 'rgba(255, 255, 255, 0.08)', lineHeight: 1 }}>0{i + 1}</div>
-                <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(167, 139, 250, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(172, 88, 233, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#AC58E9' }}>
                   <p.icon size={14} />
                 </div>
                 <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'white', marginBottom: '0.2rem', letterSpacing: '-0.01em', textTransform: 'uppercase' }}>{p.label}</h3>
@@ -286,7 +286,7 @@ const AppPage = () => {
           {isMobile && (
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1rem' }}>
               {perks.map((_, i) => (
-                <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(167,139,250,0.3)' }}></div>
+                <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(172, 88, 233,0.3)' }}></div>
               ))}
             </div>
           )}
@@ -309,8 +309,8 @@ const AppPage = () => {
                 style={{
                   backgroundColor: isPopular ? '#080312' : '#050505',
                   borderRadius: '16px',
-                  border: isPopular ? '2px solid #a78bfa' : '1px solid rgba(255,255,255,0.1)',
-                  boxShadow: isPopular ? '0 0 40px rgba(167, 139, 250, 0.15)' : 'none',
+                  border: isPopular ? '2px solid #AC58E9' : '1px solid rgba(255,255,255,0.1)',
+                  boxShadow: isPopular ? '0 0 40px rgba(172, 88, 233, 0.15)' : 'none',
                   padding: isMobile ? '1.2rem 1rem' : '1.5rem 1.5rem',
                   display: 'flex',
                   flexDirection: 'column',
@@ -324,10 +324,10 @@ const AppPage = () => {
                   <div style={{
                     position: 'absolute', top: '-0.8rem', left: '50%', transform: 'translateX(-50%)',
                     padding: '0.3rem 1.2rem', borderRadius: '100px',
-                    background: '#a78bfa',
+                    background: '#AC58E9',
                     color: '#fff', fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.15em',
                     textTransform: 'uppercase', whiteSpace: 'nowrap',
-                    boxShadow: '0 0 20px rgba(167, 139, 250, 0.4)'
+                    boxShadow: '0 0 20px rgba(172, 88, 233, 0.4)'
                   }}>
                     {plan.tag}
                   </div>
@@ -335,7 +335,7 @@ const AppPage = () => {
 
                 <div style={{ marginBottom: '1rem' }}>
                   <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{plan.name}</h3>
-                  <p style={{ color: '#a78bfa', fontSize: '0.65rem', fontWeight: 600, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.subtitle}</p>
+                  <p style={{ color: '#AC58E9', fontSize: '0.65rem', fontWeight: 600, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.subtitle}</p>
                 </div>
 
                 <div style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'baseline' }}>
@@ -344,7 +344,7 @@ const AppPage = () => {
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                  <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: '#a78bfa', boxShadow: '0 0 8px #a78bfa' }} />
+                  <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: '#AC58E9', boxShadow: '0 0 8px #AC58E9' }} />
                   <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{plan.delivery}</span>
                 </div>
 
@@ -357,8 +357,8 @@ const AppPage = () => {
                       <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
                       {plan.features.map((f, j) => (
                         <li key={j} style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                          <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: 'rgba(167,139,250,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                            <Check size={10} color={isPopular ? "#a78bfa" : "#fff"} strokeWidth={3} />
+                          <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: 'rgba(172, 88, 233,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                            <Check size={10} color={isPopular ? "#AC58E9" : "#fff"} strokeWidth={3} />
                           </div>
                           <span style={{ fontWeight: 500 }}>{f}</span>
                         </li>
@@ -367,7 +367,7 @@ const AppPage = () => {
 
                     <div style={{ marginTop: 'auto' }}>
                       <motion.button
-                        whileHover={{ scale: 1.02, backgroundColor: isPopular ? '#c4b5fd' : '#ffffff', color: isPopular ? '#000' : '#000' }}
+                        whileHover={{ scale: 1.02, backgroundColor: isPopular ? '#AC58E9' : '#ffffff', color: isPopular ? '#000' : '#000' }}
                         whileTap={{ scale: 0.98 }}
                         onClick={(e) => {
                           e.stopPropagation();
@@ -382,7 +382,7 @@ const AppPage = () => {
                           padding: '0.6rem 1rem',
                           borderRadius: '8px',
                           border: isPopular ? 'none' : '1px solid rgba(255,255,255,0.1)',
-                          backgroundColor: isPopular ? '#a78bfa' : 'transparent',
+                          backgroundColor: isPopular ? '#AC58E9' : 'transparent',
                           color: isPopular ? '#000' : '#fff',
                           fontWeight: 900,
                           cursor: 'pointer',
@@ -403,7 +403,7 @@ const AppPage = () => {
                 )}
 
                 {isMobile && expandedIndex !== i && (
-                  <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed rgba(255,255,255,0.08)', textAlign: 'center', fontSize: '0.75rem', color: '#a78bfa', fontWeight: 600 }}>
+                  <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed rgba(255,255,255,0.08)', textAlign: 'center', fontSize: '0.75rem', color: '#AC58E9', fontWeight: 600 }}>
                     Tap to view details
                   </div>
                 )}
@@ -418,13 +418,13 @@ const AppPage = () => {
           {/* Left Column: Title & CTA */}
           <div style={{ flex: isMobile ? 'none' : '1.5', width: '100%', position: isMobile ? 'static' : 'sticky', top: '120px', textAlign: isMobile ? 'center' : 'left' }}>
             <h2 style={{ fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, lineHeight: 0.9, color: 'white', margin: '0 0 1.2rem 0', textTransform: 'uppercase', letterSpacing: '-0.04em', wordBreak: isMobile ? 'break-word' : 'normal', overflowWrap: isMobile ? 'break-word' : 'normal', whiteSpace: isMobile ? 'normal' : 'nowrap' }}>
-              QUESTIONS<br /><span style={{ color: '#a78bfa' }}>ANSWERED</span>
+              QUESTIONS<br /><span style={{ color: '#AC58E9' }}>ANSWERED</span>
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '2rem', maxWidth: isMobile ? '100%' : '300px', margin: isMobile ? '0 auto 2rem auto' : '0 0 2rem 0' }}>
               Have a specific query? Our experts are here to provide the clarity you need.
             </p>
             <Link href="/#contact" style={{ textDecoration: 'none' }}>
-              <motion.button whileHover={{ scale: 1.05, backgroundColor: '#c4b5fd' }} style={{ padding: isMobile ? '1rem 2.2rem' : '1rem 2rem', borderRadius: '100px', background: '#a78bfa', color: '#000', border: 'none', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '0.05em', transition: '0.3s ease', margin: isMobile ? '0 auto' : '0' }}>
+              <motion.button whileHover={{ scale: 1.05, backgroundColor: '#AC58E9' }} style={{ padding: isMobile ? '1rem 2.2rem' : '1rem 2rem', borderRadius: '100px', background: '#AC58E9', color: '#000', border: 'none', fontWeight: 800, fontSize: '0.8rem', textTransform: 'uppercase', cursor: 'pointer', letterSpacing: '0.05em', transition: '0.3s ease', margin: isMobile ? '0 auto' : '0' }}>
                 Ask a Question
               </motion.button>
             </Link>
@@ -435,10 +435,10 @@ const AppPage = () => {
             {faqs.map((faq, idx) => (
               <div key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
                 <button onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)} style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: isMobile ? '2.2rem 0' : '2rem 0', background: 'none', border: 'none', cursor: 'pointer', color: 'white', textAlign: 'left' }}>
-                  <h3 style={{ fontSize: isMobile ? '0.9rem' : '0.95rem', fontWeight: 800, margin: 0, color: expandedIndex === idx ? '#a78bfa' : 'white', textTransform: 'uppercase', maxWidth: '85%', transition: '0.3s ease', lineHeight: 1.4 }}>
+                  <h3 style={{ fontSize: isMobile ? '0.9rem' : '0.95rem', fontWeight: 800, margin: 0, color: expandedIndex === idx ? '#AC58E9' : 'white', textTransform: 'uppercase', maxWidth: '85%', transition: '0.3s ease', lineHeight: 1.4 }}>
                     {faq.q}
                   </h3>
-                  <span style={{ fontSize: '1.2rem', color: expandedIndex === idx ? '#a78bfa' : 'rgba(255,255,255,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
+                  <span style={{ fontSize: '1.2rem', color: expandedIndex === idx ? '#AC58E9' : 'rgba(255,255,255,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
                     {expandedIndex === idx ? '−' : '+'}
                   </span>
                 </button>
@@ -463,14 +463,14 @@ const AppPage = () => {
         .services-grid-new { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         @media (max-width: 1024px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .services-grid-new { grid-template-columns: 1fr; } }
-        .modern-service-card { background-color: #ebeae4; min-height: 400px; transition: background-color 0.4s ease; }
+        .modern-service-card { background-color: #1a1a1a; min-height: 400px; transition: background-color 0.4s ease; }
         @media (max-width: 768px) { .modern-service-card { min-height: 250px !important; } }
-        .modern-service-card:hover { background-color: #8763df; }
+        .modern-service-card:hover { background-color: #AC58E9; }
         .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #121212; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; }
         .modern-service-card:hover .card-giant-text { left: 100%; transform: translate(0%,-50%); opacity: 0.05; }
         .card-hover-content { opacity: 0; transform: translateY(20px) scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease; display: flex; flex-direction: column; align-items: center; gap: 1rem; z-index: 5; padding: 0 8%; text-align: center; }
         .modern-service-card:hover .card-hover-content { opacity: 1; transform: translateY(0) scale(1); transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s; }
-        .blob-icon-wrapper { width: 90px; height: 90px; background-color: #ffcc00; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; display: flex; justify-content: center; align-items: center; animation: morph-blob 8s ease-in-out infinite alternate; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .blob-icon-wrapper { width: 90px; height: 90px; background-color: #AC58E9; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; display: flex; justify-content: center; align-items: center; animation: morph-blob 8s ease-in-out infinite alternate; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         @keyframes morph-blob { 0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; } 33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; } 66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; } 100% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; } }
         .card-hover-desc { color: #ffffff; font-size: 0.9rem; font-weight: 600; line-height: 1.5; margin: 0; }
       `}</style>

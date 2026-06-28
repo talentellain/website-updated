@@ -23,19 +23,19 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0, isMobile, minH
       borderRadius: 0,
       backdropFilter: 'none'
     }}
-    whileHover={isMobile ? {} : { backgroundColor: '#121212', borderColor: 'rgba(167, 139, 250, 0.2)' }}
+    whileHover={isMobile ? {} : { backgroundColor: '#121212', borderColor: 'rgba(172, 88, 233, 0.2)' }}
   >
     <div style={{ 
       width: '36px', 
       height: '36px', 
       borderRadius: '10px', 
-      backgroundColor: 'rgba(167, 139, 250, 0.1)', 
+      backgroundColor: 'rgba(172, 88, 233, 0.1)', 
       display: 'flex', 
       alignItems: 'center', 
       justifyContent: 'center',
-      color: '#a78bfa',
+      color: '#AC58E9',
       marginBottom: isMobile ? '1rem' : '1.5rem',
-      border: '1px solid rgba(167, 139, 250, 0.2)'
+      border: '1px solid rgba(172, 88, 233, 0.2)'
     }}>
       <Icon size={16} />
     </div>
@@ -98,7 +98,7 @@ const Features = () => {
             </motion.h2>
             <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginTop: '2rem' }}>
                <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.25rem', fontWeight: 500, margin: 0, maxWidth: '250px' }}>Launch your next project with ease.</p>
-               <ArrowUpRight size={48} color="#a78bfa" strokeWidth={2} />
+               <ArrowUpRight size={48} color="#AC58E9" strokeWidth={2} />
             </div>
           </div>
 

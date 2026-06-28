@@ -74,8 +74,8 @@ const projects = [
 
 const typeColors = {
   'E-Commerce': '#00d2ff',
-  'UX/UI Design': '#a78bfa',
-  'Web Development': '#ffcc00',
+  'UX/UI Design': '#AC58E9',
+  'Web Development': '#AC58E9',
   'AI / SaaS': '#aa3bff',
   'Creative Dev': '#3bffaa',
   'Brand Identity': '#ff3b3b',

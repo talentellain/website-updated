@@ -107,9 +107,9 @@ const PortfolioCard = ({
           cursor: 'pointer',
           borderRadius: '32px',
           overflow: 'hidden',
-          backgroundColor: '#f5f5f5',
-          border: isActive ? '2px solid rgba(114, 38, 255, 0.5)' : '1px solid rgba(0,0,0,0.06)',
-          boxShadow: isActive ? '0 30px 60px rgba(114, 38, 255, 0.2)' : '0 10px 30px rgba(0,0,0,0.08)',
+          backgroundColor: '#121214',
+          border: isActive ? '2px solid rgba(114, 38, 255, 0.5)' : '1px solid rgba(255,255,255,0.08)',
+          boxShadow: isActive ? '0 30px 60px rgba(114, 38, 255, 0.2)' : '0 10px 30px rgba(0,0,0,0.4)',
           rotateX: tiltX,
           rotateY: tiltY,
           transformStyle: 'preserve-3d',
@@ -182,7 +182,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
       minHeight: '55vh', 
       width: '100%',
       padding: '0', 
-      backgroundColor: '#ffffff', 
+      backgroundColor: '#000000', 
       overflow: 'visible',
       display: 'flex',
       alignItems: 'center',
@@ -230,7 +230,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
 
       {/* Navigation Buttons */}
       <motion.button
-        whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.08)' }}
+        whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.08)' }}
         whileTap={{ scale: 0.9 }}
         onClick={handlePrev}
         style={{ 
@@ -241,9 +241,9 @@ const SocialMediaPortfolio = ({ portfolio }) => {
           width: '44px', 
           height: '44px', 
           borderRadius: '50%', 
-          backgroundColor: 'rgba(0,0,0,0.03)', 
-          border: '1px solid rgba(0,0,0,0.1)',
-          color: '#121212',
+          backgroundColor: 'rgba(255,255,255,0.03)', 
+          border: '1px solid rgba(255,255,255,0.1)',
+          color: '#ffffff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -256,7 +256,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
       </motion.button>
 
       <motion.button
-        whileHover={{ scale: 1.1, backgroundColor: 'rgba(0,0,0,0.08)' }}
+        whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.08)' }}
         whileTap={{ scale: 0.9 }}
         onClick={handleNext}
         style={{ 
@@ -267,9 +267,9 @@ const SocialMediaPortfolio = ({ portfolio }) => {
           width: '44px', 
           height: '44px', 
           borderRadius: '50%', 
-          backgroundColor: 'rgba(0,0,0,0.03)', 
-          border: '1px solid rgba(0,0,0,0.1)',
-          color: '#121212',
+          backgroundColor: 'rgba(255,255,255,0.03)', 
+          border: '1px solid rgba(255,255,255,0.1)',
+          color: '#ffffff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

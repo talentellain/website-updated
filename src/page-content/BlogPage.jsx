@@ -9,7 +9,7 @@ import InteractiveHero from '../components/InteractiveHero';
 import { blogPosts, blogCategories } from '../data/blogData';
 
 const catColors = {
-  'Digital Marketing': '#a78bfa',
+  'Digital Marketing': '#AC58E9',
   'Web Development': '#60a5fa',
   'Social Media': '#f472b6',
   'Branding': '#34d399',
@@ -46,7 +46,7 @@ const BlogCard = ({ post, index }) => (
         }}>
           <div style={{
             position: 'absolute', inset: 0,
-            background: `linear-gradient(135deg, ${catColors[post.category] || 'rgba(167,139,250,0.2)'} 0%, transparent 70%)`,
+            background: `linear-gradient(135deg, ${catColors[post.category] || 'rgba(172, 88, 233,0.2)'} 0%, transparent 70%)`,
           }} />
           <div style={{
             position: 'absolute', bottom: '-10%', right: '-5%',
@@ -64,9 +64,9 @@ const BlogCard = ({ post, index }) => (
           <div style={{
             position: 'absolute', top: '1rem', left: '1rem',
             padding: '0.3rem 0.8rem', borderRadius: '100px',
-            background: `${catColors[post.category] || 'rgba(167,139,250,0.15)'}20`,
-            border: `1px solid ${catColors[post.category] || 'rgba(167,139,250,0.25)'}40`,
-            fontSize: '0.55rem', fontWeight: 700, color: catColors[post.category] || '#a78bfa',
+            background: `${catColors[post.category] || 'rgba(172, 88, 233,0.15)'}20`,
+            border: `1px solid ${catColors[post.category] || 'rgba(172, 88, 233,0.25)'}40`,
+            fontSize: '0.55rem', fontWeight: 700, color: catColors[post.category] || '#AC58E9',
             letterSpacing: '0.08em', textTransform: 'uppercase',
           }}>
             {post.category}
@@ -87,7 +87,7 @@ const BlogCard = ({ post, index }) => (
         <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5, margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
           {post.excerpt}
         </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.2rem', color: '#a78bfa', fontSize: '0.75rem', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.2rem', color: '#AC58E9', fontSize: '0.75rem', fontWeight: 600 }}>
           Read More <ArrowUpRight size={12} />
         </div>
       </div>

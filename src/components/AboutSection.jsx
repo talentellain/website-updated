@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 const ArrowDownRightIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 7L17 17M17 17V7M17 17H7" stroke="rgba(167,139,250,0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M7 7L17 17M17 17V7M17 17H7" stroke="rgba(172, 88, 233, 0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
@@ -20,10 +20,10 @@ const StatItem = ({ icon: Icon, value, label, delay }) => (
   >
     <div style={{ 
       width: 44, height: 44, borderRadius: 12, 
-      background: 'rgba(167,139,250,0.08)', 
-      border: '1px solid rgba(167,139,250,0.15)',
+      background: 'rgba(172, 88, 233, 0.08)', 
+      border: '1px solid rgba(172, 88, 233, 0.15)',
       display: 'flex', alignItems: 'center', justifyContent: 'center', 
-      color: '#a78bfa', flexShrink: 0 
+      color: '#AC58E9', flexShrink: 0 
     }}>
       <Icon size={18} />
     </div>
@@ -52,7 +52,7 @@ const AboutSection = () => {
   return (
     <section style={{ backgroundColor: '#000', overflow: 'hidden', position: 'relative' }}>
       {/* Subtle ambient glow */}
-      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(167,139,250,0.03) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(172, 88, 233,0.03) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
 
       <div style={{ padding: isMobile ? '4rem 5%' : '7rem 5%', position: 'relative', zIndex: 2 }}>
 
@@ -68,7 +68,7 @@ const AboutSection = () => {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.5rem' }}>
                 <ArrowDownRightIcon />
-                <span style={{ color: '#a78bfa', fontSize: '1.5rem', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>A LITTLE</span>
+                <span style={{ color: '#AC58E9', fontSize: '1.5rem', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>A LITTLE</span>
               </div>
               <h2 style={{ fontSize: isMobile ? '4rem' : 'clamp(5rem, 7vw, 7rem)', color: 'white', lineHeight: 1, fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400, margin: 0, marginBottom: '2.5rem', letterSpacing: '-0.02em' }}>
                 ABOUT US
@@ -78,8 +78,8 @@ const AboutSection = () => {
 
               {/* Stats Row */}
               <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-                <StatItem icon={Users} value="50+" label="CLIENTS" delay={0} />
-                <StatItem icon={Award} value="120+" label="PROJECTS" delay={0.2} />
+                <StatItem icon={Users} value="25+" label="CLIENTS" delay={0} />
+                <StatItem icon={Award} value="30+" label="PROJECTS" delay={0.2} />
                 <StatItem icon={Briefcase} value="3+" label="YEARS" delay={0.4} />
               </div>
             </div>
@@ -87,7 +87,7 @@ const AboutSection = () => {
             {/* Right Column */}
             <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', paddingTop: isMobile ? '0' : '1rem' }}>
               {!isMobile && (
-                <div style={{ position: 'absolute', top: '-1rem', right: '0', width: '44px', height: '44px', borderRadius: '12px', backgroundColor: 'rgba(167,139,250,0.05)', border: '1px solid rgba(167,139,250,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa' }}>
+                <div style={{ position: 'absolute', top: '-1rem', right: '0', width: '44px', height: '44px', borderRadius: '12px', backgroundColor: 'rgba(172, 88, 233, 0.05)', border: '1px solid rgba(172, 88, 233, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#AC58E9' }}>
                   <ArrowUpRight size={20} />
                 </div>
               )}
@@ -100,8 +100,8 @@ const AboutSection = () => {
               </p>
 
               <Link href="#" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', textDecoration: 'none', alignSelf: 'flex-start' }}>
-                <span style={{ color: '#a78bfa', fontSize: '0.95rem', fontWeight: 600 }}>Read more</span>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1px solid rgba(167,139,250,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#a78bfa', transition: 'all 0.3s ease' }}>
+                <span style={{ color: '#AC58E9', fontSize: '0.95rem', fontWeight: 600 }}>Read more</span>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1px solid rgba(172, 88, 233, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#AC58E9', transition: 'all 0.3s ease' }}>
                   <ArrowUpRight size={14} />
                 </div>
               </Link>
@@ -110,6 +110,7 @@ const AboutSection = () => {
         </div>
 
       </div>
+
 
       <style>{`
         .hide-scrollbar::-webkit-scrollbar { display: none; }

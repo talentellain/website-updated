@@ -9,7 +9,7 @@ const HomeFAQ = ({ faqs }) => {
   if (!faqs || faqs.length === 0) return null;
 
   return (
-    <section id="faq" style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#f5f5f0', borderTop: '1px solid rgba(0,0,0,0.05)' }}>
+    <section id="faq" style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ 
         maxWidth: '1400px', 
         margin: '0 auto', 
@@ -35,7 +35,7 @@ const HomeFAQ = ({ faqs }) => {
             fontSize: '0.65rem', 
             display: 'block', 
             marginBottom: '0.75rem',
-            color: '#8763df'
+            color: '#AC58E9'
           }}>
             Inquiry & Support
           </span>
@@ -43,7 +43,7 @@ const HomeFAQ = ({ faqs }) => {
             fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', 
             fontWeight: 900, 
             lineHeight: 0.9, 
-            color: '#121212', 
+            color: '#ffffff', 
             margin: '0 0 1.2rem 0', 
             textTransform: 'uppercase', 
             letterSpacing: '-0.04em',
@@ -51,10 +51,10 @@ const HomeFAQ = ({ faqs }) => {
             overflowWrap: isMobile ? 'break-word' : 'normal',
             whiteSpace: isMobile ? 'normal' : 'nowrap'
           }}>
-            QUESTIONS<br /><span style={{ color: '#8763df' }}>ANSWERED</span>
+            QUESTIONS<br /><span style={{ color: '#AC58E9' }}>ANSWERED</span>
           </h2>
           <p style={{ 
-            color: '#555', 
+            color: 'rgba(255,255,255,0.6)', 
             fontSize: '0.9rem', 
             lineHeight: 1.5, 
             marginBottom: '2rem', 
@@ -65,11 +65,11 @@ const HomeFAQ = ({ faqs }) => {
           </p>
           <Link href="/#contact" style={{ textDecoration: 'none' }} scroll={false}>
             <motion.button 
-              whileHover={{ scale: 1.05, backgroundColor: '#7652cc' }}
+              whileHover={{ scale: 1.05, backgroundColor: '#9b47d6' }}
               style={{ 
                 padding: isMobile ? '1rem 2.2rem' : '1rem 2rem', 
                 borderRadius: '100px', 
-                background: '#8763df', 
+                background: '#AC58E9', 
                 color: '#fff', 
                 border: 'none', 
                 fontWeight: 800, 
@@ -87,9 +87,9 @@ const HomeFAQ = ({ faqs }) => {
         </div>
 
         {/* Right Column: Accordion */}
-        <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+        <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
           {faqs.map((faq, idx) => (
-            <div key={idx} style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
+            <div key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
               <button 
                 onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} 
                 style={{ 
@@ -101,7 +101,7 @@ const HomeFAQ = ({ faqs }) => {
                   background: 'none', 
                   border: 'none', 
                   cursor: 'pointer', 
-                  color: '#121212', 
+                  color: '#ffffff', 
                   textAlign: 'left' 
                 }}
               >
@@ -109,7 +109,7 @@ const HomeFAQ = ({ faqs }) => {
                   fontSize: isMobile ? '0.9rem' : '0.95rem', 
                   fontWeight: 800, 
                   margin: 0, 
-                  color: openIndex === idx ? '#8763df' : '#121212',
+                  color: openIndex === idx ? '#AC58E9' : '#ffffff',
                   textTransform: 'uppercase',
                   maxWidth: '85%',
                   transition: '0.3s ease',
@@ -117,7 +117,7 @@ const HomeFAQ = ({ faqs }) => {
                 }}>
                   {faq.question}
                 </h3>
-                <span style={{ fontSize: '1.2rem', color: openIndex === idx ? '#8763df' : 'rgba(0,0,0,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
+                <span style={{ fontSize: '1.2rem', color: openIndex === idx ? '#AC58E9' : 'rgba(255,255,255,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
                   {openIndex === idx ? '−' : '+'}
                 </span>
               </button>
@@ -130,7 +130,7 @@ const HomeFAQ = ({ faqs }) => {
                     style={{ overflow: 'hidden' }}
                   >
                     <p style={{ 
-                      color: '#555', 
+                      color: 'rgba(255,255,255,0.6)', 
                       fontSize: '0.9rem', 
                       lineHeight: 1.6, 
                       paddingBottom: isMobile ? '2.2rem' : '2rem', 

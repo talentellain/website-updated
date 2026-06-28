@@ -5,17 +5,17 @@ const steps = [
   { 
     title: 'Discovery', 
     desc: 'We dive deep into your business goals, target audience, and market landscape across India to find your competitive edge as a brand.',
-    color: '#8763df'
+    color: '#AC58E9'
   },
   { 
     title: 'Strategy', 
     desc: 'Crafting a bespoke 360° marketing roadmap that combines brand storytelling with data-driven tactical execution for maximum ROI.',
-    color: '#ffcc00'
+    color: '#AC58E9'
   },
   { 
     title: 'Execution', 
     desc: 'Bringing the vision to life with world-class design, social media marketing, content creation, and integrated marketing solutions.',
-    color: '#a78bfa'
+    color: '#AC58E9'
   },
   { 
     title: 'Optimization', 
@@ -55,7 +55,7 @@ const Process = () => {
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  style={{ fontWeight: 800, letterSpacing: '0.4em', textTransform: 'uppercase', fontSize: '0.65rem', color: '#a78bfa', display: 'block', marginBottom: '1.2rem' }}
+                  style={{ fontWeight: 800, letterSpacing: '0.4em', textTransform: 'uppercase', fontSize: '0.65rem', color: '#AC58E9', display: 'block', marginBottom: '1.2rem' }}
                 >
                   METHODOLOGY
                 </motion.span>

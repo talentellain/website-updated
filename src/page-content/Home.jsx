@@ -29,28 +29,36 @@ const Home = () => {
         <Features />
       </div>
 
-      {/* Mobile Experience Triple Mockup Section */}
-      <div id="mobile-showcase" style={{ backgroundColor: '#ffffff', position: 'relative', zIndex: 40 }}>
-        <MobileExperience />
+      {/* Strip Design Banner */}
+      <div id="mobile-showcase" style={{ backgroundColor: '#000', position: 'relative', zIndex: 40, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem 5%' }}>
+        <img 
+          src="/talentella strip design.png" 
+          alt="TalentElla Services - 360° Marketing, Web Development, Mobile Apps, SEO, Content Creation" 
+          style={{ width: '100%', maxWidth: '1000px', height: 'auto', objectFit: 'contain' }}
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
-      {/* About Section - Normal Scroll (No overlapping effect), needs zIndex to render above sticky background */}
+      {/* About Section */}
       <div id="about" style={{ position: 'relative', zIndex: 41 }}>
         <AboutSection />
       </div>
 
+      {/* Our Winning Formula / 2026 */}
+      <WhyTalentElla />
+
       {/* Production Portfolio (Video Section) */}
-      <div id="production-portfolio" style={{ backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.06)', position: 'relative', zIndex: 45, padding: '100px 0' }}>
+      <div id="production-portfolio" style={{ backgroundColor: '#000', borderTop: '1px solid rgba(255,255,255,0.05)', position: 'relative', zIndex: 45, padding: '100px 0' }}>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ textAlign: 'center', marginBottom: '4rem', padding: '0 5%' }}>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1, color: '#121212' }}>Production Portfolio</h2>
-            <p style={{ color: 'rgba(0,0,0,0.5)', marginTop: '0.5rem', fontSize: '0.9rem', maxWidth: '600px', marginInline: 'auto' }}>A deep dive into our creative storytelling and visual craftsmanship.</p>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.8rem)', fontWeight: 800, textTransform: 'uppercase', lineHeight: 1, color: '#ffffff' }}>Production Portfolio</h2>
+            <p style={{ color: 'rgba(255,255,255,0.5)', marginTop: '0.5rem', fontSize: '0.9rem', maxWidth: '600px', marginInline: 'auto' }}>A deep dive into our creative storytelling and visual craftsmanship.</p>
           </div>
           <SocialMediaPortfolio portfolio={smmPortfolio} />
         </div>
       </div>
 
-      <WhyTalentElla />
       <HomeFAQ faqs={homepageFAQs} />
       <Contact />
       <Footer />

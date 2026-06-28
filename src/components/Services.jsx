@@ -34,16 +34,16 @@ const ServiceCard = ({ s, index }) => {
       <div className="modern-service-card" style={{ position: 'relative', height: '100%', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '28px' }}>
         {/* Top Header inside Card */}
         <div className="card-top-header" style={{ position: 'absolute', top: '2rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 3, transition: 'opacity 0.4s ease' }}>
-          <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', fontWeight: 700, color: 'rgba(0,0,0,0.3)', letterSpacing: '0.15em' }}>{num}</span>
-          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'rgba(0,0,0,0.4)', letterSpacing: '0.2em' }}>{tag}</span>
+          <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em' }}>{num}</span>
+          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em' }}>{tag}</span>
         </div>
 
         {/* Center Title */}
         <div className="card-giant-text">{displayTitle}</div>
 
         {/* Bottom CTA Arrow Button */}
-        <div className="card-bottom-cta" style={{ position: 'absolute', bottom: '2rem', right: '2rem', zIndex: 3, width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)', backgroundColor: 'transparent' }}>
-          <ArrowUpRight size={18} className="cta-arrow-icon" style={{ color: 'rgba(0,0,0,0.5)', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }} />
+        <div className="card-bottom-cta" style={{ position: 'absolute', bottom: '2rem', right: '2rem', zIndex: 3, width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)', backgroundColor: 'transparent' }}>
+          <ArrowUpRight size={18} className="cta-arrow-icon" style={{ color: 'rgba(255,255,255,0.5)', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }} />
         </div>
 
         {/* Hover Content */}
@@ -73,10 +73,10 @@ const Services = () => {
         <motion.section
           className={`sticky-section ${isMobile ? 'services-section-mobile-unwrap' : ''}`}
           style={{ 
-            backgroundColor: '#f5f5f0', 
+            backgroundColor: '#000000', 
             borderTopLeftRadius: isMobile ? '0px' : borderRad, 
             borderTopRightRadius: isMobile ? '0px' : borderRad, 
-            borderTop: '1px solid rgba(0,0,0,0.06)', 
+            borderTop: '1px solid rgba(255,255,255,0.08)', 
             height: isMobile ? 'auto' : '100dvh',
             minHeight: isMobile ? '100dvh' : 'auto',
             display: isMobile ? 'flex' : 'block',
@@ -86,10 +86,10 @@ const Services = () => {
         >
           <div className="services-container-inner" style={{ width: '100%', height: isMobile ? 'auto' : '100%', overflowY: isMobile ? 'visible' : 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div className="services-header" style={{ maxWidth: '800px', textAlign: 'center', padding: '0 5%', marginBottom: 'clamp(2.5rem, 6vh, 4.5rem)' }}>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: 'clamp(1.6rem, 6vw, 4rem)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em', color: '#121212' }}>
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: 'clamp(1.6rem, 6vw, 4rem)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em', color: '#ffffff' }}>
                 OUR SERVICES
               </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ color: '#4a4a4a', fontSize: 'clamp(0.75rem, 2vw, 1rem)', lineHeight: '1.4', fontWeight: 500, marginTop: '0.5rem', maxWidth: '600px', margin: '0.5rem auto 0' }}>
+              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.75rem, 2vw, 1rem)', lineHeight: '1.4', fontWeight: 500, marginTop: '0.5rem', maxWidth: '600px', margin: '0.5rem auto 0' }}>
                 Full-service 360° marketing solutions — brand development, social media marketing, and integrated digital strategies.
               </motion.p>
             </div>
@@ -102,8 +102,7 @@ const Services = () => {
 
       <style>{`
         :root { --mobile-rad: 0px; }
-        @media (min-width: 769px) { :root { --mobile-rad: borderRad; } }
-
+        
         .services-container-inner { padding: 12vh 2% 8vh; }
         @media (max-width: 768px) { .services-container-inner { padding: 3vh 4% 1vh !important; } }
 
@@ -125,17 +124,17 @@ const Services = () => {
         }
 
         .modern-service-card { 
-          background-color: #ebeae4; 
+          background-color: #1a1a1a; 
           min-height: 380px; 
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-          border: 1px solid rgba(0, 0, 0, 0.04);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.015);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
         }
         
         .modern-service-card:hover { 
-          background: linear-gradient(135deg, #7c3aed, #a78bfa); 
-          border-color: rgba(167, 139, 250, 0.3);
-          box-shadow: 0 30px 60px rgba(124, 58, 237, 0.25);
+          background: #AC58E9; 
+          border-color: rgba(172, 88, 233, 0.3);
+          box-shadow: 0 30px 60px rgba(172, 88, 233, 0.25);
           transform: translateY(-8px);
         }
 
@@ -146,7 +145,7 @@ const Services = () => {
           transform: translate(-50%,-50%); 
           font-size: clamp(1.2rem, 1.8vw, 1.9rem); 
           font-weight: 850; 
-          color: #121212; 
+          color: #ffffff; 
           line-height: 1.1; 
           letter-spacing: -0.03em; 
           pointer-events: none; 
@@ -172,7 +171,7 @@ const Services = () => {
           transform: scale(1.1);
         }
         .modern-service-card:hover .cta-arrow-icon {
-          color: #7c3aed !important;
+          color: #AC58E9 !important;
           transform: rotate(45deg);
         }
 
@@ -197,7 +196,7 @@ const Services = () => {
         .blob-icon-wrapper { 
           width: 80px; 
           height: 80px; 
-          background-color: #ffcc00; 
+          background-color: #AC58E9; 
           border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; 
           display: flex; 
           justify-content: center; 
@@ -233,13 +232,13 @@ const Services = () => {
             min-height: 130px !important;
             height: 100% !important;
             border-radius: 16px !important;
-            background: #ebeae4 !important;
-            border: 1px solid rgba(0, 0, 0, 0.04) !important;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
+            background: #1a1a1a !important;
+            border: 1px solid rgba(255, 255, 255, 0.08) !important;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
           }
           .modern-service-card:hover {
             transform: none !important;
-            background: #ebeae4 !important;
+            background: #1a1a1a !important;
             box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
           }
           .card-top-header {
@@ -275,11 +274,11 @@ const Services = () => {
           }
           .modern-service-card:hover .card-bottom-cta {
             background-color: transparent !important;
-            border-color: rgba(0,0,0,0.08) !important;
+            border-color: rgba(255,255,255,0.15) !important;
             transform: none !important;
           }
           .modern-service-card:hover .cta-arrow-icon {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(255,255,255,0.5) !important;
             transform: none !important;
           }
           .card-hover-content {

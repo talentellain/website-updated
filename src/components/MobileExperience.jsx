@@ -27,7 +27,7 @@ const MobileExperience = () => {
     <section 
       ref={containerRef}
       style={{ 
-        backgroundColor: '#ffffff', 
+        backgroundColor: '#000000', 
         padding: isMobile ? '40px 0' : '0', 
         overflow: 'hidden',
         position: 'relative',
@@ -44,12 +44,12 @@ const MobileExperience = () => {
         height: isMobile ? 'auto' : '100vh',
         gap: isMobile ? '40px' : '24px', 
         padding: isMobile ? '0 20px' : '24px', 
-        backgroundColor: '#ffffff'
+        backgroundColor: '#000000'
       }}>
         
         {/* Left Box */}
         <div style={{ 
-          backgroundColor: '#ffffff', 
+          backgroundColor: '#000000', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center', 
@@ -89,7 +89,7 @@ const MobileExperience = () => {
 
         {/* Center Box */}
         <div style={{ 
-          backgroundColor: '#ffffff', 
+          backgroundColor: '#000000', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center', 
@@ -127,7 +127,7 @@ const MobileExperience = () => {
 
         {/* Right Box */}
         <div style={{ 
-          backgroundColor: '#ffffff', 
+          backgroundColor: '#000000', 
           display: 'flex', 
           alignItems: 'center', 
           justifyContent: 'center', 

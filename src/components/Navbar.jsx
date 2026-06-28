@@ -198,9 +198,9 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [location.pathname]);
 
-    const textColor = isDarkTheme ? '#000000' : '#ffffff';
-    const borderColor = isDarkTheme ? 'rgba(0, 0, 0, 0.15)' : 'rgba(255, 255, 255, 0.1)';
-    const glassBg = isDarkTheme ? 'rgba(255, 255, 255, 0.9)' : 'rgba(5, 5, 5, 0.85)';
+    const textColor = '#ffffff';
+    const borderColor = 'rgba(255, 255, 255, 0.1)';
+    const glassBg = 'rgba(5, 5, 5, 0.85)';
 
     return (
         <>
@@ -259,8 +259,8 @@ const Navbar = () => {
                           style={{ 
                             height: '40px',
                             width: 'auto',
-                            mixBlendMode: isDarkTheme ? 'multiply' : 'screen',
-                            filter: isDarkTheme ? 'contrast(1.2)' : 'none',
+                            mixBlendMode: 'screen',
+                            filter: 'none',
                             borderRadius: '6px'
                           }} 
                         />
@@ -280,7 +280,7 @@ const Navbar = () => {
                             {['HOME', 'WEBSITE', 'SMM', 'IDENTITY', 'APP', 'PORTFOLIO', 'BLOG'].map((item, index) => {
                         const isPageLink = !!PAGE_LINKS[item];
                         const isActive = isPageLink ? location.pathname === PAGE_LINKS[item] : false;
-                        const activeColor = '#a78bfa';
+                        const activeColor = '#AC58E9';
                         const linkColor = isActive ? activeColor : textColor;
                         const linkOpacity = isActive ? 1 : (hoveredIndex === index ? 1 : 0.7);
 
@@ -354,7 +354,7 @@ const Navbar = () => {
                 <div className="hidden-mobile" style={{ pointerEvents: 'auto' }}>
                         <Link href="/#contact" onClick={(e) => handleNavClick(e, 'contact')} scroll={false} style={{ textDecoration: 'none' }}>
                         <motion.div 
-                          whileHover={{ scale: 1.05, y: -1, boxShadow: '0 8px 20px rgba(167, 139, 250, 0.2)' }}
+                          whileHover={{ scale: 1.05, y: -1, boxShadow: '0 8px 20px rgba(172, 88, 233, 0.3)' }}
                           whileTap={{ scale: 0.98 }}
                           style={{ 
                               padding: '0.65rem 1.6rem', 
@@ -365,9 +365,9 @@ const Navbar = () => {
                               justifyContent: 'center',
                               alignItems: 'center',
                               letterSpacing: '0.05em',
-                              backgroundColor: isDarkTheme ? '#121212' : '#ffffff',
-                              color: isDarkTheme ? '#ffffff' : '#121212',
-                              border: isDarkTheme ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
+                              backgroundColor: '#ffffff',
+                              color: '#121212',
+                              border: '1px solid rgba(255, 255, 255, 0.1)',
                               transition: 'all 0.3s ease'
                           }}
                         >
@@ -426,7 +426,7 @@ const Navbar = () => {
                                         style={{
                                             width: '100%',
                                             padding: '1.4rem 0',
-                                            color: isActive ? '#a78bfa' : 'white',
+                                            color: isActive ? '#AC58E9' : 'white',
                                             textDecoration: 'none',
                                             borderBottom: '1px solid rgba(255,255,255,0.08)',
                                             borderTop: index === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
@@ -459,7 +459,7 @@ const Navbar = () => {
                                     borderRadius: '100px',
                                     textAlign: 'center',
                                     letterSpacing: '0.08em',
-                                    backgroundColor: '#a78bfa',
+                                    backgroundColor: '#AC58E9',
                                     color: '#000',
                                 }}
                             >
@@ -484,10 +484,10 @@ const Navbar = () => {
                             left: 0,
                             right: 0,
                             height: '3px',
-                            backgroundColor: '#a78bfa',
+                            backgroundColor: '#AC58E9',
                             transformOrigin: 'left',
                             zIndex: 9999,
-                            boxShadow: '0 0 10px #a78bfa'
+                            boxShadow: '0 0 10px #AC58E9'
                         }}
                     />
                 )}
