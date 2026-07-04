@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Instagram, Linkedin, Mail, ArrowUpRight, MessageCircle } from 'lucide-react';

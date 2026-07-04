@@ -402,9 +402,10 @@ const PricingCard = ({ plan, idx, isMobile }) => {
 /* ──────────────────────────────────────────────
    Main Service Page
    ────────────────────────────────────────────── */
-const ServicePage = () => {
-  const { id } = useParams();
-    const service = servicesData.find(s => s.id === id);
+const ServicePage = ({ customServiceId, customCityName }) => {
+  const params = useParams();
+  const id = customServiceId || params?.id;
+  const service = servicesData.find(s => s.id === id);
   const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 968 : false);
 
   useEffect(() => {
@@ -424,9 +425,9 @@ const ServicePage = () => {
       <InteractiveHero 
         bgText={service.title.replace(/^SMM\s*/i, '').split(' ')[0].toUpperCase()}
         tagline1="TALENTELLA"
-        tagline2="SERVICE DETAILS"
-        heading={service.title.replace(/^SMM\s*/i, '')}
-        description={service.description}
+        tagline2={customCityName ? `SERVICE DETAILS IN ${customCityName.toUpperCase()}` : "SERVICE DETAILS"}
+        heading={`${service.title.replace(/^SMM\s*/i, '')}${customCityName ? ` in ${customCityName}` : ''}`}
+        description={customCityName ? `Providing professional ${service.title} services for businesses in ${customCityName}. ${service.description}` : service.description}
         links={[
           { text: "FREE STRATEGY CALL", url: "/#contact" },
           { text: "BOOK CONSULTATION", url: "/#contact" }

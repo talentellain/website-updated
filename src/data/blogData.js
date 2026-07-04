@@ -1,5 +1,85 @@
 export const blogPosts = [
   {
+    id: 'website-development-cost-ranchi',
+    title: 'The True Cost of Website Development in Ranchi (2026 Guide)',
+    excerpt: 'Planning to build a website for your Ranchi-based business? Discover the real costs, hidden fees, and exactly what you should expect to pay for a high-performance website.',
+    category: 'Web Development',
+    readTime: '6 min read',
+    date: 'July 4, 2026',
+    image: '/blog/web-dev-cost.jpg', // Reusing existing image placeholder
+    author: 'TalentElla Local SEO Team',
+    tags: ['website development cost ranchi', 'web design ranchi', 'ecommerce website ranchi', 'startup website cost'],
+    content: `
+      <p>As Ranchi continues its rapid transformation into a major digital hub in Jharkhand, local businesses are realizing that a Facebook page simply isn't enough anymore. Whether you run a coaching institute in Lalpur or a retail store in Main Road, a professional website is critical for building trust.</p>
+
+      <h2>Breaking Down the Costs in Ranchi</h2>
+      <p>Here is what you can realistically expect to pay a reputable agency in Ranchi for website development in 2026:</p>
+      <ul>
+        <li><strong>Basic Business Website (₹5,999 – ₹10,000):</strong> Ideal for small businesses. This includes a 5-page responsive design, contact forms, and basic local SEO setup.</li>
+        <li><strong>Dynamic Corporate Website (₹15,000 – ₹25,000):</strong> Perfect for growing businesses requiring CMS (Content Management Systems), blogs, and advanced SEO optimization to rank on Google Maps.</li>
+        <li><strong>E-Commerce & Portals (₹35,000+):</strong> Required for online stores wanting secure payment gateways (Razorpay, UPI), inventory management, and fast Next.js architectures.</li>
+      </ul>
+
+      <h2>Beware of the "₹2,000 Website" Trap</h2>
+      <p>Many freelancers in Ranchi offer websites for extremely low prices. However, these are often built on outdated, slow templates. Google severely penalizes slow websites. At TalentElla, our custom websites start at ₹5,999 and are built using modern React architectures, ensuring they load in under 2 seconds.</p>
+
+      <h2>Local SEO is Non-Negotiable</h2>
+      <p>Building the website is only step one. It must be optimized for local search queries like "Best coaching center in Ranchi" or "Top cafes near me." Ensure your development agency includes local schema markup—something we include as standard in all our packages.</p>
+    `
+  },
+  {
+    id: 'b2b-seo-manufacturing-jamshedpur',
+    title: 'How Jamshedpur Manufacturing Firms are Using SEO to Get National B2B Leads',
+    excerpt: 'The Steel City is going digital. Learn how Jamshedpur-based logistics and manufacturing companies are leveraging local and national SEO to secure enterprise contracts.',
+    category: 'SEO & Marketing',
+    readTime: '7 min read',
+    date: 'July 1, 2026',
+    image: '/blog/digital-marketing.jpg',
+    author: 'TalentElla B2B Marketing Strategy',
+    tags: ['SEO for manufacturing', 'B2B digital marketing jamshedpur', 'industrial SEO', 'lead generation jamshedpur'],
+    content: `
+      <p>Jamshedpur is the industrial heartland of Jharkhand. For decades, manufacturing, heavy engineering, and logistics firms here relied on word-of-mouth and traditional networking. However, in 2026, corporate procurement teams across India are using Google to find vendors.</p>
+
+      <h2>The B2B SEO Advantage</h2>
+      <p>When a national corporation searches for "industrial steel fabricators in Eastern India" or "heavy machinery logistics Jamshedpur," they skip the ads and trust the top organic results. If your firm isn't there, your competitors are getting the contracts.</p>
+      
+      <h2>Core Strategies for Industrial SEO</h2>
+      <ul>
+        <li><strong>Technical SEO Architecture:</strong> Enterprise clients judge your credibility by your website's performance. A fast, mobile-responsive, and secure (HTTPS) site is the baseline.</li>
+        <li><strong>Targeted Service Pages:</strong> Instead of listing all services on one page, successful firms build dedicated pages for specific queries (e.g., "CNC Machining Services," "Bulk Steel Transport").</li>
+        <li><strong>LocalBusiness Schema:</strong> Injecting structured data that explicitly tells Google your service radius ensures you dominate the local Google Map Pack.</li>
+      </ul>
+
+      <h2>Case Study: 300% Increase in Inbound RFQs</h2>
+      <p>By implementing a targeted B2B SEO strategy and redesigning their corporate portal, one of our logistics clients in Adityapur saw a 300% increase in inbound Requests For Quotation (RFQs) from companies outside Jharkhand within just 6 months.</p>
+
+      <p>Ready to modernize your manufacturing firm's digital presence? TalentElla specializes in industrial digital marketing and SEO.</p>
+    `
+  },
+  {
+    id: 'digital-marketing-local-retail-jharkhand',
+    title: 'Digital Marketing for Local Retailers in Jharkhand: What Actually Works?',
+    excerpt: 'Stop wasting money on boosted posts. Here is the proven digital marketing blueprint for retail stores, restaurants, and local businesses in Jharkhand.',
+    category: 'Digital Marketing',
+    readTime: '5 min read',
+    date: 'June 28, 2026',
+    image: '/blog/social-media.jpg',
+    author: 'TalentElla Retail Growth',
+    tags: ['local retail marketing', 'jharkhand business marketing', 'meta ads for retail', 'local SEO'],
+    content: `
+      <p>From the bustling streets of Ranchi to the growing markets of Dhanbad and Bokaro, retail is fiercely competitive. But many local businesses are throwing money into the void by simply clicking "Boost Post" on Facebook. Here is the actual blueprint for driving foot traffic and sales.</p>
+
+      <h2>1. Dominate the Google Map Pack</h2>
+      <p>Before someone visits a new restaurant or boutique, they search Google Maps. Your Google Business Profile must be fully optimized. This means consistent NAP (Name, Address, Phone), weekly post updates, and most importantly, actively soliciting reviews from happy customers.</p>
+
+      <h2>2. Hyper-Local Meta Ads</h2>
+      <p>Instead of broad targeting, use Meta Ads (Facebook & Instagram) with a strict 5-10km radius around your store. Offer a specific, trackable discount code to measure foot traffic directly attributed to the ads. Video reels showcasing the interior of your store perform 4x better than static images.</p>
+
+      <h2>3. Fast, Mobile-First Landing Pages</h2>
+      <p>If you run an ad for a specific product, do not send users to your homepage. Send them to a lightning-fast, mobile-optimized landing page dedicated to that exact product. TalentElla builds custom landing pages starting at ₹5,999 that convert clicks into customers.</p>
+    `
+  },
+  {
     id: 'digital-marketing-agency-india-cost',
     title: 'Digital Marketing Agency India: Cost, Services & How to Choose the Right Partner in 2026',
     excerpt: 'Looking for a digital marketing agency in India? Compare pricing, services offered, and learn how to select the best 360° marketing partner for your business growth.',

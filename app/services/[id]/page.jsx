@@ -12,12 +12,10 @@ export async function generateMetadata({ params }) {
 
   const pageTitle = service.seo?.pageTitle || service.title
   const metaDesc = service.seo?.metaDescription || service.description
-  const pageKeywords = service.seo?.keywords || ''
 
   return {
     title: pageTitle,
     description: metaDesc,
-    keywords: pageKeywords,
     alternates: {
       canonical: `${SITE_URL}/services/${params.id}`,
     },

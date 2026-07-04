@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MousePointer2, Rocket, Flag, Pause, PiggyBank, ArrowUpRight } from 'lucide-react';

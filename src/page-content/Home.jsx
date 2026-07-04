@@ -16,12 +16,14 @@ import MobileExperience from '../components/MobileExperience';
 import AboutSection from '../components/AboutSection';
 import { servicesData, homepageFAQs } from '../data/servicesData';
 
-const Home = () => {
+import Image from 'next/image';
+
+const Home = ({ tagline = "The Future of Marketing" }) => {
   const smmPortfolio = (servicesData.find(s => s.id === 'social-media-management')?.portfolio || []).slice(0, 6);
 
   return (
     <main>
-      <Hero />
+      <Hero tagline={tagline} />
       <Services />
       
       {/* Features Bento Grid Section */}
@@ -31,12 +33,13 @@ const Home = () => {
 
       {/* Strip Design Banner */}
       <div id="mobile-showcase" style={{ backgroundColor: '#000', position: 'relative', zIndex: 40, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '4rem 5%' }}>
-        <img 
+        <Image 
           src="/talentella strip design.png" 
           alt="TalentElla Services - 360° Marketing, Web Development, Mobile Apps, SEO, Content Creation" 
+          width={1000}
+          height={800}
           style={{ width: '100%', maxWidth: '1000px', height: 'auto', objectFit: 'contain' }}
-          loading="lazy"
-          decoding="async"
+          sizes="(max-width: 1000px) 100vw, 1000px"
         />
       </div>
 

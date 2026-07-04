@@ -6,11 +6,11 @@ const SITE_URL = 'https://www.talentella.in'
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
+    default: 'TalentElla | Top Web Development & Digital Marketing Agency in Ranchi',
     template: '%s | TalentElla',
   },
-  description: "TalentElla is India's leading 360° marketing agency offering brand development, social media marketing, influencer marketing, lead generation & integrated marketing solutions. Get a free strategy call today.",
-  keywords: '360 degree marketing agency, full service digital marketing agency, brand development agency, social media marketing agency India, influencer marketing agency, lead generation agency, integrated marketing solutions, content marketing agency, talent management marketing agency, online offline marketing agency',
+  description: "TalentElla is the best web development and digital marketing agency in Ranchi, Jharkhand. We offer expert SEO services, custom website design, social media marketing, and branding.",
+  keywords: 'Web Development Company in Ranchi, Digital Marketing Agency Ranchi, SEO Company Ranchi, Website Design Company Ranchi, Social Media Marketing Ranchi, Branding Agency Jharkhand, Best Website Designer in Ranchi',
   authors: [{ name: 'TalentElla' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
   icons: {
@@ -26,8 +26,8 @@ export const metadata = {
   openGraph: {
     type: 'website',
     url: SITE_URL + '/',
-    title: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
-    description: "TalentElla is India's leading 360° marketing agency. Brand development, social media marketing, influencer marketing, lead generation & integrated marketing solutions — all under one roof.",
+    title: 'TalentElla | Top Web Development & Digital Marketing Agency in Ranchi',
+    description: "TalentElla is the best web development and digital marketing agency in Ranchi, Jharkhand. We offer expert SEO services, custom website design, social media marketing, and branding.",
     siteName: 'TalentElla',
     images: [
       {
@@ -40,13 +40,13 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TalentElla | 360° Marketing Agency India — The Future of Marketing',
-    description: "India's full-service 360° marketing agency — brand development, social media, influencer marketing, lead gen & integrated solutions. Book a free consultation.",
+    title: 'TalentElla | Top Web Development & Digital Marketing Agency in Ranchi',
+    description: "TalentElla is the best web development and digital marketing agency in Ranchi, Jharkhand. We offer expert SEO services, custom website design, social media marketing, and branding.",
     images: [SITE_URL + '/logo.jpg'],
   },
   other: {
-    'geo.region': 'IN',
-    'geo.placename': 'India',
+    'geo.region': 'IN-JH',
+    'geo.placename': 'Ranchi',
     'msapplication-TileColor': '#0a0a0c',
     'theme-color': '#0a0a0c',
   },
@@ -66,12 +66,12 @@ export default function RootLayout({ children }) {
     'alternateName': 'TalentElla Marketing Agency',
     'url': 'https://www.talentella.in',
     'logo': 'https://www.talentella.in/logo.png',
-    'description': "TalentElla is India's leading 360° marketing agency providing full-service digital marketing, brand development, social media management, influencer marketing, lead generation, and integrated marketing solutions.",
+    'description': "TalentElla is a top web development and digital marketing agency based in Ranchi, Jharkhand.",
     'email': 'talentella.in@gmail.com',
     'foundingDate': '2026',
     'areaServed': {
-      '@type': 'Country',
-      'name': 'India',
+      '@type': 'State',
+      'name': 'Jharkhand',
     },
     'sameAs': [
       'https://www.instagram.com/talentella.in',
@@ -92,9 +92,11 @@ export default function RootLayout({ children }) {
     'image': 'https://www.talentella.in/logo.png',
     'url': 'https://www.talentella.in',
     'email': 'talentella.in@gmail.com',
-    'description': 'Full-service 360° marketing agency in India offering brand development, social media marketing, influencer marketing, lead generation, and integrated marketing solutions.',
+    'description': 'Top web development and digital marketing agency in Ranchi, offering SEO, social media marketing, and website design.',
     'address': {
       '@type': 'PostalAddress',
+      'addressLocality': 'Ranchi',
+      'addressRegion': 'Jharkhand',
       'addressCountry': 'IN',
     },
     'priceRange': '₹₹',

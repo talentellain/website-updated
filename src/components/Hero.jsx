@@ -1,10 +1,12 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 // Critical hero assets are served from /public for stable preloading paths
 const fgImage = '/fg.webp';
 
-const Hero = () => {
+const Hero = ({ tagline = "The Future of Marketing" }) => {
   const heroWrapperRef = useRef(null);
   const titleWrapRef = useRef(null);
   const mountainRef = useRef(null);
@@ -102,7 +104,7 @@ const Hero = () => {
                   className="accent-gradient"
                   style={{ fontWeight: 800, letterSpacing: '0.4em', fontSize: 'clamp(0.6rem, 1.5vw, 0.85rem)', marginBottom: '1rem', display: 'block', textTransform: 'uppercase' }}
                 >
-                  The Future of Marketing
+                  {tagline}
                 </h2>
                 
                 {/* Branding text — not a heading */}

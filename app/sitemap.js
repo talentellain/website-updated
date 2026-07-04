@@ -54,5 +54,37 @@ export default async function sitemap() {
     priority: 0.6,
   }))
 
-  return [...staticPages, ...servicePages, ...blogPostPages]
+  const allCities = [
+    'ranchi', 'jamshedpur', 'dhanbad', 'bokaro', 'hazaribagh', 
+    'deoghar', 'ramgarh', 'gumla', 'chaibasa', 'lohardaga', 
+    'simdega', 'khunti', 'latehar', 'giridih', 'koderma', 
+    'godda', 'dumka', 'pakur', 'sahibganj', 'chatra', 'palamu'
+  ]
+
+  const services = [
+    'web-development', 'website-development', 'seo-services', 
+    'digital-marketing', 'social-media-marketing', 'website-maintenance', 
+    'ecommerce-development', 'app-development', 'branding-agency'
+  ]
+
+  const locationPages = allCities.map((city) => ({
+    url: `${SITE_URL}/location/${city}`,
+    lastModified: '2026-07-04',
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
+  const serviceLocPages = []
+  for (const city of allCities) {
+    for (const service of services) {
+      serviceLocPages.push({
+        url: `${SITE_URL}/${service}-${city}`,
+        lastModified: '2026-07-04',
+        changeFrequency: 'weekly',
+        priority: 0.9,
+      })
+    }
+  }
+
+  return [...staticPages, ...servicePages, ...blogPostPages, ...locationPages, ...serviceLocPages]
 }
