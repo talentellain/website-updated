@@ -3,7 +3,7 @@
 import React, { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform, useSpring, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowUpRight, Play, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Play, X, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 import InteractiveHero from '../components/InteractiveHero';
 import { servicesData } from '../data/servicesData';
@@ -699,7 +699,7 @@ const LandscapeMarquee = ({ videos, setSelectedProject, isMobile }) => {
 
 const PortfolioTestimonial = ({ isMobile }) => {
   return (
-    <section style={{ position: 'relative', zIndex: 20, padding: isMobile ? '8vh 5%' : '12vh 5%', backgroundColor: '#0a0a0c', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'center' }}>
+    <section style={{ position: 'relative', zIndex: 20, height: '100vh', padding: isMobile ? '8vh 5%' : '12vh 5%', backgroundColor: '#0a0a0c', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -715,10 +715,6 @@ const PortfolioTestimonial = ({ isMobile }) => {
         <h2 style={{ fontSize: isMobile ? '1.8rem' : '3.5rem', fontWeight: 800, color: 'white', lineHeight: 1.2, margin: '0 0 2rem 0', letterSpacing: '-0.02em' }}>
           "TalentElla didn't just build us a website; they engineered a digital experience that completely transformed how our clients perceive us. The ROI has been absolutely astronomical."
         </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <p style={{ color: '#aa3bff', fontWeight: 700, margin: '0 0 0.5rem 0', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Sarah Jenkins</p>
-          <p style={{ color: 'rgba(255,255,255,0.5)', margin: 0, fontSize: '0.9rem' }}>Chief Marketing Officer, Symetra</p>
-        </div>
       </motion.div>
     </section>
   );
@@ -1017,38 +1013,7 @@ const PortfolioPage = () => {
         )}
       </AnimatePresence>
 
-      <section style={{ padding: isMobile ? '12vh 5%' : '20vh 5%', backgroundColor: '#0a0a0c', borderTop: '1px solid rgba(255,255,255,0.05)', textAlign: 'center' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.8 }}
-          style={{ maxWidth: '800px', margin: '0 auto' }}
-        >
-          <span style={{ fontSize: '0.75rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', display: 'block', marginBottom: '1.5rem' }}>
-            Ready to scale?
-          </span>
-          <h2 style={{ fontSize: isMobile ? '2.5rem' : '4.5rem', fontWeight: 900, color: 'white', lineHeight: 1.1, margin: '0 0 2rem 0', letterSpacing: '-0.02em' }}>
-            Let's Build Something <span style={{ color: '#aa3bff' }}>Amazing</span> Together.
-          </h2>
-          <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.6)', marginBottom: '3rem' }}>
-            Whether it's a world-class website, a cinematic video, or a full-scale digital strategy, we're ready to bring your vision to life.
-          </p>
-          <motion.a
-            href="/contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.8rem',
-              backgroundColor: '#aa3bff', color: '#000', padding: '1.2rem 2.5rem',
-              borderRadius: '100px', fontSize: '1.1rem', fontWeight: 800,
-              textDecoration: 'none', cursor: 'pointer', boxShadow: '0 10px 30px rgba(170,59,255,0.3)',
-            }}
-          >
-            Start Your Project <ArrowUpRight size={20} strokeWidth={3} />
-          </motion.a>
-        </motion.div>
-      </section>
+
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import './globals.css'
 import ClientLayout from './client-layout'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const SITE_URL = 'https://www.talentella.in'
 
@@ -130,6 +131,9 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <ClientLayout>{children}</ClientLayout>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   )

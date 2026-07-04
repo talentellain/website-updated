@@ -155,42 +155,64 @@ const Footer = () => {
                 </div>
             </div>
 
-            <div className="flex-col-mobile" style={{ 
-                position: 'relative', 
-                zIndex: 2, 
-                display: 'flex', 
-                justifyContent: 'space-between', 
-                alignItems: 'flex-end',
-                borderTop: '1px solid rgba(255,255,255,0.08)',
-                paddingTop: '3rem',
-                flexWrap: 'wrap',
+            <div style={{
+                position: 'relative',
+                zIndex: 2,
+                marginTop: '8rem',
+                display: 'flex',
+                flexDirection: 'column',
                 gap: '2rem'
             }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <div style={{ fontWeight: 800, letterSpacing: '-1px', fontSize: '1.5rem', display: 'flex', alignItems: 'center', color: '#ffffff' }}>
-                        TALENT<span style={{ color: '#AC58E9', marginLeft: '4px' }}>ELLA</span>
-                        <div style={{ width: '6px', height: '6px', background: '#AC58E9', borderRadius: '50%', marginLeft: '4px' }}></div>
-                    </div>
-                    <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem', maxWidth: '300px' }}>
-                        India's 360° marketing agency crafting digital excellence through imagination, strategy, and precision.
-                    </p>
-                </div>
-
-                <div style={{ display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.4)' }}>Connect</span>
-                        <div style={{ display: 'flex', gap: '1.5rem', color: '#ffffff' }}>
-                            <motion.a href="https://www.instagram.com/talentella.in?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.2, color: '#AC58E9' }} style={{ cursor: 'pointer', color: 'inherit' }}><Instagram size={20} /></motion.a>
-                            <motion.a href="https://www.linkedin.com/company/talentella/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BoCez94fpRBmgazPJzx3LPw%3D%3D" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.2, color: '#AC58E9' }} style={{ cursor: 'pointer', color: 'inherit' }}><Linkedin size={20} /></motion.a>
-                            <motion.a href="mailto:talentella.in@gmail.com" whileHover={{ scale: 1.2, color: '#AC58E9' }} style={{ cursor: 'pointer', color: 'inherit' }}><Mail size={20} /></motion.a>
-                        </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '1.5rem', fontWeight: 600 }}>
+                        <a href="/services" style={{ color: 'white', textDecoration: 'none' }}>Services</a>
+                        <a href="/portfolio" style={{ color: 'white', textDecoration: 'none' }}>Portfolio</a>
+                        <a href="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contact Us</a>
                     </div>
                     
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', textAlign: 'left' }}>
-                        <span style={{ fontSize: '0.7rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.2em', color: 'rgba(255,255,255,0.4)' }}>Legal</span>
-                        <div style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)' }}>
-                            © 2026 TALENT ELLA. ALL RIGHTS RESERVED.
-                        </div>
+                    <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                        <span style={{ fontSize: '1.5rem', fontWeight: 600, color: 'white', marginBottom: '0.5rem' }}>Office</span>
+                        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem' }}>Ranchi</span>
+                        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem' }}>Jharkhand</span>
+                        <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem' }}>India</span>
+                    </div>
+                </div>
+
+                <div style={{ width: '100%', textAlign: 'center', overflow: 'hidden', padding: '2rem 0' }}>
+                    <h1 style={{ 
+                        fontSize: 'clamp(3rem, 9.5vw, 10rem)', 
+                        fontWeight: 800, 
+                        lineHeight: 0.8, 
+                        margin: 0, 
+                        letterSpacing: '-0.04em',
+                        color: 'white',
+                        fontFamily: 'Syne, sans-serif'
+                    }}>
+                        TalentElla
+                    </h1>
+                </div>
+
+                <div style={{ 
+                    backgroundColor: '#B190FF', 
+                    color: 'black', 
+                    padding: '1.5rem 2rem', 
+                    borderRadius: '20px',
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                    gap: '1rem',
+                    fontWeight: 600,
+                    fontSize: '0.9rem'
+                }}>
+                    <div>Copyright © TalentElla 2026</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        India
+                    </div>
+                    <div style={{ display: 'flex', gap: '1.5rem' }}>
+                        <a href="https://www.instagram.com/talentella.in" target="_blank" rel="noopener noreferrer" style={{ color: 'black', textDecoration: 'none' }}>Instagram</a>
+                        <a href="https://www.linkedin.com/company/talentella" target="_blank" rel="noopener noreferrer" style={{ color: 'black', textDecoration: 'none' }}>LinkedIn</a>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Loader2, ArrowUpRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 
@@ -129,84 +129,70 @@ const Contact = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
   return (
-    <div id="contact" ref={outerRef} className="sticky-outer" style={{ zIndex: 80 }}>
+    <div id="contact" ref={outerRef} className="sticky-outer" style={{ zIndex: 80, backgroundColor: '#000000', position: 'relative', overflow: 'hidden' }}>
+      
+      {/* Background massive text */}
+      <div style={{ 
+        position: 'absolute', 
+        top: isMobile ? '8%' : '12%', 
+        left: isMobile ? '50%' : '40%', 
+        transform: 'translate(-50%, -50%) scaleY(1.4)', 
+        width: '100%', 
+        textAlign: 'center',
+        zIndex: 1,
+        pointerEvents: 'none'
+      }}>
+        <h1 style={{ 
+          fontSize: isMobile ? 'clamp(4rem, 25vw, 7rem)' : 'clamp(6rem, 18vw, 20rem)', 
+          fontWeight: 900, 
+          margin: 0,
+          color: '#ffffff',
+          lineHeight: 0.8,
+          textTransform: 'uppercase',
+          letterSpacing: '-0.02em',
+          fontFamily: 'Impact, sans-serif'
+        }}>
+          CONTACT
+        </h1>
+      </div>
+
       <motion.section
-        className="sticky-section black-purple-gradient"
+        className="sticky-section"
         style={{ 
+          position: 'relative',
+          zIndex: 10,
           borderTop: '1px solid rgba(255,255,255,0.05)', 
           borderTopLeftRadius: isMobile ? '0px' : borderRad, 
           borderTopRightRadius: isMobile ? '0px' : borderRad, 
           color: '#ffffff',
           justifyContent: 'center',
-          height: '100dvh'
+          minHeight: '100dvh'
         }}
       >
-        <div className="hide-scrollbar" style={{ width: '100%', height: '100%', overflowY: 'auto', padding: 'clamp(5rem, 20vh, 10rem) 5%' }}>
-          <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto', position: 'relative' }}>
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-32 items-center">
+        <div className="hide-scrollbar" style={{ width: '100%', minHeight: '100dvh', padding: isMobile ? '5rem 5% 4rem' : 'clamp(2rem, 10vh, 5rem) 5%', display: 'flex', alignItems: 'center' }}>
+          <div style={{ width: '100%', margin: '0 auto', position: 'relative' }}>
             
-            {/* Left Side: Massive Heading */}
-            <div className="flex flex-col gap-6 text-left">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: false }}
-                transition={{ duration: 1 }}
-              >
-                <h2 className="text-[clamp(3rem,10vw,7.5rem)] font-black leading-[0.85] uppercase tracking-tighter text-white m-0" style={{ fontFamily: 'Syne, sans-serif' }}>
-                  {["LET'S", "GET IN", "TOUCH"].map((line, lineIdx) => (
-                    <motion.div 
-                      key={lineIdx} 
-                      initial="hidden"
-                      whileInView="visible"
-                      viewport={{ once: false }}
-                      className="block overflow-hidden pb-2"
-                    >
-                      {line.split("").map((letter, i) => (
-                        <motion.span
-                          key={i}
-                          variants={{
-                            hidden: { opacity: 0, y: '100%' },
-                            visible: { 
-                              opacity: 1, 
-                              y: 0, 
-                              transition: { 
-                                duration: 0.8, 
-                                delay: (lineIdx * 5 + i) * 0.04,
-                                ease: [0.16, 1, 0.3, 1] 
-                              } 
-                            }
-                          }}
-                          className={`inline-block ${letter === ' ' ? 'whitespace-pre' : 'whitespace-normal'}`}
-                        >
-                          {letter}
-                        </motion.span>
-                      ))}
-                    </motion.div>
-                  ))}
-                </h2>
-                <a 
-                  href="mailto:talentella.in@gmail.com" 
-                  className="inline-block mt-8 text-[clamp(1rem,2vw,1.6rem)] text-white/90 font-semibold border-b-[2px] border-white/40 pb-1 hover:text-white hover:border-white transition-colors"
-                >
-                   talentella.in@gmail.com
-                </a>
-              </motion.div>
-            </div>
-
-            {/* Right Side: Form centered vertically with the heading */}
+            {/* The Form Card */}
             <motion.div 
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="w-full max-w-[650px] mx-auto xl:mx-0"
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              style={{ 
+                backgroundColor: '#7c3aed', // Purple background
+                padding: isMobile ? '2.5rem 1.5rem' : '3rem',
+                width: '100%',
+                maxWidth: '750px',
+                margin: isMobile ? '3rem auto 0' : '1.5rem -2% 0 auto',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: isMobile ? '1.5rem' : '2rem'
+              }}
             >
-              <form 
-                onSubmit={handleSubmit} 
-                className="flex flex-col gap-8 w-full"
-              >
-                {/* Honeypot — hidden from real users, bots fill this */}
+              <h3 style={{ fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.1em', margin: 0, textTransform: 'uppercase', color: 'white' }}>REACH US</h3>
+              
+              <form onSubmit={handleSubmit} className="flex flex-col gap-6 w-full relative z-20">
+                {/* Honeypot */}
                 <input
                   type="text"
                   name="website"
@@ -218,127 +204,127 @@ const Contact = () => {
                   style={{ position: 'absolute', left: '-9999px', opacity: 0, height: 0, width: 0 }}
                 />
                 
-                {/* Full Name */}
-                <div className="relative w-full group">
-                  <input 
-                    type="text" 
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    required
-                    maxLength={100}
-                    placeholder="Your Name *"
-                    disabled={status === 'loading'}
-                    className="w-full bg-transparent border-b-[2px] border-white/10 py-4 text-lg md:text-xl text-white font-medium placeholder-white/20 outline-none transition-all duration-300 focus:border-white disabled:opacity-50"
-                  />
-                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 w-full">
+                  {/* Left Column Fields */}
+                  <div className="flex flex-col gap-5">
+                    <input 
+                      type="text" 
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      required
+                      placeholder="First & Last Name"
+                      disabled={status === 'loading'}
+                      className="contact-input"
+                      style={{
+                        width: '100%', backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.4)',
+                        padding: '0.6rem 0', fontSize: '1rem', color: 'white', fontWeight: 500, outline: 'none'
+                      }}
+                    />
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="Phone (Optional)"
+                      disabled={status === 'loading'}
+                      className="contact-input"
+                      style={{
+                        width: '100%', backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.4)',
+                        padding: '0.6rem 0', fontSize: '1rem', color: 'white', fontWeight: 500, outline: 'none'
+                      }}
+                    />
+                    <input 
+                      type="email" 
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="Email"
+                      disabled={status === 'loading'}
+                      className="contact-input"
+                      style={{
+                        width: '100%', backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.4)',
+                        padding: '0.6rem 0', fontSize: '1rem', color: 'white', fontWeight: 500, outline: 'none'
+                      }}
+                    />
+                    
+                    <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginTop: '1rem' }}>
+                      <input type="checkbox" required style={{ marginTop: '0.2rem', accentColor: '#7c3aed', width: '18px', height: '18px', flexShrink: 0 }} />
+                      <span style={{ fontSize: '0.85rem', lineHeight: 1.4, color: 'rgba(255,255,255,0.9)' }}>
+                        I give TalentElla permission to contact me at this email address.
+                      </span>
+                    </div>
+                  </div>
 
-                {/* Email + Phone */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                  <input 
-                    type="email" 
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    maxLength={150}
-                    placeholder="Email Address *"
-                    disabled={status === 'loading'}
-                    className="w-full bg-transparent border-b-[2px] border-white/10 py-4 text-lg md:text-xl text-white font-medium placeholder-white/20 outline-none transition-all duration-300 focus:border-white disabled:opacity-50"
-                  />
-                  <input 
-                    type="tel" 
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    maxLength={20}
-                    placeholder="Phone Number"
-                    disabled={status === 'loading'}
-                    className="w-full bg-transparent border-b-[2px] border-white/10 py-4 text-lg md:text-xl text-white font-medium placeholder-white/20 outline-none transition-all duration-300 focus:border-white disabled:opacity-50"
-                  />
-                </div>
-
-
-                {/* Message */}
-                <div className="relative w-full group">
-                  <textarea 
-                    rows="4" 
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    maxLength={500}
-                    placeholder="Tell us about your project *"
-                    disabled={status === 'loading'}
-                    className="w-full bg-transparent border-b-[2px] border-white/10 py-4 text-lg md:text-xl text-white font-medium placeholder-white/20 outline-none resize-none transition-all duration-300 focus:border-white disabled:opacity-50"
-                  />
+                  {/* Right Column Fields */}
+                  <div className="flex flex-col h-full justify-between gap-5">
+                    <textarea 
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      placeholder="Type your message here"
+                      disabled={status === 'loading'}
+                      style={{
+                        width: '100%', backgroundColor: 'transparent', borderBottom: '1px solid rgba(255,255,255,0.4)',
+                        padding: '0.6rem 0', fontSize: '1rem', color: 'white', fontWeight: 500, outline: 'none', resize: 'none', minHeight: isMobile ? '160px' : '110px'
+                      }}
+                    />
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                      <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, margin: 0 }}>
+                        This site is protected by reCAPTCHA and the Google <a href="#" style={{textDecoration: 'underline', color: 'white'}}>Privacy Policy</a> and <a href="#" style={{textDecoration: 'underline', color: 'white'}}>Terms of Service</a> apply.<br/><br/>
+                        For information on how to unsubscribe, please review our <a href="#" style={{textDecoration: 'underline', color: 'white'}}>privacy policy</a>.
+                      </p>
+                      
+                      <div className="flex justify-end">
+                        <button 
+                          type="submit" 
+                          disabled={status === 'loading'}
+                          style={{ 
+                            border: '1px solid white', 
+                            background: 'transparent', 
+                            color: 'white',
+                            padding: '0.6rem 2rem',
+                            borderRadius: '100px',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.8rem',
+                            fontSize: '1rem',
+                            fontWeight: 500,
+                            cursor: status === 'loading' ? 'not-allowed' : 'pointer',
+                            transition: 'all 0.3s'
+                          }}
+                          onMouseEnter={(e) => { if(status!=='loading'){ e.currentTarget.style.background = 'white'; e.currentTarget.style.color = '#7c3aed'; } }}
+                          onMouseLeave={(e) => { if(status!=='loading'){ e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'white'; } }}
+                        >
+                          {status === 'loading' ? 'Sending...' : 'Send'}
+                          {status !== 'loading' && <ArrowUpRight size={18} />}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Status Messages */}
                 {validationError && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    className="flex flex-col items-center justify-center gap-3 text-white bg-gradient-to-br from-orange-500/20 via-orange-900/30 to-black/40 border border-orange-500/30 py-6 px-6 rounded-[1.5rem] backdrop-blur-xl text-center"
-                  >
-                    <div className="bg-orange-500/20 p-3 rounded-full">
-                      <AlertCircle size={24} className="text-orange-500" />
-                    </div>
-                    <span className="text-base font-bold tracking-tight">{validationError}</span>
-                  </motion.div>
+                  <div style={{ color: 'white', background: 'rgba(255,0,0,0.2)', padding: '1rem', textAlign: 'center', marginTop: '1rem' }}>
+                    {validationError}
+                  </div>
                 )}
                 {status === 'success' && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    className="flex flex-col items-center justify-center gap-3 text-white bg-gradient-to-br from-green-500/20 via-green-900/30 to-black/40 border border-green-500/30 py-8 px-6 rounded-[1.5rem] backdrop-blur-xl text-center"
-                  >
-                    <div className="bg-green-500/20 p-4 rounded-full shadow-[0_0_20px_rgba(34,197,94,0.2)]">
-                      <CheckCircle size={32} className="text-green-500 animate-pulse" />
-                    </div>
-                    <div className="flex flex-col gap-0.5">
-                      <span className="text-xl font-black tracking-tighter uppercase italic text-green-400">Success!</span>
-                      <span className="text-base text-white/90 font-medium">Message received loud and clear.</span>
-                    </div>
-                  </motion.div>
+                  <div style={{ color: 'white', background: 'rgba(255,255,255,0.2)', padding: '1rem', textAlign: 'center', marginTop: '1rem' }}>
+                    Success! Message received loud and clear.
+                  </div>
                 )}
                 {status === 'error' && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.95 }} 
-                    animate={{ opacity: 1, scale: 1 }} 
-                    className="flex flex-col items-center justify-center gap-3 text-white bg-gradient-to-br from-red-500/20 via-red-900/30 to-black/40 border border-red-500/30 py-6 px-6 rounded-[1.5rem] backdrop-blur-xl text-center"
-                  >
-                    <div className="bg-red-500/20 p-3 rounded-full">
-                      <AlertCircle size={24} className="text-red-500" />
-                    </div>
-                    <span className="text-base font-bold tracking-tight">Failed to route. Try sending an email directly.</span>
-                  </motion.div>
-                )}
-
-
-                {/* Submit Button */}
-                {/* Submit Button */}
-                <button 
-                  type="submit"
-                  disabled={status === 'loading'}
-                  className="group relative mt-4 flex items-center justify-between w-full overflow-hidden rounded-full transition-all duration-500 hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:hover:scale-100 disabled:cursor-not-allowed border border-white/20 bg-transparent hover:bg-white hover:border-white"
-                  style={{ padding: '14px 20px 14px 28px' }}
-                >
-                  <span className="relative z-10 text-sm font-bold tracking-[0.2em] uppercase text-white group-hover:text-black transition-colors duration-300">
-                    {status === 'loading' ? 'Transmitting...' : 'Send Inquiry'}
-                  </span>
-                  
-                  <div className="relative z-10 bg-white text-black p-2.5 rounded-full flex items-center justify-center transition-all duration-500 group-hover:bg-black group-hover:text-white">
-                    {status === 'loading' ? (
-                      <Loader2 className="animate-spin" size={16} />
-                    ) : (
-                      <Send size={16} className="transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    )}
+                  <div style={{ color: 'white', background: 'rgba(255,0,0,0.2)', padding: '1rem', textAlign: 'center', marginTop: '1rem' }}>
+                    Failed to route. Try sending an email directly.
                   </div>
-                </button>
+                )}
               </form>
             </motion.div>
-          </div>
           </div>
         </div>
       </motion.section>
