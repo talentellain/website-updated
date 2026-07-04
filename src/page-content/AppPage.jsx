@@ -197,7 +197,7 @@ const ServiceCard = ({ s }) => {
 const RelatedServices = ({ currentId, isMobile }) => {
   const related = servicesData.filter(s => s.id !== currentId);
   return (
-    <section style={{ padding: isMobile ? '80px 5% 20px' : '140px 5% 20px', backgroundColor: '#000000', color: '#ffffff', textAlign: 'center' }}>
+    <section style={{ padding: isMobile ? '80px 5% 20px' : '140px 5% 20px', backgroundColor: '#000000', color: '#ffffff', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>EXPLORE MORE SERVICES</h2>
         <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', marginBottom: '4rem', fontWeight: 500 }}>Discover more ways we can help you grow your brand.</p>
@@ -466,7 +466,7 @@ const AppPage = () => {
         .modern-service-card { background-color: #1a1a1a; min-height: 400px; transition: background-color 0.4s ease; }
         @media (max-width: 768px) { .modern-service-card { min-height: 250px !important; } }
         .modern-service-card:hover { background-color: #AC58E9; }
-        .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #121212; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; }
+        .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #ffffff; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; }
         .modern-service-card:hover .card-giant-text { left: 100%; transform: translate(0%,-50%); opacity: 0.05; }
         .card-hover-content { opacity: 0; transform: translateY(20px) scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease; display: flex; flex-direction: column; align-items: center; gap: 1rem; z-index: 5; padding: 0 8%; text-align: center; }
         .modern-service-card:hover .card-hover-content { opacity: 1; transform: translateY(0) scale(1); transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s; }

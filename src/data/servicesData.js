@@ -413,6 +413,17 @@ export const servicesData = [
         category: 'VIDEO EDITING',
         content: '/video/ngf-final-cut.mp4',
         alt: 'NGF Final Cut video production by TalentElla'
+      },
+      { 
+        id: 'day-at-talentella',
+        orientation: 'landscape',
+        title: 'Day at TalentElla', 
+        description: 'A cinematic look at a typical day at TalentElla, showcasing our team and culture.', 
+        type: 'video',
+        category: 'VIDEO SHOOTING',
+        content: '/video/day-at-talentella-landscape.mp4',
+        image: '/video/day-at-talentella-landscape.jpg',
+        alt: 'Day at TalentElla - cinematic office life video'
       }
     ],
     plans: [

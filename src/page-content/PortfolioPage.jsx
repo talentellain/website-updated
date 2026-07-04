@@ -384,6 +384,9 @@ const getPosterUrl = (videoUrl) => {
     }
     return posterUrl;
   }
+  if (videoUrl.startsWith('/video/')) {
+    return videoUrl.replace(/\.mp4$/, '.jpg');
+  }
   return '';
 };
 
