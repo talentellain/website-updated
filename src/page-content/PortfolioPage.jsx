@@ -22,6 +22,7 @@ const allFeatured = [
   { id: 9, title: 'Astro Portfolio', category: 'CREATIVE DEV', image: '/projects/astro-portfolio.png', link: 'https://astro-portfolio-opal-ten.vercel.app/' },
   { id: 10, title: 'Ring Portfolio', category: 'UX/UI DESIGN', image: '/projects/rig.png', link: 'https://ring-portfolio.vercel.app/' },
   { id: 11, title: 'Digniteq', category: 'BRAND IDENTITY', image: '/projects/digniteq.png', link: 'https://www.digniteq.in' },
+  { id: 12, title: 'EcoServeDev', category: 'WEB DEVELOPMENT', image: '/thubnail-website/image copy 2.png', link: 'https://ecoservedev.org/homepage', orientation: 'landscape' },
 ];
 
 const categoryColors = {
@@ -55,7 +56,7 @@ const HorizontalWork = () => {
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  const scrollDistance = isMobile ? '-279vw' : '-222vw';
+  const scrollDistance = isMobile ? '-279vw' : '-282vw';
   const x = useTransform(progress, [0, 1], ['0vw', scrollDistance]);
 
   useEffect(() => {
@@ -90,11 +91,11 @@ const HorizontalWork = () => {
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.7 }}
-              style={{ width: isMobile ? '85vw' : '70vw', flexShrink: 0, position: 'relative' }}
+              style={{ width: isMobile ? '85vw' : '90vw', flexShrink: 0, position: 'relative' }}
             >
               <div style={{
                 position: 'relative',
-                height: isMobile ? '60vw' : '75vh',
+                height: isMobile ? '60vw' : '85vh',
                 width: '100%',
                 overflow: 'hidden',
                 borderRadius: isMobile ? '16px' : '24px',
@@ -112,8 +113,8 @@ const HorizontalWork = () => {
                       src={project.image?.src || project.image}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 768px) 85vw, 70vw"
-                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 768px) 85vw, 90vw"
+                      style={{ objectFit: 'cover', objectPosition: 'top' }}
                       priority={i === 0}
                     />
                   </motion.div>
@@ -339,9 +340,9 @@ const RemainingWork = () => {
                   onClick={handleLinkClick}
                   whileHover={{ y: -8 }}
                   style={{ 
-                    width: 'min(85vw, 350px)', 
+                    width: 'min(85vw, 400px)', 
                     flexShrink: 0, 
-                    aspectRatio: '4/3', 
+                    aspectRatio: '16/9', 
                     backgroundColor: 'rgba(255,255,255,0.02)', 
                     borderRadius: '16px', 
                     border: '1px solid rgba(255,255,255,0.05)', 
@@ -356,8 +357,8 @@ const RemainingWork = () => {
                     src={p.image?.src || p.image}
                     alt={p.title}
                     fill
-                    sizes="(max-width: 768px) 85vw, 350px"
-                    style={{ objectFit: 'cover', pointerEvents: 'none' }}
+                    sizes="(max-width: 768px) 85vw, 400px"
+                    style={{ objectFit: 'cover', objectPosition: 'top', pointerEvents: 'none' }}
                   />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
                     <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
@@ -512,7 +513,7 @@ const PortfolioCard = ({ p, index, setSelectedVideo, isMobile }) => {
           alt={projectTitle}
           fill
           sizes="(max-width: 768px) 100vw, 400px"
-          style={{ objectFit: 'cover', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
+          style={{ objectFit: 'cover', objectPosition: 'top', transition: 'transform 0.6s ease', transform: isHovered ? 'scale(1.06)' : 'scale(1)' }}
         />
       )}
 

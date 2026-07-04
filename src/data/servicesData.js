@@ -165,6 +165,14 @@ export const servicesData = [
         link: 'https://example.com',
         image: globalInsights,
         alt: 'Global Insights analytics dashboard — enterprise data visualization platform developed by TalentElla agency'
+      },
+      { 
+        title: 'EcoServe Development Foundation', 
+        description: 'A youth-led, innovation-driven non-profit delivering scalable climate action and inclusive development solutions.', 
+        link: 'https://ecoservedev.org/homepage',
+        image: '/thubnail-website/image copy 2.png',
+        orientation: 'landscape',
+        alt: 'EcoServeDev website developed by TalentElla'
       }
     ],
     plans: [
