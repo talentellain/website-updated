@@ -277,7 +277,7 @@ const RelatedServices = ({ currentId, isMobile }) => {
 /* ──────────────────────────────────────────────
    Pricing Card
    ────────────────────────────────────────────── */
-const PricingCard = ({ plan, idx, isMobile }) => {
+const PricingCard = ({ plan, idx, isMobile, service }) => {
   const router = useRouter();
   const [isExpanded, setIsExpanded] = useState(false);
   const isPopular = plan.popular;
@@ -358,11 +358,9 @@ const PricingCard = ({ plan, idx, isMobile }) => {
                 whileTap={{ scale: 0.98 }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  router.push('/');
-                  setTimeout(() => {
-                    const el = document.getElementById('footer');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }, 600);
+                  const msg = `Hi TalentElla! I'm interested in starting a project. Service: ${service.title} — Plan: ${plan.name} (${plan.price}). Can you share more details?`;
+                  const whatsappUrl = `https://wa.me/919709667244?text=${encodeURIComponent(msg)}`;
+                  window.open(whatsappUrl, '_blank');
                 }}
                 style={{
                   width: '100%',
@@ -512,7 +510,7 @@ const ServicePage = ({ customServiceId, customCityName }) => {
             
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 850, marginTop: '0.4rem' }}>Transparent Investment</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile}  />)}</div>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile} service={service} />)}</div>
         </div>
       </section>
 

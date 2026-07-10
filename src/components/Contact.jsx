@@ -28,7 +28,7 @@ const validateEmail = (email) => {
 };
 
 const validatePhone = (phone) =>
-  phone === '' || /^[+\d\s\-().]{7,20}$/.test(phone);
+  /^[+\d\s\-().]{7,20}$/.test(phone);
 
 const checkRateLimit = () => {
   try {
@@ -226,7 +226,8 @@ const Contact = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="Phone (Optional)"
+                      required
+                      placeholder="Phone"
                       disabled={status === 'loading'}
                       className="contact-input"
                       style={{
@@ -274,8 +275,7 @@ const Contact = () => {
                     
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                       <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', lineHeight: 1.5, margin: 0 }}>
-                        This site is protected by reCAPTCHA and the Google <a href="#" style={{textDecoration: 'underline', color: 'white'}}>Privacy Policy</a> and <a href="#" style={{textDecoration: 'underline', color: 'white'}}>Terms of Service</a> apply.<br/><br/>
-                        For information on how to unsubscribe, please review our <a href="#" style={{textDecoration: 'underline', color: 'white'}}>privacy policy</a>.
+                        We value your privacy. For more details on how we handle your data, please review our <a href="#" style={{textDecoration: 'underline', color: 'white'}}>Privacy Policy</a>.
                       </p>
                       
                       <div className="flex justify-end">

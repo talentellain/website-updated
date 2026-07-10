@@ -9,6 +9,7 @@ const nextConfig = {
       },
     ],
   },
+  trailingSlash: false,
   async redirects() {
     return [
       // Old /service/:id → /services/:id (from previous React router)

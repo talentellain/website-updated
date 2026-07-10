@@ -371,11 +371,9 @@ const AppPage = () => {
                         whileTap={{ scale: 0.98 }}
                         onClick={(e) => {
                           e.stopPropagation();
-                          router.push('/');
-                          setTimeout(() => {
-                            const el = document.getElementById('footer');
-                            if (el) el.scrollIntoView({ behavior: 'smooth' });
-                          }, 600);
+                          const msg = `Hi TalentElla! I'm interested in starting a project. Service: App Development — Plan: ${plan.name} (${plan.price}). Can you share more details?`;
+                          const whatsappUrl = `https://wa.me/919709667244?text=${encodeURIComponent(msg)}`;
+                          window.open(whatsappUrl, '_blank');
                         }}
                         style={{
                           width: '100%',

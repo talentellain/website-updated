@@ -31,7 +31,7 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap
-Sitemap: https://talentella.in/sitemap.xml
+Sitemap: https://www.talentella.in/sitemap.xml
 
 # Host
-Host: https://talentella.in
+Host: https://www.talentella.in

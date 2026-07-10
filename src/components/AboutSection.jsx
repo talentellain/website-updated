@@ -1,131 +1,193 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Users, Award, Briefcase } from 'lucide-react';
-import Link from 'next/link';
+import { PenTool, MonitorSmartphone, Layers, Lightbulb, ArrowRight } from 'lucide-react';
 
-
-const ArrowDownRightIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 7L17 17M17 17V7M17 17H7" stroke="rgba(172, 88, 233, 0.6)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-  </svg>
-);
-
-const StatItem = ({ icon: Icon, value, label, delay }) => (
+const FloatingElement = ({ children, top, left, right, bottom, delay, duration }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay, duration: 0.6 }}
-    style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}
+    initial={{ y: 0, rotate: 0 }}
+    animate={{ 
+      y: [0, -30, 0],
+      rotate: [0, 5, -5, 0] 
+    }}
+    transition={{ repeat: Infinity, duration: duration, delay: delay, ease: "easeInOut" }}
+    style={{
+      position: 'absolute',
+      top, left, right, bottom,
+      zIndex: 0,
+      pointerEvents: 'none'
+    }}
   >
-    <div style={{ 
-      width: 44, height: 44, borderRadius: 12, 
-      background: 'rgba(172, 88, 233, 0.08)', 
-      border: '1px solid rgba(172, 88, 233, 0.15)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', 
-      color: '#AC58E9', flexShrink: 0 
-    }}>
-      <Icon size={18} />
-    </div>
-    <div>
-      <div style={{ fontSize: '1.4rem', fontWeight: 900, color: 'white', lineHeight: 1, letterSpacing: '-0.02em' }}>{value}</div>
-      <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.35)', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginTop: '0.15rem' }}>{label}</div>
-    </div>
+    {children}
   </motion.div>
 );
 
-
 const AboutSection = () => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
-  const pad = isMobile ? '2rem' : '6%';
-
-
-
   return (
-    <section style={{ backgroundColor: '#000', overflow: 'hidden', position: 'relative' }}>
-      {/* Subtle ambient glow */}
-      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(172, 88, 233,0.03) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
-
-      <div style={{ padding: isMobile ? '4rem 5%' : '7rem 5%', position: 'relative', zIndex: 2 }}>
-
-        {/* ── ABOUT US SECTION (FROM USER REFERENCE) ── */}
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          position: 'relative',
-          paddingBottom: '4rem'
-        }}>
-          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.2fr 1fr', gap: isMobile ? '4rem' : '8rem', alignItems: 'flex-start' }}>
-            {/* Left Column */}
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.5rem' }}>
-                <ArrowDownRightIcon />
-                <span style={{ color: '#AC58E9', fontSize: '1.5rem', fontWeight: 400, letterSpacing: '0.1em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>A LITTLE</span>
-              </div>
-              <h2 style={{ fontSize: isMobile ? '4rem' : 'clamp(5rem, 7vw, 7rem)', color: 'white', lineHeight: 1, fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 400, margin: 0, marginBottom: '2.5rem', letterSpacing: '-0.02em' }}>
-                ABOUT US
-              </h2>
-              
-              <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.05)', marginBottom: '3rem' }}></div>
-
-              {/* Stats Row */}
-              <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
-                <StatItem icon={Users} value="25+" label="CLIENTS" delay={0} />
-                <StatItem icon={Award} value="30+" label="PROJECTS" delay={0.2} />
-                <StatItem icon={Briefcase} value="3+" label="YEARS" delay={0.4} />
-              </div>
-            </div>
-
-            {/* Right Column */}
-            <div style={{ display: 'flex', flexDirection: 'column', position: 'relative', paddingTop: isMobile ? '0' : '1rem' }}>
-              {!isMobile && (
-                <div style={{ position: 'absolute', top: '-1rem', right: '0', width: '44px', height: '44px', borderRadius: '12px', backgroundColor: 'rgba(172, 88, 233, 0.05)', border: '1px solid rgba(172, 88, 233, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#AC58E9' }}>
-                  <ArrowUpRight size={20} />
-                </div>
-              )}
-              
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '2rem', fontFamily: 'Inter, sans-serif' }}>
-                Headquartered in India, our team is dedicated to driving conversions and delivering tangible value to our clients. We are fueled by our passion for creating distinctive digital experiences that set you apart from the sea of ordinary brands in today's market.
-              </p>
-              <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.95rem', lineHeight: 1.8, marginBottom: '3rem', fontFamily: 'Inter, sans-serif' }}>
-                We take the time to deeply understand your business, allowing us to execute on your mission most effectively and craft strategies that resonate with your audience.
-              </p>
-
-              <Link href="#" style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', textDecoration: 'none', alignSelf: 'flex-start' }}>
-                <span style={{ color: '#AC58E9', fontSize: '0.95rem', fontWeight: 600 }}>Read more</span>
-                <div style={{ width: '32px', height: '32px', borderRadius: '50%', border: '1px solid rgba(172, 88, 233, 0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#AC58E9', transition: 'all 0.3s ease' }}>
-                  <ArrowUpRight size={14} />
-                </div>
-              </Link>
-            </div>
-          </div>
+    <>
+      {/* ── VIDEO SECTION ── */}
+      <section style={{ backgroundColor: '#000', padding: '4rem 0' }}>
+        <div style={{ width: '95%', maxWidth: '1400px', aspectRatio: '21/9', margin: '0 auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}>
+          <video 
+            src="/video/Ropes_weaving_with_marketing_terms_202607100004.mp4" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
         </div>
+      </section>
 
-      </div>
+      <section style={{ 
+        backgroundColor: '#030303', 
+        minHeight: '100vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '4rem 2rem'
+      }}>
+        {/* Decorative Floating Elements representing Design & Tech */}
+        
+        {/* Top Left - Branding/Design */}
+        <FloatingElement top="15%" left="12%" delay={0} duration={4}>
+          <div style={{ 
+            filter: 'drop-shadow(0px 10px 25px rgba(233, 88, 192, 0.5))',
+            transform: 'rotate(-15deg)',
+            color: '#E958C0'
+          }}>
+            <PenTool size={100} strokeWidth={1.5} />
+          </div>
+        </FloatingElement>
+        
+        {/* Top Right - Web Design / Devices */}
+        <FloatingElement top="15%" right="12%" delay={1} duration={5}>
+          <div style={{ 
+            filter: 'drop-shadow(0px 15px 25px rgba(60, 150, 255, 0.5))',
+            transform: 'rotate(10deg)',
+            color: '#3C96FF'
+          }}>
+            <MonitorSmartphone size={110} strokeWidth={1.5} />
+          </div>
+        </FloatingElement>
 
+        {/* Bottom Left - User Experience / UI Layers */}
+        <FloatingElement bottom="20%" left="15%" delay={2} duration={4.5}>
+          <div style={{ 
+            filter: 'drop-shadow(0px 15px 25px rgba(255, 100, 100, 0.5))',
+            transform: 'rotate(-10deg)',
+            color: '#FF6464'
+          }}>
+            <Layers size={120} strokeWidth={1.5} />
+          </div>
+        </FloatingElement>
 
-      <style>{`
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        {/* Bottom Right - Creativity / Ideas */}
+        <FloatingElement bottom="25%" right="15%" delay={0.5} duration={6}>
+          <div style={{ 
+            filter: 'drop-shadow(0px 15px 25px rgba(172, 88, 233, 0.5))',
+            transform: 'rotate(15deg)',
+            color: '#AC58E9'
+          }}>
+            <Lightbulb size={110} strokeWidth={1.5} />
+          </div>
+        </FloatingElement>
 
-        @keyframes marqueeScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
+        <div style={{
+          position: 'relative',
+          zIndex: 10,
+          textAlign: 'center',
+          maxWidth: '900px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            style={{
+              fontSize: 'clamp(5rem, 12vw, 9rem)',
+              fontWeight: 900,
+              color: '#e2e2e2',
+              fontFamily: '"Impact", "Arial Black", sans-serif',
+              margin: '0 0 2rem 0',
+              lineHeight: 1,
+              letterSpacing: '0.01em',
+              textTransform: 'uppercase'
+            }}
+          >
+            ABOUT US
+          </motion.h1>
 
-        .marquee-track:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-    </section>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{
+              color: '#d4d4d4',
+              fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+              lineHeight: 1.8,
+              fontWeight: 400,
+              fontFamily: '"Inter", sans-serif',
+              marginBottom: '4rem',
+              letterSpacing: '0.02em',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.2rem'
+            }}
+          >
+            <p style={{ margin: 0 }}>
+              With over <strong style={{ color: '#fff', fontWeight: 600 }}>5 years of experience</strong> crafting digital products, I merge strategic thinking with cutting-edge design to solve complex problems.
+            </p>
+            <p style={{ margin: 0 }}>
+              My expertise spans across building <strong style={{ color: '#fff', fontWeight: 600 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
+            </p>
+            <p style={{ margin: 0 }}>
+              I partner with forward-thinking businesses to translate their vision into measurable results through data-driven design and pixel-perfect development.
+            </p>
+          </motion.div>
+
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            whileHover={{ 
+              scale: 1.05, 
+              boxShadow: '0 0 40px rgba(233, 88, 140, 0.8)',
+              background: 'linear-gradient(135deg, rgba(108,58,253,0.9) 0%, rgba(253,108,160,0.9) 100%)'
+            }}
+            whileTap={{ scale: 0.95 }}
+            style={{
+              background: 'linear-gradient(135deg, rgba(88,38,233,0.8) 0%, rgba(233,88,140,0.8) 100%)',
+              border: '1px solid rgba(255,255,255,0.2)',
+              borderRadius: '50px',
+              padding: '1.2rem 3rem',
+              color: 'white',
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              cursor: 'pointer',
+              textTransform: 'uppercase',
+              letterSpacing: '0.15em',
+              boxShadow: '0 0 20px rgba(172, 88, 233, 0.3)',
+              backdropFilter: 'blur(10px)',
+              fontFamily: '"Inter", sans-serif',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '1rem',
+              transition: 'background 0.3s ease, box-shadow 0.3s ease'
+            }}
+          >
+            <span>Let's Talk</span>
+            <ArrowRight size={20} strokeWidth={2.5} />
+          </motion.button>
+        </div>
+      </section>
+    </>
   );
 };
 
