@@ -290,9 +290,11 @@ export function generateSEOContent(serviceSlug, citySlug) {
   const serviceTitle = service.title;
   const servicePrice = service.price;
 
-  // Render dynamic values
-  const title = `${serviceTitle} Company in ${cityName} | TalentElla`;
-  const metaDescription = `Looking for top ${serviceTitle.toLowerCase()} in ${cityName}? TalentElla is the best ${serviceTitle.toLowerCase()} company in ${cityName}, Jharkhand. Packages start at ${servicePrice}.`;
+  // Render dynamic values with targeted SEO keywords
+  const isMarketing = serviceTitle.includes('Marketing') || serviceTitle.includes('SEO') || serviceTitle.includes('Branding');
+  const term = isMarketing ? 'Agency' : 'Company';
+  const title = `${serviceTitle} ${term} in ${cityName}, Jharkhand | TalentElla`;
+  const metaDescription = `Looking for a top ${serviceTitle.toLowerCase()} ${term.toLowerCase()} near me in ${cityName}, Jharkhand? TalentElla offers expert ${serviceTitle.toLowerCase()} services. Packages start at ${servicePrice}.`;
   
   const heroTagline = `${service.tagline} in ${cityName}`;
   

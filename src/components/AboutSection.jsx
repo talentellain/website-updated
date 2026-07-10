@@ -111,7 +111,7 @@ const AboutSection = () => {
             style={{
               fontSize: 'clamp(5rem, 12vw, 9rem)',
               fontWeight: 900,
-              color: '#e2e2e2',
+              color: 'var(--accent)',
               fontFamily: '"Impact", "Arial Black", sans-serif',
               margin: '0 0 2rem 0',
               lineHeight: 1,
@@ -123,10 +123,16 @@ const AboutSection = () => {
           </motion.h1>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              visible: {
+                transition: {
+                  staggerChildren: 0.3
+                }
+              }
+            }}
             style={{
               color: '#d4d4d4',
               fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
@@ -140,51 +146,26 @@ const AboutSection = () => {
               gap: '1.2rem'
             }}
           >
-            <p style={{ margin: 0 }}>
+            <motion.p 
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
+              style={{ margin: 0 }}
+            >
               With over <strong style={{ color: '#fff', fontWeight: 600 }}>5 years of experience</strong> crafting digital products, I merge strategic thinking with cutting-edge design to solve complex problems.
-            </p>
-            <p style={{ margin: 0 }}>
+            </motion.p>
+            <motion.p 
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
+              style={{ margin: 0 }}
+            >
               My expertise spans across building <strong style={{ color: '#fff', fontWeight: 600 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
-            </p>
-            <p style={{ margin: 0 }}>
+            </motion.p>
+            <motion.p 
+              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
+              style={{ margin: 0 }}
+            >
               I partner with forward-thinking businesses to translate their vision into measurable results through data-driven design and pixel-perfect development.
-            </p>
+            </motion.p>
           </motion.div>
 
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ 
-              scale: 1.05, 
-              boxShadow: '0 0 40px rgba(233, 88, 140, 0.8)',
-              background: 'linear-gradient(135deg, rgba(108,58,253,0.9) 0%, rgba(253,108,160,0.9) 100%)'
-            }}
-            whileTap={{ scale: 0.95 }}
-            style={{
-              background: 'linear-gradient(135deg, rgba(88,38,233,0.8) 0%, rgba(233,88,140,0.8) 100%)',
-              border: '1px solid rgba(255,255,255,0.2)',
-              borderRadius: '50px',
-              padding: '1.2rem 3rem',
-              color: 'white',
-              fontSize: '1.1rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              textTransform: 'uppercase',
-              letterSpacing: '0.15em',
-              boxShadow: '0 0 20px rgba(172, 88, 233, 0.3)',
-              backdropFilter: 'blur(10px)',
-              fontFamily: '"Inter", sans-serif',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1rem',
-              transition: 'background 0.3s ease, box-shadow 0.3s ease'
-            }}
-          >
-            <span>Let's Talk</span>
-            <ArrowRight size={20} strokeWidth={2.5} />
-          </motion.button>
         </div>
       </section>
     </>

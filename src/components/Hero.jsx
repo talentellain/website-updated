@@ -179,7 +179,7 @@ const Hero = ({ tagline = "The Future of Marketing" }) => {
                 }}
               >
                 <h1 style={{ fontSize: 'clamp(0.75rem, 2.5vw, 1rem)', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
-                  India's 360° Marketing Agency
+                  Top Digital Marketing Agency in Jharkhand
                 </h1>
                 <p style={{ 
                   fontFamily: "'Outfit', sans-serif",
@@ -189,7 +189,7 @@ const Hero = ({ tagline = "The Future of Marketing" }) => {
                   fontWeight: 400,
                   color: 'rgba(255, 255, 255, 0.6)'
                 }}>
-                   TalentElla is a full-service digital marketing and web development agency offering branding, social media marketing, website development, UI/UX design, SEO, and scalable digital solutions for startups and businesses across India.
+                   TalentElla is a full-service digital marketing and web development agency near you. We offer premium branding, graphic design, social media marketing, and SEO services for startups and businesses across India.
                 </p>
                 
                 {/* SEO CTA Button */}

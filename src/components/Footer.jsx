@@ -170,6 +170,14 @@ const Footer = () => {
                         <a href="/contact" style={{ color: 'white', textDecoration: 'none' }}>Contact Us</a>
                     </div>
                     
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '1rem', fontWeight: 500, paddingTop: '0.3rem' }}>
+                        <span style={{ fontSize: '1.2rem', fontWeight: 600, color: 'white', marginBottom: '0.2rem' }}>Top Local Searches</span>
+                        <a href="/digital-marketing-ranchi" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Digital Marketing Agency in Jharkhand</a>
+                        <a href="/branding-agency-ranchi" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Graphic Designers in Ranchi</a>
+                        <a href="/seo-services-ranchi" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>SEO Services near me</a>
+                        <a href="/website-development-ranchi" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none' }}>Website Development in Jharkhand</a>
+                    </div>
+
                     <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
                         <span style={{ fontSize: '1.5rem', fontWeight: 600, color: 'white', marginBottom: '0.5rem' }}>Office</span>
                         <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem' }}>Ranchi</span>
