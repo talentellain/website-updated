@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
-import { Code, Share2, Palette, Settings, Zap, Smartphone, ArrowUpRight } from 'lucide-react';
+import { Code, Share2, Palette, Settings, Zap, Smartphone, ArrowUpRight, ChevronDown } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
 
 const iconMap = { Code, Share2, Palette, Settings, Zap, Smartphone };
@@ -137,8 +137,66 @@ const ServiceCard = ({ s, index, scrollYProgress, total }) => {
   );
 };
 
+
+const MobileAccordionCard = ({ s, index, isActive, onToggle }) => {
+  const IconComponent = iconMap[s.icon] || Zap;
+  const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
+  const tag = serviceTags[s.id] || 'SERVICES';
+
+  return (
+    <div className={`mobile-accordion-card ${isActive ? 'active' : ''}`}>
+      <div className="accordion-header" onClick={onToggle}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <div className="accordion-icon-wrap">
+            <IconComponent size={24} color={isActive ? "#ffffff" : "rgba(255,255,255,0.7)"} strokeWidth={2} />
+          </div>
+          <div className="accordion-title-wrap">
+            <div className="accordion-tag">{tag}</div>
+            <h3 className="accordion-title">{s.title}</h3>
+          </div>
+        </div>
+        <div className="accordion-chevron-wrap">
+          <motion.div animate={{ rotate: isActive ? 180 : 0 }} transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}>
+            <ChevronDown size={20} color={isActive ? "#AC58E9" : "rgba(255,255,255,0.4)"} />
+          </motion.div>
+        </div>
+      </div>
+
+      <motion.div 
+        initial={false}
+        animate={{ height: isActive ? 'auto' : 0, opacity: isActive ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        style={{ overflow: 'hidden' }}
+      >
+        <div className="accordion-content">
+          <p className="accordion-desc-text">{s.description}</p>
+          
+          {s.subItems && (
+            <div className="accordion-feature-list">
+              {s.subItems.slice(0, 3).map((item, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#AC58E9', boxShadow: '0 0 10px rgba(172,88,233,0.5)' }} />
+                  <span style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.85rem', fontWeight: 500 }}>{item.title}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          <Link href={targetPath} className="accordion-cta">
+            <span>Explore Service</span>
+            <div style={{ background: '#AC58E9', borderRadius: '50%', width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 15px rgba(172,88,233,0.4)' }}>
+              <ArrowUpRight size={18} color="#ffffff" strokeWidth={2.5} />
+            </div>
+          </Link>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 const Services = () => {
   const outerRef = useRef(null);
+  const [activeAccordion, setActiveAccordion] = useState(0);
   
   // Track scroll progress of the entire tall container
   const { scrollYProgress } = useScroll({ 
@@ -173,8 +231,8 @@ const Services = () => {
                 </motion.p>
               </div>
               
-              {/* The Pinned Container */}
-              <div className="services-pinned-container" style={{ width: '100%', padding: '0 5%', position: 'relative', height: '400px', maxWidth: '1200px', margin: '0 auto' }}>
+              {/* Desktop Sticky Scroll Container (Hidden on Mobile) */}
+              <div className="services-pinned-container desktop-only" style={{ width: '100%', padding: '0 5%', position: 'relative', height: '400px', maxWidth: '1200px', margin: '0 auto' }}>
                 {servicesData.map((s, index) => (
                   <ServiceCard 
                     key={s.id} 
@@ -182,6 +240,19 @@ const Services = () => {
                     index={index} 
                     scrollYProgress={scrollYProgress} 
                     total={servicesData.length} 
+                  />
+                ))}
+              </div>
+
+              {/* Mobile Accordion Container (Hidden on Desktop) */}
+              <div className="mobile-accordion-container mobile-only" style={{ width: '100%', padding: '0 5%', maxWidth: '600px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
+                {servicesData.map((s, index) => (
+                  <MobileAccordionCard 
+                    key={s.id}
+                    s={s}
+                    index={index}
+                    isActive={activeAccordion === index}
+                    onToggle={() => setActiveAccordion(activeAccordion === index ? -1 : index)}
                   />
                 ))}
               </div>
@@ -194,11 +265,20 @@ const Services = () => {
       <style>{`
         :root { --mobile-rad: 0px; }
         
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
+        
         .services-outer-wrapper { height: 400vh; }
         .services-sticky-wrapper { position: sticky; top: 0vh; height: 100vh; }
 
         .services-container-inner { padding: 12vh 0 0 0; }
-        @media (max-width: 768px) { .services-container-inner { padding: 3vh 0 1vh !important; } }
+        @media (max-width: 900px) { 
+          .services-container-inner { padding: 8vh 0 5vh !important; }
+          .desktop-only { display: none !important; }
+          .mobile-only { display: block !important; }
+          .services-outer-wrapper { height: auto !important; }
+          .services-sticky-wrapper { position: relative !important; height: auto !important; }
+        }
 
         /* The Card Design */
         .modern-service-card { 
@@ -406,31 +486,121 @@ const Services = () => {
           100% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; } 
         }
 
-        /* --- MOBILE OVERRIDES --- */
+        /* Mobile Accordion Styles - Premium Redesign */
+        .mobile-accordion-card {
+          background: rgba(20, 20, 25, 0.4);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.03);
+          border-radius: 24px;
+          margin-bottom: 1.25rem;
+          overflow: hidden;
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-accordion-card.active {
+          background: linear-gradient(180deg, rgba(172, 88, 233, 0.12) 0%, rgba(20, 20, 25, 0.9) 100%);
+          border-top: 1px solid rgba(172, 88, 233, 0.4);
+          border-bottom: 1px solid rgba(172, 88, 233, 0.1);
+          border-left: 1px solid rgba(172, 88, 233, 0.2);
+          border-right: 1px solid rgba(172, 88, 233, 0.2);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 1px 20px rgba(172,88,233,0.1);
+        }
+        .accordion-header {
+          padding: 1.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .accordion-icon-wrap {
+          width: 52px; height: 52px;
+          border-radius: 16px;
+          background: rgba(255,255,255,0.03);
+          display: flex; align-items: center; justify-content: center;
+          border: 1px solid rgba(255,255,255,0.05);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-accordion-card.active .accordion-icon-wrap {
+          background: linear-gradient(135deg, #AC58E9 0%, #7B2CBF 100%);
+          border-color: rgba(255,255,255,0.2);
+          box-shadow: 0 8px 20px rgba(172,88,233,0.4);
+          transform: scale(1.05);
+        }
+        .accordion-title-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+        }
+        .accordion-tag {
+          font-size: 0.65rem;
+          color: rgba(255,255,255,0.4);
+          font-weight: 800;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          transition: color 0.3s;
+        }
+        .mobile-accordion-card.active .accordion-tag {
+          color: #AC58E9;
+        }
+        .accordion-title {
+          font-size: 1.25rem;
+          font-weight: 800;
+          color: #ffffff;
+          margin: 0;
+          text-transform: uppercase;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+        }
+        .accordion-chevron-wrap {
+          width: 36px; height: 36px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.03);
+          display: flex; align-items: center; justify-content: center;
+          border: 1px solid rgba(255,255,255,0.05);
+          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-accordion-card.active .accordion-chevron-wrap {
+          background: rgba(172,88,233,0.15);
+          border-color: rgba(172,88,233,0.3);
+        }
+        .accordion-content {
+          padding: 0 1.5rem 1.5rem 1.5rem;
+        }
+        .accordion-desc-text {
+          font-size: 0.95rem;
+          color: rgba(255,255,255,0.6);
+          line-height: 1.6;
+          margin: 0.5rem 0 1.5rem 0;
+        }
+        .accordion-feature-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          margin-bottom: 2rem;
+          background: rgba(0,0,0,0.25);
+          padding: 1.25rem;
+          border-radius: 16px;
+          border: 1px solid rgba(255,255,255,0.03);
+        }
+        .accordion-cta {
+          display: flex; align-items: center; justify-content: space-between;
+          background: linear-gradient(90deg, rgba(172,88,233,0.15) 0%, rgba(172,88,233,0.05) 100%);
+          padding: 0.9rem 1rem 0.9rem 1.25rem;
+          border-radius: 100px;
+          color: #fff;
+          text-decoration: none;
+          font-weight: 800;
+          font-size: 0.85rem;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          border: 1px solid rgba(172,88,233,0.3);
+          transition: all 0.3s;
+        }
+
         @media (max-width: 900px) {
-          .modern-service-card {
-            position: relative !important;
-            transform: none !important;
-            opacity: 1 !important;
-            margin-bottom: 2rem;
-            min-height: auto;
-          }
-          .modern-service-card > a {
-            flex-direction: column !important;
-          }
-          .card-left-section {
-            padding: 2rem;
-            border-right: none;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-          }
-          .card-right-section {
-            padding: 2rem;
-            gap: 2rem;
-          }
-          .services-pinned-container {
-            height: auto !important;
-            padding: 0 5% !important;
-          }
+          .desktop-only { display: none !important; }
+          .mobile-only { display: block !important; }
           .services-outer-wrapper {
             height: auto !important;
           }
@@ -439,17 +609,9 @@ const Services = () => {
             height: auto !important;
           }
         }
-        
-        @media (max-width: 768px) {
-          .services-stacked-container {
-            padding-bottom: 5vh !important;
-          }
-          .modern-service-card {
-            margin-bottom: 20px !important;
-          }
+        @media (min-width: 901px) {
+            .mobile-only { display: none !important; }
         }
-
-
       `}</style>
     </>
   );
