@@ -1,25 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PenTool, MonitorSmartphone, Layers, Lightbulb, ArrowRight } from 'lucide-react';
-
-const FloatingElement = ({ children, top, left, right, bottom, delay, duration }) => (
-  <motion.div
-    initial={{ y: 0, rotate: 0 }}
-    animate={{ 
-      y: [0, -30, 0],
-      rotate: [0, 5, -5, 0] 
-    }}
-    transition={{ repeat: Infinity, duration: duration, delay: delay, ease: "easeInOut" }}
-    style={{
-      position: 'absolute',
-      top, left, right, bottom,
-      zIndex: 0,
-      pointerEvents: 'none'
-    }}
-  >
-    {children}
-  </motion.div>
-);
 
 const AboutSection = () => {
   return (
@@ -48,52 +28,6 @@ const AboutSection = () => {
         overflow: 'hidden',
         padding: '4rem 2rem'
       }}>
-        {/* Decorative Floating Elements representing Design & Tech */}
-        
-        {/* Top Left - Branding/Design */}
-        <FloatingElement top="15%" left="12%" delay={0} duration={4}>
-          <div style={{ 
-            filter: 'drop-shadow(0px 10px 25px rgba(233, 88, 192, 0.5))',
-            transform: 'rotate(-15deg)',
-            color: '#E958C0'
-          }}>
-            <PenTool size={100} strokeWidth={1.5} />
-          </div>
-        </FloatingElement>
-        
-        {/* Top Right - Web Design / Devices */}
-        <FloatingElement top="15%" right="12%" delay={1} duration={5}>
-          <div style={{ 
-            filter: 'drop-shadow(0px 15px 25px rgba(60, 150, 255, 0.5))',
-            transform: 'rotate(10deg)',
-            color: '#3C96FF'
-          }}>
-            <MonitorSmartphone size={110} strokeWidth={1.5} />
-          </div>
-        </FloatingElement>
-
-        {/* Bottom Left - User Experience / UI Layers */}
-        <FloatingElement bottom="20%" left="15%" delay={2} duration={4.5}>
-          <div style={{ 
-            filter: 'drop-shadow(0px 15px 25px rgba(255, 100, 100, 0.5))',
-            transform: 'rotate(-10deg)',
-            color: '#FF6464'
-          }}>
-            <Layers size={120} strokeWidth={1.5} />
-          </div>
-        </FloatingElement>
-
-        {/* Bottom Right - Creativity / Ideas */}
-        <FloatingElement bottom="25%" right="15%" delay={0.5} duration={6}>
-          <div style={{ 
-            filter: 'drop-shadow(0px 15px 25px rgba(172, 88, 233, 0.5))',
-            transform: 'rotate(15deg)',
-            color: '#AC58E9'
-          }}>
-            <Lightbulb size={110} strokeWidth={1.5} />
-          </div>
-        </FloatingElement>
-
         <div style={{
           position: 'relative',
           zIndex: 10,

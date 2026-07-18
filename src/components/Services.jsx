@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
 import { Code, Share2, Palette, Settings, Zap, Smartphone, ArrowUpRight } from 'lucide-react';
@@ -22,271 +22,422 @@ const serviceNumbers = {
   'visual-identity-design': '04'
 };
 
-const ServiceCard = ({ s, index }) => {
+const ServiceCard = ({ s, index, scrollYProgress, total }) => {
   const IconComponent = iconMap[s.icon] || Zap;
-  const displayTitle = s.title.toUpperCase().split(' ').map((word, idx) => (
-    <React.Fragment key={idx}>{word}<br /></React.Fragment>
-  ));
   const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
   const tag = serviceTags[s.id] || 'SERVICES';
   const num = serviceNumbers[s.id] || `0${index + 1}`;
+  
+  const step = 1 / (total - 1);
+  
+  const { yInput, yOutput, scaleInput, scaleOutput, opacityInput, opacityOutput, rotateInput, rotateOutput } = useMemo(() => {
+    const yIn = [], yOut = [], sIn = [], sOut = [], oIn = [], oOut = [], rIn = [], rOut = [];
+    for (let i = 0; i < total; i++) {
+      yIn.push(i * step);
+      sIn.push(i * step);
+      oIn.push(i * step);
+      rIn.push(i * step);
+      
+      if (i < index) {
+        // Waiting in stack (behind active)
+        const depth = index - i;
+        yOut.push(`${depth * 4}vh`);
+        sOut.push(1 - depth * 0.04);
+        oOut.push(1 - depth * 0.15);
+        rOut.push("0deg");
+      } else if (i === index) {
+        // Active card (on top)
+        yOut.push("0vh");
+        sOut.push(1);
+        oOut.push(1);
+        rOut.push("0deg");
+      } else {
+        // Swung away (scrolled past)
+        yOut.push("-80vh");
+        sOut.push(1);
+        oOut.push(0);
+        rOut.push("-15deg");
+      }
+    }
+    return {
+      yInput: yIn, yOutput: yOut, 
+      scaleInput: sIn, scaleOutput: sOut, 
+      opacityInput: oIn, opacityOutput: oOut, 
+      rotateInput: rIn, rotateOutput: rOut
+    };
+  }, [index, step, total]);
+
+  const y = useTransform(scrollYProgress, yInput, yOutput);
+  const scale = useTransform(scrollYProgress, scaleInput, scaleOutput);
+  const rotate = useTransform(scrollYProgress, rotateInput, rotateOutput);
+  const opacity = useTransform(scrollYProgress, opacityInput, opacityOutput);
 
   return (
-    <Link href={targetPath} style={{ textDecoration: 'none', display: 'block', height: '100%', outline: 'none' }} aria-label={`Learn about TalentElla's ${s.title} services`}>
-      <div className="modern-service-card" style={{ position: 'relative', height: '100%', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', borderRadius: '28px' }}>
-        {/* Top Header inside Card */}
-        <div className="card-top-header" style={{ position: 'absolute', top: '2rem', left: '2rem', right: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 3, transition: 'opacity 0.4s ease' }}>
-          <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', fontWeight: 700, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em' }}>{num}</span>
-          <span style={{ fontSize: '0.65rem', fontWeight: 800, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.2em' }}>{tag}</span>
-        </div>
+    <motion.div 
+      className="modern-service-card" 
+      style={{ 
+        position: 'absolute', 
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: total - index, // First card on top
+        width: '100%', 
+        maxWidth: '1200px', 
+        margin: '0 auto',
+        overflow: 'hidden', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        borderRadius: '28px',
+        transformOrigin: 'top left', // The "Nail"
+        rotate,
+        scale,
+        opacity,
+        y,
+        willChange: 'transform, opacity'
+      }}
+    >
+      <Link href={targetPath} style={{ textDecoration: 'none', display: 'flex', height: '100%', width: '100%', outline: 'none', position: 'relative', zIndex: 1 }} aria-label={`Learn about TalentElla's ${s.title} services`}>
+        
+        {/* Massive Watermark Number */}
+        <div className="card-watermark">{num}</div>
 
-        {/* Center Title */}
-        <div className="card-giant-text">{displayTitle}</div>
-
-        {/* Bottom CTA Arrow Button */}
-        <div className="card-bottom-cta" style={{ position: 'absolute', bottom: '2rem', right: '2rem', zIndex: 3, width: '40px', height: '40px', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)', backgroundColor: 'transparent' }}>
-          <ArrowUpRight size={18} className="cta-arrow-icon" style={{ color: 'rgba(255,255,255,0.5)', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }} />
-        </div>
-
-        {/* Hover Content */}
-        <div className="card-hover-content">
-          <div className="blob-icon-wrapper"><IconComponent size={44} color="#000000" strokeWidth={2.5} /></div>
-          <p className="card-hover-desc">{s.description}</p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginTop: '1.2rem' }} className="explore-btn-wrap">
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, letterSpacing: '0.1em', color: 'white' }}>EXPLORE SERVICE</span>
-            <ArrowUpRight size={14} color="white" />
+        {/* Left Section: Number, Icon, Title */}
+        <div className="card-left-section">
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', marginBottom: '2rem', position: 'relative', zIndex: 2 }}>
+            <span style={{ fontFamily: 'monospace', fontSize: '1rem', fontWeight: 700, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.15em' }}>{num}</span>
+            <div className="blob-icon-wrapper-small">
+              <IconComponent size={28} color="#AC58E9" strokeWidth={2} />
+            </div>
+          </div>
+          
+          <div style={{ position: 'relative', zIndex: 2 }}>
+            <span className="card-tag">{tag}</span>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: 850, color: '#ffffff', lineHeight: 1.1, letterSpacing: '-0.02em', margin: 0, textTransform: 'uppercase' }}>
+              {s.title}
+            </h3>
           </div>
         </div>
-      </div>
-    </Link>
+
+        {/* Right Section: Description, Features & CTA */}
+        <div className="card-right-section">
+          <p className="card-desc-text">
+            {s.description}
+          </p>
+
+          {s.subItems && s.subItems.length > 0 && (
+            <div className="card-features-list">
+              {s.subItems.slice(0, 3).map((item, i) => (
+                <div key={i} className="feature-item">
+                  <div className="feature-dot" />
+                  <span className="feature-text">{item.title}</span>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          <div className="card-bottom-cta-wrap">
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <span className="explore-text" style={{ fontSize: '0.85rem', fontWeight: 800, letterSpacing: '0.1em', color: 'white', textTransform: 'uppercase' }}>Explore Service</span>
+            </div>
+            <div className="card-arrow-btn">
+              <ArrowUpRight size={20} className="cta-arrow-icon" style={{ color: 'rgba(255,255,255,1)', transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)' }} />
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
   );
 };
 
 const Services = () => {
   const outerRef = useRef(null);
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
-  const { scrollYProgress } = useScroll({ target: isMobile ? undefined : outerRef, offset: ['start end', 'start start'] });
   
-  const borderRad = useTransform(scrollYProgress, [0, 1], ['60px', '0px']);
+  // Track scroll progress of the entire tall container
+  const { scrollYProgress } = useScroll({ 
+    target: outerRef, 
+    offset: ['start start', 'end end'] 
+  });
 
   return (
     <>
-      <div id="services" ref={outerRef} className={`sticky-outer ${isMobile ? 'mobile-unstick' : ''}`} style={{ zIndex: 20 }}>
-        <motion.section
-          className={`sticky-section ${isMobile ? 'services-section-mobile-unwrap' : ''}`}
-          style={{ 
-            backgroundColor: '#000000', 
-            borderTopLeftRadius: isMobile ? '0px' : borderRad, 
-            borderTopRightRadius: isMobile ? '0px' : borderRad, 
-            borderTop: '1px solid rgba(255,255,255,0.08)', 
-            height: isMobile ? 'auto' : '100dvh',
-            minHeight: isMobile ? '100dvh' : 'auto',
-            display: isMobile ? 'flex' : 'block',
-            flexDirection: isMobile ? 'column' : 'initial',
-            justifyContent: isMobile ? 'center' : 'initial'
-          }}
-        >
-          <div className="services-container-inner" style={{ width: '100%', height: isMobile ? 'auto' : '100%', overflowY: isMobile ? 'visible' : 'auto', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div className="services-header" style={{ maxWidth: '800px', textAlign: 'center', padding: '0 5%', marginBottom: 'clamp(2.5rem, 6vh, 4.5rem)' }}>
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: 'clamp(1.6rem, 6vw, 4rem)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em', color: '#ffffff' }}>
-                OUR SERVICES
-              </motion.h2>
-              <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.75rem, 2vw, 1rem)', lineHeight: '1.4', fontWeight: 500, marginTop: '0.5rem', maxWidth: '600px', margin: '0.5rem auto 0' }}>
-                Full-service 360° marketing solutions — brand development, social media marketing, and integrated digital strategies.
-              </motion.p>
-            </div>
-            <div className="services-grid-new">
-              {servicesData.map((s, index) => <ServiceCard key={s.id} s={s} index={index} />)}
+      <div id="services" style={{ backgroundColor: '#000000', zIndex: 20, position: 'relative' }}>
+        {/* Tall container to allow scrolling. 4 cards = 400vh scroll distance */}
+        <div ref={outerRef} style={{ height: isMobile ? 'auto' : '400vh', width: '100%', position: 'relative' }}>
+          
+          <div 
+            className="services-sticky-wrapper"
+            style={{ 
+              position: isMobile ? 'relative' : 'sticky', 
+              top: isMobile ? '0' : '0vh', 
+              height: isMobile ? 'auto' : '100vh',
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden'
+            }}
+          >
+            <div className="services-container-inner" style={{ width: '100%', position: 'relative', zIndex: 2 }}>
+              <div className="services-header" style={{ maxWidth: '800px', textAlign: 'center', margin: '0 auto clamp(2.5rem, 6vh, 4.5rem) auto', padding: '0 5%' }}>
+                <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} style={{ fontSize: 'clamp(1.6rem, 6vw, 4rem)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '-0.02em', color: '#ffffff' }}>
+                  OUR SERVICES
+                </motion.h2>
+                <motion.p initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} style={{ color: 'rgba(255,255,255,0.6)', fontSize: 'clamp(0.75rem, 2vw, 1rem)', lineHeight: '1.4', fontWeight: 500, marginTop: '0.5rem', maxWidth: '600px', margin: '0.5rem auto 0' }}>
+                  Full-service 360° marketing solutions — brand development, social media marketing, and integrated digital strategies.
+                </motion.p>
+              </div>
+              
+              {/* The Pinned Container */}
+              <div className="services-pinned-container" style={{ width: '100%', padding: '0 5%', position: 'relative', height: '400px', maxWidth: '1200px', margin: '0 auto' }}>
+                {servicesData.map((s, index) => (
+                  <ServiceCard 
+                    key={s.id} 
+                    s={s} 
+                    index={index} 
+                    scrollYProgress={isMobile ? null : scrollYProgress} 
+                    total={servicesData.length} 
+                  />
+                ))}
+              </div>
+
             </div>
           </div>
-        </motion.section>
+        </div>
       </div>
 
       <style>{`
         :root { --mobile-rad: 0px; }
         
-        .services-container-inner { padding: 12vh 2% 8vh; }
-        @media (max-width: 768px) { .services-container-inner { padding: 3vh 4% 1vh !important; } }
+        .services-container-inner { padding: 12vh 0 0 0; }
+        @media (max-width: 768px) { .services-container-inner { padding: 3vh 0 1vh !important; } }
 
-        .services-grid-new { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2.5vh; width: 100%; }
-        @media (max-width: 1200px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); gap: 2vh; } }
-        
-        /* Mobile Vertical Stack */
-        @media (max-width: 768px) { 
-          .services-grid-new { 
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 0.8rem !important;
-            width: 100% !important;
-            padding: 0 1rem 2rem 1rem !important;
-          }
-          .services-header {
-            margin-bottom: 1.5rem !important;
-          }
-        }
-
+        /* The Card Design */
         .modern-service-card { 
-          background-color: #1a1a1a; 
-          min-height: 380px; 
+          background: linear-gradient(145deg, #111116 0%, #0a0a0d 100%);
+          min-height: 400px; 
+          border: 1px solid rgba(255, 255, 255, 0.04);
+          box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6); 
           transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+          position: relative;
         }
         
+        .modern-service-card::before {
+          content: '';
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: inherit;
+          background: radial-gradient(600px circle at 0% 0%, rgba(172, 88, 233, 0.08), transparent 40%);
+          z-index: 0;
+          pointer-events: none;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
         .modern-service-card:hover { 
-          background: #AC58E9; 
           border-color: rgba(172, 88, 233, 0.3);
-          box-shadow: 0 30px 60px rgba(172, 88, 233, 0.25);
-          transform: translateY(-8px);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(172, 88, 233, 0.1);
         }
 
-        .card-giant-text { 
-          position: absolute; 
-          top: 50%; 
-          left: 50%; 
-          transform: translate(-50%,-50%); 
-          font-size: clamp(1.2rem, 1.8vw, 1.9rem); 
-          font-weight: 850; 
-          color: #ffffff; 
-          line-height: 1.1; 
-          letter-spacing: -0.03em; 
-          pointer-events: none; 
-          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
-          z-index: 2; 
-          width: 100%; 
-          text-align: center; 
+        .modern-service-card:hover::before {
+          background: radial-gradient(800px circle at 100% 100%, rgba(172, 88, 233, 0.12), transparent 40%);
         }
         
-        .modern-service-card:hover .card-giant-text { 
-          left: 100%; 
-          transform: translate(0%,-50%); 
-          opacity: 0; 
-        }
-        
-        .modern-service-card:hover .card-top-header {
-          opacity: 0;
+        .modern-service-card > a {
+          display: flex !important;
+          flex-direction: row !important;
         }
 
-        .modern-service-card:hover .card-bottom-cta {
-          background-color: white !important;
-          border-color: white !important;
-          transform: scale(1.1);
-        }
-        .modern-service-card:hover .cta-arrow-icon {
-          color: #AC58E9 !important;
-          transform: rotate(45deg);
-        }
-
-        .card-hover-content { 
-          opacity: 0; 
-          transform: translateY(30px) scale(0.95); 
-          transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-          display: flex; 
-          flex-direction: column; 
-          align-items: center; 
-          gap: 0.8rem; 
-          z-index: 5; 
-          padding: 0 10%; 
-          text-align: center; 
-        }
-        .modern-service-card:hover .card-hover-content { 
-          opacity: 1; 
-          transform: translateY(0) scale(1); 
-          transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s; 
+        .card-watermark {
+          position: absolute;
+          bottom: -4rem;
+          right: -2rem;
+          font-size: 16rem;
+          font-weight: 900;
+          color: rgba(255, 255, 255, 0.015);
+          line-height: 1;
+          z-index: 0;
+          pointer-events: none;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          letter-spacing: -0.05em;
         }
 
-        .blob-icon-wrapper { 
-          width: 80px; 
-          height: 80px; 
-          background-color: #AC58E9; 
+        .modern-service-card:hover .card-watermark {
+          color: rgba(172, 88, 233, 0.04);
+          transform: scale(1.02) translate(-10px, -10px);
+        }
+
+        .card-left-section {
+          flex: 1;
+          padding: 3rem 4rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          border-right: 1px solid rgba(255,255,255,0.03);
+          position: relative;
+          z-index: 2;
+        }
+
+        .card-right-section {
+          flex: 1;
+          padding: 3rem 4rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background: rgba(255,255,255,0.005);
+          position: relative;
+          z-index: 2;
+        }
+
+        .card-tag {
+          display: inline-block;
+          padding: 0.4rem 1.2rem;
+          background: rgba(172, 88, 233, 0.08);
+          border: 1px solid rgba(172, 88, 233, 0.15);
+          border-radius: 100px;
+          font-size: 0.65rem;
+          font-weight: 800;
+          color: #AC58E9;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          margin-bottom: 1.5rem;
+          backdrop-filter: blur(10px);
+        }
+
+        .blob-icon-wrapper-small { 
+          width: 50px; 
+          height: 50px; 
+          background: linear-gradient(135deg, rgba(172,88,233,0.15) 0%, rgba(172,88,233,0.02) 100%);
+          border: 1px solid rgba(172, 88, 233, 0.25);
+          box-shadow: inset 0 0 20px rgba(172,88,233,0.05), 0 0 15px rgba(172,88,233,0.1);
           border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; 
           display: flex; 
           justify-content: center; 
           align-items: center; 
           animation: morph-blob 8s ease-in-out infinite alternate; 
-          box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
-          margin-bottom: 0.5rem;
+          backdrop-filter: blur(5px);
         }
+
+        .card-desc-text {
+          color: rgba(255,255,255,0.65);
+          font-size: clamp(1rem, 1.5vw, 1.2rem);
+          line-height: 1.7;
+          font-weight: 400;
+          margin: 0;
+          max-width: 90%;
+        }
+
+        .card-features-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          margin: 1.5rem 0;
+        }
+
+        .feature-item {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          opacity: 0.85;
+          transition: opacity 0.3s ease;
+        }
+        
+        .modern-service-card:hover .feature-item {
+          opacity: 1;
+        }
+
+        .feature-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(172, 88, 233, 0.3);
+          border: 1px solid #AC58E9;
+          box-shadow: 0 0 10px rgba(172, 88, 233, 0.4);
+        }
+
+        .feature-text {
+          color: rgba(255,255,255,0.9);
+          font-size: 0.95rem;
+          font-weight: 600;
+          letter-spacing: 0.03em;
+        }
+
+        .card-bottom-cta-wrap {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 2rem;
+          border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .explore-text {
+          transition: all 0.4s ease;
+        }
+
+        .modern-service-card:hover .explore-text {
+          color: #AC58E9 !important;
+          letter-spacing: 0.15em !important;
+        }
+
+        .card-arrow-btn {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modern-service-card:hover .card-arrow-btn {
+          transform: scale(1.1);
+          background: #AC58E9;
+          border-color: #AC58E9;
+          box-shadow: 0 0 20px rgba(172, 88, 233, 0.3);
+        }
+
+        .modern-service-card:hover .cta-arrow-icon {
+          color: #ffffff !important;
+          transform: translate(2px, -2px) rotate(45deg);
+        }
+
         @keyframes morph-blob { 
           0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; } 
           33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; } 
           66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; } 
           100% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; } 
         }
-        .card-hover-desc { 
-          color: #ffffff; 
-          font-size: clamp(0.75rem, 1.2vw, 0.88rem); 
-          font-weight: 500; 
-          line-height: 1.5; 
-          margin: 0; 
-          opacity: 0.9;
-        }
 
         /* --- MOBILE OVERRIDES --- */
-        @media (max-width: 768px) {
-          /* Target the Link wrapper (direct flex child) for sizing */
-          .services-grid-new > a {
-            width: 100% !important;
-            height: 130px !important;
-            display: block !important;
+        @media (max-width: 900px) {
+          .modern-service-card > a {
+            flex-direction: column !important;
+          }
+          .card-left-section {
+            padding: 2rem;
+            border-right: none;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+          }
+          .card-right-section {
+            padding: 2rem;
+            gap: 2rem;
           }
           .modern-service-card {
-            min-height: 130px !important;
-            height: 100% !important;
-            border-radius: 16px !important;
-            background: #1a1a1a !important;
-            border: 1px solid rgba(255, 255, 255, 0.08) !important;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2) !important;
-          }
-          .modern-service-card:hover {
-            transform: none !important;
-            background: #1a1a1a !important;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.03) !important;
-          }
-          .card-top-header {
-            top: 0.7rem !important;
-            left: 1.2rem !important;
-            right: 1.2rem !important;
-          }
-          .modern-service-card:hover .card-top-header {
-            opacity: 1 !important;
-          }
-          .card-giant-text {
-            font-size: 1.1rem !important;
-            text-align: left !important;
-            left: 1.2rem !important;
-            transform: translate(0, -35%) !important;
-            width: auto !important;
-            top: 55% !important;
-          }
-          .modern-service-card:hover .card-giant-text {
-            left: 1.2rem !important;
-            transform: translate(0, -35%) !important;
-            opacity: 1 !important;
-          }
-          .card-bottom-cta {
-            bottom: 0.7rem !important;
-            right: 1.2rem !important;
-            width: 28px !important;
-            height: 28px !important;
-          }
-          .card-bottom-cta svg {
-            width: 12px !important;
-            height: 12px !important;
-          }
-          .modern-service-card:hover .card-bottom-cta {
-            background-color: transparent !important;
-            border-color: rgba(255,255,255,0.15) !important;
-            transform: none !important;
-          }
-          .modern-service-card:hover .cta-arrow-icon {
-            color: rgba(255,255,255,0.5) !important;
-            transform: none !important;
-          }
-          .card-hover-content {
-            display: none !important;
+            min-height: auto;
           }
         }
+        
+        @media (max-width: 768px) {
+          .services-stacked-container {
+            padding-bottom: 5vh !important;
+          }
+          .modern-service-card {
+            margin-bottom: 20px !important;
+          }
+        }
+
 
       `}</style>
     </>
