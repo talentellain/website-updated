@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const AboutSection = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    // Force play the video to bypass browser autoplay restrictions
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log("Video autoplay failed:", error);
+      });
+    }
+  }, []);
+
   return (
     <>
       {/* ── VIDEO SECTION ── */}
       <section style={{ backgroundColor: '#000', padding: '4rem 0' }}>
-        <div style={{ width: '95%', maxWidth: '1400px', aspectRatio: '21/9', margin: '0 auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 30px rgba(0,0,0,0.5)' }}>
+        <div style={{ width: '95%', maxWidth: '1400px', aspectRatio: '21/9', minHeight: '300px', margin: '0 auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 30px rgba(0,0,0,0.5)', backgroundColor: '#111' }}>
           <video 
+            ref={videoRef}
             src="/video/Ropes_weaving_with_marketing_terms_202607100004.mp4" 
             autoPlay 
             loop 
             muted 
             playsInline
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            preload="auto"
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
         </div>
       </section>
