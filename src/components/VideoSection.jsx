@@ -2,16 +2,12 @@ import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence, useInView } from 'framer-motion';
 import { Play } from 'lucide-react';
 
-import jeetVideo from '../assets/video/jeet-insta-01.mp4';
-import samikshaVideo from '../assets/video/samiksha.mp4';
-import manishVideo from '../assets/video/manish-insta.mp4';
-
 const videos = [
-  { id: 1, title: "Production Reel 01", src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: manishVideo },
-  { id: 2, title: "Creative Showcase", src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: samikshaVideo },
-  { id: 3, title: "Talent Feature", src: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: jeetVideo },
-  { id: 4, title: "Production Reel 02", src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: samikshaVideo },
-  { id: 5, title: "Brand Story", src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: manishVideo },
+  { id: 1, title: "Production Reel 01", src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: "/video/manish-insta.mp4" },
+  { id: 2, title: "Creative Showcase", src: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: "/video/samiksha.mp4" },
+  { id: 3, title: "Talent Feature", src: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: "/video/jeet-insta-01.mp4" },
+  { id: 4, title: "Production Reel 02", src: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: "/video/samiksha.mp4" },
+  { id: 5, title: "Brand Story", src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", videoSrc: "/video/manish-insta.mp4" },
 ];
 
 // Calculate 3D perspective outside of component render cycle for performance
