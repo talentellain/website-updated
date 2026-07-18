@@ -53,10 +53,10 @@ const ServiceCard = ({ s, index, scrollYProgress, total }) => {
         rOut.push("0deg");
       } else {
         // Swung away (scrolled past)
-        yOut.push("-80vh");
+        yOut.push("-100vh");
         sOut.push(1);
-        oOut.push(0);
-        rOut.push("-15deg");
+        oOut.push(1); // Keep solid, don't fade out to avoid transparency bleeding
+        rOut.push("-5deg");
       }
     }
     return {
@@ -76,24 +76,12 @@ const ServiceCard = ({ s, index, scrollYProgress, total }) => {
     <motion.div 
       className="modern-service-card" 
       style={{ 
-        position: 'absolute', 
-        top: 0,
-        left: 0,
-        right: 0,
         zIndex: total - index, // First card on top
-        width: '100%', 
-        maxWidth: '1200px', 
-        margin: '0 auto',
-        overflow: 'hidden', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        borderRadius: '28px',
-        transformOrigin: 'top left', // The "Nail"
         rotate,
         scale,
         opacity,
         y,
-        willChange: 'transform, opacity'
+        willChange: 'transform'
       }}
     >
       <Link href={targetPath} style={{ textDecoration: 'none', display: 'flex', height: '100%', width: '100%', outline: 'none', position: 'relative', zIndex: 1 }} aria-label={`Learn about TalentElla's ${s.title} services`}>
@@ -151,7 +139,6 @@ const ServiceCard = ({ s, index, scrollYProgress, total }) => {
 
 const Services = () => {
   const outerRef = useRef(null);
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
   
   // Track scroll progress of the entire tall container
   const { scrollYProgress } = useScroll({ 
@@ -163,14 +150,11 @@ const Services = () => {
     <>
       <div id="services" style={{ backgroundColor: '#000000', zIndex: 20, position: 'relative' }}>
         {/* Tall container to allow scrolling. 4 cards = 400vh scroll distance */}
-        <div ref={outerRef} style={{ height: isMobile ? 'auto' : '400vh', width: '100%', position: 'relative' }}>
+        <div ref={outerRef} className="services-outer-wrapper" style={{ width: '100%', position: 'relative' }}>
           
           <div 
             className="services-sticky-wrapper"
             style={{ 
-              position: isMobile ? 'relative' : 'sticky', 
-              top: isMobile ? '0' : '0vh', 
-              height: isMobile ? 'auto' : '100vh',
               width: '100%',
               display: 'flex',
               flexDirection: 'column',
@@ -196,7 +180,7 @@ const Services = () => {
                     key={s.id} 
                     s={s} 
                     index={index} 
-                    scrollYProgress={isMobile ? null : scrollYProgress} 
+                    scrollYProgress={scrollYProgress} 
                     total={servicesData.length} 
                   />
                 ))}
@@ -210,6 +194,9 @@ const Services = () => {
       <style>{`
         :root { --mobile-rad: 0px; }
         
+        .services-outer-wrapper { height: 400vh; }
+        .services-sticky-wrapper { position: sticky; top: 0vh; height: 100vh; }
+
         .services-container-inner { padding: 12vh 0 0 0; }
         @media (max-width: 768px) { .services-container-inner { padding: 3vh 0 1vh !important; } }
 
@@ -219,8 +206,17 @@ const Services = () => {
           min-height: 400px; 
           border: 1px solid rgba(255, 255, 255, 0.04);
           box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6); 
-          transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
-          position: relative;
+          transition: border-color 0.5s, box-shadow 0.5s; 
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          border-radius: 28px;
+          transform-origin: top left;
         }
         
         .modern-service-card::before {
@@ -412,6 +408,13 @@ const Services = () => {
 
         /* --- MOBILE OVERRIDES --- */
         @media (max-width: 900px) {
+          .modern-service-card {
+            position: relative !important;
+            transform: none !important;
+            opacity: 1 !important;
+            margin-bottom: 2rem;
+            min-height: auto;
+          }
           .modern-service-card > a {
             flex-direction: column !important;
           }
@@ -424,8 +427,16 @@ const Services = () => {
             padding: 2rem;
             gap: 2rem;
           }
-          .modern-service-card {
-            min-height: auto;
+          .services-pinned-container {
+            height: auto !important;
+            padding: 0 5% !important;
+          }
+          .services-outer-wrapper {
+            height: auto !important;
+          }
+          .services-sticky-wrapper {
+            position: relative !important;
+            height: auto !important;
           }
         }
         
