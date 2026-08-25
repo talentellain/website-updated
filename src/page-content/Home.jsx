@@ -12,6 +12,7 @@ import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import SocialMediaPortfolio from '../components/SocialMediaPortfolio';
 import Features from '../components/Features';
+import ClientsSection from '../components/ClientsSection';
 import MobileExperience from '../components/MobileExperience';
 import AboutSection from '../components/AboutSection';
 import { servicesData, homepageFAQs } from '../data/servicesData';
@@ -36,6 +37,9 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
       <div id="features" style={{ backgroundColor: '#000', position: 'relative', zIndex: 35 }}>
         <Features />
       </div>
+
+      {/* Who We Work With / Clients Wireframe Section */}
+      <ClientsSection />
 
 
 
