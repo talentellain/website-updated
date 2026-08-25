@@ -1,333 +1,426 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown } from 'lucide-react';
-// Critical hero assets are served from /public for stable preloading paths
-const fgImage = '/fg.webp';
+import { ArrowRight } from 'lucide-react';
 
-const Hero = ({ tagline = "The Future of Marketing" }) => {
-  const heroWrapperRef = useRef(null);
-  const titleWrapRef = useRef(null);
-  const mountainRef = useRef(null);
-  const contentRefs = useRef([]); 
-
-  // Reset array on render to avoid stale refs
-  contentRefs.current = [];
-  const addToContentRefs = (el) => {
-    if (el && !contentRefs.current.includes(el)) {
-      contentRefs.current.push(el);
-    }
-  };
-
+const Hero = () => {
   useEffect(() => {
-    // Dynamically import GSAP to reduce initial bundle and improve LCP
-    import('gsap').then(({ gsap }) => {
-      const tl = gsap.timeline();
+    let animationTriggered = false;
+    const forceIsIn = () => {
+      if (animationTriggered) return;
+      animationTriggered = true;
+      document.querySelectorAll('.appear, .hero-photo').forEach(el => {
+        el.classList.add('is-in');
+      });
+    };
 
-      // Initial setups for GSAP
-      if (titleWrapRef.current) gsap.set(titleWrapRef.current, { opacity: 0, y: 60, scale: 1.1 });
-      if (heroWrapperRef.current) gsap.set(heroWrapperRef.current, { scale: 1.05 }); 
-      if (mountainRef.current) gsap.set(mountainRef.current, { y: '25%' }); 
-      if (contentRefs.current.length) gsap.set(contentRefs.current, { opacity: 0, y: 40 });
-
-      tl.to(titleWrapRef.current, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 1.6,
-        ease: 'expo.out',
-      })
-      .to(heroWrapperRef.current, {
-        scale: 0.95,
-        duration: 2.2,
-        ease: 'power2.inOut',
-      }, '-=0.4')
-      .to(mountainRef.current, {
-        keyframes: [
-          { x: -10, duration: 0.1 },
-          { x: 10, duration: 0.1 },
-          { x: -10, duration: 0.1 },
-          { x: 10, duration: 0.1 },
-          { x: -10, duration: 0.1 },
-          { x: 10, duration: 0.1 },
-          { x: 0, y: '0%', duration: 0.6, ease: 'expo.out' }
-        ],
-      }, 0)
-      .to(contentRefs.current, {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: 'expo.out',
-      }, '-=0.2');
-
-      return () => tl.kill();
+    // Fallback animation check after 2 requestAnimationFrames
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        let hasActiveAnimation = false;
+        const elements = document.querySelectorAll('.appear');
+        elements.forEach(el => {
+          if (typeof el.getAnimations === 'function' && el.getAnimations().length > 0) {
+            hasActiveAnimation = true;
+          }
+        });
+        if (!hasActiveAnimation) {
+          forceIsIn();
+        }
+      });
     });
+
+    const timeoutId = setTimeout(forceIsIn, 2000);
+    return () => clearTimeout(timeoutId);
   }, []);
 
+  const handleAnimationEnd = (e) => {
+    e.currentTarget.classList.add('is-in');
+  };
+
   return (
-    <div id="hero" className="sticky-outer" style={{ zIndex: 10 }}>
-      <section 
-        className="sticky-section black-purple-gradient" 
-        style={{ 
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-          overflow: 'hidden',
-          justifyContent: 'center'
-        }}
-      >
-        {/* Main scaled container */}
-        <div 
-          ref={heroWrapperRef}
-          style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, transformOrigin: 'center center' }}
-        >
-          {/* LAYER 10: Behind Mountain (Title + Subtitle) */}
-          <div style={{ position: 'absolute', zIndex: 10, top: 0, left: 0, width: '100%', height: '100%' }}>
-            <div style={{ position: 'relative', maxWidth: '1600px', width: '100%', margin: '0 auto', height: '100%', transformStyle: 'preserve-3d' }}>
-              <div className="hero-title-block" style={{ 
-                position: 'absolute', 
-                top: '36%',
-                left: '50%', 
-                transform: 'translate(-50%, -50%)', 
-                width: '100%', 
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                textAlign: 'center',
-                padding: '0 5%'
-              }}>
-                <h2
-                  ref={addToContentRefs}
-                  className="accent-gradient"
-                  style={{ fontWeight: 800, letterSpacing: '0.4em', fontSize: 'clamp(0.6rem, 1.5vw, 0.85rem)', marginBottom: '1rem', display: 'block', textTransform: 'uppercase' }}
-                >
-                  {tagline}
-                </h2>
-                
-                {/* Branding text — not a heading */}
-                <div 
-                  ref={titleWrapRef}
-                  className="hero-title-3d"
-                  style={{ 
-                    fontSize: 'clamp(2rem, 8vw, 12rem)', 
-                    marginBottom: '0',
-                    lineHeight: 0.85,
-                    fontWeight: 900,
-                    letterSpacing: '0.01em',
-                    paddingBottom: '0.1em',
-                    fontFamily: 'Syne, sans-serif',
-                    whiteSpace: 'nowrap'
-                  }}
-                >
-                  TALENTELLA
-                </div>
-              </div>
-            </div>
+    <div id="hero" className="hero-landing-wrapper">
+      {/* CSS Stylesheet optimized for performance, fluid typography, and accessibility */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        :root {
+          --bg: #000000;
+          --text: #ffffff;
+          --muted: #9a9a9a;
+          --border: rgba(255, 255, 255, 0.16);
+          --border-soft: rgba(255, 255, 255, 0.12);
+
+          --logo: 15.5px;
+          --logo-mark: 22px;
+          --nav: 14px;
+          --nav-h: 40px;
+          --btn: 13.5px;
+          --btn-h: 40px;
+          --hero-btn-h: 42px;
+          --lede: 15.5px;
+          --badge: 12.5px;
+          --stat-size: 13.5px;
+          --header-y: 22px;
+          --header-x: 40px;
+          --stats-x: 72px;
+          --stats-y: 36px;
+          --hero-gap: 85px;
+          --copy-max: 960px;
+          --lede-max: 470px;
+
+          --nav-gap: 8px;
+          --nav-pad: 0 18px;
+          --btn-pad: 0 16px;
+          --badge-pad: 9px 15px;
+          --badge-mb: 22px;
+          --lede-mt: 18px;
+          --actions-mt: 26px;
+          --actions-gap: 10px;
+
+          /* INDUSTRY STANDARD: Fluid typography using clamp() to prevent jumpy breakpoints */
+          --h1-fluid: clamp(2.5rem, 8.5vw, 8.5rem);
+        }
+
+        .hero-landing-wrapper {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          height: 100dvh;
+          overflow: hidden;
+          background: #000000;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 10;
+        }
+
+        /* Grain Overlay */
+        .grain {
+          position: absolute;
+          inset: 0;
+          z-index: 100;
+          pointer-events: none;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+        }
+
+        /* Background video styling with purple overlay */
+        .hero-photo {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          overflow: hidden;
+          background: #000000;
+        }
+
+        .hero-photo video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: contrast(1.15) brightness(0.95);
+        }
+
+        /* INDUSTRY STANDARD: Scrim/Overlay gradient to ensure WCAG AAA readability contrast */
+        .hero-photo::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle, rgba(12, 10, 20, 0.2) 0%, rgba(0, 0, 0, 0.75) 100%), #7C3AED;
+          mix-blend-mode: multiply;
+          pointer-events: none;
+        }
+
+        /* Hero content block styling */
+        .hero {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 8px 24px;
+          width: 100%;
+          z-index: 10;
+        }
+
+        .hero-copy {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          max-width: var(--copy-max);
+          width: 100%;
+          margin: auto 0;
+        }
+
+        /* Hero Tagline Badge */
+        .hero-badge {
+          color: #7C3AED;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          margin-bottom: 20px;
+        }
+
+        /* Main Branding Title */
+        .hero-title {
+          font-size: var(--h1-fluid);
+          font-weight: 900;
+          letter-spacing: -0.015em;
+          line-height: 0.95;
+          color: #ffffff;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-transform: uppercase;
+          font-family: 'Syne', 'Inter', sans-serif;
+          margin-bottom: 8px;
+        }
+
+        .headline-line {
+          display: block;
+          overflow: hidden;
+          padding: 0.06em 0.15em 0.14em;
+        }
+
+        /* Centered Subtitle (SEO Target Keyword H1) */
+        .hero-subtitle-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          max-width: 620px;
+          margin-top: 18px;
+          gap: 16px;
+          z-index: 10;
+        }
+
+        .hero-subtitle {
+          font-size: clamp(0.75rem, 2.5vw, 1rem);
+          font-weight: 800;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: #ffffff;
+          margin: 0;
+        }
+
+        .hero-desc {
+          font-size: clamp(0.85rem, 2vw, 0.95rem);
+          line-height: 1.6;
+          color: var(--muted);
+          font-weight: 400;
+          letter-spacing: -0.01em;
+          font-family: 'Outfit', 'Inter', sans-serif;
+        }
+
+        .hero-subtitle-container .hero-actions {
+          margin-top: 12px;
+        }
+
+        /* Button Custom Language */
+        .btn {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          height: var(--hero-btn-h, 42px);
+          padding: 0 28px;
+          border-radius: 50px;
+          font-size: var(--btn, 13.5px);
+          font-weight: 600;
+          letter-spacing: -0.02em;
+          line-height: 1;
+          white-space: nowrap;
+          cursor: pointer;
+          border: 1px solid transparent;
+          transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
+        }
+
+        .btn::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.45) 48%, transparent 76%);
+          transform: translateX(-130%);
+          transition: transform 0.65s ease;
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .btn:hover::after {
+          transform: translateX(130%);
+        }
+
+        .btn-solid {
+          background: linear-gradient(180deg, #ffffff 0%, #e7e7e7 48%, #cfcfcf 100%);
+          color: #111111;
+          border: 1px solid #ffffff;
+          box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
+        }
+
+        .btn-solid:hover {
+          background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 42%, #d5def2 100%);
+          border-color: #f2f6ff;
+          box-shadow: inset 0 1px 0 #ffffff, 0 0 26px rgba(186,208,255,0.4), 0 8px 18px rgba(255,255,255,0.12);
+        }
+
+        /* --- Entrance Motion System --- */
+        .appear {
+          opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+          .appear {
+            opacity: 0;
+            animation-duration: 1.05s;
+            animation-fill-mode: both;
+            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            animation-delay: var(--d, 0.08s);
+          }
+
+          .appear--pop { animation-name: in-pop; }
+          .appear--mask { animation-name: in-mask; }
+          .appear--soft { animation-name: in-soft; }
+
+          .hero-photo {
+            opacity: 0;
+            animation: hero-fade-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+          }
+        }
+
+        @keyframes in-pop {
+          0% { opacity: 0; transform: scale(0.9); }
+          70% { opacity: 1; transform: scale(1.03); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes in-mask {
+          0% { opacity: 0; transform: translateY(40%); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes in-soft {
+          0% { opacity: 0; transform: translateY(14px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes hero-fade-in {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        /* Clean animations on end */
+        .is-in,
+        .is-in * {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+          clip-path: none !important;
+          filter: none !important;
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            transition: none !important;
+            animation: none !important;
+          }
+          .appear, .hero-photo {
+            opacity: 1 !important;
+            transform: none !important;
+            clip-path: none !important;
+            filter: none !important;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .hero {
+            padding: 20px;
+          }
+          .hero-subtitle-container {
+            max-width: 100%;
+          }
+        }
+
+        @media (max-width: 560px) {
+          .hero-actions {
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+          }
+          .hero-actions .btn {
+            width: 100%;
+          }
+        }
+      ` }} />
+
+      {/* Decorative Grain texture */}
+      <div className="grain"></div>
+
+      {/* Background purple smoke video (ARIA hidden since it is purely decorative) */}
+      <div className="hero-photo">
+        <video 
+          src="/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4" 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          aria-hidden="true"
+          tabIndex="-1"
+          onAnimationEnd={handleAnimationEnd}
+        ></video>
+      </div>
+
+      {/* Centered Hero Landing content */}
+      <main className="hero">
+        <div className="hero-copy">
+          {/* Tagline Badge */}
+          <div 
+            className="hero-badge appear appear--pop" 
+            style={{ '--d': '0.22s' }}
+            onAnimationEnd={handleAnimationEnd}
+          >
+            THE FUTURE OF MARKETING
           </div>
 
-          {/* LAYER 20: Foreground Mountains Overlay */}
+          {/* Branding Title (Branding text — not a semantic heading to optimize page SEO) */}
+          <div className="hero-title">
+            <span className="headline-line">
+              <span 
+                className="appear appear--mask" 
+                style={{ '--d': '0.42s' }}
+                onAnimationEnd={handleAnimationEnd}
+              >
+                TALENTELLA
+              </span>
+            </span>
+          </div>
+
+          {/* Subtitle & Desc Description Container */}
           <div 
-            ref={mountainRef}
-            className="hero-mountain"
-            style={{
-              position: 'absolute',
-              bottom: '-27%', 
-              left: '-20%', 
-              width: '140%', 
-              height: '115%', 
-              pointerEvents: 'none',
-              zIndex: 20, 
-              backgroundImage: `url(${fgImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'bottom center',
-              backgroundRepeat: 'no-repeat',
-              opacity: 1,
-              mixBlendMode: 'normal'
-            }}
-            role="img"
-            aria-label="TalentElla hero background — India's leading 360 degree marketing agency creative landscape"
-          />
-
-          {/* LAYER 30: Intro and Content Over Mountain */}
-          <div style={{ position: 'absolute', zIndex: 30, top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
-            {/* Priority Hit: WebP with PNG fallback — 90% smaller than original PNGs */}
-            <picture>
-              <source srcSet="/bg5.webp" type="image/webp" />
-              <img src="/bg5.png" style={{ display: 'none' }} fetchPriority="high" decoding="async" loading="eager" alt="" />
-            </picture>
-            <picture>
-              <source srcSet="/fg.webp" type="image/webp" />
-              <img src="/fg.png" style={{ display: 'none' }} fetchPriority="high" decoding="async" loading="eager" alt="" />
-            </picture>
-            
-            <div style={{ position: 'relative', maxWidth: '1600px', width: '100%', margin: '0 auto', height: '100%' }}>
-              
-              {/* Bottom Left Content — Primary keyword in first 100 words */}
-              <div 
-                ref={addToContentRefs}
-                className="hero-description-mobile"
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '12%', 
-                  left: '4%', 
-                  textAlign: 'left', 
-                  maxWidth: '380px',
-                  pointerEvents: 'auto'
+            className="hero-subtitle-container appear appear--soft" 
+            style={{ '--d': '0.82s' }}
+            onAnimationEnd={handleAnimationEnd}
+          >
+            {/* INDUSTRY STANDARD SEO: Primary search keyword is the semantic H1 heading */}
+            <h1 className="hero-subtitle">Top Digital Marketing Agency in Jharkhand</h1>
+            <p className="hero-desc">
+              TalentElla is a full-service digital marketing and web development agency near you. We offer premium branding, graphic design, social media marketing, and SEO services for startups and businesses across India.
+            </p>
+            <div className="hero-actions">
+              <button 
+                className="btn btn-solid"
+                onClick={() => {
+                  const contactEl = document.getElementById('contact');
+                  if (contactEl) {
+                    contactEl.scrollIntoView({ behavior: 'smooth' });
+                  }
                 }}
               >
-                <h1 style={{ fontSize: 'clamp(0.75rem, 2.5vw, 1rem)', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
-                  Top Digital Marketing Agency in Jharkhand
-                </h1>
-                <p style={{ 
-                  fontFamily: "'Outfit', sans-serif",
-                  fontSize: 'clamp(0.75rem, 2vw, 0.95rem)', 
-                  margin: '0 0 1.5rem 0', 
-                  lineHeight: '1.6',
-                  fontWeight: 400,
-                  color: 'rgba(255, 255, 255, 0.6)'
-                }}>
-                   TalentElla is a full-service digital marketing and web development agency near you. We offer premium branding, graphic design, social media marketing, and SEO services for startups and businesses across India.
-                </p>
-                
-                {/* SEO CTA Button */}
-                <motion.button 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  aria-label="Get a free strategy call from TalentElla — India's 360 degree marketing agency"
-                  style={{ 
-                    fontSize: '0.85rem', 
-                    padding: '12px 28px', 
-                    display: 'inline-flex', 
-                    alignItems: 'center', 
-                    gap: '0.5rem',
-                    backgroundColor: '#fff',
-                    color: '#000',
-                    borderRadius: '50px',
-                    fontWeight: 600,
-                    border: 'none',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Get a Free Strategy Call <ArrowRight size={16} />
-                </motion.button>
-              </div>
-
-              {/* Bottom Right Content */}
-              <div 
-                ref={addToContentRefs} 
-                className="hidden-mobile"
-                style={{ 
-                  position: 'absolute', 
-                  bottom: '20%', 
-                  right: '5%', 
-                  textAlign: 'right', 
-                  maxWidth: '300px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-end',
-                  gap: '1.5rem',
-                  pointerEvents: 'auto'
-                }}
-              >
-                <div style={{ textAlign: 'right' }}>
-                  <h2 style={{ fontSize: '1rem', fontWeight: 800, margin: '0 0 0.5rem 0', letterSpacing: '0.05em', textTransform: 'uppercase', color: '#fff' }}>
-                    Integrated Marketing Solutions
-                  </h2>
-                  <p style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.6)', margin: 0, lineHeight: 1.6 }}>
-                    Est. 2026. Elevating brands through omnichannel marketing solutions — blending online and offline strategies for maximum impact across India.
-                  </p>
-                </div>
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                  <span style={{ fontSize: '0.7rem', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.8)', textTransform: 'uppercase', fontWeight: 600 }}>
-                    Scroll to explore
-                  </span>
-                  <motion.div 
-                    animate={{ y: [0, 8, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                    aria-label="Scroll down to explore TalentElla's marketing services"
-                    style={{ 
-                      cursor: 'pointer', 
-                      width: '36px', 
-                      height: '36px', 
-                      borderRadius: '50%', 
-                      border: '1px solid rgba(255,255,255,0.3)', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      justifyContent: 'center',
-                      backgroundColor: 'transparent'
-                    }}
-                  >
-                    <ChevronDown size={18} color="white" />
-                  </motion.div>
-                </div>
-              </div>
-
+                Get a Free Strategy Call <ArrowRight size={16} style={{ marginLeft: '8px' }} />
+              </button>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Responsive overrides for hero title position and mountain zoom */}
-      <style>{`
-        /* Tablet: push title down a bit, zoom mountain */
-        @media (max-width: 1024px) {
-          .hero-title-block {
-            top: 25% !important;
-          }
-          .hero-mountain {
-            height: 140% !important;
-            bottom: -25% !important;
-            width: 160% !important;
-            left: -30% !important;
-          }
-          .hero-description-mobile {
-             bottom: 8% !important;
-             left: 50% !important;
-             transform: translateX(-50%) !important;
-             text-align: center !important;
-             width: 90% !important;
-             max-width: 500px !important;
-          }
-        }
-        /* Mobile: push title further down, mountain covers more */
-        @media (max-width: 768px) {
-          .hero-title-block {
-            top: 22% !important;
-          }
-          .hero-mountain {
-            height: 160% !important;
-            bottom: -30% !important;
-            width: 200% !important;
-            left: -50% !important;
-          }
-          .hero-description-mobile {
-             bottom: auto !important;
-             top: 30% !important;
-             left: 50% !important;
-             transform: translateX(-50%) !important;
-             text-align: center !important;
-             width: 92% !important;
-             max-width: 400px !important;
-             display: flex !important;
-             flex-direction: column !important;
-             align-items: center !important;
-          }
-          .hero-description-mobile h1 {
-             font-size: 0.8rem !important;
-          }
-          .hero-description-mobile p {
-             font-size: 0.8rem !important;
-             line-height: 1.5 !important;
-             margin-bottom: 1rem !important;
-          }
-        }
-      `}</style>
+      </main>
     </div>
   );
 };

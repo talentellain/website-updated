@@ -1,287 +1,290 @@
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useRef, useState, useEffect } from 'react';
+'use client';
 
-const PortfolioCard = ({ 
-  item, 
-  index, 
-  activeIndex, 
-  portfolioLength, 
-  setSelectedId, 
-  setActiveIndex, 
-  selectedId 
-}) => {
-  const videoRef = useRef(null);
-  // Calculate relative position to active index
-  let diff = index - activeIndex;
-  
-  // Infinite loop correction
-  if (diff > portfolioLength / 2) diff -= portfolioLength;
-  if (diff < -portfolioLength / 2) diff += portfolioLength;
-
-  const isActive = diff === 0;
-  const isNear = Math.abs(diff) === 1;
-  const isVisible = Math.abs(diff) <= 2; // Show 5 cards at most
-
-  // Local Mouse Tilt Logic for Universal Interaction
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 20 });
-  
-  // Interactive tilt
-  const tiltX = useTransform(mouseYSpring, [-0.5, 0.5], [7, -7]);
-  const tiltY = useTransform(mouseXSpring, [-0.5, 0.5], [-7, 7]);
-
-  // Position offsets using element-relative percentage for bulletproof stacking
-  const xOffset = `${diff * 85}%`;
-  const zOffset = isActive ? 150 : isNear ? 0 : -150;
-  const scale = isActive ? 1.1 : isNear ? 0.85 : 0.65;
-  const opacity = isActive ? 1 : isNear ? 0.6 : 0.2;
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
-    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseEnter = () => {
-    // Keep tilt interaction but no need to play() manually if autoPlay is on
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-    // Removed pause and reset to keep videos playing
-  };
-
-  // Ensure video plays on mount/update if visible
-  useEffect(() => {
-    if (videoRef.current) {
-        if (isVisible) {
-            videoRef.current.play().catch(e => console.log("Autoplay blocked:", e));
-        } else {
-            videoRef.current.pause();
-        }
-    }
-  }, [item.content, isVisible]);
-
-  if (!isVisible && !isActive) return null;
-
-  return (
-    <motion.div
-      layoutId={item.id}
-      animate={{ 
-        x: xOffset,
-        z: zOffset,
-        rotateY: diff * -35,
-        scale: scale,
-        opacity: opacity,
-      }}
-      transition={{ 
-        type: 'spring',
-        stiffness: 260,
-        damping: 30,
-        mass: 1
-      }}
-      style={{ 
-        position: 'absolute',
-        width: 'clamp(200px, 40vw, 280px)',
-        aspectRatio: '1/1.3',
-        zIndex: 10 - Math.abs(diff),
-        filter: selectedId && selectedId !== item.id ? 'blur(10px) brightness(0.3)' : 'none',
-        transformStyle: 'preserve-3d',
-        perspective: 1200
-      }}
-    >
-      <motion.div
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onClick={() => isActive ? setSelectedId(item.id) : setActiveIndex(index)}
-        style={{
-          width: '100%',
-          height: '100%',
-          cursor: 'pointer',
-          borderRadius: '32px',
-          overflow: 'hidden',
-          backgroundColor: '#121214',
-          border: isActive ? '2px solid rgba(114, 38, 255, 0.5)' : '1px solid rgba(255,255,255,0.08)',
-          boxShadow: isActive ? '0 30px 60px rgba(114, 38, 255, 0.2)' : '0 10px 30px rgba(0,0,0,0.4)',
-          rotateX: tiltX,
-          rotateY: tiltY,
-          transformStyle: 'preserve-3d',
-        }}
-        whileTap={{ scale: isActive ? 0.98 : 1 }}
-      >
-        {item.type === 'video' ? (
-          <video 
-            ref={videoRef}
-            src={item.content}
-            poster={item.thumbnail}
-            muted
-            loop
-            playsInline
-            preload="none"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-        ) : (
-          <img 
-            src={item.content} 
-            alt={item.title} 
-            loading="lazy"
-            decoding="async"
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-          />
-        )}
-
-        {/* Rolling Overlay */}
-        <motion.div 
-          animate={{ opacity: isActive ? 1 : 0 }}
-          style={{ 
-            position: 'absolute', 
-            inset: 0, 
-            background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, transparent 60%)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            padding: '1.5rem',
-            pointerEvents: 'none'
-          }}
-        >
-          <h2 style={{ color: 'white', margin: 0, fontSize: 'clamp(0.9rem, 3.5vw, 1.15rem)', fontWeight: 800 }}>{item.title}</h2>
-          <p style={{ color: 'rgba(255,255,255,0.6)', margin: '0.15rem 0 0 0', fontSize: 'clamp(0.65rem, 2.2vw, 0.75rem)', lineHeight: 1.25 }}>{item.description}</p>
-        </motion.div>
-      </motion.div>
-    </motion.div>
-  );
-};
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, ArrowUpRight } from 'lucide-react';
+import { useState, useMemo } from 'react';
 
 const SocialMediaPortfolio = ({ portfolio }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
   const [selectedId, setSelectedId] = useState(null);
-  const containerRef = useRef(null);
+
+  // Interweave portrait and landscape items into a perfectly balanced grid pattern
+  const mixedPortfolio = useMemo(() => {
+    if (!portfolio || portfolio.length === 0) return [];
+    
+    const portraits = [...portfolio.filter(item => item.orientation !== 'landscape')];
+    const landscapes = [...portfolio.filter(item => item.orientation === 'landscape')];
+    
+    const mixed = [];
+    let pIdx = 0;
+    let lIdx = 0;
+
+    // Define a repeating layout structure that matches grid slots:
+    // Row 1: Portrait (1 col) + Landscape (2 cols)
+    if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+    if (landscapes[lIdx]) mixed.push(landscapes[lIdx++]);
+
+    // Row 2: Landscape (2 cols) + Portrait (1 col)
+    if (landscapes[lIdx]) mixed.push(landscapes[lIdx++]);
+    if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+
+    // Row 3: 3 Portraits (1 col each)
+    for (let i = 0; i < 3; i++) {
+      if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+    }
+
+    // Row 4: Landscape (2 cols) + Portrait (1 col)
+    if (landscapes[lIdx]) mixed.push(landscapes[lIdx++]);
+    if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+
+    // Row 5: Portrait (1 col) + Landscape (2 cols)
+    if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+    if (landscapes[lIdx]) mixed.push(landscapes[lIdx++]);
+
+    // Row 6: 3 Portraits (1 col each)
+    for (let i = 0; i < 3; i++) {
+      if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+    }
+
+    // Row 7: Landscape (2 cols) + Portrait (1 col)
+    if (landscapes[lIdx]) mixed.push(landscapes[lIdx++]);
+    if (portraits[pIdx]) mixed.push(portraits[pIdx++]);
+
+    // Append any leftover items dynamically
+    while (pIdx < portraits.length) {
+      mixed.push(portraits[pIdx++]);
+    }
+    while (lIdx < landscapes.length) {
+      mixed.push(landscapes[lIdx++]);
+    }
+
+    return mixed;
+  }, [portfolio]);
 
   if (!portfolio || portfolio.length === 0) return null;
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % portfolio.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + portfolio.length) % portfolio.length);
-  };
 
   const selectedItem = portfolio.find(item => item.id === selectedId);
 
   return (
-    <div ref={containerRef} style={{ 
-      position: 'relative', 
-      minHeight: '55vh', 
-      width: '100%',
-      padding: '0', 
-      backgroundColor: '#000000', 
-      overflow: 'visible',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      {/* Background Sphere Glow */}
-      <div style={{ 
-        position: 'absolute', 
-        top: '50%', 
-        left: '50%', 
-        transform: 'translate(-50%, -50%)',
-        width: '100vw',
-        height: '100vh',
-        background: 'radial-gradient(circle, rgba(114, 38, 255, 0.05) 0%, transparent 70%)',
-        pointerEvents: 'none',
-        zIndex: 1
-      }} />
+    <div style={{ position: 'relative', width: '100%', backgroundColor: '#000000', padding: '30px 0' }}>
+      
+      {/* Local CSS Stylesheet to guarantee dynamic orientation rendering and perfect grid pack flow */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .portfolio-grid-container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          grid-auto-flow: dense;
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          padding: 0 20px;
+          box-sizing: border-box;
+        }
 
-      {/* 3D Carousel Container */}
-      <div style={{ 
-        position: 'relative', 
-        zIndex: 2,
-        width: '100%',
-        maxWidth: '1200px',
-        height: '400px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        perspective: '1200px',
-        transformStyle: 'preserve-3d'
-      }}>
-        {portfolio.map((item, index) => (
-          <PortfolioCard 
-            key={item.id} 
-            item={item} 
-            index={index} 
-            activeIndex={activeIndex}
-            portfolioLength={portfolio.length}
-            setSelectedId={setSelectedId}
-            setActiveIndex={setActiveIndex}
-            selectedId={selectedId}
-          />
-        ))}
+        .portfolio-bento-card {
+          position: relative;
+          border-radius: 24px;
+          background-color: #0e0e11;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 24px;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+
+        .portfolio-bento-card:hover {
+          border-color: rgba(172, 88, 233, 0.35);
+          box-shadow: 0 20px 40px rgba(172, 88, 233, 0.15);
+        }
+
+        .portfolio-card-portrait {
+          grid-column: span 1;
+          grid-row: span 2;
+          min-height: 480px;
+        }
+
+        .portfolio-card-landscape {
+          grid-column: span 2;
+          grid-row: span 1;
+          min-height: 230px;
+        }
+
+        .portfolio-card-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: 0.55;
+          pointer-events: none;
+          transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-bento-card:hover .portfolio-card-video {
+          opacity: 0.9;
+          transform: scale(1.05);
+        }
+
+        .portfolio-card-overlay {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.25) 60%, transparent 100%);
+          pointer-events: none;
+          z-index: 10;
+        }
+
+        .portfolio-card-text {
+          position: relative;
+          z-index: 20;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          text-align: left;
+        }
+
+        .portfolio-card-category {
+          font-size: 10px;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.15em;
+          color: #AC58E9;
+        }
+
+        .portfolio-card-title {
+          font-size: clamp(1.1rem, 2vw, 1.35rem);
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: -0.015em;
+          color: #ffffff;
+          margin: 0;
+          line-height: 1.2;
+          transition: color 0.3s ease;
+        }
+
+        .portfolio-bento-card:hover .portfolio-card-title {
+          color: #AC58E9;
+        }
+
+        .portfolio-card-desc {
+          font-size: 12px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.55);
+          line-height: 1.5;
+          margin: 4px 0 0 0;
+          max-width: 92%;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .portfolio-card-arrow {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          z-index: 20;
+          width: 38px;
+          height: 38px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #ffffff;
+          opacity: 0;
+          transform: translateY(6px);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-bento-card:hover .portfolio-card-arrow {
+          opacity: 1;
+          transform: translateY(0);
+          background: #AC58E9;
+          border-color: #AC58E9;
+          box-shadow: 0 0 15px rgba(172, 88, 233, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+          .portfolio-grid-container {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .portfolio-card-portrait {
+            min-height: 420px;
+          }
+          .portfolio-card-landscape {
+            min-height: 200px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .portfolio-grid-container {
+            grid-template-columns: 1fr;
+            padding: 0 16px;
+          }
+          .portfolio-card-portrait, .portfolio-card-landscape {
+            grid-column: span 1 !important;
+            grid-row: span 1 !important;
+            min-height: 280px !important;
+          }
+        }
+      ` }} />
+
+      {/* Bento Grid Layout Container */}
+      <div className="portfolio-grid-container select-none">
+        {mixedPortfolio.map((item) => {
+          const isLandscape = item.orientation === 'landscape';
+          return (
+            <div 
+              key={item.id}
+              onClick={() => setSelectedId(item.id)}
+              className={`portfolio-bento-card ${isLandscape ? 'portfolio-card-landscape' : 'portfolio-card-portrait'}`}
+            >
+              {item.type === 'video' ? (
+                <video 
+                  src={item.content}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="portfolio-card-video"
+                />
+              ) : (
+                <img 
+                  src={item.content} 
+                  alt={item.title}
+                  className="portfolio-card-video"
+                />
+              )}
+              <div className="portfolio-card-overlay" />
+              
+              <div className="portfolio-card-text">
+                <span className="portfolio-card-category">
+                  {item.category || 'VIDEO PRODUCTION'}
+                </span>
+                <h3 className="portfolio-card-title">
+                  {item.title}
+                </h3>
+                {item.description && (
+                  <p className="portfolio-card-desc">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+              
+              <div className="portfolio-card-arrow">
+                <ArrowUpRight size={18} />
+              </div>
+            </div>
+          );
+        })}
       </div>
 
-      {/* Navigation Buttons */}
-      <motion.button
-        whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.08)' }}
-        whileTap={{ scale: 0.9 }}
-        onClick={handlePrev}
-        style={{ 
-          position: 'absolute',
-          left: '5%',
-          top: '50%',
-          y: '-50%',
-          width: '44px', 
-          height: '44px', 
-          borderRadius: '50%', 
-          backgroundColor: 'rgba(255,255,255,0.03)', 
-          border: '1px solid rgba(255,255,255,0.1)',
-          color: '#ffffff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          backdropFilter: 'blur(10px)',
-          zIndex: 30
-        }}
-      >
-        <ChevronLeft size={20} />
-      </motion.button>
-
-      <motion.button
-        whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.08)' }}
-        whileTap={{ scale: 0.9 }}
-        onClick={handleNext}
-        style={{ 
-          position: 'absolute',
-          right: '5%',
-          top: '50%',
-          y: '-50%',
-          width: '44px', 
-          height: '44px', 
-          borderRadius: '50%', 
-          backgroundColor: 'rgba(255,255,255,0.03)', 
-          border: '1px solid rgba(255,255,255,0.1)',
-          color: '#ffffff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          backdropFilter: 'blur(10px)',
-          zIndex: 30
-        }}
-      >
-        <ChevronRight size={20} />
-      </motion.button>
-
-      {/* Pop-out Modal */}
+      {/* Pop-out Modal Overlay and Video Player */}
       <AnimatePresence>
         {selectedId && selectedItem && (
           <>
@@ -326,8 +329,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
                   <video 
                     src={selectedItem.content} 
                     autoPlay 
-                    muted 
-                    loop 
+                    controls
                     preload="metadata"
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

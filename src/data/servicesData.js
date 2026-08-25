@@ -98,7 +98,7 @@ export const servicesData = [
     // ── GEO: Answer-first block ──
     answerBlock: {
       question: 'What is Website Development?',
-      answer: 'Website development is the process of designing, building, and maintaining websites and web applications. At TalentElla, we create custom, high-performance websites using modern technologies like React, Next.js, and Node.js — optimized for speed, SEO, and conversions. Our full-service digital marketing agency in India delivers responsive designs that work seamlessly across all devices, starting from ₹5,999.',
+      answer: 'Website development is the process of designing, building, and maintaining websites and web applications. At TalentElla, we create custom, high-performance websites using modern technologies like React, Next.js, and Node.js — optimized for speed, SEO, and conversions. Our full-service digital marketing agency in India delivers responsive designs that work seamlessly across all devices, starting from ₹7,599.',
     },
     // ── FAQs with FAQPage schema ──
     faqs: [
@@ -179,28 +179,28 @@ export const servicesData = [
       { 
         name: 'Starter Website', 
         subtitle: 'Perfect for startups and local businesses.',
-        price: '₹5,999', 
+        price: '₹7,599', 
         billing: 'one-time',
         features: ['Up to 5 Pages', 'Responsive Design', 'Mobile Optimization', 'Contact Form', 'Basic SEO Setup', 'WhatsApp Integration', 'Google Maps Integration', 'Fast Loading Website', 'SSL Setup', '1 Month Support'],
-        priceNum: 5999,
+        priceNum: 7599,
         popular: false
       },
       { 
         name: 'Growth Website', 
         subtitle: 'Perfect for growing businesses.',
-        price: '₹19,999', 
+        price: '₹21,999', 
         billing: 'one-time',
         features: ['Up to 10 Pages', 'Custom Website Design', 'CMS Integration', 'Blog Setup', 'Advanced SEO Setup', 'Analytics Integration', 'WhatsApp & Contact Forms', 'Lead Capture Forms', 'Performance Optimization', '3 Months Support'],
-        priceNum: 19999,
+        priceNum: 21999,
         popular: true
       },
       { 
         name: 'Premium Website', 
         subtitle: 'Complete business website solution.',
-        price: '₹39,999', 
+        price: '₹44,999', 
         billing: 'one-time',
         features: ['Unlimited Pages', 'Premium Custom Design', 'Advanced Animations', 'CMS Integration', 'E-Commerce Functionality', 'Payment Gateway Integration', 'Custom Integrations', 'Advanced SEO Optimization', 'Analytics Dashboard', 'Speed Optimization', 'Security Hardening', 'Priority Support', '6 Months Support', 'Source Code Ownership'],
-        priceNum: 39999,
+        priceNum: 44999,
         popular: false
       }
     ]

@@ -175,9 +175,9 @@ export const servicesDataMap = {
     serviceId: 'website-development',
     tagline: 'Custom Website Development',
     description: 'Get custom, high-performance websites optimized for speed, mobile responsiveness, and high conversion rates.',
-    price: '₹5,999',
+    price: '₹7,599',
     faqs: [
-      { question: 'What is the cost of website development in [City]?', answer: 'Our custom website development packages in [City] start at just ₹5,999 for a basic business website. Professional business pages with dynamic blogs start at ₹19,999, and fully custom e-commerce or portal sites begin at ₹39,999.' },
+      { question: 'What is the cost of website development in [City]?', answer: 'Our custom website development packages in [City] start at just ₹7,599 for a basic business website. Professional business pages with dynamic blogs start at ₹21,999, and fully custom e-commerce or portal sites begin at ₹44,999.' },
       { question: 'How long does it take to deliver a website in [City]?', answer: 'A standard website takes 1-2 weeks from design to deployment. Custom web apps and e-commerce stores take between 3-4 weeks depending on database configurations.' },
       { question: 'Do you provide website maintenance in [City]?', answer: 'Yes, we provide monthly website maintenance packages in [City] covering daily backups, security monitoring, server health audits, and priority bug fixing.' }
     ]
@@ -187,9 +187,9 @@ export const servicesDataMap = {
     serviceId: 'website-development',
     tagline: 'Custom Website Development',
     description: 'Get custom, high-performance websites optimized for speed, mobile responsiveness, and high conversion rates.',
-    price: '₹5,999',
+    price: '₹7,599',
     faqs: [
-      { question: 'What is the cost of website development in [City]?', answer: 'Our custom website development packages in [City] start at just ₹5,999 for a basic business website. Professional business pages with dynamic blogs start at ₹19,999, and fully custom e-commerce or portal sites begin at ₹39,999.' },
+      { question: 'What is the cost of website development in [City]?', answer: 'Our custom website development packages in [City] start at just ₹7,599 for a basic business website. Professional business pages with dynamic blogs start at ₹21,999, and fully custom e-commerce or portal sites begin at ₹44,999.' },
       { question: 'How long does it take to deliver a website in [City]?', answer: 'A standard website takes 1-2 weeks from design to deployment. Custom web apps and e-commerce stores take between 3-4 weeks depending on database configurations.' },
       { question: 'Do you provide website maintenance in [City]?', answer: 'Yes, we provide monthly website maintenance packages in [City] covering daily backups, security monitoring, server health audits, and priority bug fixing.' }
     ]

@@ -58,12 +58,12 @@ const WhyTalentElla = () => {
       <section
         style={{ 
           borderTop: '1px solid rgba(255,255,255,0.05)', 
-          padding: isMobile ? '80px 0' : '120px 0',
+          padding: isMobile ? '50px 0 30px 0' : '80px 0 30px 0',
           position: 'relative',
           overflow: 'hidden'
         }}
       >
-        <div style={{ width: '100%', height: '100%', overflowY: isMobile ? 'visible' : 'auto', padding: isMobile ? '0 5%' : '10vh 5%' }}>
+        <div style={{ width: '100%', height: '100%', overflowY: isMobile ? 'visible' : 'auto', padding: isMobile ? '0 5%' : '4vh 5% 2vh 5%' }}>
           <div style={{ maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
             
             {/* Top Section: Our Winning Formula */}
