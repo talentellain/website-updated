@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
+  const videoRef = React.useRef(null);
   useEffect(() => {
     let animationTriggered = false;
     const forceIsIn = () => {
@@ -268,103 +269,51 @@ const Hero = () => {
         /* --- Entrance Motion System --- */
         .appear {
           opacity: 1;
-        }
-
-        @media (prefers-reduced-motion: no-preference) {
-          .appear {
-            opacity: 0;
-            animation-duration: 1.05s;
-            animation-fill-mode: both;
-            animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-            animation-delay: var(--d, 0.08s);
-          }
-
-          .appear--pop { animation-name: in-pop; }
-          .appear--mask { animation-name: in-mask; }
-          .appear--soft { animation-name: in-soft; }
-
-          .hero-photo {
-            opacity: 0;
-            animation: hero-fade-in 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-          }
+          transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes in-pop {
-          0% { opacity: 0; transform: scale(0.9); }
-          70% { opacity: 1; transform: scale(1.03); }
+          0% { opacity: 0; transform: scale(0.95); }
           100% { opacity: 1; transform: scale(1); }
         }
         @keyframes in-mask {
-          0% { opacity: 0; transform: translateY(40%); }
+          0% { opacity: 0; transform: translateY(20px); }
           100% { opacity: 1; transform: translateY(0); }
         }
         @keyframes in-soft {
-          0% { opacity: 0; transform: translateY(14px); }
+          0% { opacity: 0; transform: translateY(12px); }
           100% { opacity: 1; transform: translateY(0); }
         }
-        @keyframes hero-fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
 
-        /* Clean animations on end */
-        .is-in,
-        .is-in * {
-          animation: none !important;
-          opacity: 1 !important;
-          transform: none !important;
-          clip-path: none !important;
-          filter: none !important;
-        }
+        .appear--pop { animation: in-pop 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .appear--mask { animation: in-mask 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .appear--soft { animation: in-soft 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
 
-        /* Reduced Motion */
-        @media (prefers-reduced-motion: reduce) {
-          *, *::before, *::after {
-            transition: none !important;
-            animation: none !important;
-          }
-          .appear, .hero-photo {
-            opacity: 1 !important;
-            transform: none !important;
-            clip-path: none !important;
-            filter: none !important;
-          }
-        }
-
-        @media (max-width: 900px) {
-          .hero {
-            padding: 20px;
-          }
-          .hero-subtitle-container {
-            max-width: 100%;
-          }
-        }
-
-        @media (max-width: 560px) {
-          .hero-actions {
-            flex-direction: column;
-            width: 100%;
-            gap: 10px;
-          }
-          .hero-actions .btn {
-            width: 100%;
-          }
+        .hero-photo {
+          opacity: 1;
+          transition: opacity 0.4s ease;
         }
       ` }} />
 
       {/* Decorative Grain texture */}
       <div className="grain"></div>
 
-      {/* Background purple smoke video (ARIA hidden since it is purely decorative) */}
+      {/* Background purple smoke video (Instant render optimized) */}
       <div className="hero-photo">
         <video 
+          ref={videoRef}
           src="/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4" 
           autoPlay 
           loop 
           muted 
           playsInline
+          preload="auto"
+          fetchPriority="high"
           aria-hidden="true"
           tabIndex="-1"
+          onCanPlay={(e) => {
+            e.currentTarget.play().catch(() => {});
+          }}
           onAnimationEnd={handleAnimationEnd}
         ></video>
       </div>
