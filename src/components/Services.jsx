@@ -20,6 +20,20 @@ const serviceNumbers = {
   'visual-identity-design': '04'
 };
 
+const serviceHoverImages = {
+  'app-development': '/projects/zobiit.png',
+  'website-development': '/thubnail-website/image copy 2.png',
+  'social-media-management': '/projects/addidas.png',
+  'visual-identity-design': '/talentella strip design.png'
+};
+
+const serviceOrientations = {
+  'app-development': 'landscape',
+  'website-development': 'landscape',
+  'social-media-management': 'portrait',
+  'visual-identity-design': 'landscape'
+};
+
 const MotionLink = motion(Link);
 
 const Services = () => {
@@ -35,6 +49,7 @@ const Services = () => {
           z-index: 35;
           font-family: 'Inter', sans-serif;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
+          overflow: visible;
         }
 
         .services-header-v2 {
@@ -69,12 +84,14 @@ const Services = () => {
           margin: 0 auto;
           display: flex;
           flex-direction: column;
+          position: relative;
+          overflow: visible;
         }
 
         .service-row-v2 {
           display: flex;
           align-items: center;
-          padding: 38px 12px;
+          padding: 42px 12px;
           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
           text-decoration: none !important;
           color: #ffffff !important;
@@ -82,6 +99,7 @@ const Services = () => {
           position: relative;
           cursor: pointer;
           outline: none;
+          overflow: visible !important;
         }
 
         /* Border top on the first row to frame the list */
@@ -91,13 +109,14 @@ const Services = () => {
 
         .service-row-v2:hover {
           border-color: rgba(124, 58, 237, 0.4);
+          z-index: 40;
         }
 
         .service-num-v2 {
           font-size: clamp(1.8rem, 4vw, 3.5rem);
           font-weight: 800;
           color: rgba(255, 255, 255, 0.15);
-          min-width: 180px; /* Increased gap between number and text */
+          min-width: 180px;
           transition: color 0.4s ease, transform 0.4s ease;
           font-family: 'Syne', sans-serif;
         }
@@ -112,11 +131,11 @@ const Services = () => {
           display: flex;
           flex-direction: column;
           gap: 8px;
-          padding-right: 40px;
+          padding-right: 200px; /* Generous gap preventing title text overlap */
         }
 
         .service-title-v2 {
-          font-size: clamp(1.25rem, 2.8vw, 1.85rem); /* Made slightly smaller */
+          font-size: clamp(1.25rem, 2.8vw, 1.85rem);
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: -0.015em;
@@ -127,11 +146,11 @@ const Services = () => {
         }
 
         .service-desc-v2 {
-          font-size: clamp(0.85rem, 1.6vw, 0.95rem); /* Made slightly smaller */
+          font-size: clamp(0.85rem, 1.6vw, 0.95rem);
           line-height: 1.6;
           color: rgba(255, 255, 255, 0.5);
           font-weight: 400;
-          max-width: 820px;
+          max-width: 520px;
           margin: 0;
           font-family: 'Outfit', sans-serif;
           transition: color 0.4s ease;
@@ -141,8 +160,53 @@ const Services = () => {
           color: rgba(255, 255, 255, 0.85);
         }
 
+        /* Base Hover Preview Image Box */
+        .service-preview-box {
+          position: absolute;
+          right: -40px; /* Floats OUT of the right side of the row container */
+          top: 50%;
+          border-radius: 16px;
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(-50%) scale(0.65) rotate(-6deg);
+          pointer-events: none;
+          transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(124, 58, 237, 0.4);
+          background: #121214;
+          z-index: 50;
+        }
+
+        /* Landscape Card Sizing */
+        .service-preview-box.is-landscape {
+          width: 220px;
+          height: 140px;
+        }
+
+        /* Portrait Card Sizing */
+        .service-preview-box.is-portrait {
+          width: 150px;
+          height: 210px;
+        }
+
+        .service-row-v2:hover .service-preview-box {
+          opacity: 1;
+          transform: translateY(-50%) scale(1.08) rotate(2deg) translateX(30px);
+        }
+
+        .service-preview-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-row-v2:hover .service-preview-img {
+          transform: scale(1.1);
+        }
+
         .service-arrow-v2 {
-          width: 50px; /* Made slightly smaller */
+          width: 50px;
           height: 50px;
           border-radius: 50%;
           border: 1px solid rgba(255, 255, 255, 0.16);
@@ -151,6 +215,9 @@ const Services = () => {
           justify-content: center;
           transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
           background: transparent;
+          flex-shrink: 0;
+          position: relative;
+          z-index: 20;
         }
 
         .service-row-v2:hover .service-arrow-v2 {
@@ -170,7 +237,32 @@ const Services = () => {
           transform: rotate(45deg);
         }
 
-        /* Mobile Adjustments */
+        /* Mobile & Tablet Adjustments */
+        @media (max-width: 1200px) {
+          .service-preview-box.is-landscape {
+            right: 0px;
+            width: 180px;
+            height: 115px;
+          }
+          .service-preview-box.is-portrait {
+            right: 0px;
+            width: 135px;
+            height: 190px;
+          }
+          .service-content-v2 {
+            padding-right: 140px;
+          }
+        }
+
+        @media (max-width: 880px) {
+          .service-preview-box {
+            display: none;
+          }
+          .service-content-v2 {
+            padding-right: 0;
+          }
+        }
+
         @media (max-width: 768px) {
           .services-section-v2 {
             padding: 70px 16px;
@@ -197,10 +289,6 @@ const Services = () => {
             transform: translateX(4px);
           }
 
-          .service-content-v2 {
-            padding-right: 0;
-          }
-
           .service-arrow-v2 {
             align-self: flex-end;
             margin-top: 6px;
@@ -220,6 +308,8 @@ const Services = () => {
           const num = serviceNumbers[s.id] || `0${index + 1}`;
           const displayTitle = serviceDisplayTitles[s.id] || s.title.toUpperCase();
           const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
+          const previewImg = serviceHoverImages[s.id] || '/thubnail-website/image copy 2.png';
+          const orientation = serviceOrientations[s.id] || 'landscape';
 
           return (
             <MotionLink 
@@ -237,6 +327,15 @@ const Services = () => {
               <div className="service-content-v2">
                 <h3 className="service-title-v2">{displayTitle}</h3>
                 <p className="service-desc-v2">{s.description}</p>
+              </div>
+
+              {/* Dynamic Hover Preview Image Box (Landscape or Portrait) */}
+              <div className={`service-preview-box is-${orientation}`}>
+                <img 
+                  src={previewImg} 
+                  alt={`${s.title} preview`} 
+                  className="service-preview-img"
+                />
               </div>
 
               <div className="service-arrow-v2">
