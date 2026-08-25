@@ -105,6 +105,21 @@ const Hero = () => {
           background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
         }
 
+        @keyframes smoke-pulse {
+          0% {
+            transform: scale(1) translate(0, 0) rotate(0deg);
+            opacity: 0.5;
+          }
+          50% {
+            transform: scale(1.2) translate(-30px, 20px) rotate(5deg);
+            opacity: 0.85;
+          }
+          100% {
+            transform: scale(1.05) translate(20px, -15px) rotate(-3deg);
+            opacity: 0.6;
+          }
+        }
+
         /* Background video styling with purple overlay */
         .hero-photo {
           position: absolute;
@@ -114,21 +129,34 @@ const Hero = () => {
           background: #000000;
         }
 
+        .hero-smoke-aura {
+          position: absolute;
+          inset: -25%;
+          background: radial-gradient(ellipse at 50% 45%, rgba(147, 51, 234, 0.55) 0%, rgba(124, 58, 237, 0.35) 40%, rgba(0, 0, 0, 0.98) 75%);
+          filter: blur(50px);
+          animation: smoke-pulse 12s ease-in-out infinite alternate;
+          pointer-events: none;
+          z-index: 1;
+        }
+
         .hero-photo video {
+          position: relative;
+          z-index: 2;
           width: 100%;
           height: 100%;
           object-fit: cover;
           filter: contrast(1.15) brightness(0.95);
         }
 
-        /* INDUSTRY STANDARD: Scrim/Overlay gradient to ensure WCAG AAA readability contrast */
+        /* Scrim/Overlay gradient to ensure WCAG AAA readability contrast */
         .hero-photo::after {
           content: "";
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle, rgba(12, 10, 20, 0.2) 0%, rgba(0, 0, 0, 0.75) 100%), #7C3AED;
+          background: radial-gradient(circle, rgba(12, 10, 20, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%), #7C3AED;
           mix-blend-mode: multiply;
           pointer-events: none;
+          z-index: 3;
         }
 
         /* Hero content block styling */
@@ -298,8 +326,9 @@ const Hero = () => {
       {/* Decorative Grain texture */}
       <div className="grain"></div>
 
-      {/* Background purple smoke video (Instant render optimized) */}
+      {/* Background purple smoke video (Instant render optimized + Ambient smoke fallback) */}
       <div className="hero-photo">
+        <div className="hero-smoke-aura"></div>
         <video 
           ref={videoRef}
           src="/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4" 
