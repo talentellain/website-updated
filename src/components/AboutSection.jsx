@@ -16,8 +16,8 @@ const AboutSection = () => {
   return (
     <>
       {/* ── VIDEO SECTION ── */}
-      <section style={{ backgroundColor: '#000', padding: '4rem 0' }}>
-        <div style={{ width: '95%', maxWidth: '1400px', aspectRatio: '21/9', minHeight: '300px', margin: '0 auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 0 30px rgba(0,0,0,0.5)', backgroundColor: '#111' }}>
+      <section style={{ backgroundColor: '#ffffff', padding: '4rem 0' }}>
+        <div style={{ width: '95%', maxWidth: '1400px', aspectRatio: '21/9', minHeight: '300px', margin: '0 auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', backgroundColor: '#f0f2f5' }}>
           <video 
             ref={videoRef}
             src="/video/Ropes_weaving_with_marketing_terms_202607100004.mp4" 
@@ -32,14 +32,14 @@ const AboutSection = () => {
       </section>
 
       <section style={{ 
-        backgroundColor: '#030303', 
-        minHeight: '100vh', 
+        backgroundColor: '#ffffff', 
+        minHeight: '80vh', 
         display: 'flex', 
         alignItems: 'center', 
-        justifyContent: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        padding: '4rem 2rem'
+        justifyContent: 'center', 
+        position: 'relative', 
+        overflow: 'hidden', 
+        padding: '4rem 2rem' 
       }}>
         <div style={{
           position: 'relative',
@@ -56,13 +56,13 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             style={{
-              fontSize: 'clamp(5rem, 12vw, 9rem)',
+              fontSize: 'clamp(4rem, 10vw, 7.5rem)',
               fontWeight: 900,
-              color: 'var(--accent)',
-              fontFamily: '"Impact", "Arial Black", sans-serif',
+              color: '#7C3AED',
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
               margin: '0 0 2rem 0',
               lineHeight: 1,
-              letterSpacing: '0.01em',
+              letterSpacing: '-0.02em',
               textTransform: 'uppercase'
             }}
           >
@@ -81,13 +81,13 @@ const AboutSection = () => {
               }
             }}
             style={{
-              color: '#d4d4d4',
-              fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
+              color: '#4b4d5a',
+              fontSize: 'clamp(1.05rem, 2.2vw, 1.35rem)',
               lineHeight: 1.8,
               fontWeight: 400,
-              fontFamily: '"Inter", sans-serif',
+              fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
               marginBottom: '4rem',
-              letterSpacing: '0.02em',
+              letterSpacing: '-0.01em',
               display: 'flex',
               flexDirection: 'column',
               gap: '1.2rem'
@@ -97,13 +97,13 @@ const AboutSection = () => {
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
               style={{ margin: 0 }}
             >
-              With over <strong style={{ color: '#fff', fontWeight: 600 }}>5 years of experience</strong> crafting digital products, I merge strategic thinking with cutting-edge design to solve complex problems.
+              With over <strong style={{ color: '#0f1015', fontWeight: 700 }}>5 years of experience</strong> crafting digital products, I merge strategic thinking with cutting-edge design to solve complex problems.
             </motion.p>
             <motion.p 
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
               style={{ margin: 0 }}
             >
-              My expertise spans across building <strong style={{ color: '#fff', fontWeight: 600 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
+              My expertise spans across building <strong style={{ color: '#0f1015', fontWeight: 700 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
             </motion.p>
             <motion.p 
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 

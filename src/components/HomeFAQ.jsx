@@ -11,7 +11,7 @@ const HomeFAQ = ({ faqs }) => {
   if (!faqs || faqs.length === 0) return null;
 
   return (
-    <section id="faq" style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#000000', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <section id="faq" style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
       <div style={{ 
         maxWidth: '1400px', 
         margin: '0 auto', 
@@ -45,18 +45,19 @@ const HomeFAQ = ({ faqs }) => {
             fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', 
             fontWeight: 900, 
             lineHeight: 0.9, 
-            color: '#ffffff', 
+            color: '#0f1015', 
             margin: '0 0 1.2rem 0', 
             textTransform: 'uppercase', 
             letterSpacing: '-0.04em',
             wordBreak: isMobile ? 'break-word' : 'normal',
             overflowWrap: isMobile ? 'break-word' : 'normal',
-            whiteSpace: isMobile ? 'normal' : 'nowrap'
+            whiteSpace: isMobile ? 'normal' : 'nowrap',
+            fontFamily: "'Space Grotesk', system-ui, sans-serif"
           }}>
             QUESTIONS<br /><span style={{ color: '#AC58E9' }}>ANSWERED</span>
           </h2>
           <p style={{ 
-            color: 'rgba(255,255,255,0.6)', 
+            color: '#555562', 
             fontSize: '0.9rem', 
             lineHeight: 1.5, 
             marginBottom: '2rem', 
@@ -89,9 +90,9 @@ const HomeFAQ = ({ faqs }) => {
         </div>
 
         {/* Right Column: Accordion */}
-        <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
           {faqs.map((faq, idx) => (
-            <div key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+            <div key={idx} style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
               <button 
                 onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} 
                 style={{ 
@@ -103,7 +104,7 @@ const HomeFAQ = ({ faqs }) => {
                   background: 'none', 
                   border: 'none', 
                   cursor: 'pointer', 
-                  color: '#ffffff', 
+                  color: '#0f1015', 
                   textAlign: 'left' 
                 }}
               >
@@ -111,15 +112,16 @@ const HomeFAQ = ({ faqs }) => {
                   fontSize: isMobile ? '0.9rem' : '0.95rem', 
                   fontWeight: 800, 
                   margin: 0, 
-                  color: openIndex === idx ? '#AC58E9' : '#ffffff',
+                  color: openIndex === idx ? '#AC58E9' : '#0f1015',
                   textTransform: 'uppercase',
                   maxWidth: '85%',
                   transition: '0.3s ease',
-                  lineHeight: 1.4
+                  lineHeight: 1.4,
+                  fontFamily: "'Space Grotesk', system-ui, sans-serif"
                 }}>
                   {faq.question}
                 </h3>
-                <span style={{ fontSize: '1.2rem', color: openIndex === idx ? '#AC58E9' : 'rgba(255,255,255,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
+                <span style={{ fontSize: '1.2rem', color: openIndex === idx ? '#AC58E9' : 'rgba(0,0,0,0.25)', fontWeight: 300, transition: '0.3s ease' }}>
                   {openIndex === idx ? '−' : '+'}
                 </span>
               </button>
@@ -132,7 +134,7 @@ const HomeFAQ = ({ faqs }) => {
                     style={{ overflow: 'hidden' }}
                   >
                     <p style={{ 
-                      color: 'rgba(255,255,255,0.6)', 
+                      color: '#555562', 
                       fontSize: '0.9rem', 
                       lineHeight: 1.6, 
                       paddingBottom: isMobile ? '2.2rem' : '2rem', 

@@ -139,7 +139,7 @@ const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects, 
       >
         <div className="flex-col-mobile" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1.5rem', marginBottom: '2rem' }}>
           <div style={{ display: 'flex', gap: 'clamp(1rem, 3vw, 2.5rem)', alignItems: 'center' }}>
-            <span style={{ fontSize: '2.5rem', fontWeight: 900, opacity: 0.15, lineHeight: 1, fontFamily: 'Outfit, sans-serif' }}>{project.id}</span>
+            <span style={{ fontSize: '2.5rem', fontWeight: 900, opacity: 0.15, lineHeight: 1, fontFamily: "'Space Grotesk', sans-serif" }}>{project.id}</span>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.4rem' }}>
                 <span style={{ fontSize: '0.65rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.3em', color: '#aa3bff', opacity: 0.7 }}>Project</span>

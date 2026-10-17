@@ -107,7 +107,7 @@ const Process = () => {
                       lineHeight: 1,
                       WebkitTextStroke: '1px rgba(255,255,255,0.04)',
                       color: 'transparent',
-                      fontFamily: 'Outfit, sans-serif',
+                      fontFamily: "'Space Grotesk', sans-serif",
                       pointerEvents: 'none'
                     }}>
                       0{i + 1}

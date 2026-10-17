@@ -129,7 +129,7 @@ const Contact = () => {
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
 
   return (
-    <div id="contact" ref={outerRef} className="sticky-outer" style={{ zIndex: 80, backgroundColor: '#000000', position: 'relative', overflow: 'hidden' }}>
+    <div id="contact" ref={outerRef} className="sticky-outer" style={{ zIndex: 80, backgroundColor: '#ffffff', position: 'relative', overflow: 'hidden' }}>
       
       {/* Background massive text */}
       <div style={{ 
@@ -146,11 +146,11 @@ const Contact = () => {
           fontSize: isMobile ? 'clamp(4rem, 25vw, 7rem)' : 'clamp(6rem, 18vw, 20rem)', 
           fontWeight: 900, 
           margin: 0,
-          color: '#ffffff',
+          color: 'rgba(0, 0, 0, 0.04)',
           lineHeight: 0.8,
           textTransform: 'uppercase',
           letterSpacing: '-0.02em',
-          fontFamily: 'Impact, sans-serif'
+          fontFamily: "'Space Grotesk', Impact, sans-serif"
         }}>
           CONTACT
         </h1>
@@ -161,7 +161,7 @@ const Contact = () => {
         style={{ 
           position: 'relative',
           zIndex: 10,
-          borderTop: '1px solid rgba(255,255,255,0.05)', 
+          borderTop: '1px solid rgba(0,0,0,0.08)', 
           borderTopLeftRadius: isMobile ? '0px' : borderRad, 
           borderTopRightRadius: isMobile ? '0px' : borderRad, 
           color: '#ffffff',

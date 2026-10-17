@@ -159,7 +159,6 @@ const Navbar = () => {
                 { id: 'contact', isLight: false },
                 { id: 'faq', isLight: true },
                 { id: 'process', isLight: true },
-                { id: 'why-talentella', isLight: false },
                 { id: 'production-portfolio', isLight: true },
                 { id: 'about', isLight: false },
                 { id: 'mobile-showcase', isLight: true },
@@ -198,9 +197,9 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [location.pathname]);
 
-    const textColor = '#ffffff';
-    const borderColor = 'rgba(255, 255, 255, 0.1)';
-    const glassBg = 'rgba(5, 5, 5, 0.85)';
+    const textColor = '#0f1015';
+    const borderColor = 'rgba(0, 0, 0, 0.08)';
+    const glassBg = 'rgba(255, 255, 255, 0.9)';
 
     return (
         <>
@@ -259,7 +258,7 @@ const Navbar = () => {
                           style={{ 
                             height: '40px',
                             width: 'auto',
-                            mixBlendMode: 'screen',
+                            mixBlendMode: 'multiply',
                             filter: 'none',
                             borderRadius: '6px'
                           }} 
@@ -305,7 +304,8 @@ const Navbar = () => {
                                     transition: 'opacity 0.3s ease, color 0.3s ease',
                                     cursor: 'pointer',
                                     textDecoration: 'none',
-                                    padding: '0.5rem 0'
+                                    padding: '0.5rem 0',
+                                    outline: 'none'
                                 }}
                             >
                                 {item}
@@ -365,9 +365,9 @@ const Navbar = () => {
                               justifyContent: 'center',
                               alignItems: 'center',
                               letterSpacing: '0.05em',
-                              backgroundColor: '#ffffff',
-                              color: '#121212',
-                              border: '1px solid rgba(255, 255, 255, 0.1)',
+                              backgroundColor: '#0f1015',
+                              color: '#ffffff',
+                              border: '1px solid #0f1015',
                               transition: 'all 0.3s ease'
                           }}
                         >

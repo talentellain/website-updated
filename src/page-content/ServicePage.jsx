@@ -49,21 +49,21 @@ const ServiceCard = ({ s }) => {
 const ExpertInsightSection = ({ service, isMobile }) => {
   if (!service.answerBlock) return null;
   return (
-    <section style={{ padding: isMobile ? '60px 5% 40px' : '100px 8% 60px', backgroundColor: '#050508', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(172, 88, 233,0.03) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
+    <section style={{ padding: isMobile ? '60px 5% 40px' : '100px 8% 60px', backgroundColor: '#ffffff', position: 'relative', overflow: 'hidden', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(172, 88, 233, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }}></div>
       <div style={{ maxWidth: '1000px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} style={{ textAlign: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem', marginBottom: '2.5rem' }}>
             <div style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#AC58E9', boxShadow: '0 0 15px #AC58E9' }}></div>
-            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#AC58E9', letterSpacing: '0.4em', textTransform: 'uppercase' }}>Expert Perspective</span>
+            <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#7C3AED', letterSpacing: '0.4em', textTransform: 'uppercase' }}>Expert Perspective</span>
           </div>
           <div itemScope itemType="https://schema.org/Answer" itemProp="acceptedAnswer">
-            <h2 itemProp="text" style={{ color: 'white', fontSize: 'clamp(1.5rem, 4vw, 2.4rem)', lineHeight: 1.5, fontWeight: 500, margin: 0, fontFamily: '"Playfair Display", serif', fontStyle: 'italic' }}>"{service.answerBlock.answer}"</h2>
+            <h2 itemProp="text" style={{ color: '#0f1015', fontSize: 'clamp(1.5rem, 4vw, 2.4rem)', lineHeight: 1.5, fontWeight: 500, margin: 0, fontFamily: '"Playfair Display", serif', fontStyle: 'italic' }}>"{service.answerBlock.answer}"</h2>
           </div>
           <div style={{ marginTop: '3.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-            <div style={{ width: '40px', height: '1px', backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
-            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>TalentElla Core Insight</span>
-            <div style={{ width: '40px', height: '1px', backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
+            <div style={{ width: '40px', height: '1px', backgroundColor: 'rgba(0,0,0,0.1)' }}></div>
+            <span style={{ color: '#555562', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>TalentElla Core Insight</span>
+            <div style={{ width: '40px', height: '1px', backgroundColor: 'rgba(0,0,0,0.1)' }}></div>
           </div>
         </motion.div>
       </div>
@@ -85,7 +85,7 @@ const TechMarquee = ({ serviceId }) => {
   const techStack = serviceMarquees[serviceId] || ['MARKETING', 'DEVELOPMENT', 'BRANDING', 'STRATEGY', 'CREATIVE', 'DESIGN', 'SEO', 'GROWTH'];
 
   return (
-    <div style={{ padding: '3rem 0', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', backgroundColor: '#020202', overflow: 'hidden', display: 'flex', position: 'relative' }}>
+    <div style={{ padding: '3rem 0', borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', backgroundColor: '#ffffff', overflow: 'hidden', display: 'flex', position: 'relative' }}>
       <style>
         {`
           @keyframes scrollMarquee {
@@ -110,9 +110,9 @@ const TechMarquee = ({ serviceId }) => {
             {techStack.map((tech, j) => (
               <div key={j} style={{ display: 'flex', alignItems: 'center', cursor: 'default' }}>
                 <span 
-                  style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.15em', transition: 'all 0.3s ease' }}
-                  onMouseOver={(e) => { e.target.style.color = '#fff'; e.target.style.WebkitTextStroke = '0px'; e.target.style.textShadow = '0 0 20px rgba(172, 88, 233, 0.5)'; }} 
-                  onMouseOut={(e) => { e.target.style.color = 'transparent'; e.target.style.WebkitTextStroke = '1.5px rgba(255,255,255,0.3)'; e.target.style.textShadow = 'none'; }}
+                  style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 900, color: 'transparent', WebkitTextStroke: '1.5px rgba(0,0,0,0.2)', textTransform: 'uppercase', letterSpacing: '0.15em', transition: 'all 0.3s ease' }}
+                  onMouseOver={(e) => { e.target.style.color = '#7C3AED'; e.target.style.WebkitTextStroke = '0px'; e.target.style.textShadow = '0 0 20px rgba(172, 88, 233, 0.25)'; }} 
+                  onMouseOut={(e) => { e.target.style.color = 'transparent'; e.target.style.WebkitTextStroke = '1.5px rgba(0,0,0,0.2)'; e.target.style.textShadow = 'none'; }}
                 >
                   {tech}
                 </span>
@@ -152,18 +152,19 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
           fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', 
           fontWeight: 900, 
           lineHeight: 0.9, 
-          color: 'white', 
+          color: '#0f1015', 
           margin: '0 0 1.2rem 0', 
           textTransform: 'uppercase', 
           letterSpacing: '-0.04em',
           wordBreak: isMobile ? 'break-word' : 'normal',
           overflowWrap: isMobile ? 'break-word' : 'normal',
-          whiteSpace: isMobile ? 'normal' : 'nowrap'
+          whiteSpace: isMobile ? 'normal' : 'nowrap',
+          fontFamily: "'Space Grotesk', system-ui, sans-serif"
         }}>
           QUESTIONS<br /><span style={{ color: '#AC58E9' }}>ANSWERED</span>
         </h2>
         <p style={{ 
-          color: 'rgba(255,255,255,0.4)', 
+          color: '#555562', 
           fontSize: '0.9rem', 
           lineHeight: 1.5, 
           marginBottom: '2rem', 
@@ -173,12 +174,17 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
           Have a specific query? Our experts are here to provide the clarity you need.
         </p>
         <motion.button 
-          whileHover={{ scale: 1.05, backgroundColor: '#AC58E9' }}
+          whileHover={{ scale: 1.05, backgroundColor: '#7C3AED' }}
+          onClick={() => {
+            const el = document.getElementById('contact');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            else window.location.href = '/#contact';
+          }}
           style={{ 
             padding: isMobile ? '1rem 2.2rem' : '1rem 2rem', 
             borderRadius: '100px', 
             background: '#AC58E9', 
-            color: '#000', 
+            color: '#fff', 
             border: 'none', 
             fontWeight: 800, 
             fontSize: '0.8rem',
@@ -186,7 +192,8 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
             cursor: 'pointer',
             letterSpacing: '0.05em',
             transition: '0.3s ease',
-            margin: isMobile ? '0 auto' : '0'
+            margin: isMobile ? '0 auto' : '0',
+            boxShadow: '0 4px 15px rgba(172, 88, 233, 0.3)'
           }}
         >
           Ask a Question
@@ -194,9 +201,9 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
       </div>
 
       {/* Right Column: Accordion */}
-      <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+      <div style={{ flex: isMobile ? 'none' : '2.5', width: '100%', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         {faqs.map((faq, idx) => (
-          <div key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+          <div key={idx} style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
             <button 
               onClick={() => setOpenIndex(openIndex === idx ? -1 : idx)} 
               style={{ 
@@ -208,7 +215,7 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
                 background: 'none', 
                 border: 'none', 
                 cursor: 'pointer', 
-                color: 'white', 
+                color: '#0f1015', 
                 textAlign: 'left' 
               }}
             >
@@ -216,15 +223,16 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
                 fontSize: isMobile ? '0.9rem' : '0.95rem', 
                 fontWeight: 800, 
                 margin: 0, 
-                color: openIndex === idx ? '#AC58E9' : 'white',
+                color: openIndex === idx ? '#AC58E9' : '#0f1015',
                 textTransform: 'uppercase',
                 maxWidth: '85%',
                 transition: '0.3s ease',
-                lineHeight: 1.4
+                lineHeight: 1.4,
+                fontFamily: "'Space Grotesk', system-ui, sans-serif"
               }}>
                 {faq.question}
               </h3>
-              <span style={{ fontSize: isMobile ? '1.2rem' : '1.2rem', color: openIndex === idx ? '#AC58E9' : 'rgba(255,255,255,0.2)', fontWeight: 300, transition: '0.3s ease' }}>
+              <span style={{ fontSize: isMobile ? '1.2rem' : '1.2rem', color: openIndex === idx ? '#AC58E9' : 'rgba(0,0,0,0.25)', fontWeight: 300, transition: '0.3s ease' }}>
                 {openIndex === idx ? '−' : '+'}
               </span>
             </button>
@@ -237,7 +245,7 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
                   style={{ overflow: 'hidden' }}
                 >
                   <p style={{ 
-                    color: 'rgba(255,255,255,0.5)', 
+                    color: '#555562', 
                     fontSize: isMobile ? '0.9rem' : '0.9rem', 
                     lineHeight: 1.6, 
                     paddingBottom: isMobile ? '2.2rem' : '2rem', 
@@ -262,10 +270,10 @@ const ServiceFAQ = ({ faqs, isMobile }) => {
 const RelatedServices = ({ currentId, isMobile }) => {
   const related = servicesData.filter(s => s.id !== currentId);
   return (
-    <section style={{ padding: isMobile ? '80px 5% 20px' : '140px 5% 20px', backgroundColor: '#000000', color: '#ffffff', textAlign: 'center', minHeight: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <section style={{ padding: isMobile ? '80px 5% 40px' : '120px 5% 60px', backgroundColor: '#ffffff', color: '#0f1015', textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#ffffff', marginBottom: '1rem' }}>EXPLORE MORE SERVICES</h2>
-        <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1rem', marginBottom: '4rem', fontWeight: 500 }}>Discover more ways we can help you grow your brand.</p>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#0f1015', marginBottom: '1rem', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>EXPLORE MORE SERVICES</h2>
+        <p style={{ color: '#555562', fontSize: '1rem', marginBottom: '4rem', fontWeight: 500 }}>Discover more ways we can help you grow your brand.</p>
         <div className="services-grid-new" style={{ width: '100%' }}>
           {related.map(s => <ServiceCard key={s.id} s={s} />)}
         </div>
@@ -292,10 +300,10 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
       whileHover={isMobile ? {} : { y: -8 }}
       onClick={() => isMobile && setIsExpanded(!isExpanded)}
       style={{ 
-        backgroundColor: isPopular ? '#080312' : '#050505',
+        backgroundColor: isPopular ? '#faf5ff' : '#ffffff',
         borderRadius: '16px',
-        border: isPopular ? '2px solid #AC58E9' : '1px solid rgba(255,255,255,0.1)',
-        boxShadow: isPopular ? '0 0 40px rgba(172, 88, 233, 0.15)' : 'none',
+        border: isPopular ? '2px solid #AC58E9' : '1px solid rgba(0,0,0,0.08)',
+        boxShadow: isPopular ? '0 10px 40px rgba(172, 88, 233, 0.15)' : '0 4px 20px rgba(0,0,0,0.03)',
         padding: isMobile ? '1.2rem 1rem' : '1.5rem 1.5rem',
         display: 'flex', 
         flexDirection: 'column',
@@ -310,27 +318,27 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
           position: 'absolute', top: '-0.8rem', left: '50%', transform: 'translateX(-50%)',
           padding: '0.3rem 1.2rem', borderRadius: '100px',
           background: '#AC58E9',
-          color: '#000', fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.15em',
+          color: '#fff', fontSize: '0.65rem', fontWeight: 900, letterSpacing: '0.15em',
           textTransform: 'uppercase', whiteSpace: 'nowrap',
-          boxShadow: '0 0 20px rgba(172, 88, 233, 0.4)'
+          boxShadow: '0 4px 15px rgba(172, 88, 233, 0.4)'
         }}>
           Most Popular
         </div>
       )}
 
       <div style={{ marginBottom: '1rem' }}>
-        <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{plan.name}</h3>
-        <p style={{ color: '#AC58E9', fontSize: '0.65rem', fontWeight: 600, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.subtitle}</p>
+        <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{plan.name}</h3>
+        <p style={{ color: '#7C3AED', fontSize: '0.65rem', fontWeight: 700, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.subtitle}</p>
       </div>
 
       <div style={{ marginBottom: '0.5rem', display: 'flex', alignItems: 'baseline' }}>
-        <span style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 900, letterSpacing: '-0.02em' }}>{plan.price}</span>
-        <span style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.4)', fontWeight: 600, marginLeft: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.billing}</span>
+        <span style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 900, letterSpacing: '-0.02em', color: '#0f1015' }}>{plan.price}</span>
+        <span style={{ fontSize: '0.65rem', color: '#555562', fontWeight: 600, marginLeft: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.billing}</span>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1.5rem', paddingBottom: '1.5rem', borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ width: 4, height: 4, borderRadius: '50%', backgroundColor: '#AC58E9', boxShadow: '0 0 8px #AC58E9' }} />
-        <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.6)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Quick delivery</span>
+        <span style={{ fontSize: '0.7rem', color: '#555562', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.05em' }}>Quick delivery</span>
       </div>
 
       <AnimatePresence>
@@ -343,9 +351,9 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
           >
             <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', flex: 1 }}>
               {plan.features.map((f, i) => (
-                <li key={i} style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                  <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: 'rgba(172, 88, 233,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <Check size={10} color={isPopular ? "#AC58E9" : "#fff"} strokeWidth={3} />
+                <li key={i} style={{ fontSize: '0.75rem', color: '#555562', display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                  <div style={{ width: 14, height: 14, borderRadius: '50%', backgroundColor: 'rgba(172, 88, 233, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                    <Check size={10} color="#7C3AED" strokeWidth={3} />
                   </div>
                   <span style={{ fontWeight: 500 }}>{f}</span>
                 </li>
@@ -354,7 +362,7 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
 
             <div style={{ marginTop: 'auto' }}>
               <motion.button
-                whileHover={{ scale: 1.02, backgroundColor: isPopular ? '#AC58E9' : '#ffffff', color: isPopular ? '#fff' : '#000' }}
+                whileHover={{ scale: 1.02, backgroundColor: isPopular ? '#7C3AED' : '#0f1015', color: '#fff' }}
                 whileTap={{ scale: 0.98 }}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -366,10 +374,10 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
                   width: '100%',
                   padding: '0.6rem 1rem',
                   borderRadius: '8px',
-                  border: isPopular ? 'none' : '1px solid rgba(255,255,255,0.1)',
-                  backgroundColor: isPopular ? '#AC58E9' : 'transparent',
-                  color: isPopular ? '#fff' : '#fff',
-                  fontWeight: 900,
+                  border: isPopular ? 'none' : '1px solid rgba(0,0,0,0.12)',
+                  backgroundColor: isPopular ? '#AC58E9' : '#f8f9fc',
+                  color: isPopular ? '#fff' : '#0f1015',
+                  fontWeight: 800,
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -389,7 +397,7 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
       </AnimatePresence>
 
       {isMobile && !isExpanded && (
-        <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed rgba(255,255,255,0.08)', textAlign: 'center', fontSize: '0.75rem', color: '#AC58E9', fontWeight: 600 }}>
+        <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px dashed rgba(0,0,0,0.08)', textAlign: 'center', fontSize: '0.75rem', color: '#AC58E9', fontWeight: 600 }}>
           Tap to view details
         </div>
       )}
@@ -417,10 +425,11 @@ const ServicePage = ({ customServiceId, customCityName }) => {
   const IconComponent = iconMap[service.icon] || Zap;
 
   return (
-    <div style={{ backgroundColor: '#000', color: 'white', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#ffffff', color: '#0f1015', minHeight: '100vh', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
       <SEO pageTitle={service.seo?.pageTitle || service.title} description={service.seo?.metaDescription || service.description} />
       
       <InteractiveHero 
+        theme="light"
         bgText={service.title.replace(/^SMM\s*/i, '').split(' ')[0].toUpperCase()}
         tagline1="TALENTELLA"
         tagline2={customCityName ? `SERVICE DETAILS IN ${customCityName.toUpperCase()}` : "SERVICE DETAILS"}
@@ -436,7 +445,7 @@ const ServicePage = ({ customServiceId, customCityName }) => {
 
       <ExpertInsightSection service={service} isMobile={isMobile} />
 
-      <section style={{ padding: isMobile ? '30px 5% 50px' : '40px 5% 60px', backgroundColor: '#050508' }}>
+      <section style={{ padding: isMobile ? '30px 5% 50px' : '60px 5% 70px', backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           </div>
@@ -467,16 +476,16 @@ const ServicePage = ({ customServiceId, customCityName }) => {
                   whileInView={{ opacity: 1, y: 0 }} 
                   viewport={{ once: true }} 
                   transition={{ delay: idx * 0.05 }} 
-                  whileHover={isMobile ? {} : { y: -5, backgroundColor: 'rgba(172, 88, 233, 0.08)', borderColor: 'rgba(172, 88, 233, 0.3)' }} 
+                  whileHover={isMobile ? {} : { y: -5, backgroundColor: 'rgba(172, 88, 233, 0.05)', borderColor: 'rgba(172, 88, 233, 0.3)' }} 
                   style={{ 
                     gridColumn: isMobile ? 'none' : (idx === 0 || idx === 3 || idx === 4) ? 'span 2' : 'span 1',
-                    padding: isMobile ? '1.6rem 1.4rem' : '1.2rem 1.4rem', 
-                    backgroundColor: 'rgba(255, 255, 255, 0.02)', 
-                    border: '1px solid rgba(255, 255, 255, 0.05)', 
+                    padding: isMobile ? '1.6rem 1.4rem' : '1.4rem 1.4rem', 
+                    backgroundColor: '#f8f9fc', 
+                    border: '1px solid rgba(0, 0, 0, 0.08)', 
                     borderRadius: '20px', 
                     position: 'relative', 
                     overflow: 'hidden', 
-                    backdropFilter: 'blur(10px)', 
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.02)',
                     transition: 'all 0.3s ease',
                     minWidth: isMobile ? '88%' : 'auto',
                     scrollSnapAlign: 'center',
@@ -485,10 +494,10 @@ const ServicePage = ({ customServiceId, customCityName }) => {
                     gap: '0.7rem'
                   }}
                 >
-                  <div style={{ position: 'absolute', top: '1rem', right: '1.2rem', fontSize: '1.5rem', fontWeight: 900, color: 'rgba(255, 255, 255, 0.08)', lineHeight: 1 }}>0{idx + 1}</div>
-                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(172, 88, 233, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#AC58E9', marginBottom: '0.5rem' }}><Icon size={14} /></div>
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: 'white', marginBottom: '0.2rem', letterSpacing: '-0.01em' }}>{item.title}</h3>
-                  <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.8rem', lineHeight: 1.5, margin: 0, maxWidth: (idx === 0 || idx === 3 || idx === 4) && !isMobile ? '70%' : '100%' }}>{item.description}</p>
+                  <div style={{ position: 'absolute', top: '1rem', right: '1.2rem', fontSize: '1.5rem', fontWeight: 900, color: 'rgba(0, 0, 0, 0.06)', lineHeight: 1 }}>0{idx + 1}</div>
+                  <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(172, 88, 233, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7C3AED', marginBottom: '0.5rem' }}><Icon size={14} /></div>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f1015', marginBottom: '0.2rem', letterSpacing: '-0.01em', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{item.title}</h3>
+                  <p style={{ color: '#555562', fontSize: '0.82rem', lineHeight: 1.5, margin: 0, maxWidth: (idx === 0 || idx === 3 || idx === 4) && !isMobile ? '70%' : '100%' }}>{item.description}</p>
                 </motion.div>
               );
             })}
@@ -497,24 +506,23 @@ const ServicePage = ({ customServiceId, customCityName }) => {
           {isMobile && (
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.5rem', marginTop: '1rem' }}>
               {service.subItems.map((_, i) => (
-                <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(172, 88, 233,0.3)' }}></div>
+                <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(172, 88, 233, 0.3)' }}></div>
               ))}
             </div>
           )}
         </div>
       </section>
 
-      <section style={{ padding: isMobile ? '60px 5%' : '70px 5%' }}>
+      <section style={{ padding: isMobile ? '60px 5%' : '80px 5%', backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-            
-            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 850, marginTop: '0.4rem' }}>Transparent Investment</h2>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', fontWeight: 850, marginTop: '0.4rem', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Transparent Investment</h2>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: '1.2rem', alignItems: 'stretch' }}>{service.plans.map((p, i) => <PricingCard key={i} plan={p} idx={i} isMobile={isMobile} service={service} />)}</div>
         </div>
       </section>
 
-      <section style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#050508' }}>
+      <section style={{ padding: isMobile ? '60px 5%' : '100px 5%', backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <ServiceFAQ faqs={service.faqs} isMobile={isMobile} />
       </section>
       
@@ -525,14 +533,14 @@ const ServicePage = ({ customServiceId, customCityName }) => {
         .services-grid-new { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
         @media (max-width: 1024px) { .services-grid-new { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .services-grid-new { grid-template-columns: 1fr; } }
-        .modern-service-card { background-color: #1a1a1a; min-height: 400px; transition: background-color 0.4s ease; }
+        .modern-service-card { background-color: #f8f9fc; border: 1px solid rgba(0,0,0,0.08); min-height: 400px; transition: all 0.4s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
         @media (max-width: 768px) { .modern-service-card { min-height: 250px !important; } }
-        .modern-service-card:hover { background-color: #AC58E9; }
-        .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #ffffff; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; }
+        .modern-service-card:hover { background-color: #AC58E9; border-color: #AC58E9; transform: translateY(-5px); box-shadow: 0 12px 30px rgba(172, 88, 233, 0.2); }
+        .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #0f1015; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; font-family: 'Space Grotesk', system-ui, sans-serif; }
         .modern-service-card:hover .card-giant-text { left: 100%; transform: translate(0%,-50%); opacity: 0.05; }
         .card-hover-content { opacity: 0; transform: translateY(20px) scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease; display: flex; flex-direction: column; align-items: center; gap: 1rem; z-index: 5; padding: 0 8%; text-align: center; }
         .modern-service-card:hover .card-hover-content { opacity: 1; transform: translateY(0) scale(1); transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s; }
-        .blob-icon-wrapper { width: 90px; height: 90px; background-color: #AC58E9; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; display: flex; justify-content: center; align-items: center; animation: morph-blob 8s ease-in-out infinite alternate; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .blob-icon-wrapper { width: 90px; height: 90px; background-color: #ffffff; border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; display: flex; justify-content: center; align-items: center; animation: morph-blob 8s ease-in-out infinite alternate; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
         @keyframes morph-blob { 0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; } 33% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; } 66% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; } 100% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; } }
         .card-hover-desc { color: #ffffff; font-size: 0.9rem; font-weight: 600; line-height: 1.5; margin: 0; }
       `}</style>

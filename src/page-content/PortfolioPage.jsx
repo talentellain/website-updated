@@ -71,13 +71,13 @@ const HorizontalWork = () => {
   const activeColor = categoryColors[activeProject.category] || '#aa3bff';
 
   return (
-    <section ref={targetRef} style={{ height: '300vh', position: 'relative', background: '#0a0a0c' }}>
+    <section ref={targetRef} style={{ height: '300vh', position: 'relative', background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
       {/* Dynamic Ambient Glow */}
       <div 
         style={{
           position: 'absolute',
           inset: 0,
-          background: `radial-gradient(circle at ${isMobile ? '50% 30%' : '30% 40%'}, ${activeColor}1e 0%, transparent 65%), radial-gradient(circle at ${isMobile ? '50% 70%' : '75% 60%'}, ${activeColor}10 0%, transparent 50%)`,
+          background: `radial-gradient(circle at ${isMobile ? '50% 30%' : '30% 40%'}, ${activeColor}15 0%, transparent 65%), radial-gradient(circle at ${isMobile ? '50% 70%' : '75% 60%'}, ${activeColor}0a 0%, transparent 50%)`,
           transition: 'background 1s cubic-bezier(0.2, 0.8, 0.2, 1)',
           pointerEvents: 'none',
           zIndex: 0
@@ -99,8 +99,8 @@ const HorizontalWork = () => {
                 width: '100%',
                 overflow: 'hidden',
                 borderRadius: isMobile ? '16px' : '24px',
-                border: activeIndex === i ? `1px solid ${categoryColors[project.category]}55` : '1px solid rgba(255,255,255,0.06)',
-                boxShadow: activeIndex === i ? `0 30px 70px ${categoryColors[project.category]}22` : 'none',
+                border: activeIndex === i ? `1px solid ${categoryColors[project.category] || '#AC58E9'}` : '1px solid rgba(0,0,0,0.08)',
+                boxShadow: activeIndex === i ? `0 30px 70px rgba(172, 88, 233, 0.18)` : '0 10px 30px rgba(0,0,0,0.06)',
                 transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
               }}>
                 <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
@@ -177,7 +177,7 @@ const HorizontalWork = () => {
         </motion.div>
         <div style={{ position: 'absolute', bottom: isMobile ? '1.5rem' : '3rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '0.6rem', zIndex: 10 }}>
           {top4Featured.map((_, i) => (
-            <motion.div key={i} animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? activeColor : 'rgba(255,255,255,0.2)' }} style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }} />
+            <motion.div key={i} animate={{ scale: activeIndex === i ? 1.4 : 1, backgroundColor: activeIndex === i ? activeColor : 'rgba(0,0,0,0.15)' }} style={{ width: 8, height: 8, borderRadius: '50%', cursor: 'pointer' }} />
           ))}
         </div>
       </div>
@@ -185,7 +185,7 @@ const HorizontalWork = () => {
   );
 };
 
-const RemainingWork = () => {
+const RemainingWork = ({ isMobile = false }) => {
   const containerRef = useRef(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -268,16 +268,16 @@ const RemainingWork = () => {
   }, [isMouseDown, isHovered]);
 
   return (
-    <section style={{ position: 'relative', zIndex: 20, padding: '10vh 5%', background: 'transparent' }}>
+    <section style={{ position: 'relative', zIndex: 20, padding: isMobile ? '8vh 5%' : '10vh 5%', background: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', gap: '1rem' }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: 'white' }}>Rest of Websites</h2>
+            <span style={{ fontSize: '0.65rem', color: '#7C3AED', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Rest of Websites</h2>
           </motion.div>
           <div style={{ display: 'flex', gap: '0.8rem', flexShrink: 0 }}>
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.08)', borderColor: 'rgba(255, 255, 255, 0.2)' }}
+              whileHover={{ scale: 1.05, backgroundColor: '#7C3AED', color: '#fff', borderColor: '#7C3AED' }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleArrowClick('left')}
               style={{
@@ -287,9 +287,9 @@ const RemainingWork = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                color: 'white',
+                backgroundColor: '#f8f9fc',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                color: '#0f1015',
                 cursor: 'pointer',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
@@ -298,7 +298,7 @@ const RemainingWork = () => {
               <ChevronLeft size={20} />
             </motion.button>
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 255, 255, 0.08)', borderColor: 'rgba(255, 255, 255, 0.2)' }}
+              whileHover={{ scale: 1.05, backgroundColor: '#7C3AED', color: '#fff', borderColor: '#7C3AED' }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleArrowClick('right')}
               style={{
@@ -308,9 +308,9 @@ const RemainingWork = () => {
                 width: '48px',
                 height: '48px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                color: 'white',
+                backgroundColor: '#f8f9fc',
+                border: '1px solid rgba(0, 0, 0, 0.08)',
+                color: '#0f1015',
                 cursor: 'pointer',
                 transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
               }}
@@ -356,9 +356,10 @@ const RemainingWork = () => {
                     width: 'min(85vw, 400px)', 
                     flexShrink: 0, 
                     aspectRatio: '16/9', 
-                    backgroundColor: 'rgba(255,255,255,0.02)', 
+                    backgroundColor: '#f8f9fc', 
                     borderRadius: '16px', 
-                    border: '1px solid rgba(255,255,255,0.05)', 
+                    border: '1px solid rgba(0, 0, 0, 0.08)', 
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
                     overflow: 'hidden', 
                     position: 'relative', 
                     display: 'block', 
@@ -373,8 +374,8 @@ const RemainingWork = () => {
                     sizes="(max-width: 768px) 85vw, 400px"
                     style={{ objectFit: 'cover', objectPosition: 'top', pointerEvents: 'none' }}
                   />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
-                    <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}1a`, border: `1px solid ${catColor}33`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
+                    <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}22`, border: `1px solid ${catColor}44`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
                       {p.category}
                     </span>
                     <h4 style={{ margin: '0.2rem 0 0', fontWeight: 800, fontSize: '1.15rem', color: 'white' }}>{p.title}</h4>
@@ -481,14 +482,14 @@ const PortfolioCard = ({ p, index, setSelectedProject, isMobile }) => {
       ref={containerRef}
       style={{
         aspectRatio: aspectRatio,
-        backgroundColor: '#0a0a0a',
+        backgroundColor: '#f8f9fc',
         borderRadius: isMobile ? '16px' : '12px',
-        border: isHovered ? `1px solid ${catColor}88` : '1px solid rgba(255,255,255,0.07)',
+        border: isHovered ? `1px solid ${catColor}` : '1px solid rgba(0,0,0,0.08)',
         overflow: 'hidden',
         position: 'relative',
         cursor: 'pointer',
         transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1)',
-        boxShadow: isHovered ? `0 20px 50px ${catColor}22` : 'none',
+        boxShadow: isHovered ? `0 20px 45px rgba(172, 88, 233, 0.18)` : '0 2px 10px rgba(0,0,0,0.03)',
         transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
       }}
     >
@@ -699,20 +700,21 @@ const LandscapeMarquee = ({ videos, setSelectedProject, isMobile }) => {
 
 const PortfolioTestimonial = ({ isMobile }) => {
   return (
-    <section style={{ position: 'relative', zIndex: 20, height: '100vh', padding: isMobile ? '8vh 5%' : '12vh 5%', backgroundColor: '#0a0a0c', borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <section style={{ position: 'relative', zIndex: 20, height: isMobile ? '70vh' : '80vh', padding: isMobile ? '8vh 5%' : '12vh 5%', backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(172, 88, 233, 0.05) 0%, transparent 70%)', pointerEvents: 'none' }} />
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.7 }}
-        style={{ maxWidth: '1000px', textAlign: 'center' }}
+        style={{ maxWidth: '1000px', textAlign: 'center', position: 'relative', zIndex: 2 }}
       >
         <div style={{ marginBottom: '2rem' }}>
           {[...Array(5)].map((_, i) => (
-            <span key={i} style={{ color: '#aa3bff', fontSize: '1.5rem', margin: '0 4px' }}>★</span>
+            <span key={i} style={{ color: '#AC58E9', fontSize: '1.5rem', margin: '0 4px' }}>★</span>
           ))}
         </div>
-        <h2 style={{ fontSize: isMobile ? '1.8rem' : '3.5rem', fontWeight: 800, color: 'white', lineHeight: 1.2, margin: '0 0 2rem 0', letterSpacing: '-0.02em' }}>
+        <h2 style={{ fontSize: isMobile ? '1.8rem' : '3.2rem', fontWeight: 800, color: '#0f1015', lineHeight: 1.25, margin: '0 0 2rem 0', letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
           "TalentElla didn't just build us a website; they engineered a digital experience that completely transformed how our clients perceive us. The ROI has been absolutely astronomical."
         </h2>
       </motion.div>
@@ -754,13 +756,14 @@ const PortfolioPage = () => {
   const portraitVideos = useMemo(() => filtered.filter(p => p.orientation !== 'landscape'), [filtered]);
 
   return (
-    <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif' }}>
+    <div style={{ backgroundColor: '#ffffff', color: '#0f1015', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
       <SEO
         pageTitle="Immersive Portfolio | TalentElla Agency"
         description="Experience the future of digital marketing. Explore our award-winning work in branding, development, and social media."
       />
 
       <InteractiveHero
+        theme="light"
         bgText="PORTFOLIO"
         tagline1="TALENTELLA"
         tagline2="PORTFOLIO PAGE"
@@ -773,24 +776,24 @@ const PortfolioPage = () => {
       
       <PortfolioTestimonial isMobile={isMobile} />
 
-      <RemainingWork />
+      <RemainingWork isMobile={isMobile} />
 
-      <section style={{ padding: isMobile ? '10vh 4% 16vh' : '15vh 5% 20vh', backgroundColor: '#000', position: 'relative' }}>
+      <section style={{ padding: isMobile ? '8vh 4% 14vh' : '12vh 5% 16vh', backgroundColor: '#ffffff', position: 'relative', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             style={{ marginBottom: isMobile ? '2.5rem' : '3.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1.5rem' }}
           >
             <div>
-              <span style={{ fontSize: '0.65rem', color: '#aa3bff', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.6rem' }}>
+              <span style={{ fontSize: '0.65rem', color: '#7C3AED', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.6rem' }}>
                 Explore By Category
               </span>
-              <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: '1.5px rgba(255,255,255,0.85)' }}>
+              <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 4.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', textTransform: 'uppercase', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
                 All Creatives
               </h2>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 1rem', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '4px' }}>
-              <span style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.2em', fontWeight: 600 }}>{filtered.length} PROJECTS</span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 1rem', background: '#f8f9fc', border: '1px solid rgba(0,0,0,0.08)', borderRadius: '100px' }}>
+              <span style={{ fontSize: '0.7rem', color: '#555562', letterSpacing: '0.15em', fontWeight: 700 }}>{filtered.length} PROJECTS</span>
             </div>
           </motion.div>
 
@@ -798,7 +801,8 @@ const PortfolioPage = () => {
             initial={{ opacity: 0, y: -10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
             style={{ 
               display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: isMobile ? '2.5rem' : '4rem',
-              position: 'sticky', top: '20px', zIndex: 100, padding: '1rem 0', backgroundColor: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(10px)'
+              position: 'sticky', top: '20px', zIndex: 100, padding: '1rem 0', backgroundColor: 'rgba(255,255,255,0.92)', backdropFilter: 'blur(12px)',
+              borderBottom: '1px solid rgba(0,0,0,0.06)'
             }}
           >
             {VIDEO_CATEGORIES.map((cat) => (
@@ -808,14 +812,14 @@ const PortfolioPage = () => {
                 whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}
                 style={{
                   padding: isMobile ? '0.5rem 1rem' : '0.6rem 1.4rem',
-                  borderRadius: '4px',
-                  border: `1px solid ${activeFilter === cat ? '#aa3bff' : 'rgba(255,255,255,0.1)'}`,
-                  backgroundColor: activeFilter === cat ? 'rgba(170,59,255,0.12)' : 'transparent',
-                  color: activeFilter === cat ? '#fff' : 'rgba(255,255,255,0.4)',
+                  borderRadius: '100px',
+                  border: `1px solid ${activeFilter === cat ? '#AC58E9' : 'rgba(0,0,0,0.08)'}`,
+                  backgroundColor: activeFilter === cat ? '#AC58E9' : '#f8f9fc',
+                  color: activeFilter === cat ? '#ffffff' : '#555562',
                   fontSize: isMobile ? '0.7rem' : '0.75rem',
-                  fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase',
+                  fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase',
                   cursor: 'pointer', transition: 'all 0.3s ease',
-                  boxShadow: activeFilter === cat ? '0 0 20px rgba(170,59,255,0.2)' : 'none',
+                  boxShadow: activeFilter === cat ? '0 4px 15px rgba(172,88,233,0.3)' : 'none',
                 }}
               >
                 {cat === 'ALL' ? 'All' : cat.split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ')}
@@ -826,7 +830,7 @@ const PortfolioPage = () => {
           <AnimatePresence mode="wait">
             {filtered.length === 0 ? (
               <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                style={{ textAlign: 'center', padding: '6rem 0', color: 'rgba(255,255,255,0.3)' }}>
+                style={{ textAlign: 'center', padding: '6rem 0', color: '#888896' }}>
                 No projects match this category yet.
               </motion.div>
             ) : (
@@ -837,14 +841,14 @@ const PortfolioPage = () => {
               >
                 {landscapeVideos.length > 0 && (
                   <div style={{ marginBottom: isMobile ? '3rem' : '4rem' }}>
-                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Cinematic & Landscape</h3>
+                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.4rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f1015', letterSpacing: '0.02em', textTransform: 'uppercase', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Cinematic & Landscape</h3>
                     <LandscapeMarquee videos={landscapeVideos} setSelectedProject={setSelectedProject} isMobile={isMobile} />
                   </div>
                 )}
 
                 {portraitVideos.length > 0 && (
                   <div>
-                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, marginBottom: '1.5rem', color: '#fff', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Reels & Portrait</h3>
+                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.4rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f1015', letterSpacing: '0.02em', textTransform: 'uppercase', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Reels & Portrait</h3>
                     <div style={{
                       display: 'grid',
                       gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
@@ -868,7 +872,7 @@ const PortfolioPage = () => {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}
             style={{
-              position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.92)',
+              position: 'fixed', inset: 0, backgroundColor: 'rgba(15, 16, 21, 0.75)',
               backdropFilter: 'blur(16px)', zIndex: 9999,
               display: 'flex', justifyContent: 'center', alignItems: 'center',
               padding: isMobile ? '1rem' : '3rem',
@@ -881,14 +885,14 @@ const PortfolioPage = () => {
               onClick={(e) => e.stopPropagation()}
               style={{
                 width: '100%', maxWidth: '1200px', maxHeight: '90vh',
-                backgroundColor: '#0a0a0c', borderRadius: '24px',
-                border: `1px solid ${categoryColors[selectedProject.category] || '#aa3bff'}33`,
-                overflow: 'auto', boxShadow: `0 40px 100px rgba(0,0,0,0.8), 0 0 60px ${categoryColors[selectedProject.category] || '#aa3bff'}15`,
+                backgroundColor: '#ffffff', borderRadius: '24px',
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                overflow: 'auto', boxShadow: '0 40px 100px rgba(0,0,0,0.2), 0 0 60px rgba(172, 88, 233, 0.15)',
                 position: 'relative', display: 'flex', flexDirection: isMobile ? 'column' : 'row',
               }}
             >
               {/* Media Section */}
-              <div style={{ flex: isMobile ? 'none' : '1.2', position: 'relative', backgroundColor: '#000', minHeight: isMobile ? '40vh' : 'auto', borderRight: isMobile ? 'none' : '1px solid rgba(255,255,255,0.05)' }}>
+              <div style={{ flex: isMobile ? 'none' : '1.2', position: 'relative', backgroundColor: '#0a0a0c', minHeight: isMobile ? '40vh' : 'auto', borderRight: isMobile ? 'none' : '1px solid rgba(0,0,0,0.08)' }}>
                 {selectedProject.type === 'video' ? (
                   <video
                     src={selectedProject.content}
@@ -914,9 +918,9 @@ const PortfolioPage = () => {
                   <div style={{ display: 'flex', gap: '0.8rem', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
                     <span style={{
                       padding: '0.3rem 0.8rem', borderRadius: '4px',
-                      backgroundColor: `${categoryColors[selectedProject.category] || '#aa3bff'}1a`,
-                      border: `1px solid ${categoryColors[selectedProject.category] || '#aa3bff'}44`,
-                      color: categoryColors[selectedProject.category] || '#aa3bff',
+                      backgroundColor: 'rgba(172, 88, 233, 0.12)',
+                      border: '1px solid rgba(172, 88, 233, 0.3)',
+                      color: '#7C3AED',
                       fontSize: '0.65rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase'
                     }}>
                       {selectedProject.category || 'Portfolio Project'}
@@ -924,16 +928,16 @@ const PortfolioPage = () => {
                     {selectedProject.metrics && (
                       <span style={{
                         padding: '0.3rem 0.8rem', borderRadius: '4px',
-                        backgroundColor: 'rgba(255,255,255,0.1)',
-                        border: `1px solid rgba(255,255,255,0.2)`,
-                        color: '#fff', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.05em'
+                        backgroundColor: '#f8f9fc',
+                        border: '1px solid rgba(0, 0, 0, 0.08)',
+                        color: '#0f1015', fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.05em'
                       }}>
                         {selectedProject.metrics}
                       </span>
                     )}
                   </div>
                   
-                  <h3 style={{ fontSize: isMobile ? '2rem' : '2.5rem', fontWeight: 900, color: 'white', margin: 0, lineHeight: 1.1, letterSpacing: '-0.02em' }}>
+                  <h3 style={{ fontSize: isMobile ? '2rem' : '2.5rem', fontWeight: 900, color: '#0f1015', margin: 0, lineHeight: 1.1, letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
                     {selectedProject.title}
                   </h3>
                 </div>
@@ -941,31 +945,31 @@ const PortfolioPage = () => {
                 <div style={{ flex: 1 }}>
                   {selectedProject.challenge && (
                     <div style={{ marginBottom: '1.5rem' }}>
-                      <h4 style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>The Challenge</h4>
-                      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', lineHeight: 1.6, margin: 0 }}>{selectedProject.challenge}</p>
+                      <h4 style={{ fontSize: '0.85rem', color: '#7C3AED', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', fontWeight: 700 }}>The Challenge</h4>
+                      <p style={{ color: '#444452', fontSize: '1rem', lineHeight: 1.6, margin: 0 }}>{selectedProject.challenge}</p>
                     </div>
                   )}
 
                   {selectedProject.solution && (
                     <div style={{ marginBottom: '1.5rem' }}>
-                      <h4 style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>The Solution</h4>
-                      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', lineHeight: 1.6, margin: 0 }}>{selectedProject.solution}</p>
+                      <h4 style={{ fontSize: '0.85rem', color: '#7C3AED', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', fontWeight: 700 }}>The Solution</h4>
+                      <p style={{ color: '#444452', fontSize: '1rem', lineHeight: 1.6, margin: 0 }}>{selectedProject.solution}</p>
                     </div>
                   )}
 
                   {(!selectedProject.challenge && !selectedProject.solution && selectedProject.description) && (
                     <div style={{ marginBottom: '1.5rem' }}>
-                      <h4 style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem' }}>Overview</h4>
-                      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1rem', lineHeight: 1.6, margin: 0 }}>{selectedProject.description}</p>
+                      <h4 style={{ fontSize: '0.85rem', color: '#7C3AED', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.5rem', fontWeight: 700 }}>Overview</h4>
+                      <p style={{ color: '#444452', fontSize: '1rem', lineHeight: 1.6, margin: 0 }}>{selectedProject.description}</p>
                     </div>
                   )}
 
                   {selectedProject.techStack && (
                     <div>
-                      <h4 style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.8rem' }}>Technologies Used</h4>
+                      <h4 style={{ fontSize: '0.85rem', color: '#7C3AED', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: '0.8rem', fontWeight: 700 }}>Technologies Used</h4>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
                         {selectedProject.techStack.map(tech => (
-                          <span key={tech} style={{ padding: '0.4rem 0.8rem', backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '100px', fontSize: '0.75rem', color: 'rgba(255,255,255,0.7)', fontWeight: 500 }}>
+                          <span key={tech} style={{ padding: '0.4rem 0.8rem', backgroundColor: '#f8f9fc', border: '1px solid rgba(0, 0, 0, 0.08)', borderRadius: '100px', fontSize: '0.75rem', color: '#555562', fontWeight: 600 }}>
                             {tech}
                           </span>
                         ))}
@@ -981,9 +985,10 @@ const PortfolioPage = () => {
                       style={{
                         display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem',
                         width: '100%', padding: '1rem', borderRadius: '12px',
-                        backgroundColor: categoryColors[selectedProject.category] || '#aa3bff',
-                        color: '#000', fontSize: '1rem', fontWeight: 700, textDecoration: 'none',
-                        transition: 'opacity 0.2s', cursor: 'pointer'
+                        backgroundColor: '#AC58E9',
+                        color: '#ffffff', fontSize: '1rem', fontWeight: 700, textDecoration: 'none',
+                        transition: 'opacity 0.2s', cursor: 'pointer',
+                        boxShadow: '0 4px 15px rgba(172, 88, 233, 0.3)'
                       }}
                       onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
                       onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
@@ -998,13 +1003,14 @@ const PortfolioPage = () => {
                 onClick={() => setSelectedProject(null)}
                 style={{
                   position: 'absolute', top: '1.5rem', right: '1.5rem',
-                  backgroundColor: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.1)',
-                  color: 'white', width: '40px', height: '40px', borderRadius: '50%',
+                  backgroundColor: '#f8f9fc', border: '1px solid rgba(0,0,0,0.1)',
+                  color: '#0f1015', width: '40px', height: '40px', borderRadius: '50%',
                   cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center',
                   zIndex: 10, backdropFilter: 'blur(8px)', transition: 'all 0.2s',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.08)'
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = categoryColors[selectedProject.category] || '#aa3bff'; e.currentTarget.style.color = '#000'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(0,0,0,0.5)'; e.currentTarget.style.color = 'white'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#AC58E9'; e.currentTarget.style.color = '#ffffff'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#f8f9fc'; e.currentTarget.style.color = '#0f1015'; }}
               >
                 <X size={18} />
               </button>

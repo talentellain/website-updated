@@ -1,404 +1,418 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import React from 'react';
+import { ArrowUpRight, Sparkles } from 'lucide-react';
+
+const scrollTo = (id) => {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth' });
+};
+
+const STYLES = `
+  /* ── Root ── */
+  .hs-root {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    background: #fafafa;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 1fr auto;
+  }
+
+  /* ── Blobs ── */
+  .hs-blobs {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hs-blob-main {
+    position: absolute;
+    top: -20%;
+    right: -6%;
+    width: 58%;
+    height: 88%;
+    border-radius: 42% 58% 55% 45% / 48% 52% 48% 52%;
+    background: conic-gradient(
+      from 200deg at 55% 45%,
+      rgba(139,92,246,0.85),
+      rgba(99,102,241,0.75),
+      rgba(147,197,253,0.6),
+      rgba(192,132,252,0.7),
+      rgba(139,92,246,0.85)
+    );
+    filter: blur(32px);
+    animation: hs-morph 20s ease-in-out infinite alternate;
+    will-change: transform, border-radius;
+  }
+
+  .hs-blob-soft {
+    position: absolute;
+    top: 5%;
+    right: 10%;
+    width: 40%;
+    height: 65%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 45% 40%,
+      rgba(224,231,255,0.7) 0%,
+      rgba(196,181,253,0.4) 45%,
+      transparent 70%
+    );
+    filter: blur(50px);
+    animation: hs-morph 26s 4s ease-in-out infinite alternate-reverse;
+  }
+
+  .hs-blob-accent {
+    position: absolute;
+    top: 30%;
+    right: 28%;
+    width: 22%;
+    height: 35%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center,
+      rgba(255,255,255,0.55) 0%,
+      transparent 70%
+    );
+    filter: blur(20px);
+  }
+
+  @keyframes hs-morph {
+    0%   { transform: translate(0,0) scale(1); border-radius: 42% 58% 55% 45% / 48% 52% 48% 52%; }
+    33%  { transform: translate(-18px, 22px) scale(1.03); border-radius: 55% 45% 42% 58% / 52% 48% 52% 48%; }
+    66%  { transform: translate(12px,-18px) scale(0.97); border-radius: 48% 52% 60% 40% / 44% 56% 44% 56%; }
+    100% { transform: translate(-8px, 10px) scale(1.05); border-radius: 58% 42% 48% 52% / 50% 50% 50% 50%; }
+  }
+
+  /* ── Inner content ── */
+  .hs-inner {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 6vw 5.5vh;
+    height: 100%;
+  }
+
+  /* ── Tag row ── */
+  .hs-tags {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-bottom: 3.2vh;
+    animation: hs-up 0.6s 0.1s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .hs-tag {
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #4b5563;
+    padding: 5px 13px;
+    border-radius: 100px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .hs-tag:hover {
+    border-color: rgba(124,58,237,0.3);
+    color: #7C3AED;
+  }
+
+  .hs-tag-active {
+    background: rgba(124,58,237,0.06);
+    border-color: rgba(124,58,237,0.25);
+    color: #7C3AED;
+  }
+
+  /* ── Serif italic headline ── */
+  .hs-h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(2rem, 5.2vw, 5.8rem);
+    color: #111827;
+    line-height: 1.05;
+    margin: 0 0 0.5vh;
+    letter-spacing: -0.02em;
+    animation: hs-up 0.75s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  /* ── Big bold word row ── */
+  .hs-h2-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2vw;
+    animation: hs-up 0.85s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .hs-h2 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 900;
+    font-size: clamp(4rem, 13.5vw, 13rem);
+    color: #09090b;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+    text-transform: uppercase;
+    margin: 0;
+    flex: 1;
+    white-space: nowrap;
+  }
+
+  /* ── Right side: desc + CTA ── */
+  .hs-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+    flex-shrink: 0;
+    padding-bottom: 6px;
+    max-width: 280px;
+    animation: hs-up 0.85s 0.38s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .hs-desc {
+    font-size: 12px;
+    line-height: 1.65;
+    color: rgba(0,0,0,0.42);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 450;
+    text-align: right;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  .hs-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 24px;
+    border-radius: 100px;
+    background: #09090b;
+    color: #ffffff;
+    font-size: 13.5px;
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: 0 8px 28px rgba(15,16,21,0.22);
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+  .hs-cta:hover {
+    background: #7C3AED;
+    box-shadow: 0 12px 36px rgba(124,58,237,0.42);
+    transform: translateY(-2px);
+  }
+  .hs-cta-icon {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.14);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+  }
+  .hs-cta:hover .hs-cta-icon {
+    transform: rotate(45deg) scale(1.1);
+  }
+
+  /* ── Bottom strip ── */
+  .hs-strip {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 6vw;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: hs-up 0.7s 0.5s both;
+  }
+
+  .hs-strip-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .hs-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .hs-metric-val {
+    font-size: 15px;
+    font-weight: 900;
+    color: #09090b;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .hs-metric-lbl {
+    font-size: 9.5px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .hs-strip-sep {
+    width: 1px;
+    height: 28px;
+    background: rgba(0,0,0,0.08);
+  }
+
+  .hs-strip-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.35);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .hs-strip-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #7C3AED;
+    box-shadow: 0 0 8px rgba(124,58,237,0.5);
+    animation: hs-pulse 2.5s ease-in-out infinite;
+  }
+
+  @keyframes hs-pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50%      { opacity:0.4; transform:scale(0.75); }
+  }
+
+  @keyframes hs-up {
+    from { opacity:0; transform:translateY(28px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .hs-h2 { font-size: clamp(3rem, 14vw, 7rem); }
+    .hs-h1 { font-size: clamp(1.8rem, 5.5vw, 3.2rem); }
+    .hs-right { max-width: 220px; }
+    .hs-desc { font-size: 11px; }
+  }
+
+  @media (max-width: 640px) {
+    .hs-inner { padding: 0 5% 4vh; }
+    .hs-h2-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .hs-h2 { font-size: clamp(3.5rem, 18vw, 6rem); white-space: normal; }
+    .hs-h1 { font-size: clamp(1.6rem, 7vw, 2.8rem); }
+    .hs-right { max-width: 100%; align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+    .hs-desc { text-align: left; display: none; }
+    .hs-strip-left { gap: 16px; }
+    .hs-metric-val { font-size: 13px; }
+  }
+
+  @media (max-width: 400px) {
+    .hs-h2 { font-size: 3rem; }
+    .hs-tags { gap: 5px; }
+    .hs-tag { font-size: 9.5px; padding: 4px 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hs-blob-main, .hs-blob-soft, .hs-strip-dot { animation: none !important; }
+  }
+`;
+
+const TAGS = ['Smart Design', 'Experiences', 'Strategy', 'Branding'];
+const METRICS = [
+  { val: '150+', lbl: 'Brands Scaled' },
+  { val: '340%', lbl: 'Avg ROI' },
+  { val: '98%',  lbl: 'Retention Rate' },
+];
 
 const Hero = () => {
-  const videoRef = React.useRef(null);
-  useEffect(() => {
-    let animationTriggered = false;
-    const forceIsIn = () => {
-      if (animationTriggered) return;
-      animationTriggered = true;
-      document.querySelectorAll('.appear, .hero-photo').forEach(el => {
-        el.classList.add('is-in');
-      });
-    };
-
-    // Fallback animation check after 2 requestAnimationFrames
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        let hasActiveAnimation = false;
-        const elements = document.querySelectorAll('.appear');
-        elements.forEach(el => {
-          if (typeof el.getAnimations === 'function' && el.getAnimations().length > 0) {
-            hasActiveAnimation = true;
-          }
-        });
-        if (!hasActiveAnimation) {
-          forceIsIn();
-        }
-      });
-    });
-
-    const timeoutId = setTimeout(forceIsIn, 2000);
-    return () => clearTimeout(timeoutId);
-  }, []);
-
-  const handleAnimationEnd = (e) => {
-    e.currentTarget.classList.add('is-in');
-  };
-
   return (
-    <div id="hero" className="hero-landing-wrapper">
-      {/* CSS Stylesheet optimized for performance, fluid typography, and accessibility */}
-      <style dangerouslySetInnerHTML={{ __html: `
-        :root {
-          --bg: #000000;
-          --text: #ffffff;
-          --muted: #9a9a9a;
-          --border: rgba(255, 255, 255, 0.16);
-          --border-soft: rgba(255, 255, 255, 0.12);
+    <div id="hero" className="hs-root">
+      <style dangerouslySetInnerHTML={{ __html: STYLES }} />
 
-          --logo: 15.5px;
-          --logo-mark: 22px;
-          --nav: 14px;
-          --nav-h: 40px;
-          --btn: 13.5px;
-          --btn-h: 40px;
-          --hero-btn-h: 42px;
-          --lede: 15.5px;
-          --badge: 12.5px;
-          --stat-size: 13.5px;
-          --header-y: 22px;
-          --header-x: 40px;
-          --stats-x: 72px;
-          --stats-y: 36px;
-          --hero-gap: 85px;
-          --copy-max: 960px;
-          --lede-max: 470px;
-
-          --nav-gap: 8px;
-          --nav-pad: 0 18px;
-          --btn-pad: 0 16px;
-          --badge-pad: 9px 15px;
-          --badge-mb: 22px;
-          --lede-mt: 18px;
-          --actions-mt: 26px;
-          --actions-gap: 10px;
-
-          /* INDUSTRY STANDARD: Fluid typography using clamp() to prevent jumpy breakpoints */
-          --h1-fluid: clamp(2.5rem, 8.5vw, 8.5rem);
-        }
-
-        .hero-landing-wrapper {
-          position: relative;
-          width: 100%;
-          height: 100vh;
-          height: 100dvh;
-          overflow: hidden;
-          background: #000000;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          z-index: 10;
-        }
-
-        /* Grain Overlay */
-        .grain {
-          position: absolute;
-          inset: 0;
-          z-index: 100;
-          pointer-events: none;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-        }
-
-        @keyframes smoke-pulse {
-          0% {
-            transform: scale(1) translate(0, 0) rotate(0deg);
-            opacity: 0.5;
-          }
-          50% {
-            transform: scale(1.2) translate(-30px, 20px) rotate(5deg);
-            opacity: 0.85;
-          }
-          100% {
-            transform: scale(1.05) translate(20px, -15px) rotate(-3deg);
-            opacity: 0.6;
-          }
-        }
-
-        /* Background video styling with purple overlay */
-        .hero-photo {
-          position: absolute;
-          inset: 0;
-          z-index: 0;
-          overflow: hidden;
-          background: #000000;
-        }
-
-        .hero-smoke-aura {
-          position: absolute;
-          inset: -25%;
-          background: radial-gradient(ellipse at 50% 45%, rgba(147, 51, 234, 0.55) 0%, rgba(124, 58, 237, 0.35) 40%, rgba(0, 0, 0, 0.98) 75%);
-          filter: blur(50px);
-          animation: smoke-pulse 12s ease-in-out infinite alternate;
-          pointer-events: none;
-          z-index: 1;
-        }
-
-        .hero-photo video {
-          position: relative;
-          z-index: 2;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          filter: contrast(1.15) brightness(0.95);
-        }
-
-        /* Scrim/Overlay gradient to ensure WCAG AAA readability contrast */
-        .hero-photo::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: radial-gradient(circle, rgba(12, 10, 20, 0.15) 0%, rgba(0, 0, 0, 0.7) 100%), #7C3AED;
-          mix-blend-mode: multiply;
-          pointer-events: none;
-          z-index: 3;
-        }
-
-        /* Hero content block styling */
-        .hero {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 8px 24px;
-          width: 100%;
-          z-index: 10;
-        }
-
-        .hero-copy {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          max-width: var(--copy-max);
-          width: 100%;
-          margin: auto 0;
-        }
-
-        /* Hero Tagline Badge */
-        .hero-badge {
-          color: #7C3AED;
-          font-size: 13px;
-          font-weight: 700;
-          letter-spacing: 0.18em;
-          text-transform: uppercase;
-          margin-bottom: 20px;
-        }
-
-        /* Main Branding Title */
-        .hero-title {
-          font-size: var(--h1-fluid);
-          font-weight: 900;
-          letter-spacing: -0.015em;
-          line-height: 0.95;
-          color: #ffffff;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-transform: uppercase;
-          font-family: 'Syne', 'Inter', sans-serif;
-          margin-bottom: 8px;
-        }
-
-        .headline-line {
-          display: block;
-          overflow: hidden;
-          padding: 0.06em 0.15em 0.14em;
-        }
-
-        /* Centered Subtitle (SEO Target Keyword H1) */
-        .hero-subtitle-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          text-align: center;
-          max-width: 620px;
-          margin-top: 18px;
-          gap: 16px;
-          z-index: 10;
-        }
-
-        .hero-subtitle {
-          font-size: clamp(0.75rem, 2.5vw, 1rem);
-          font-weight: 800;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #ffffff;
-          margin: 0;
-        }
-
-        .hero-desc {
-          font-size: clamp(0.85rem, 2vw, 0.95rem);
-          line-height: 1.6;
-          color: var(--muted);
-          font-weight: 400;
-          letter-spacing: -0.01em;
-          font-family: 'Outfit', 'Inter', sans-serif;
-        }
-
-        .hero-subtitle-container .hero-actions {
-          margin-top: 12px;
-        }
-
-        /* Button Custom Language */
-        .btn {
-          position: relative;
-          isolation: isolate;
-          overflow: hidden;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          height: var(--hero-btn-h, 42px);
-          padding: 0 28px;
-          border-radius: 50px;
-          font-size: var(--btn, 13.5px);
-          font-weight: 600;
-          letter-spacing: -0.02em;
-          line-height: 1;
-          white-space: nowrap;
-          cursor: pointer;
-          border: 1px solid transparent;
-          transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, color 0.35s ease;
-        }
-
-        .btn::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.45) 48%, transparent 76%);
-          transform: translateX(-130%);
-          transition: transform 0.65s ease;
-          z-index: 1;
-          pointer-events: none;
-        }
-
-        .btn:hover::after {
-          transform: translateX(130%);
-        }
-
-        .btn-solid {
-          background: linear-gradient(180deg, #ffffff 0%, #e7e7e7 48%, #cfcfcf 100%);
-          color: #111111;
-          border: 1px solid #ffffff;
-          box-shadow: inset 0 1px 0 rgba(255,255,255,0.95);
-        }
-
-        .btn-solid:hover {
-          background: linear-gradient(180deg, #ffffff 0%, #f3f6ff 42%, #d5def2 100%);
-          border-color: #f2f6ff;
-          box-shadow: inset 0 1px 0 #ffffff, 0 0 26px rgba(186,208,255,0.4), 0 8px 18px rgba(255,255,255,0.12);
-        }
-
-        /* --- Entrance Motion System --- */
-        .appear {
-          opacity: 1;
-          transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes in-pop {
-          0% { opacity: 0; transform: scale(0.95); }
-          100% { opacity: 1; transform: scale(1); }
-        }
-        @keyframes in-mask {
-          0% { opacity: 0; transform: translateY(20px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes in-soft {
-          0% { opacity: 0; transform: translateY(12px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .appear--pop { animation: in-pop 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
-        .appear--mask { animation: in-mask 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
-        .appear--soft { animation: in-soft 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
-
-        .hero-photo {
-          opacity: 1;
-          transition: opacity 0.4s ease;
-        }
-      ` }} />
-
-      {/* Decorative Grain texture */}
-      <div className="grain"></div>
-
-      {/* Background purple smoke video (Instant render optimized + Ambient smoke fallback) */}
-      <div className="hero-photo">
-        <div className="hero-smoke-aura"></div>
-        <video 
-          ref={videoRef}
-          src="/hf_20260818_072341_50851634-bbc3-4c33-9acc-7647d4db44aa.mp4" 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          preload="auto"
-          fetchPriority="high"
-          aria-hidden="true"
-          tabIndex="-1"
-          onCanPlay={(e) => {
-            e.currentTarget.play().catch(() => {});
-          }}
-          onAnimationEnd={handleAnimationEnd}
-        ></video>
+      {/* Gradient Blobs */}
+      <div className="hs-blobs" aria-hidden="true">
+        <div className="hs-blob-main" />
+        <div className="hs-blob-soft" />
+        <div className="hs-blob-accent" />
       </div>
 
-      {/* Centered Hero Landing content */}
-      <main className="hero">
-        <div className="hero-copy">
-          {/* Tagline Badge */}
-          <div 
-            className="hero-badge appear appear--pop" 
-            style={{ '--d': '0.22s' }}
-            onAnimationEnd={handleAnimationEnd}
-          >
-            THE FUTURE OF MARKETING
-          </div>
+      {/* Main Content */}
+      <div className="hs-inner">
 
-          {/* Branding Title (Branding text — not a semantic heading to optimize page SEO) */}
-          <div className="hero-title">
-            <span className="headline-line">
-              <span 
-                className="appear appear--mask" 
-                style={{ '--d': '0.42s' }}
-                onAnimationEnd={handleAnimationEnd}
-              >
-                TALENTELLA
-              </span>
+        {/* Tag Pills */}
+        <div className="hs-tags" role="list" aria-label="Expertise areas">
+          {TAGS.map((tag, i) => (
+            <span key={tag} role="listitem" className={`hs-tag${i === 2 ? ' hs-tag-active' : ''}`}>
+              {tag}
             </span>
-          </div>
+          ))}
+        </div>
 
-          {/* Subtitle & Desc Description Container */}
-          <div 
-            className="hero-subtitle-container appear appear--soft" 
-            style={{ '--d': '0.82s' }}
-            onAnimationEnd={handleAnimationEnd}
-          >
-            {/* INDUSTRY STANDARD SEO: Primary search keyword is the semantic H1 heading */}
-            <h1 className="hero-subtitle">Top Digital Marketing Agency in Jharkhand</h1>
-            <p className="hero-desc">
-              TalentElla is a full-service digital marketing and web development agency near you. We offer premium branding, graphic design, social media marketing, and SEO services for startups and businesses across India.
+        {/* Serif italic line */}
+        <h1 className="hs-h1">Creative digital</h1>
+
+        {/* Giant word + right side */}
+        <div className="hs-h2-row">
+          <h2 className="hs-h2">STRATEGY</h2>
+
+          <div className="hs-right">
+            <p className="hs-desc">
+              TalentElla builds brands that dominate — high-performance websites,
+              scroll-stopping content, and full-scale campaigns that turn businesses
+              into market leaders.
             </p>
-            <div className="hero-actions">
-              <button 
-                className="btn btn-solid"
-                onClick={() => {
-                  const contactEl = document.getElementById('contact');
-                  if (contactEl) {
-                    contactEl.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-              >
-                Get a Free Strategy Call <ArrowRight size={16} style={{ marginLeft: '8px' }} />
-              </button>
-            </div>
+            <button
+              className="hs-cta"
+              onClick={() => scrollTo('contact')}
+              aria-label="Let's Talk"
+            >
+              <span>Let's Talk</span>
+              <span className="hs-cta-icon">
+                <ArrowUpRight size={14} strokeWidth={2.5} />
+              </span>
+            </button>
           </div>
         </div>
-      </main>
+      </div>
+
+      {/* Bottom metrics strip */}
+      <div className="hs-strip">
+        <div className="hs-strip-left">
+          {METRICS.map((m, i) => (
+            <React.Fragment key={m.lbl}>
+              <div className="hs-metric">
+                <span className="hs-metric-val">{m.val}</span>
+                <span className="hs-metric-lbl">{m.lbl}</span>
+              </div>
+              {i < METRICS.length - 1 && <div className="hs-strip-sep" aria-hidden="true" />}
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="hs-strip-right">
+          <div className="hs-strip-dot" aria-hidden="true" />
+          Jharkhand &amp; Pan-India
+        </div>
+      </div>
     </div>
   );
 };

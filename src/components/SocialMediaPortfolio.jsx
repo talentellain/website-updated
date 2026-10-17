@@ -65,7 +65,7 @@ const SocialMediaPortfolio = ({ portfolio }) => {
   const selectedItem = portfolio.find(item => item.id === selectedId);
 
   return (
-    <div style={{ position: 'relative', width: '100%', backgroundColor: '#000000', padding: '30px 0' }}>
+    <div style={{ position: 'relative', width: '100%', backgroundColor: 'transparent', padding: '30px 0' }}>
       
       {/* Local CSS Stylesheet to guarantee dynamic orientation rendering and perfect grid pack flow */}
       <style dangerouslySetInnerHTML={{ __html: `
@@ -251,12 +251,15 @@ const SocialMediaPortfolio = ({ portfolio }) => {
                   loop
                   muted
                   playsInline
+                  preload="metadata"
                   className="portfolio-card-video"
                 />
               ) : (
                 <img 
                   src={item.content} 
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className="portfolio-card-video"
                 />
               )}

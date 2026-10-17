@@ -11,13 +11,13 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0, isMobile, minH
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
     style={{
-      backgroundColor: '#000',
+      backgroundColor: '#ffffff',
       padding: isMobile ? '1.5rem' : '2.5rem',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
       minHeight: minH || (isMobile ? '180px' : '280px'),
-      border: isMobile ? 'none' : '1px solid rgba(255,255,255,0.03)',
+      border: isMobile ? 'none' : '1px solid rgba(0,0,0,0.06)',
       transition: 'all 0.3s ease',
       minWidth: isMobile ? 'auto' : 'auto',
       scrollSnapAlign: 'center',
@@ -25,7 +25,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0, isMobile, minH
       borderRadius: 0,
       backdropFilter: 'none'
     }}
-    whileHover={isMobile ? {} : { backgroundColor: '#121212', borderColor: 'rgba(172, 88, 233, 0.2)' }}
+    whileHover={isMobile ? {} : { backgroundColor: '#faf5ff', borderColor: 'rgba(172, 88, 233, 0.3)' }}
   >
     <div style={{ 
       width: '36px', 
@@ -34,7 +34,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0, isMobile, minH
       backgroundColor: 'rgba(172, 88, 233, 0.1)', 
       display: 'flex', 
       alignItems: 'center', 
-      justifyContent: 'center',
+      justifyContent: 'center', 
       color: '#AC58E9',
       marginBottom: isMobile ? '1rem' : '1.5rem',
       border: '1px solid rgba(172, 88, 233, 0.2)'
@@ -42,8 +42,8 @@ const FeatureCard = ({ icon: Icon, title, description, delay = 0, isMobile, minH
       <Icon size={16} />
     </div>
     <div>
-      <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, color: 'white', marginBottom: '0.8rem', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{title}</h3>
-      <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{description}</p>
+      <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 800, color: '#0f1015', marginBottom: '0.8rem', lineHeight: 1.2, letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{title}</h3>
+      <p style={{ color: '#555562', fontSize: '0.85rem', lineHeight: 1.5, margin: 0 }}>{description}</p>
     </div>
   </motion.div>
 );
@@ -58,7 +58,7 @@ const Features = () => {
   }, []);
 
   return (
-    <section style={{ backgroundColor: '#000', padding: isMobile ? '40px 0' : '80px 5% 100px 5%', transform: isMobile ? 'none' : 'translateY(-20px)', overflow: 'hidden', width: '100%' }}>
+    <section style={{ backgroundColor: '#ffffff', padding: isMobile ? '40px 0' : '80px 5% 100px 5%', transform: isMobile ? 'none' : 'translateY(-20px)', overflow: 'hidden', width: '100%' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
         
         {/* Bento Grid Layout */}
@@ -67,14 +67,14 @@ const Features = () => {
           gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', 
           gridAutoRows: isMobile ? 'auto' : 'minmax(280px, auto)',
           gap: '1px', 
-          backgroundColor: 'rgba(255,255,255,0.05)', 
-          border: '1px solid rgba(255,255,255,0.05)'
+          backgroundColor: 'rgba(0,0,0,0.06)', 
+          border: '1px solid rgba(0,0,0,0.06)'
         }}>
           
           {/* Main Title Box */}
           <div style={{ 
             gridColumn: isMobile ? 'span 2' : 'span 2', 
-            backgroundColor: '#000', 
+            backgroundColor: '#ffffff', 
             padding: isMobile ? '2.5rem 1.5rem' : '3rem',
             textAlign: isMobile ? 'center' : 'left',
             display: 'flex',
@@ -89,23 +89,24 @@ const Features = () => {
               style={{ 
                 fontSize: isMobile ? 'clamp(2.4rem, 10vw, 3.2rem)' : 'clamp(2rem, 6vw, 3.5rem)', 
                 fontWeight: 900, 
-                color: 'white', 
+                color: '#0f1015', 
                 margin: 0, 
                 textTransform: 'uppercase', 
                 letterSpacing: '-0.04em',
-                lineHeight: 1
+                lineHeight: 1,
+                fontFamily: "'Space Grotesk', system-ui, sans-serif"
               }}
             >
               FEATURES
             </motion.h2>
             <div style={{ display: isMobile ? 'none' : 'flex', alignItems: 'flex-end', justifyContent: 'space-between', marginTop: '2rem' }}>
-               <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.25rem', fontWeight: 500, margin: 0, maxWidth: '250px' }}>Launch your next project with ease.</p>
+               <p style={{ color: '#555562', fontSize: '1.25rem', fontWeight: 500, margin: 0, maxWidth: '250px' }}>Launch your next project with ease.</p>
                <ArrowUpRight size={48} color="#AC58E9" strokeWidth={2} />
             </div>
           </div>
 
           {/* Cards directly in the grid */}
-          <div style={{ gridColumn: isMobile ? 'span 2' : 'auto', backgroundColor: '#000' }}>
+          <div style={{ gridColumn: isMobile ? 'span 2' : 'auto', backgroundColor: '#ffffff' }}>
             <FeatureCard 
               icon={MousePointer2}
               title="Unlimited Requests"
@@ -116,7 +117,7 @@ const Features = () => {
             />
           </div>
 
-          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#000' }}>
+          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#ffffff' }}>
             <FeatureCard 
               icon={Rocket}
               title="Launch Fast"
@@ -127,9 +128,9 @@ const Features = () => {
           </div>
 
           {/* Spacer only on desktop to maintain bento flow */}
-          {!isMobile && <div style={{ backgroundColor: '#000' }} />}
+          {!isMobile && <div style={{ backgroundColor: '#ffffff' }} />}
 
-          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#000' }}>
+          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#ffffff' }}>
             <FeatureCard 
               icon={Flag}
               title="Start Today"
@@ -139,7 +140,7 @@ const Features = () => {
             />
           </div>
 
-          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#000' }}>
+          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#ffffff' }}>
             <FeatureCard 
               icon={Pause}
               title="Pause Anytime"
@@ -149,7 +150,7 @@ const Features = () => {
             />
           </div>
 
-          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#000' }}>
+          <div style={{ gridColumn: isMobile ? 'auto' : 'auto', backgroundColor: '#ffffff' }}>
             <FeatureCard 
               icon={PiggyBank}
               title="Affordable"

@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --bg: #0a0a0c;
-  --fg: #ffffff;
+  --bg: #ffffff;
+  --fg: #0f1015;
   --accent: #aa3bff;
   --accent-secondary: #00d2ff;
-  --muted: #88888f;
-  --border: rgba(255, 255, 255, 0.1);
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.05);
+  --muted: #555562;
+  --border: rgba(0, 0, 0, 0.08);
+  --glass: rgba(0, 0, 0, 0.02);
+  --glass-border: rgba(0, 0, 0, 0.06);
   
-  --sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --heading: 'Outfit', sans-serif;
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --heading: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   
   background-color: var(--bg);
   color: var(--fg);
@@ -28,8 +28,8 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #050508 inset !important;
-  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #0f1015 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -54,7 +54,7 @@ html, body {
   overflow-x: clip;
   background-color: var(--bg);
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) var(--bg);
+  scrollbar-color: rgba(0, 0, 0, 0.15) var(--bg);
 }
 
 /* Global Custom Webkit Scrollbar */
@@ -66,11 +66,11 @@ html, body {
   background: var(--bg); 
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2); 
+  background: rgba(0, 0, 0, 0.15); 
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4); 
+  background: rgba(0, 0, 0, 0.25); 
 }
 
 body {
@@ -111,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title-shimmer {
-  color: #ffffff;
+  color: #0f1015;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
 }
@@ -154,7 +154,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-title-3d {
-  color: #ffffff;
+  color: #0f1015;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: default;
 }
@@ -304,16 +304,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 32px;
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.9);
   border-color: var(--accent);
   box-shadow: 0 0 40px rgba(170, 59, 255, 0.15);
 }

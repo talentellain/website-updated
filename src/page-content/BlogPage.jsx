@@ -27,17 +27,18 @@ const BlogCard = ({ post, index }) => (
     transition={{ delay: index * 0.05, duration: 0.5 }}
     whileHover={{ y: -6 }}
     style={{
-      backgroundColor: 'rgba(255,255,255,0.02)',
+      backgroundColor: '#f8f9fc',
       borderRadius: '20px',
-      border: '1px solid rgba(255,255,255,0.06)',
+      border: '1px solid rgba(0,0,0,0.08)',
       overflow: 'hidden',
-      transition: 'border-color 0.3s ease',
+      transition: 'all 0.3s ease',
+      boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
     }}
   >
     <Link href={`/blog/${post.id}`} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
       <div style={{
           aspectRatio: '16/9',
-          backgroundColor: '#0a0a0a',
+          backgroundColor: '#f1f3f9',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -46,13 +47,13 @@ const BlogCard = ({ post, index }) => (
         }}>
           <div style={{
             position: 'absolute', inset: 0,
-            background: `linear-gradient(135deg, ${catColors[post.category] || 'rgba(172, 88, 233,0.2)'} 0%, transparent 70%)`,
+            background: `linear-gradient(135deg, ${catColors[post.category] || 'rgba(172, 88, 233, 0.12)'} 0%, transparent 70%)`,
           }} />
           <div style={{
             position: 'absolute', bottom: '-10%', right: '-5%',
             fontSize: 'clamp(5rem, 15vw, 10rem)',
             fontWeight: 900,
-            color: 'rgba(255,255,255,0.03)',
+            color: 'rgba(0,0,0,0.04)',
             textTransform: 'uppercase',
             letterSpacing: '0.05em',
             lineHeight: 1,
@@ -64,16 +65,17 @@ const BlogCard = ({ post, index }) => (
           <div style={{
             position: 'absolute', top: '1rem', left: '1rem',
             padding: '0.3rem 0.8rem', borderRadius: '100px',
-            background: `${catColors[post.category] || 'rgba(172, 88, 233,0.15)'}20`,
-            border: `1px solid ${catColors[post.category] || 'rgba(172, 88, 233,0.25)'}40`,
+            background: '#ffffff',
+            border: `1px solid ${catColors[post.category] || '#AC58E9'}40`,
             fontSize: '0.55rem', fontWeight: 700, color: catColors[post.category] || '#AC58E9',
             letterSpacing: '0.08em', textTransform: 'uppercase',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
           }}>
             {post.category}
           </div>
         </div>
       <div style={{ padding: '1.5rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.8rem', fontSize: '0.65rem', color: 'rgba(255,255,255,0.35)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '0.8rem', fontSize: '0.65rem', color: '#888896' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <Calendar size={10} /> {post.date}
           </span>
@@ -81,13 +83,13 @@ const BlogCard = ({ post, index }) => (
             <Clock size={10} /> {post.readTime}
           </span>
         </div>
-        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 0.6rem', lineHeight: 1.3, color: 'white' }}>
+        <h3 style={{ fontSize: '1.1rem', fontWeight: 800, margin: '0 0 0.6rem', lineHeight: 1.3, color: '#0f1015' }}>
           {post.title}
         </h3>
-        <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5, margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+        <p style={{ fontSize: '0.82rem', color: '#555562', lineHeight: 1.5, margin: 0, display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
           {post.excerpt}
         </p>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.2rem', color: '#AC58E9', fontSize: '0.75rem', fontWeight: 600 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.2rem', color: '#7C3AED', fontSize: '0.75rem', fontWeight: 700 }}>
           Read More <ArrowUpRight size={12} />
         </div>
       </div>
@@ -111,9 +113,10 @@ const BlogPage = () => {
     : blogPosts.filter(p => p.category === activeCategory);
 
   return (
-    <div style={{ backgroundColor: '#050505', color: 'white', fontFamily: 'Outfit, sans-serif', minHeight: '100vh' }}>
+    <div style={{ backgroundColor: '#ffffff', color: '#0f1015', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif", minHeight: '100vh' }}>
 
       <InteractiveHero 
+        theme="light"
         bgText="BLOG"
         tagline1="TALENTELLA"
         tagline2="INSIGHTS & GUIDES"
@@ -122,7 +125,7 @@ const BlogPage = () => {
         description="EXPERT INSIGHTS, ACTIONABLE GUIDES, AND THE LATEST TRENDS IN DIGITAL MARKETING, WEB DEVELOPMENT, AND BRANDING.\nEXPLORE OUR COMPREHENSIVE BLOG TO STAY AHEAD OF INDUSTRY TRENDS."
       />
 
-      <section style={{ padding: isMobile ? '50px 5% 50px' : '80px 5% 70px' }}>
+      <section style={{ padding: isMobile ? '50px 5% 50px' : '80px 5% 70px', backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -139,16 +142,16 @@ const BlogPage = () => {
                 style={{
                   padding: '0.6rem 1.4rem',
                   borderRadius: '100px',
-                  border: `1px solid ${activeCategory === cat ? '#aa3bff' : 'rgba(255,255,255,0.15)'}`,
-                  backgroundColor: activeCategory === cat ? '#aa3bff' : 'rgba(255,255,255,0.02)',
-                  color: activeCategory === cat ? '#ffffff' : 'rgba(255,255,255,0.6)',
+                  border: `1px solid ${activeCategory === cat ? '#AC58E9' : 'rgba(0,0,0,0.08)'}`,
+                  backgroundColor: activeCategory === cat ? '#AC58E9' : '#f8f9fc',
+                  color: activeCategory === cat ? '#ffffff' : '#555562',
                   fontSize: '0.75rem',
-                  fontWeight: 800,
+                  fontWeight: 700,
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
-                  boxShadow: activeCategory === cat ? '0 0 15px rgba(170, 59, 255, 0.4)' : 'none',
+                  boxShadow: activeCategory === cat ? '0 4px 15px rgba(172, 88, 233, 0.3)' : 'none',
                 }}
               >
                 {cat}
@@ -158,7 +161,7 @@ const BlogPage = () => {
 
           <AnimatePresence mode="wait">
             {filtered.length === 0 ? (
-              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', padding: '4rem 0', color: 'rgba(255,255,255,0.3)' }}>
+              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', padding: '4rem 0', color: '#888896' }}>
                 No posts in this category yet.
               </motion.div>
             ) : (

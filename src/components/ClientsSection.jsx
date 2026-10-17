@@ -21,23 +21,24 @@ const ClientsSection = () => {
     <section className="who-we-work-section">
       <style dangerouslySetInnerHTML={{ __html: `
         .who-we-work-section {
-          background-color: #000000;
-          padding: 60px 24px;
+          background-color: #ffffff;
+          padding: 70px 24px;
           position: relative;
           z-index: 38;
-          font-family: 'Inter', sans-serif;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .who-we-work-card {
-          background: #0d0d10;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          color: #ffffff;
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.08);
+          color: #0d0d12;
           border-radius: 32px;
           padding: 60px 56px;
           max-width: 1320px;
           margin: 0 auto;
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
           position: relative;
           overflow: hidden;
         }
@@ -54,11 +55,11 @@ const ClientsSection = () => {
           font-size: clamp(2.2rem, 4.5vw, 3.8rem);
           font-weight: 800;
           letter-spacing: -0.03em;
-          color: #ffffff;
+          color: #0f1015;
           line-height: 1.05;
           margin: 0;
           text-transform: uppercase;
-          font-family: 'Syne', sans-serif;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
         }
 
         .who-serve-block {
@@ -74,8 +75,9 @@ const ClientsSection = () => {
           font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.2em;
-          color: #AC58E9;
+          color: #8b28de;
           text-transform: uppercase;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
           margin: 0;
         }
 
@@ -86,12 +88,12 @@ const ClientsSection = () => {
         }
 
         .who-desc {
-          font-size: 14px;
-          line-height: 1.65;
-          color: rgba(255, 255, 255, 0.6);
+          font-size: 14.5px;
+          line-height: 1.7;
+          color: #4b4d5a;
           margin: 0;
           font-weight: 400;
-          font-family: 'Outfit', sans-serif;
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
 
         /* Real Client Logo Grid — Balanced 5-Column Desktop Grid */
@@ -100,7 +102,7 @@ const ClientsSection = () => {
           grid-template-columns: repeat(5, 1fr);
           gap: 20px;
           align-items: center;
-          border-top: 1px solid rgba(255, 255, 255, 0.08);
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
           padding-top: 56px;
         }
 
@@ -111,9 +113,9 @@ const ClientsSection = () => {
           justify-content: center;
           padding: 16px 20px;
           border-radius: 18px;
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          background: rgba(255, 255, 255, 0.03);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          background: #f8f9fc;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
           transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           cursor: pointer;
           position: relative;
@@ -121,27 +123,27 @@ const ClientsSection = () => {
         }
 
         .logo-card-item:hover {
-          background: rgba(172, 88, 233, 0.12);
-          border-color: rgba(172, 88, 233, 0.45);
+          background: #faf5ff;
+          border-color: rgba(139, 40, 222, 0.4);
           transform: translateY(-5px);
-          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(172, 88, 233, 0.3);
+          box-shadow: 0 14px 30px rgba(139, 40, 222, 0.12);
         }
 
-        /* Invert logos to crisp pure white for 100% visibility on black cards */
+        /* Dark crisp monochrome logos for 100% legibility on light cards */
         .logo-card-img {
           max-width: 82%;
           max-height: 50px;
           width: auto;
           height: auto;
           object-fit: contain;
-          opacity: 0.85;
-          filter: brightness(0) invert(1);
+          opacity: 0.75;
+          filter: brightness(0);
           transition: all 0.4s ease;
         }
 
         .logo-card-item:hover .logo-card-img {
           opacity: 1;
-          filter: brightness(0) invert(1);
+          filter: brightness(0);
           transform: scale(1.06);
         }
 

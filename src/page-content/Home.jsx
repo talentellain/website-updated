@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
 import Projects from '../components/Projects';
-import WhyTalentElla from '../components/WhyTalentElla';
 import HomeFAQ from '../components/HomeFAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
@@ -30,11 +29,20 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
 
   return (
     <main>
-      <Hero tagline={tagline} />
-      <Services />
+      {/* Hero + Services Overlap Container: Hero is sticky ONLY within this container */}
+      <div style={{ position: 'relative' }}>
+        <div style={{ position: 'sticky', top: 0, zIndex: 1, height: '100vh' }}>
+          <Hero tagline={tagline} />
+        </div>
+
+        {/* Services slides up and overlaps the Hero */}
+        <div style={{ position: 'relative', zIndex: 10 }}>
+          <Services />
+        </div>
+      </div>
       
       {/* Features Bento Grid Section */}
-      <div id="features" style={{ backgroundColor: '#000', position: 'relative', zIndex: 35 }}>
+      <div id="features" style={{ backgroundColor: '#ffffff', position: 'relative', zIndex: 35 }}>
         <Features />
       </div>
 
@@ -44,15 +52,12 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
 
 
       {/* About Section */}
-      <div id="about" style={{ position: 'relative', zIndex: 41 }}>
+      <div id="about" style={{ position: 'relative', zIndex: 41, backgroundColor: '#ffffff' }}>
         <AboutSection />
       </div>
 
-      {/* Our Winning Formula / 2026 */}
-      <WhyTalentElla />
-
       {/* Production Portfolio (Video Section) */}
-      <div id="production-portfolio" style={{ backgroundColor: '#000', borderTop: '1px solid rgba(255,255,255,0.05)', position: 'relative', zIndex: 45, padding: '40px 0 60px 0' }}>
+      <div id="production-portfolio" style={{ backgroundColor: '#ffffff', borderTop: '1px solid rgba(0,0,0,0.08)', position: 'relative', zIndex: 45, padding: '40px 0 60px 0' }}>
         <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ textAlign: 'center', marginBottom: '2.5rem', padding: '0 5%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{
@@ -79,7 +84,8 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
               fontWeight: 900, 
               textTransform: 'uppercase', 
               lineHeight: 1.1, 
-              color: '#ffffff',
+              color: '#0f1015',
+              fontFamily: "'Space Grotesk', system-ui, sans-serif",
               letterSpacing: '-0.02em',
               margin: 0
             }}>
@@ -87,7 +93,7 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
             </h2>
 
             <p style={{ 
-              color: 'rgba(255,255,255,0.6)', 
+              color: '#555562', 
               fontSize: 'clamp(0.9rem, 2vw, 1.05rem)', 
               maxWidth: '620px', 
               margin: '0 auto',
@@ -103,10 +109,9 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
             <Link href="/portfolio" style={{ textDecoration: 'none' }}>
               <button 
                 style={{
-                  background: 'rgba(255, 255, 255, 0.01)',
-                  backdropFilter: 'blur(8px)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  boxShadow: 'inset 0 1px 1px rgba(255, 255, 255, 0.15)',
+                  background: '#0f1015',
+                  border: '1px solid #0f1015',
+                  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
                   padding: '12px 32px',
                   borderRadius: '30px',
                   color: '#ffffff',
@@ -123,15 +128,15 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
                   overflow: 'hidden'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(172, 88, 233, 0.15)';
-                  e.currentTarget.style.borderColor = 'rgba(172, 88, 233, 0.35)';
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(172, 88, 233, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.backgroundColor = '#7C3AED';
+                  e.currentTarget.style.borderColor = '#7C3AED';
+                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(124, 58, 237, 0.3)';
                   e.currentTarget.style.transform = 'scale(1.03)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.01)';
-                  e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                  e.currentTarget.style.boxShadow = 'inset 0 1px 1px rgba(255, 255, 255, 0.15)';
+                  e.currentTarget.style.backgroundColor = '#0f1015';
+                  e.currentTarget.style.borderColor = '#0f1015';
+                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
@@ -143,7 +148,9 @@ const Home = ({ tagline = "The Future of Marketing" }) => {
         </div>
       </div>
 
-      <HomeFAQ faqs={homepageFAQs} />
+      <div style={{ position: 'relative', zIndex: 50, backgroundColor: '#ffffff' }}>
+        <HomeFAQ faqs={homepageFAQs} />
+      </div>
       <Contact />
       <Footer />
     </main>

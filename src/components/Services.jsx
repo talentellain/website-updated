@@ -42,14 +42,16 @@ const Services = () => {
       {/* Embedded CSS for clean style definition and zero bleed */}
       <style dangerouslySetInnerHTML={{ __html: `
         .services-section-v2 {
-          background-color: #000000;
-          color: #ffffff;
+          background-color: #ffffff;
+          color: #0f1015;
           padding: 100px 24px;
           position: relative;
           z-index: 35;
-          font-family: 'Inter', sans-serif;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+          border-top: none;
           overflow: visible;
+          border-radius: 28px 28px 0 0;
+          box-shadow: 0 -12px 60px rgba(0,0,0,0.12), 0 -2px 8px rgba(0,0,0,0.06);
         }
 
         .services-header-v2 {
@@ -63,19 +65,19 @@ const Services = () => {
           font-weight: 900;
           text-transform: uppercase;
           letter-spacing: -0.02em;
-          color: #ffffff;
+          color: #0f1015;
           margin-bottom: 14px;
-          font-family: 'Syne', sans-serif;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
           line-height: 0.95;
         }
 
         .services-header-v2 p {
-          color: rgba(255, 255, 255, 0.5);
+          color: #555562;
           font-size: clamp(0.85rem, 1.8vw, 1rem);
           line-height: 1.6;
           max-width: 600px;
           margin: 0 auto;
-          font-family: 'Outfit', sans-serif;
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
           font-weight: 400;
         }
 
@@ -92,10 +94,10 @@ const Services = () => {
           display: flex;
           align-items: center;
           padding: 42px 12px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
           text-decoration: none !important;
-          color: #ffffff !important;
-          transition: border-color 0.4s ease;
+          color: #0f1015 !important;
+          transition: border-color 0.4s ease, background-color 0.4s ease;
           position: relative;
           cursor: pointer;
           outline: none;
@@ -104,21 +106,22 @@ const Services = () => {
 
         /* Border top on the first row to frame the list */
         .service-row-v2:first-child {
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .service-row-v2:hover {
           border-color: rgba(124, 58, 237, 0.4);
+          background-color: rgba(124, 58, 237, 0.02);
           z-index: 40;
         }
 
         .service-num-v2 {
           font-size: clamp(1.8rem, 4vw, 3.5rem);
           font-weight: 800;
-          color: rgba(255, 255, 255, 0.15);
+          color: rgba(0, 0, 0, 0.12);
           min-width: 180px;
           transition: color 0.4s ease, transform 0.4s ease;
-          font-family: 'Syne', sans-serif;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
         }
 
         .service-row-v2:hover .service-num-v2 {
@@ -139,8 +142,8 @@ const Services = () => {
           font-weight: 800;
           text-transform: uppercase;
           letter-spacing: -0.015em;
-          color: #ffffff;
-          font-family: 'Syne', sans-serif;
+          color: #0f1015;
+          font-family: 'Space Grotesk', system-ui, sans-serif;
           margin: 0;
           line-height: 1.1;
         }
@@ -148,16 +151,16 @@ const Services = () => {
         .service-desc-v2 {
           font-size: clamp(0.85rem, 1.6vw, 0.95rem);
           line-height: 1.6;
-          color: rgba(255, 255, 255, 0.5);
+          color: #555562;
           font-weight: 400;
           max-width: 520px;
           margin: 0;
-          font-family: 'Outfit', sans-serif;
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
           transition: color 0.4s ease;
         }
 
         .service-row-v2:hover .service-desc-v2 {
-          color: rgba(255, 255, 255, 0.85);
+          color: #1a1a24;
         }
 
         /* Base Hover Preview Image Box */
@@ -209,7 +212,7 @@ const Services = () => {
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          border: 1px solid rgba(255, 255, 255, 0.16);
+          border: 1px solid rgba(0, 0, 0, 0.12);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -228,7 +231,7 @@ const Services = () => {
         }
 
         .service-arrow-v2 svg {
-          color: rgba(255, 255, 255, 0.6);
+          color: rgba(0, 0, 0, 0.6);
           transition: color 0.4s ease, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
