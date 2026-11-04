@@ -1,19 +1,20 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
-const clientLogos = [
-  { id: 1, name: 'Brand R.Comm', src: '/clients-logos/Brand R.Comm 4 final logo-02.png' },
-  { id: 2, name: 'EcoServeDev', src: '/clients-logos/EcoServeDev Logo.png' },
-  { id: 3, name: 'Simetra', src: '/clients-logos/Simetra-Logo-02(1).png' },
-  { id: 4, name: 'Snail', src: '/clients-logos/Snail-New-logo-01-scaled.png' },
-  { id: 5, name: 'Biospec', src: '/clients-logos/biospec-logo.png' },
-  { id: 6, name: 'Inclusive', src: '/clients-logos/inclusive-logo.png' },
-  { id: 7, name: 'Real Estate', src: '/clients-logos/logo white real estate (1).png' },
-  { id: 8, name: 'Trenvity', src: '/clients-logos/logo-trenvity.png' },
-  { id: 9, name: 'Trenvity Studio', src: '/clients-logos/logo-trenvity1.png' },
-  { id: 10, name: 'Partner Brand', src: '/clients-logos/logo-white.png' },
+const row1Logos = [
+  { id: 1, name: 'Brand R.Comm', src: '/clients-logos/brand-rcomm-new.png', isWhite: false },
+  { id: 2, name: 'EcoServeDev', src: '/clients-logos/EcoServeDev Logo.png', isWhite: false },
+  { id: 3, name: 'Simetra', src: '/clients-logos/Simetra-Logo-02(1).png', isWhite: false },
+  { id: 4, name: 'Snail Integral', src: '/clients-logos/Snail-New-logo-01-scaled.png', isWhite: false },
+  { id: 5, name: 'Biospec', src: '/clients-logos/biospec-logo.png', isWhite: false },
+];
+
+const row2Logos = [
+  { id: 6, name: 'InclusivAll', src: '/clients-logos/inclusive-logo.png', isWhite: false },
+  { id: 7, name: 'Zobiit', src: '/clients-logos/logo white real estate (1).png', isWhite: true },
+  { id: 8, name: 'Trenvity', src: '/clients-logos/logo-trenvity.png', isWhite: false },
+  { id: 10, name: 'Digniteq', src: '/clients-logos/logo-white.png', isWhite: true },
 ];
 
 const ClientsSection = () => {
@@ -35,7 +36,7 @@ const ClientsSection = () => {
           border: 1px solid rgba(0, 0, 0, 0.08);
           color: #0d0d12;
           border-radius: 32px;
-          padding: 60px 56px;
+          padding: 60px 48px;
           max-width: 1320px;
           margin: 0 auto;
           box-shadow: 0 20px 50px rgba(0, 0, 0, 0.04), 0 2px 8px rgba(0, 0, 0, 0.02);
@@ -47,7 +48,7 @@ const ClientsSection = () => {
           display: grid;
           grid-template-columns: 1fr 1.2fr;
           gap: 48px;
-          margin-bottom: 64px;
+          margin-bottom: 56px;
           align-items: start;
         }
 
@@ -96,99 +97,162 @@ const ClientsSection = () => {
           font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
 
-        /* Real Client Logo Grid — Balanced 5-Column Desktop Grid */
-        .logo-grid {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 20px;
-          align-items: center;
+        /* ── Floating Logo Marquee (No Boxes, Large Logos) ── */
+        .marquee-wrapper {
+          position: relative;
+          width: 100%;
+          overflow: hidden;
           border-top: 1px solid rgba(0, 0, 0, 0.08);
-          padding-top: 56px;
+          padding-top: 52px;
+          display: flex;
+          flex-direction: column;
+          gap: 36px;
         }
 
-        .logo-card-item {
-          height: 100px;
+        /* Edge Vignettes for smooth in/out transitions */
+        .marquee-fade-left {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: clamp(40px, 9vw, 130px);
+          background: linear-gradient(to right, #ffffff, rgba(255, 255, 255, 0));
+          z-index: 10;
+          pointer-events: none;
+        }
+
+        .marquee-fade-right {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          width: clamp(40px, 9vw, 130px);
+          background: linear-gradient(to left, #ffffff, rgba(255, 255, 255, 0));
+          z-index: 10;
+          pointer-events: none;
+        }
+
+        .marquee-row {
+          width: 100%;
+          overflow: hidden;
+          display: flex;
+          position: relative;
+          user-select: none;
+        }
+
+        .marquee-track {
           display: flex;
           align-items: center;
-          justify-content: center;
-          padding: 16px 20px;
-          border-radius: 18px;
-          border: 1px solid rgba(0, 0, 0, 0.06);
-          background: #f8f9fc;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
-          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
+          gap: clamp(48px, 6.5vw, 88px);
+          width: max-content;
+          will-change: transform;
         }
 
-        .logo-card-item:hover {
-          background: #faf5ff;
-          border-color: rgba(139, 40, 222, 0.4);
-          transform: translateY(-5px);
-          box-shadow: 0 14px 30px rgba(139, 40, 222, 0.12);
+        .marquee-row:hover .marquee-track {
+          animation-play-state: paused;
         }
 
-        /* Dark crisp monochrome logos for 100% legibility on light cards */
-        .logo-card-img {
-          max-width: 82%;
-          max-height: 50px;
-          width: auto;
-          height: auto;
-          object-fit: contain;
-          opacity: 0.75;
-          filter: brightness(0);
-          transition: all 0.4s ease;
+        /* Row 1 glides continuously to the LEFT on loop */
+        .marquee-track-left {
+          animation: marqueeScrollLeft 32s linear infinite;
         }
 
-        .logo-card-item:hover .logo-card-img {
-          opacity: 1;
-          filter: brightness(0);
-          transform: scale(1.06);
+        /* Row 2 glides continuously to the RIGHT on loop */
+        .marquee-track-right {
+          animation: marqueeScrollRight 32s linear infinite;
         }
 
-        /* Mobile & Tablet Responsiveness */
-        @media (max-width: 1200px) {
-          .logo-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+        @keyframes marqueeScrollLeft {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
           }
         }
 
+        @keyframes marqueeScrollRight {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0);
+          }
+        }
+
+        /* ── Individual Logo Items (No boxes, pure large logos) ── */
+        .logo-item {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 8px 12px;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          cursor: pointer;
+          flex-shrink: 0;
+          transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .logo-item:hover {
+          transform: translateY(-4px) scale(1.08);
+        }
+
+        /* Large Prominent Logo Images */
+        .logo-item-img {
+          height: clamp(60px, 6vw, 82px);
+          max-height: 82px;
+          max-width: clamp(180px, 18vw, 260px);
+          width: auto;
+          object-fit: contain;
+          opacity: 0.92;
+          transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .logo-item:hover .logo-item-img {
+          opacity: 1;
+        }
+
+        /* Darkened filter ONLY for pure-white assets to ensure high legibility on light background */
+        .logo-img-darkened {
+          filter: brightness(0);
+        }
+
+        /* ── Responsive adjustments ── */
         @media (max-width: 1024px) {
           .who-we-work-card {
-            padding: 44px 32px;
+            padding: 44px 28px;
             border-radius: 24px;
           }
 
           .who-header-grid {
             grid-template-columns: 1fr;
             gap: 28px;
-            margin-bottom: 44px;
+            margin-bottom: 40px;
           }
 
-          .logo-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
+          .marquee-wrapper {
+            gap: 28px;
             padding-top: 40px;
           }
-        }
 
-        @media (max-width: 768px) {
-          .logo-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
+          .marquee-track {
+            gap: clamp(36px, 5vw, 60px);
           }
 
-          .logo-card-item {
-            height: 85px;
-            padding: 14px 16px;
+          .logo-item-img {
+            height: clamp(52px, 6vw, 70px);
+            max-height: 70px;
           }
         }
 
-        @media (max-width: 550px) {
+        @media (max-width: 640px) {
+          .who-we-work-section {
+            padding: 50px 16px;
+          }
+
           .who-we-work-card {
-            padding: 32px 20px;
+            padding: 32px 18px;
             border-radius: 20px;
           }
 
@@ -197,18 +261,34 @@ const ClientsSection = () => {
             gap: 16px;
           }
 
-          .logo-grid {
-            grid-template-columns: 1fr;
-            gap: 12px;
+          .marquee-wrapper {
+            gap: 24px;
+            padding-top: 32px;
           }
 
-          .logo-card-item {
-            height: 80px;
-            padding: 12px 14px;
+          .marquee-track {
+            gap: 32px;
           }
 
-          .logo-card-img {
-            max-height: 44px;
+          .logo-item-img {
+            height: clamp(44px, 12vw, 58px);
+            max-height: 58px;
+            max-width: 160px;
+          }
+
+          .marquee-track-left {
+            animation-duration: 22s;
+          }
+
+          .marquee-track-right {
+            animation-duration: 22s;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-track-left,
+          .marquee-track-right {
+            animation: none !important;
           }
         }
       `}} />
@@ -234,24 +314,42 @@ const ClientsSection = () => {
           </div>
         </div>
 
-        {/* Real Client Logo Grid — 10 White Inverted Logos on Black Cards */}
-        <div className="logo-grid">
-          {clientLogos.map((item, idx) => (
-            <motion.div
-              key={item.id}
-              className="logo-card-item"
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.04 }}
-            >
-              <img
-                src={item.src}
-                alt={`${item.name} Client Logo`}
-                className="logo-card-img"
-              />
-            </motion.div>
-          ))}
+        {/* Floating Logo Marquees (No Boxes, Infinite Left & Right Loop) */}
+        <div className="marquee-wrapper">
+          <div className="marquee-fade-left" aria-hidden="true" />
+          <div className="marquee-fade-right" aria-hidden="true" />
+
+          {/* Row 1: Smoothly scrolling LEFT on loop */}
+          <div className="marquee-row" aria-label="Client logos row 1">
+            <div className="marquee-track marquee-track-left">
+              {[...row1Logos, ...row1Logos, ...row1Logos, ...row1Logos].map((item, idx) => (
+                <div key={`r1-${idx}`} className="logo-item">
+                  <img
+                    src={item.src}
+                    alt={`${item.name} Client Logo`}
+                    className={`logo-item-img ${item.isWhite ? 'logo-img-darkened' : ''}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Row 2: Smoothly scrolling RIGHT on loop */}
+          <div className="marquee-row" aria-label="Client logos row 2">
+            <div className="marquee-track marquee-track-right">
+              {[...row2Logos, ...row2Logos, ...row2Logos, ...row2Logos].map((item, idx) => (
+                <div key={`r2-${idx}`} className="logo-item">
+                  <img
+                    src={item.src}
+                    alt={`${item.name} Client Logo`}
+                    className={`logo-item-img ${item.isWhite ? 'logo-img-darkened' : ''}`}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

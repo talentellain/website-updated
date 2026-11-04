@@ -1,10 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
-import dentwise from '../assets/dentwise.png';
-import k72 from '../assets/K72.png';
-import onepiece from '../assets/onepiece.png';
-import whatsappVideo from '../assets/video/WhatsApp Video 2026-05-07 at 6.59.49 PM.mp4';
 
 const projects = [
   {
@@ -12,63 +8,63 @@ const projects = [
     client: 'Adidas Animated',
     desc: 'High-performance interactive e-commerce experience with smooth animations and dynamic product reveals.',
     type: 'E-Commerce',
-    image: '/projects/addidas.png',
     link: 'https://addidas-animated.vercel.app/',
-    alt: 'Adidas Animated — immersive e-commerce experience by TalentElla',
   },
   {
     id: '02',
     client: 'Ring Portfolio',
     desc: 'Immersive 3D portfolio experience featuring high-end digital craftsmanship and interactive storytelling.',
     type: 'UX/UI Design',
-    image: '/projects/rig.png',
     link: 'https://ring-portfolio.vercel.app/',
-    alt: 'Ring Portfolio — 3D interactive web design by TalentElla',
   },
   {
     id: '03',
     client: 'Astro Portfolio',
     desc: 'A sleek, modern portfolio built with Astro for maximum performance and SEO optimization — developed by TalentElla.',
     type: 'Web Development',
-    image: '/projects/astro-portfolio.png',
     link: 'https://astro-portfolio-opal-ten.vercel.app/',
-    alt: 'Astro Portfolio — high-performance web solution by TalentElla digital agency',
   },
   {
     id: '04',
     client: 'DentWise AI',
     desc: 'Intelligent dental assistant platform with 24/7 AI-patient interaction — built with cutting-edge web technologies by TalentElla.',
     type: 'AI / SaaS',
-    image: dentwise,
     link: 'https://smart-dent-ai-app.vercel.app/',
-    alt: 'DentWise AI dental assistant web application — healthcare SaaS platform developed by TalentElla, full-service digital marketing agency India',
   },
   {
     id: '05',
     client: 'K72 Agency',
     desc: 'Award-winning creative agency portal with cinematic WebGL animations and immersive user experience design.',
     type: 'Creative Dev',
-    image: k72,
     link: 'https://react-animated-web-l9i8.vercel.app/',
-    alt: 'K72 creative agency website — award-winning animated web portal by TalentElla brand development agency',
   },
   {
     id: '06',
     client: 'One Piece Legacy',
     desc: 'Immersive storytelling experience with dynamic content and engaging visual narratives for maximum user engagement.',
     type: 'Brand Identity',
-    image: onepiece,
     link: 'https://one-piece-eight-henna.vercel.app/',
-    alt: 'One Piece Legacy immersive storytelling website — narrative web experience by TalentElla content marketing agency India',
   },
   {
     id: '07',
+    client: 'Brand R.Comm',
+    desc: "National agriculture & rural communications summit & awards portal engineered for high-authority presence and delegate conversion.",
+    type: 'Brand Identity',
+    link: 'https://www.brandrcomm.com/',
+  },
+  {
+    id: '08',
+    client: 'Snail Integral',
+    desc: 'Strategic corporate & government communications platform delivering measurable impact with interactive storytelling.',
+    type: 'Web Development',
+    link: 'https://www.snailintegral.com/',
+  },
+  {
+    id: '09',
     client: 'Creative Production',
     desc: 'Cinematic brand storytelling and high-end video production showcasing creative excellence.',
     type: 'Production',
-    video: whatsappVideo,
     link: '#',
-    alt: 'Creative Production showcase — premium video by TalentElla',
   }
 ];
 
@@ -83,8 +79,6 @@ const typeColors = {
 };
 
 const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects, activeIndex }) => {
-  const videoRef = useRef(null);
-  const [imgHovered, setImgHovered] = useState(false);
 
   const revealStart = 0.1;
   const revealEnd = 0.85;
@@ -188,70 +182,7 @@ const ProjectCard = ({ project, index, scrollProgress, isMobile, totalProjects, 
           {project.desc}
         </p>
 
-        <div
-          onClick={handleExplore}
-          onMouseEnter={() => { setImgHovered(true); if (videoRef.current) videoRef.current.play(); }}
-          onMouseLeave={() => { setImgHovered(false); if (videoRef.current) { videoRef.current.pause(); videoRef.current.currentTime = 0; } }}
-          style={{
-            width: '100%',
-            aspectRatio: isMobile ? '16/11' : '2/1.1',
-            borderRadius: '20px',
-            overflow: 'hidden',
-            backgroundColor: '#111',
-            border: '1px solid rgba(255, 255, 255, 0.05)',
-            cursor: 'pointer',
-            position: 'relative',
-          }}
-        >
-          {project.video ? (
-            <motion.video
-              ref={videoRef}
-              src={project.video}
-              muted
-              loop
-              playsInline
-              preload="none"
-              animate={{ scale: imgHovered ? 1.06 : 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <motion.img
-              src={project.image?.src || project.image}
-              animate={{ scale: imgHovered ? 1.06 : 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              alt={project.alt || `${project.client} — project by TalentElla, India's 360° marketing agency`}
-              loading="lazy"
-              decoding="async"
-            />
-          )}
 
-          <motion.div
-            animate={{ opacity: imgHovered ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
-            style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)',
-              display: 'flex', alignItems: 'flex-end', justifyContent: 'flex-start',
-              padding: '2rem', pointerEvents: 'none',
-            }}
-          >
-            <motion.div
-              animate={{ y: imgHovered ? 0 : 15 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              style={{
-                display: 'flex', alignItems: 'center', gap: '0.6rem',
-                padding: '0.6rem 1.2rem', borderRadius: '100px',
-                backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.1)',
-              }}
-            >
-              <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>View Live</span>
-              <ArrowUpRight size={14} />
-            </motion.div>
-          </motion.div>
-        </div>
       </div>
     </motion.div>
   );

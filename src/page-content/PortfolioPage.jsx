@@ -23,6 +23,8 @@ const allFeatured = [
   { id: 10, title: 'Ring Portfolio', category: 'UX/UI DESIGN', image: '/projects/rig.png', link: 'https://ring-portfolio.vercel.app/', metrics: '💎 Premium UI', challenge: 'Design a sleek, minimalist portfolio for a high-end jewelry brand.', solution: 'Focused on micro-interactions, elegant typography, and high-resolution imagery to convey luxury.', techStack: ['Figma', 'Next.js'] },
   { id: 11, title: 'Digniteq', category: 'BRAND IDENTITY', image: '/projects/digniteq.png', link: 'https://www.digniteq.in', metrics: '🚀 B2B Growth', challenge: 'Digniteq needed a professional corporate identity and website to attract enterprise clients.', solution: 'Delivered a clean, authoritative brand guidelines package and a fast, accessible corporate website.', techStack: ['React', 'Tailwind'] },
   { id: 12, title: 'EcoServeDev', category: 'WEB DEVELOPMENT', image: '/thubnail-website/image copy 2.png', link: 'https://ecoservedev.org/homepage', orientation: 'landscape', metrics: '🌱 +200% Donations', challenge: 'An environmental NGO needed a modern platform to drive donations and volunteer sign-ups.', solution: 'Built an inspiring, accessible website with clear calls-to-action and a seamless donation integration.', techStack: ['Next.js', 'React', 'Node.js'] },
+  { id: 13, title: 'Brand R.Comm', category: 'BRAND IDENTITY', image: '/projects/brandrcomm.jpg', link: 'https://www.brandrcomm.com/', orientation: 'landscape', metrics: '🏆 Agri Summit 2026', challenge: "Brand R.Comm needed a high-impact digital platform for India's 4th Edition Agriculture & Rural Communication Summit & Awards to command authority and scale delegate registrations.", solution: 'Architected a high-converting summit portal with event countdowns, delegate onboarding flows, and speaker & sponsor showcase modules.', techStack: ['Next.js', 'React', 'Tailwind', 'Node.js'] },
+  { id: 14, title: 'Snail Integral', category: 'WEB DEVELOPMENT', image: '/projects/snailintegral.jpg', link: 'https://www.snailintegral.com/', orientation: 'landscape', metrics: '📣 60+ Brand Clients', challenge: 'Snail Integral required an authoritative, high-trust digital presence representing their communications leadership across agriculture, corporate, and government sectors.', solution: 'Designed and engineered an immersive modern web platform featuring dynamic storytelling, case study spotlights, and clear client conversion pathways.', techStack: ['React', 'Next.js', 'Tailwind', 'Framer Motion'] },
 ];
 
 const categoryColors = {
@@ -125,18 +127,6 @@ const HorizontalWork = () => {
                   display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: isMobile ? '2rem 1.5rem' : '4rem',
                 }}>
                   <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }}>
-                    <div style={{
-                      display: 'inline-flex', alignItems: 'center',
-                      padding: '0.4rem 1.2rem', borderRadius: '100px',
-                      backgroundColor: `${categoryColors[project.category]}1a`,
-                      backdropFilter: 'blur(12px)', border: `1px solid ${categoryColors[project.category]}44`,
-                      marginBottom: '1rem',
-                    }}>
-                      <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: categoryColors[project.category], marginRight: '8px', boxShadow: `0 0 10px ${categoryColors[project.category]}` }} />
-                      <span style={{ fontSize: '0.65rem', color: categoryColors[project.category], fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                        {project.category}
-                      </span>
-                    </div>
                     {project.metrics && (
                       <div style={{ marginBottom: '1rem' }}>
                         <span style={{
@@ -375,9 +365,6 @@ const RemainingWork = ({ isMobile = false }) => {
                     style={{ objectFit: 'cover', objectPosition: 'top', pointerEvents: 'none' }}
                   />
                   <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 55%)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', padding: '1.5rem' }}>
-                    <span style={{ display: 'inline-block', padding: '0.25rem 0.7rem', borderRadius: '100px', backgroundColor: `${catColor}22`, border: `1px solid ${catColor}44`, fontSize: '0.55rem', color: catColor, fontWeight: 800, letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', width: 'fit-content' }}>
-                      {p.category}
-                    </span>
                     <h4 style={{ margin: '0.2rem 0 0', fontWeight: 800, fontSize: '1.15rem', color: 'white' }}>{p.title}</h4>
                   </div>
                 </motion.a>
@@ -556,14 +543,6 @@ const PortfolioCard = ({ p, index, setSelectedProject, isMobile }) => {
             {p.metrics}
           </span>
         )}
-        <span style={{
-          display: 'inline-block', padding: '0.25rem 0.65rem', borderRadius: '4px',
-          border: `1px solid ${catColor}99`, fontSize: '0.55rem', color: catColor,
-          fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase',
-          marginBottom: '0.5rem', width: 'fit-content',
-        }}>
-          {p.category || 'Production'}
-        </span>
         <h4 style={{ margin: 0, fontWeight: 900, fontSize: isMobile ? '1rem' : '1.15rem', lineHeight: 1.2, textTransform: 'uppercase', letterSpacing: '-0.01em', color: 'white' }}>
           {projectTitle}
         </h4>

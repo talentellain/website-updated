@@ -6,13 +6,13 @@ import { ArrowRight, Instagram, Linkedin, Twitter, MessageCircle, ArrowUpRight }
 
 const TALENT_ELLA_AVANDE_STYLES = `
   .te-av-footer {
-    --bg-paper: #f4f3ec;
-    --card-bg: #e7e5dc;
+    --bg-paper: #ffffff;
+    --card-bg: #ffffff;
     --box-dark: #0d0d0d;
     --text-primary: #0d0d0d;
-    --text-muted: #666660;
-    --text-dim: #8c8c84;
-    --border-light: rgba(0, 0, 0, 0.1);
+    --text-muted: #64748b;
+    --text-dim: #94a3b8;
+    --border-light: rgba(0, 0, 0, 0.08);
     --accent-purple: #7c3aed;
     --accent-purple-hover: #6d28d9;
     
@@ -24,6 +24,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
     z-index: 80;
     box-sizing: border-box;
     width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .te-av-footer *,
@@ -40,7 +41,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   /* ── Top Banner Card ── */
   .te-av-top-card {
     background-color: var(--card-bg);
-    border-radius: 18px;
+    border-radius: 24px;
     padding: clamp(36px, 5vw, 64px);
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -48,7 +49,8 @@ const TALENT_ELLA_AVANDE_STYLES = `
     align-items: center;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.04);
   }
 
   /* Halftone background texture on the top card */
@@ -59,7 +61,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
     width: 60%;
     height: 100%;
     pointer-events: none;
-    opacity: 0.18;
+    opacity: 0.08;
     background-image: radial-gradient(circle, #000 1.5px, transparent 1.5px);
     background-size: 14px 14px;
     mask-image: linear-gradient(to right, transparent, black 40%);
@@ -82,15 +84,16 @@ const TALENT_ELLA_AVANDE_STYLES = `
     max-width: 500px;
   }
 
-  /* Right Black Fast-Track Card */
+  /* Right Purple Gradient Fast-Track Card */
   .te-av-action-box {
-    background-color: var(--box-dark);
+    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
     color: #ffffff;
-    border-radius: 12px;
+    border-radius: 18px;
     padding: clamp(26px, 3.5vw, 38px);
     position: relative;
     z-index: 2;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 16px 40px rgba(124, 58, 237, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.16);
   }
 
   .te-av-action-header {
@@ -106,7 +109,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #a0a0a0;
+    color: rgba(255, 255, 255, 0.82);
   }
 
   .te-av-action-status {
@@ -114,17 +117,21 @@ const TALENT_ELLA_AVANDE_STYLES = `
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: #10b981;
+    color: #a7f3d0;
     font-weight: 600;
     letter-spacing: 0.02em;
+    background: rgba(16, 185, 129, 0.2);
+    padding: 3px 10px;
+    border-radius: 100px;
+    border: 1px solid rgba(16, 185, 129, 0.35);
   }
 
   .te-av-status-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #10b981;
-    box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+    background-color: #34d399;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.9);
     animation: te-pulse-dot 2s infinite;
   }
 
@@ -138,23 +145,25 @@ const TALENT_ELLA_AVANDE_STYLES = `
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 8px;
-    padding: 14px 18px;
-    color: #ffffff !important;
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 10px;
+    padding: 14px 20px;
+    color: #0f172a !important;
     text-decoration: none !important;
     font-size: 14.5px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .te-av-direct-btn:hover {
-    background: var(--accent-purple);
-    border-color: var(--accent-purple);
+    background: #09090b;
+    color: #ffffff !important;
+    border-color: #09090b;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
   }
 
   .te-av-btn-left {
@@ -166,7 +175,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   .te-av-action-sub {
     font-size: 12px;
     line-height: 1.55;
-    color: #94a3b8;
+    color: rgba(255, 255, 255, 0.85);
     margin: 16px 0 0;
     font-weight: 400;
   }
@@ -215,8 +224,8 @@ const TALENT_ELLA_AVANDE_STYLES = `
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    background-color: #dfded6;
+    border-radius: 8px;
+    background-color: #f1f5f9;
     color: #0d0d0d;
     text-decoration: none;
     transition: all 0.2s ease;

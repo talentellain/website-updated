@@ -20,13 +20,6 @@ const serviceNumbers = {
   'visual-identity-design': '04'
 };
 
-const serviceHoverImages = {
-  'app-development': '/projects/zobiit.png',
-  'website-development': '/thubnail-website/image copy 2.png',
-  'social-media-management': '/projects/addidas.png',
-  'visual-identity-design': '/talentella strip design.png'
-};
-
 const serviceTags = {
   'app-development': ['iOS & Android', 'React Native & Flutter', 'UI/UX Design', 'Cloud APIs'],
   'website-development': ['Next.js & React', 'High-Speed Architecture', 'SEO-First Engineering', 'E-Commerce'],
@@ -108,7 +101,7 @@ const SERVICES_STYLES = `
   /* ── Individual Service Row ── */
   .service-row-v3 {
     display: grid;
-    grid-template-columns: 80px 1fr 220px 52px;
+    grid-template-columns: 80px 1fr 52px;
     align-items: center;
     gap: clamp(20px, 3vw, 44px);
     padding: clamp(32px, 4vw, 44px) clamp(16px, 2.5vw, 28px);
@@ -299,13 +292,9 @@ const SERVICES_STYLES = `
   /* ── Responsive Tablet & Mobile ── */
   @media (max-width: 1024px) {
     .service-row-v3 {
-      grid-template-columns: 60px 1fr 180px 44px;
+      grid-template-columns: 60px 1fr 44px;
       gap: 20px;
       padding: 28px 14px;
-    }
-    .service-preview-frame {
-      width: 180px;
-      height: 110px;
     }
     .service-arrow-v3 {
       width: 44px;
@@ -341,12 +330,6 @@ const SERVICES_STYLES = `
     .service-num-v3 {
       font-size: 1.8rem;
     }
-
-    .service-preview-frame {
-      width: 100%;
-      height: 160px;
-      margin-top: 4px;
-    }
   }
 `;
 
@@ -374,7 +357,6 @@ const Services = () => {
           const num = serviceNumbers[s.id] || `0${index + 1}`;
           const displayTitle = serviceDisplayTitles[s.id] || s.title.toUpperCase();
           const targetPath = s.id === 'app-development' ? '/app-development' : `/services/${s.id}`;
-          const previewImg = serviceHoverImages[s.id] || '/thubnail-website/image copy 2.png';
           const tags = serviceTags[s.id] || ['Strategy', 'Design', 'Execution'];
 
           return (
@@ -402,17 +384,6 @@ const Services = () => {
                     </span>
                   ))}
                 </div>
-              </div>
-
-              {/* Seamlessly Integrated Project Preview Window */}
-              <div className="service-preview-frame">
-                <img
-                  src={previewImg}
-                  alt={`${s.title} Case Study Preview`}
-                  className="service-preview-img-v3"
-                  loading="lazy"
-                />
-                <span className="service-preview-badge">Featured Case</span>
               </div>
 
               {/* Circular Action Button */}
