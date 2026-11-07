@@ -79,7 +79,7 @@ export default async function ServiceLocationPage({ params }) {
           "name": `TalentElla - ${content.serviceTitle} in ${content.cityName}`,
           "image": "https://www.talentella.in/logo.png",
           "url": `https://www.talentella.in/${resolvedParams.serviceLoc}`,
-          "telephone": "+918002014660",
+          "telephone": "+916200713833",
           "address": {
             "@type": "PostalAddress",
             "addressLocality": "Ranchi",

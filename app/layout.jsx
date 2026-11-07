@@ -76,10 +76,12 @@ export default function RootLayout({ children }) {
     },
     'sameAs': [
       'https://www.instagram.com/talentella.in',
-      'https://www.linkedin.com/company/talentella',
+      'https://www.linkedin.com/company/talentella-in',
     ],
+    'telephone': '+916200713833',
     'contactPoint': {
       '@type': 'ContactPoint',
+      'telephone': '+916200713833',
       'email': 'talentella.in@gmail.com',
       'contactType': 'customer service',
       'availableLanguage': ['English', 'Hindi'],

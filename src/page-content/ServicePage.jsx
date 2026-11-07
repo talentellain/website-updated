@@ -367,7 +367,7 @@ const PricingCard = ({ plan, idx, isMobile, service }) => {
                 onClick={(e) => {
                   e.stopPropagation();
                   const msg = `Hi TalentElla! I'm interested in starting a project. Service: ${service.title} — Plan: ${plan.name} (${plan.price}). Can you share more details?`;
-                  const whatsappUrl = `https://wa.me/919709667244?text=${encodeURIComponent(msg)}`;
+                  const whatsappUrl = `https://wa.me/916200713833?text=${encodeURIComponent(msg)}`;
                   window.open(whatsappUrl, '_blank');
                 }}
                 style={{

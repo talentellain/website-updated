@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState, useEffect, useMemo } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowUpRight, Play, X, ChevronLeft, ChevronRight, MessageCircle } from 'lucide-react';
 import SEO from '../components/SEO';
@@ -44,27 +44,30 @@ const categoryColors = {
 const topFeatured = allFeatured.slice(0, 5);
 const remainingFeatured = allFeatured.slice(5);
 
-const HorizontalWork = () => {
+const HorizontalWork = ({ setSelectedProject }) => {
   const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: targetRef });
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ['start start', 'end end']
+  });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const [metrics, setMetrics] = useState({ cardWidth: 1100, gap: 40, distance: 4560, padding: 410 });
+  const [metrics, setMetrics] = useState({ cardWidth: 1040, gap: 32, distance: 4288, padding: 400 });
 
   useEffect(() => {
     const updateMetrics = () => {
       const mob = window.innerWidth < 768;
       setIsMobile(mob);
       if (mob) {
-        const cardW = window.innerWidth * 0.86;
-        const gap = window.innerWidth * 0.04;
+        const cardW = window.innerWidth * 0.88;
+        const gap = Math.max(16, window.innerWidth * 0.04);
         const padding = (window.innerWidth - cardW) / 2;
         const distance = 4 * (cardW + gap);
         setMetrics({ cardWidth: cardW, gap, distance, padding });
       } else {
-        const rawW = window.innerWidth * 0.72;
-        const cardW = Math.max(750, Math.min(1120, rawW));
-        const gap = 40;
+        const rawW = window.innerWidth * 0.68;
+        const cardW = Math.max(700, Math.min(1020, rawW));
+        const gap = 32;
         const padding = (window.innerWidth - cardW) / 2;
         const distance = 4 * (cardW + gap);
         setMetrics({ cardWidth: cardW, gap, distance, padding });
@@ -76,43 +79,69 @@ const HorizontalWork = () => {
     return () => window.removeEventListener('resize', updateMetrics);
   }, []);
 
-  // Clamped spring transform: reaches Trenvity at 0.82, stays centered until 1.0, then immediately scrolls down
-  const springProgress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
-  const x = useTransform(springProgress, [0, 0.82], [0, -metrics.distance], { clamp: true });
+  const startThreshold = 0.08;
+  const endThreshold = 0.92;
 
+  // No spring - direct transform mapping eliminates spring overhead entirely.
+  // CSS will smooth the motion naturally via GPU compositing.
+  const x = useTransform(scrollYProgress, [startThreshold, endThreshold], [0, -metrics.distance], { clamp: true });
+
+  // Throttle activeIndex updates: only update when the index actually changes
+  const lastIndexRef = useRef(0);
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange((v) => {
-      const normalized = Math.min(1, v / 0.82);
-      const idx = Math.min(topFeatured.length - 1, Math.round(normalized * (topFeatured.length - 1)));
-      setActiveIndex(idx);
+    const unsubscribe = scrollYProgress.on('change', (v) => {
+      let idx;
+      if (v <= startThreshold) {
+        idx = 0;
+      } else if (v >= endThreshold) {
+        idx = topFeatured.length - 1;
+      } else {
+        const normalized = (v - startThreshold) / (endThreshold - startThreshold);
+        idx = Math.min(topFeatured.length - 1, Math.max(0, Math.round(normalized * (topFeatured.length - 1))));
+      }
+      // Only trigger a re-render when the index genuinely changes
+      if (idx !== lastIndexRef.current) {
+        lastIndexRef.current = idx;
+        setActiveIndex(idx);
+      }
     });
     return () => unsubscribe();
   }, [scrollYProgress]);
 
-  const activeProject = topFeatured[activeIndex] || topFeatured[0];
-  const activeColor = categoryColors[activeProject.category] || '#aa3bff';
+  const scrollToCard = (index) => {
+    if (!targetRef.current) return;
+    const sectionTop = targetRef.current.offsetTop;
+    const sectionScrollable = targetRef.current.offsetHeight - window.innerHeight;
+    if (sectionScrollable <= 0) return;
+
+    let targetP;
+    if (index <= 0) {
+      targetP = 0.04;
+    } else if (index >= topFeatured.length - 1) {
+      targetP = 0.96;
+    } else {
+      const t = index / (topFeatured.length - 1);
+      targetP = startThreshold + t * (endThreshold - startThreshold);
+    }
+
+    window.scrollTo({ top: sectionTop + targetP * sectionScrollable, behavior: 'smooth' });
+  };
+
+  const activeColor = categoryColors[topFeatured[activeIndex]?.category] || '#aa3bff';
 
   return (
     <section 
+      id="featured-showcase"
       ref={targetRef} 
       style={{ 
-        height: isMobile ? '180vh' : '200vh', 
+        height: isMobile ? '340vh' : '440vh', 
         position: 'relative', 
         background: '#ffffff', 
-        borderTop: '1px solid rgba(0,0,0,0.08)' 
+        borderTop: '1px solid rgba(0,0,0,0.06)',
+        // GPU-promote the entire section to its own layer
+        willChange: 'transform'
       }}
     >
-      {/* Dynamic Ambient Glow */}
-      <div 
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background: `radial-gradient(circle at ${isMobile ? '50% 30%' : '50% 45%'}, ${activeColor}15 0%, transparent 65%), radial-gradient(circle at ${isMobile ? '50% 70%' : '75% 60%'}, ${activeColor}0a 0%, transparent 50%)`,
-          transition: 'background 1s cubic-bezier(0.2, 0.8, 0.2, 1)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }} 
-      />
       <div style={{
         position: 'sticky',
         top: 0,
@@ -120,180 +149,328 @@ const HorizontalWork = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: isMobile ? '70px' : '90px',
-        paddingBottom: '24px',
+        alignItems: 'flex-start',
+        paddingTop: isMobile ? '80px' : '96px',
+        paddingBottom: isMobile ? '16px' : '20px',
         boxSizing: 'border-box',
         overflow: 'hidden',
         zIndex: 1
       }}>
+        {/* Showcase Header */}
+        <div style={{
+          width: '100%',
+          maxWidth: isMobile ? '90%' : `${metrics.cardWidth}px`,
+          margin: '0 auto',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: isMobile ? '0.6rem' : '1rem',
+          zIndex: 10
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.45rem',
+              padding: '0.35rem 0.85rem',
+              borderRadius: '100px',
+              backgroundColor: 'rgba(172, 88, 233, 0.1)',
+              border: '1px solid rgba(172, 88, 233, 0.25)',
+              color: '#7C3AED',
+              fontSize: isMobile ? '0.7rem' : '0.75rem',
+              fontWeight: 800,
+              letterSpacing: '0.12em',
+              textTransform: 'uppercase'
+            }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: '#7C3AED', display: 'inline-block' }} />
+              Featured Work
+            </span>
+            <span style={{ fontSize: isMobile ? '0.75rem' : '0.82rem', color: '#6b7280', fontWeight: 700, letterSpacing: '0.04em' }}>
+              0{activeIndex + 1} <span style={{ opacity: 0.4 }}>/ 0{topFeatured.length}</span>
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <button
+              onClick={() => scrollToCard(Math.max(0, activeIndex - 1))}
+              disabled={activeIndex === 0}
+              aria-label="Previous project"
+              style={{
+                width: isMobile ? '36px' : '40px', height: isMobile ? '36px' : '40px',
+                borderRadius: '50%', border: '1px solid rgba(0,0,0,0.12)',
+                backgroundColor: activeIndex === 0 ? 'rgba(0,0,0,0.02)' : '#ffffff',
+                color: activeIndex === 0 ? '#9ca3af' : '#0f1015',
+                cursor: activeIndex === 0 ? 'not-allowed' : 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'all 0.2s ease', opacity: activeIndex === 0 ? 0.35 : 1
+              }}
+            >
+              <ChevronLeft size={isMobile ? 18 : 20} strokeWidth={2.4} />
+            </button>
+            <button
+              onClick={() => scrollToCard(Math.min(topFeatured.length - 1, activeIndex + 1))}
+              disabled={activeIndex === topFeatured.length - 1}
+              aria-label="Next project"
+              style={{
+                width: isMobile ? '36px' : '40px', height: isMobile ? '36px' : '40px',
+                borderRadius: '50%', border: '1px solid rgba(0,0,0,0.12)',
+                backgroundColor: activeIndex === topFeatured.length - 1 ? 'rgba(0,0,0,0.02)' : '#ffffff',
+                color: activeIndex === topFeatured.length - 1 ? '#9ca3af' : '#0f1015',
+                cursor: activeIndex === topFeatured.length - 1 ? 'not-allowed' : 'pointer',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'all 0.2s ease', opacity: activeIndex === topFeatured.length - 1 ? 0.35 : 1
+              }}
+            >
+              <ChevronRight size={isMobile ? 18 : 20} strokeWidth={2.4} />
+            </button>
+          </div>
+        </div>
+
+        {/* Horizontal Motion Track — GPU-composited translate only */}
         <motion.div 
           style={{ 
-            x, 
+            x,
             display: 'flex', 
             gap: `${metrics.gap}px`, 
-            padding: `0 ${metrics.padding}px`, 
+            paddingLeft: `${metrics.padding}px`, 
+            paddingRight: `${metrics.padding}px`, 
             width: 'max-content',
-            position: 'relative'
+            alignItems: 'center',
+            alignSelf: 'flex-start',
+            willChange: 'transform'
           }}
         >
           {topFeatured.map((project, i) => {
             const isCurrent = activeIndex === i;
+            const categoryColor = categoryColors[project.category] || '#AC58E9';
             return (
-              <motion.div
+              <div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
+                onClick={() => { if (!isCurrent) scrollToCard(i); }}
                 style={{
                   width: `${metrics.cardWidth}px`,
                   flexShrink: 0,
-                  position: 'relative'
+                  position: 'relative',
+                  cursor: isCurrent ? 'default' : 'pointer',
+                  userSelect: 'none',
+                  // CSS transitions instead of Framer animate — zero JS overhead
+                  transform: `scale(${isCurrent ? 1 : 0.94})`,
+                  opacity: isCurrent ? 1 : 0.55,
+                  transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease',
+                  willChange: 'transform, opacity'
                 }}
               >
                 <div style={{
                   position: 'relative',
-                  height: isMobile ? '56vh' : 'min(64vh, 600px)',
+                  height: isMobile ? '54vh' : 'min(55vh, 520px)',
                   width: '100%',
                   borderRadius: isMobile ? '18px' : '24px',
                   backgroundColor: '#0c0c11',
-                  border: isCurrent ? `1.5px solid ${categoryColors[project.category] || '#AC58E9'}` : '1px solid rgba(0,0,0,0.1)',
+                  border: isCurrent 
+                    ? `1.5px solid ${categoryColor}` 
+                    : '1px solid rgba(0,0,0,0.1)',
                   boxShadow: isCurrent 
-                    ? '0 25px 70px rgba(172, 88, 233, 0.2), 0 10px 30px rgba(0,0,0,0.1)' 
-                    : '0 10px 30px rgba(0,0,0,0.06)',
+                    ? `0 24px 60px -12px ${categoryColor}44, 0 8px 24px rgba(0,0,0,0.1)` 
+                    : '0 8px 24px rgba(0,0,0,0.06)',
                   overflow: 'hidden',
-                  transition: 'border 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
+                  transition: 'border 0.4s ease, box-shadow 0.4s ease'
                 }}>
-                  {/* Clean Edge-to-Edge Screenshot */}
-                  <div style={{
-                    position: 'relative',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: '#0a0a0f',
-                    overflow: 'hidden'
-                  }}>
+                  <div style={{ position: 'relative', width: '100%', height: '100%', backgroundColor: '#0a0a0f', overflow: 'hidden' }}>
                     <Image
                       src={project.image?.src || project.image}
                       alt={project.title}
                       fill
-                      sizes="(max-width: 768px) 86vw, 1100px"
+                      sizes="(max-width: 768px) 90vw, 1020px"
                       style={{ objectFit: 'cover', objectPosition: 'top' }}
-                      priority={i === 0}
+                      priority={i <= 1}
                     />
 
-                    {/* Clean Gradient Overlay & Humanized Agency Info Panel */}
+                    {/* Top Badge Bar — no backdropFilter to avoid composite layer explosion */}
                     <div style={{
                       position: 'absolute',
-                      inset: 0,
-                      background: 'linear-gradient(to top, rgba(10,10,14,0.92) 0%, rgba(10,10,14,0.45) 45%, transparent 80%)',
+                      top: isMobile ? '1rem' : '1.5rem',
+                      left: isMobile ? '1rem' : '1.75rem',
+                      right: isMobile ? '1rem' : '1.75rem',
                       display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'flex-end',
-                      padding: isMobile ? '1.5rem' : '2.5rem'
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      zIndex: 2,
+                      pointerEvents: 'none'
+                    }}>
+                      <span style={{
+                        display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
+                        padding: '0.3rem 0.75rem', borderRadius: '100px',
+                        backgroundColor: 'rgba(10,10,16,0.75)',
+                        border: '1px solid rgba(255,255,255,0.15)',
+                        color: '#ffffff',
+                        fontSize: isMobile ? '0.65rem' : '0.7rem',
+                        fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase'
+                      }}>
+                        <span style={{ width: 6, height: 6, borderRadius: '50%', backgroundColor: categoryColor, flexShrink: 0 }} />
+                        {project.category}
+                      </span>
+
+                      {project.link && !isMobile && (
+                        <span style={{
+                          padding: '0.28rem 0.65rem', borderRadius: '100px',
+                          backgroundColor: 'rgba(10,10,16,0.75)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                          color: 'rgba(255,255,255,0.75)',
+                          fontSize: '0.65rem', fontWeight: 600, letterSpacing: '0.03em', fontFamily: 'monospace'
+                        }}>
+                          {project.link.replace(/^https?:\/\/(www\.)?/, '').replace(/\/.*$/, '')}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Gradient Overlay & Bottom Info */}
+                    <div style={{
+                      position: 'absolute', inset: 0,
+                      background: 'linear-gradient(to top, rgba(10,10,14,0.95) 0%, rgba(10,10,14,0.5) 42%, transparent 75%)',
+                      display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
+                      padding: isMobile ? '1.5rem' : '2.25rem', zIndex: 2
                     }}>
                       <div style={{
                         display: 'flex',
                         alignItems: isMobile ? 'flex-start' : 'flex-end',
                         justifyContent: 'space-between',
                         flexDirection: isMobile ? 'column' : 'row',
-                        gap: '1.2rem'
+                        gap: '1rem'
                       }}>
                         <div>
                           {project.metrics && (
-                            <div style={{ marginBottom: '0.6rem' }}>
+                            <div style={{ marginBottom: '0.5rem' }}>
                               <span style={{
                                 display: 'inline-block',
-                                padding: '0.35rem 0.85rem',
-                                borderRadius: '100px',
-                                backgroundColor: 'rgba(255,255,255,0.15)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255,255,255,0.25)',
+                                padding: '0.3rem 0.75rem', borderRadius: '100px',
+                                backgroundColor: 'rgba(255,255,255,0.1)',
+                                border: '1px solid rgba(255,255,255,0.18)',
                                 fontSize: isMobile ? '0.7rem' : '0.78rem',
-                                color: '#ffffff',
-                                fontWeight: 700,
-                                letterSpacing: '0.04em'
+                                color: '#ffffff', fontWeight: 700, letterSpacing: '0.03em'
                               }}>
                                 {project.metrics}
                               </span>
                             </div>
                           )}
                           <h3 style={{
-                            fontSize: isMobile ? '1.8rem' : 'clamp(2rem, 3.2vw, 3rem)',
-                            color: '#ffffff',
-                            fontWeight: 900,
-                            margin: 0,
-                            letterSpacing: '-0.02em',
-                            lineHeight: 1.15,
-                            textShadow: '0 4px 20px rgba(0,0,0,0.5)'
+                            fontSize: isMobile ? '1.6rem' : 'clamp(1.8rem, 2.8vw, 2.6rem)',
+                            color: '#ffffff', fontWeight: 900, margin: 0,
+                            letterSpacing: '-0.02em', lineHeight: 1.15,
+                            fontFamily: "'Space Grotesk', system-ui, sans-serif"
                           }}>
                             {project.title}
                           </h3>
+                          {project.techStack && (
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginTop: '0.5rem' }}>
+                              {project.techStack.slice(0, isMobile ? 2 : 4).map(tech => (
+                                <span key={tech} style={{
+                                  padding: '0.18rem 0.55rem', borderRadius: '100px',
+                                  backgroundColor: 'rgba(255,255,255,0.08)',
+                                  fontSize: '0.65rem', color: 'rgba(255,255,255,0.7)', fontWeight: 600
+                                }}>
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
 
-                        <motion.a
-                          href={project.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.04, backgroundColor: '#ffffff', color: '#0f1015' }}
-                          whileTap={{ scale: 0.96 }}
-                          style={{
-                            display: 'inline-flex',
-                            alignItems: 'center',
-                            gap: '0.6rem',
-                            padding: isMobile ? '0.65rem 1.2rem' : '0.8rem 1.6rem',
-                            borderRadius: '100px',
-                            backgroundColor: categoryColors[project.category] || '#AC58E9',
-                            color: '#ffffff',
-                            fontSize: isMobile ? '0.8rem' : '0.9rem',
-                            fontWeight: 700,
-                            textDecoration: 'none',
-                            flexShrink: 0,
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
-                            cursor: 'pointer',
-                            transition: 'all 0.25s ease'
-                          }}
-                        >
-                          <span>Visit Website</span>
-                          <ArrowUpRight size={isMobile ? 15 : 18} strokeWidth={2.6} />
-                        </motion.a>
+                        <div style={{ display: 'flex', gap: '0.55rem', flexShrink: 0, width: isMobile ? '100%' : 'auto' }}>
+                          {setSelectedProject && (
+                            <button
+                              onClick={(e) => { e.stopPropagation(); setSelectedProject(project); }}
+                              style={{
+                                padding: isMobile ? '0.6rem 1rem' : '0.7rem 1.2rem',
+                                borderRadius: '100px',
+                                backgroundColor: 'rgba(255,255,255,0.1)',
+                                border: '1px solid rgba(255,255,255,0.2)',
+                                color: '#ffffff',
+                                fontSize: isMobile ? '0.76rem' : '0.84rem',
+                                fontWeight: 700, cursor: 'pointer',
+                                flex: isMobile ? 1 : 'none', textAlign: 'center',
+                                transition: 'background-color 0.2s ease'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.2)'}
+                              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'}
+                            >
+                              Case Study
+                            </button>
+                          )}
+
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            style={{
+                              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                              gap: '0.5rem',
+                              padding: isMobile ? '0.6rem 1.1rem' : '0.7rem 1.4rem',
+                              borderRadius: '100px',
+                              backgroundColor: categoryColor,
+                              color: '#ffffff',
+                              fontSize: isMobile ? '0.76rem' : '0.86rem',
+                              fontWeight: 700, textDecoration: 'none',
+                              flex: isMobile ? 1 : 'none',
+                              cursor: 'pointer',
+                              transition: 'opacity 0.2s ease'
+                            }}
+                            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.85'}
+                            onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+                          >
+                            <span>Visit Website</span>
+                            <ArrowUpRight size={isMobile ? 14 : 16} strokeWidth={2.5} />
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </motion.div>
 
-        {/* Carousel Indicators */}
+        {/* Dots + hint */}
         <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.6rem',
-          marginTop: isMobile ? '1rem' : '1.5rem',
-          zIndex: 10
+          margin: '0 auto',
+          display: 'flex', flexDirection: 'column', alignItems: 'center',
+          gap: '0.4rem', marginTop: isMobile ? '0.65rem' : '1rem', zIndex: 10
         }}>
-          {topFeatured.map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                scale: activeIndex === i ? 1.4 : 1,
-                backgroundColor: activeIndex === i ? activeColor : 'rgba(0,0,0,0.18)',
-                width: activeIndex === i ? 24 : 8
-              }}
-              style={{
-                height: 8,
-                borderRadius: '4px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-            />
-          ))}
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: '0.5rem',
+            padding: '0.4rem 0.8rem', borderRadius: '100px',
+            backgroundColor: 'rgba(0,0,0,0.04)', border: '1px solid rgba(0,0,0,0.06)'
+          }}>
+            {topFeatured.map((proj, i) => {
+              const isCurr = activeIndex === i;
+              return (
+                <button
+                  key={proj.id}
+                  onClick={() => scrollToCard(i)}
+                  aria-label={`Go to ${proj.title}`}
+                  style={{
+                    height: '8px', width: isCurr ? '28px' : '8px',
+                    borderRadius: '100px',
+                    backgroundColor: isCurr ? (categoryColors[proj.category] || '#AC58E9') : 'rgba(0,0,0,0.22)',
+                    border: 'none', padding: 0, cursor: 'pointer',
+                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+                  }}
+                />
+              );
+            })}
+          </div>
+          <span style={{ fontSize: '0.65rem', color: '#9ca3af', fontWeight: 600, letterSpacing: '0.04em' }}>
+            Scroll or use arrows to navigate
+          </span>
         </div>
       </div>
     </section>
   );
 };
+
+
+
 
 const RemainingWork = ({ isMobile = false }) => {
   const containerRef = useRef(null);
@@ -939,9 +1116,10 @@ const PortfolioPage = () => {
         heading="IMPACTFUL"
         cursiveOverlay="Works"
         description={"CURRENTLY SHOWCASE OUR MOST IMPACTFUL PROJECTS.\nFOR MORE INFORMATION AND ADDITIONAL DETAILS, PLEASE CONTACT US."}
+        links={[{ text: 'Explore Featured Works ↓', url: '#featured-showcase' }]}
       />
 
-      <HorizontalWork />
+      <HorizontalWork setSelectedProject={setSelectedProject} />
       
       <PortfolioTestimonial isMobile={isMobile} />
 

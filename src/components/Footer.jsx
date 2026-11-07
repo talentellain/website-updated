@@ -384,7 +384,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   }
 `;
 
-const PHONE = '9709667244';
+const PHONE = '6200713833';
 const WHATSAPP_URL = `https://wa.me/91${PHONE}?text=${encodeURIComponent("Hi TalentElla! I'm interested in scaling my business. Can we talk?")}`;
 
 const Footer = () => {
@@ -466,7 +466,7 @@ const Footer = () => {
                 <MessageCircle size={17} strokeWidth={2.2} />
               </a>
               <a
-                href="https://www.linkedin.com/company/talentella"
+                href="https://www.linkedin.com/company/talentella-in"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="te-av-social-box"
@@ -523,7 +523,7 @@ const Footer = () => {
             <h3 className="te-av-col-title">Contact Us:</h3>
             <div className="te-av-contact-list">
               <div><a href="mailto:talentella.in@gmail.com">talentella.in@gmail.com</a></div>
-              <div><a href={`tel:+91${PHONE}`}>+91-970-966-7244</a></div>
+              <div><a href={`tel:+91${PHONE}`}>+91 62007 13833</a></div>
               <div><a href="https://www.talentella.in">talentella.in</a></div>
             </div>
           </div>
