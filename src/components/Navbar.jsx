@@ -143,11 +143,12 @@ const UNIVERSAL_NAVBAR_STYLES = `
   .te-univ-sheet-overlay {
     position: fixed;
     inset: 0;
-    z-index: 2000;
+    z-index: 9999;
     background-color: rgba(0, 0, 0, 0.65);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    pointer-events: auto;
   }
 
   .te-univ-sheet {
@@ -159,6 +160,28 @@ const UNIVERSAL_NAVBAR_STYLES = `
     gap: 20px;
     box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
     animation: teUnivSlideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    pointer-events: auto;
+    position: relative;
+    z-index: 10000;
+  }
+
+  .te-univ-mobile-link {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    padding: 8px 0;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .te-univ-mobile-link:hover,
+  .te-univ-mobile-link:active {
+    color: #AC58E9 !important;
+    transform: translateX(4px);
   }
 
   @keyframes teUnivSlideUp {
@@ -304,7 +327,7 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {NAV_ITEMS.map((item) => {
                 const active = isItemActive(item.href);
                 return (
@@ -312,13 +335,9 @@ export default function Navbar() {
                     key={item.label}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
+                    className="te-univ-mobile-link"
                     style={{
-                      fontSize: '18px',
-                      fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
                       color: active ? '#AC58E9' : '#0f1015',
-                      textDecoration: 'none',
                     }}
                   >
                     {item.label}
@@ -335,6 +354,8 @@ export default function Navbar() {
                 width: '100%',
                 padding: '14px 24px',
                 fontSize: '13px',
+                pointerEvents: 'auto',
+                textAlign: 'center',
               }}
             >
               GET IN TOUCH
