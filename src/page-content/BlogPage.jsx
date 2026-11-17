@@ -9,14 +9,17 @@ import InteractiveHero from '../components/InteractiveHero';
 import { blogPosts, blogCategories } from '../data/blogData';
 
 const catColors = {
-  'Digital Marketing': '#AC58E9',
-  'Web Development': '#60a5fa',
-  'Social Media': '#f472b6',
-  'Branding': '#34d399',
-  'SEO': '#fbbf24',
-  'App Development': '#818cf8',
-  'Influencer Marketing': '#fb923c',
-  'Lead Generation': '#2dd4bf',
+  'SEO & Organic Search': '#7c3aed',
+  'Web Development': '#2563eb',
+  'Social Media': '#ec4899',
+  'Branding & Design': '#10b981',
+  'App Development': '#6366f1',
+  'Growth & CRO': '#f59e0b',
+  'Digital Marketing': '#8b5cf6',
+  'SEO': '#7c3aed',
+  'Branding': '#10b981',
+  'Influencer Marketing': '#f97316',
+  'Lead Generation': '#14b8a6',
 };
 
 const BlogCard = ({ post, index }) => (

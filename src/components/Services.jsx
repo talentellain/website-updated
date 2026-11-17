@@ -3,315 +3,414 @@
 import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import {
-  Code2,
-  Smartphone,
-  Share2,
-  Target,
-  Camera,
-  Palette,
-  ArrowUpRight,
-  ArrowRight,
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
-const SERVICES_DATA = [
-  {
-    id: 'website-development',
-    icon: Code2,
+const SERVICES_CONFIG = {
+  header: {
+    badge: 'CORE CAPABILITIES',
+    titleMain: 'FULL-STACK',
+    titleAccent: 'SERVICES',
+    subtitle:
+      'High-performance engineering, scroll-stopping creative direction, and 360° growth architecture crafted to dominate your category.',
+    ctaText: 'Start a project',
+    ctaHref: '#contact',
+  },
+  card01: {
     num: '01',
-    title: 'Website Development',
-    description: 'Next.js, React & headless platforms engineered for 99/100 speed, SEO dominance, and maximum conversion.',
+    title: 'WEBSITE DEVELOPMENT',
+    desc: 'Next.js, React & headless platforms engineered for 99/100 speed, SEO dominance, and maximum conversion rates.',
     href: '/services/website-development',
   },
-  {
-    id: 'app-development',
-    icon: Smartphone,
+  card02: {
     num: '02',
-    title: 'App Development',
-    description: 'Human-centric, native & cross-platform React Native and Flutter mobile applications for iOS & Android.',
+    title: 'SOCIAL MEDIA MARKETING',
+    desc: 'Scroll-stopping viral short-form pipelines, algorithmic reach, community scaling, and creator management systems.',
+    href: '/services/social-media-management',
+  },
+  card03: {
+    num: '03',
+    title: 'VISUAL IDENTITY & BRANDING',
+    desc: 'Iconic logo design systems, comprehensive brand guidelines, packaging, and kinetic 3D typography for visionary brands.',
+    href: '/services/visual-identity',
+  },
+  card04: {
+    num: '04',
+    title: 'APP DEVELOPMENT',
+    desc: 'Human-centric, native & cross-platform React Native and Flutter mobile applications for iOS & Android.',
     href: '/app-development',
   },
-  {
-    id: 'social-media-management',
-    icon: Share2,
-    num: '03',
-    title: 'Social Media Marketing',
-    description: 'Scroll-stopping viral short-form pipelines, community scaling, and creator management systems.',
-    href: '/services/social-media-management',
-  },
-  {
-    id: 'performance-marketing',
-    icon: Target,
-    num: '04',
-    title: 'Performance & Meta Ads',
-    description: 'High-ROAS Meta (Instagram & Facebook) and Google PPC campaigns built to scale acquisition with pure data.',
-    href: '/services/social-media-management',
-    isLavender: true,
-  },
-  {
-    id: 'product-shoot-production',
-    icon: Camera,
+  card05: {
     num: '05',
-    title: 'Product Shoot & Commercials',
-    description: 'High-end studio product stills, commercial films, 4K video reels, and luxury aesthetic direction.',
+    title: 'PRODUCT SHOOT & COMMERCIALS',
+    desc: 'High-end studio product stills, commercial brand films, 4K video reels, and luxury aesthetic direction.',
     href: '/portfolio',
   },
-  {
-    id: 'visual-identity-design',
-    icon: Palette,
+  card06: {
     num: '06',
-    title: 'Visual Identity & Branding',
-    description: 'Iconic logo design systems, comprehensive brand guidelines, packaging, and kinetic 3D typography.',
-    href: '/services/visual-identity-design',
+    title: 'PERFORMANCE & META ADS',
+    desc: 'High-ROAS Meta (Instagram & Facebook) and Google PPC campaigns built to scale acquisition with pure data-driven architecture.',
+    href: '/services/social-media-management',
   },
-];
+};
 
-const SERVICES_BENTO_STYLES = `
-  .services-bento-section {
+const SERVICES_THEME_STYLES = `
+  .te-services-section {
     background-color: #ffffff;
-    padding: clamp(60px, 7vw, 100px) clamp(16px, 4vw, 48px);
+    color: #0f1015;
+    padding: clamp(70px, 8vw, 108px) 0 clamp(60px, 7vw, 96px) 0;
     position: relative;
-    z-index: 20;
-    width: 100%;
     overflow: hidden;
+  }
+
+  .te-services-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 36px);
+  }
+
+  /* ── Header ── */
+  .te-services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: clamp(36px, 5vw, 52px);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .te-services-header-left {
+    max-width: 600px;
+  }
+
+  .te-services-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.06);
+    border: 1px solid rgba(124, 58, 237, 0.16);
+    padding: 5px 13px;
+    border-radius: 9999px;
+    margin-bottom: 12px;
+    width: fit-content;
+  }
+
+  .te-services-title {
+    font-size: clamp(2rem, 4.2vw, 3.15rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #0f1015;
+    line-height: 1.12;
+    margin: 0 0 12px 0;
     font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  .services-bento-container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  /* ─────────────────────────────────────────────────────────────
-     DESKTOP BENTO GRID (> 768px)
-     ───────────────────────────────────────────────────────────── */
-  .services-bento-desktop-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(260px, auto);
-    gap: 1px;
-    background-color: rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 20px;
-    overflow: hidden;
-  }
-
-  /* Title Cell (Spans 2 columns) */
-  .services-bento-title-cell {
-    grid-column: span 2;
-    background-color: #ffffff;
-    padding: clamp(28px, 3.5vw, 44px);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-  }
-
-  .services-bento-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    border-radius: 999px;
-    background: rgba(124, 58, 237, 0.08);
-    border: 1px solid rgba(124, 58, 237, 0.22);
-    color: #7c3aed;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    width: fit-content;
-    margin-bottom: 18px;
-  }
-
-  .services-bento-title {
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
-    font-weight: 800;
+  .te-services-title .te-serif-italic {
+    font-family: 'Bespoke Serif', Georgia, serif !important;
+    font-style: italic !important;
+    font-weight: 400;
     color: #0f1015;
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    padding-left: 0.05em;
+    letter-spacing: -0.01em;
   }
 
-  .services-bento-title .te-serif-italic {
-    font-family: 'Bespoke Serif', Georgia, serif;
-    font-style: italic;
+  .te-services-sub {
+    font-size: clamp(14px, 1.05vw, 15.5px);
+    line-height: 1.65;
+    color: #475569;
+    margin: 0;
+    max-width: 530px;
     font-weight: 400;
     letter-spacing: -0.01em;
-    padding-right: 0.08em;
   }
 
-  .services-bento-sub {
-    color: #555562;
-    font-size: clamp(0.92rem, 1.3vw, 1.08rem);
-    font-weight: 400;
-    line-height: 1.55;
-    margin: 14px 0 0 0;
-    max-width: 440px;
+  .te-services-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #0f1015;
+    color: #ffffff;
+    padding: 7px 8px 7px 22px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 18px rgba(15, 16, 21, 0.12);
   }
 
-  .services-bento-title-bottom {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-top: 24px;
+  .te-services-btn:hover {
+    background-color: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(124, 58, 237, 0.25);
   }
 
-  /* Desktop Service Card */
-  .service-bento-card {
+  .te-services-btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
     background-color: #ffffff;
-    padding: clamp(24px, 2.5vw, 36px);
+    color: #0f1015;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.2s ease;
+  }
+
+  .te-services-btn:hover .te-services-btn-icon {
+    color: #7c3aed;
+    transform: translateX(2px);
+  }
+
+  /* ── Desktop Bento Grid (> 768px) ── */
+  .te-services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.62fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  /* Left Column (Card 01 & Card 03) */
+  .te-services-col-left {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  /* Right Column (Card 02, Row with 04+05, Card 06) */
+  .te-services-col-right {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .te-services-right-middle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  /* ── Light Card (01, 02, 04, 05, 06) ── */
+  .te-card-light {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 22px;
+    padding: clamp(22px, 2.3vw, 30px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-decoration: none !important;
-    color: #0f1015 !important;
-    transition: background-color 0.25s ease, border-color 0.25s ease;
-    cursor: pointer;
-    min-height: 240px;
-    gap: 1rem;
+    text-decoration: none;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 12px -2px rgba(0, 0, 0, 0.03);
   }
 
-  .service-bento-card:hover {
-    background-color: #faf5ff !important;
-  }
-
-  .service-bento-card.lavender-cell {
-    background-color: #fbf8ff;
-  }
-
-  .service-bento-card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .service-bento-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background-color: rgba(172, 88, 233, 0.1);
-    border: 1px solid rgba(172, 88, 233, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #AC58E9;
-    transition: all 0.25s ease;
-  }
-
-  .service-bento-card:hover .service-bento-icon {
-    background-color: #7c3aed;
+  .te-card-light:hover {
     border-color: #7c3aed;
-    color: #ffffff;
-    transform: scale(1.06);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -4px rgba(124, 58, 237, 0.12);
   }
 
-  .service-bento-arrow-mini {
-    width: 28px;
-    height: 28px;
+  /* Height balances */
+  .te-card-01 {
+    min-height: 250px;
+    flex: 1;
+  }
+
+  .te-card-02 {
+    min-height: 195px;
+  }
+
+  .te-card-03 {
+    min-height: 250px;
+    flex: 1;
+  }
+
+  .te-card-04 {
+    min-height: 210px;
+  }
+
+  .te-card-05 {
+    min-height: 210px;
+  }
+
+  .te-card-06 {
+    min-height: 195px;
+    background: linear-gradient(180deg, #ffffff 0%, #faf8ff 100%);
+  }
+
+  .te-card-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .te-badge-circle {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
+    background-color: rgba(124, 58, 237, 0.08);
+    color: #7c3aed;
+    border: 1px solid rgba(124, 58, 237, 0.18);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #94a3b8;
-    transition: all 0.25s ease;
+    font-size: 11px;
+    font-weight: 800;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.01em;
   }
 
-  .service-bento-card:hover .service-bento-arrow-mini {
+  .te-arrow-hint {
+    color: #cbd5e1;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .te-card-light:hover .te-arrow-hint {
     color: #7c3aed;
     transform: translate(2px, -2px);
   }
 
-  .service-bento-card-title {
-    font-size: clamp(1.15rem, 1.4vw, 1.4rem);
-    font-weight: 700;
+  .te-card-title-light {
+    font-size: clamp(14px, 1.2vw, 15.5px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: #0f1015;
-    margin: 0 0 0.5rem 0;
-    line-height: 1.2;
-    letter-spacing: -0.015em;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    transition: color 0.25s ease;
+    margin: 0 0 8px 0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
 
-  .service-bento-card:hover .service-bento-card-title {
-    color: #7c3aed;
-  }
-
-  .service-bento-card-desc {
-    color: #555562;
-    font-size: 0.88rem;
+  .te-card-desc-light {
+    font-size: clamp(12.5px, 1vw, 13px);
     line-height: 1.55;
+    color: #64748b;
     margin: 0;
     font-weight: 400;
   }
 
-  /* ─────────────────────────────────────────────────────────────
-     MOBILE HORIZONTAL SCROLL CAROUSEL (<= 768px)
-     ───────────────────────────────────────────────────────────── */
-  .services-mobile-layout {
+  /* ── Signature Purple Highlight Card (03) ── */
+  .te-card-highlight {
+    background: linear-gradient(145deg, #7c3aed 0%, #6d28d9 100%);
+    border: 1px solid #7c3aed;
+    border-radius: 22px;
+    padding: clamp(24px, 2.5vw, 32px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 10px 30px -4px rgba(124, 58, 237, 0.35);
+  }
+
+  .te-card-highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 42px -4px rgba(124, 58, 237, 0.45);
+  }
+
+  .te-badge-circle-inverted {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    color: #7c3aed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .te-card-title-inverted {
+    font-size: clamp(14px, 1.2vw, 15.5px);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  .te-card-desc-inverted {
+    font-size: clamp(12.5px, 1vw, 13px);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+    font-weight: 400;
+  }
+
+  /* ── Mobile Layout (< 768px) ── */
+  .te-services-mobile-container {
     display: none;
   }
 
   @media (max-width: 1024px) {
-    .services-bento-desktop-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .te-services-grid {
+      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 768px) {
-    .services-bento-section {
-      padding: clamp(60px, 9vw, 80px) 0 clamp(48px, 8vw, 68px) 0;
+    .te-services-section {
+      padding: clamp(56px, 9vw, 76px) 0;
     }
 
-    .services-bento-desktop-grid {
+    .te-services-grid {
       display: none;
     }
 
-    .services-mobile-layout {
+    .te-services-mobile-container {
       display: flex;
       flex-direction: column;
       width: 100%;
     }
 
-    .services-mobile-header {
-      display: flex;
+    .te-services-header {
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 0 clamp(18px, 4vw, 24px) 24px clamp(18px, 4vw, 24px);
+      margin-bottom: 24px;
     }
 
-    .services-mobile-layout .services-bento-badge {
+    .te-services-badge {
       margin: 0 auto 12px auto;
-      font-size: 10px;
-      padding: 5px 12px;
       align-self: center;
     }
 
-    .services-mobile-layout .services-bento-title {
-      font-size: clamp(1.9rem, 7.5vw, 2.5rem);
-      line-height: 1.08;
+    .te-services-title {
+      font-size: clamp(1.85rem, 6.8vw, 2.35rem);
       text-align: center;
-      margin-left: auto;
-      margin-right: auto;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
     }
 
-    .services-mobile-layout .services-bento-sub {
+    .te-services-sub {
+      text-align: center;
       font-size: 13.5px;
-      line-height: 1.5;
-      margin: 10px auto 0 auto;
-      max-width: 100%;
-      text-align: center;
+      line-height: 1.6;
+      color: #475569;
+      max-width: 90%;
+      margin: 0 auto;
     }
 
-    .services-mobile-swipe-pill {
+    .te-services-btn {
+      align-self: center;
+      margin-top: 10px;
+    }
+
+    .te-swipe-pill {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 6px;
       font-size: 11px;
       font-weight: 700;
@@ -327,8 +426,8 @@ const SERVICES_BENTO_STYLES = `
       align-self: center;
     }
 
-    /* Horizontal Carousel Track */
-    .services-mobile-carousel {
+    /* Horizontal swipe carousel for mobile */
+    .te-services-mobile-track {
       display: flex;
       gap: 14px;
       overflow-x: auto;
@@ -336,238 +435,280 @@ const SERVICES_BENTO_STYLES = `
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 8px clamp(18px, 4vw, 24px) 20px clamp(18px, 4vw, 24px);
-      margin: 0;
+      padding: 10px clamp(18px, 4vw, 24px) 24px clamp(18px, 4vw, 24px);
+      margin: 0 -20px;
     }
 
-    .services-mobile-carousel::-webkit-scrollbar {
+    .te-services-mobile-track::-webkit-scrollbar {
       display: none;
     }
 
-    /* Individual Swipeable Card */
-    .services-mobile-card {
-      width: clamp(260px, 78vw, 300px);
+    .te-mobile-card-wrapper {
       min-width: clamp(260px, 78vw, 300px);
-      height: 240px;
-      flex-shrink: 0;
       scroll-snap-align: start;
-      background-color: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 20px;
-      padding: 22px 20px;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
-      text-decoration: none !important;
-      color: #0f1015 !important;
-      box-sizing: border-box;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .services-mobile-card:active {
-      transform: scale(0.98);
-      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12);
-    }
-
-    .services-mobile-card.lavender-cell {
-      background-color: #fbf8ff;
-      border-color: rgba(124, 58, 237, 0.18);
-    }
-
-    .services-mobile-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .te-mobile-card-wrapper .te-card-light,
+    .te-mobile-card-wrapper .te-card-highlight {
       width: 100%;
-    }
-
-    .services-mobile-icon-box {
-      width: 42px;
-      height: 42px;
-      border-radius: 12px;
-      background-color: rgba(124, 58, 237, 0.08);
-      border: 1px solid rgba(124, 58, 237, 0.18);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7c3aed;
-    }
-
-    .services-mobile-arrow {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background-color: #f8fafc;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7c3aed;
-    }
-
-    .services-mobile-card-num {
-      font-size: 11px;
-      font-weight: 800;
-      color: #AC58E9;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-    }
-
-    .services-mobile-card-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #0f1015;
-      margin: 0 0 6px 0;
-      line-height: 1.2;
-      font-family: 'Space Grotesk', system-ui, sans-serif;
-      letter-spacing: -0.015em;
-    }
-
-    .services-mobile-card-desc {
-      font-size: 12.5px;
-      line-height: 1.5;
-      color: #64748b;
-      margin: 0;
+      height: 250px;
     }
   }
 `;
 
 export default function Services() {
+  const { header, card01, card02, card03, card04, card05, card06 } = SERVICES_CONFIG;
+
   return (
-    <section id="services" className="services-bento-section">
-      <style dangerouslySetInnerHTML={{ __html: SERVICES_BENTO_STYLES }} />
+    <section id="services" className="te-services-section">
+      <style dangerouslySetInnerHTML={{ __html: SERVICES_THEME_STYLES }} />
 
-      <div className="services-bento-container">
-        {/* ── DESKTOP VIEW (> 768px): Bento Grid ── */}
-        <div className="services-bento-desktop-grid">
-          {/* Main Title Box (Spans 2 columns) */}
-          <div className="services-bento-title-cell">
-            <div>
-              <div className="services-bento-badge">
-                <span>✦</span>
-                <span>CORE CAPABILITIES</span>
-                <span>✦</span>
-              </div>
-
-              <motion.h2
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="services-bento-title"
-              >
-                FULL-STACK <em className="te-serif-italic">SERVICES</em>
-              </motion.h2>
-
-              <p className="services-bento-sub">
-                High-performance engineering, scroll-stopping creative, and 360° growth architecture
-                crafted to dominate your category.
-              </p>
+      <div className="te-services-container">
+        {/* ── Section Header ── */}
+        <div className="te-services-header">
+          <div className="te-services-header-left">
+            <div className="te-services-badge">
+              <span>✦</span>
+              <span>{header.badge}</span>
+              <span>✦</span>
             </div>
 
-            <div className="services-bento-title-bottom">
-              <span
-                style={{
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  color: '#94a3b8',
-                }}
-              >
-                End-To-End Delivery
-              </span>
-              <ArrowUpRight size={44} color="#AC58E9" strokeWidth={2} />
-            </div>
+            <h2 className="te-services-title">
+              {header.titleMain}{' '}
+              <em className="te-serif-italic" style={{ fontStyle: 'italic', fontWeight: 400 }}>
+                {header.titleAccent}
+              </em>
+            </h2>
+
+            <p className="te-services-sub">{header.subtitle}</p>
           </div>
 
-          {/* All 6 Services rendered cleanly as Desktop Bento Cells */}
-          {SERVICES_DATA.map((service, index) => {
-            const Icon = service.icon;
-            return (
+          <Link href={header.ctaHref} className="te-services-btn">
+            <span>{header.ctaText}</span>
+            <div className="te-services-btn-icon">
+              <ArrowRight size={14} />
+            </div>
+          </Link>
+        </div>
+
+        {/* ── DESKTOP BENTO GRID (> 768px) ── */}
+        <div className="te-services-grid">
+          {/* Left Column: Card 01 (Top) + Card 03 Purple Highlight (Bottom) */}
+          <div className="te-services-col-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: 'flex', flex: 1 }}
+            >
+              <Link href={card01.href} className="te-card-light te-card-01">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card01.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card01.title}</h3>
+                  <p className="te-card-desc-light">{card01.desc}</p>
+                </div>
+              </Link>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: 'flex', flex: 1 }}
+            >
+              <Link href={card03.href} className="te-card-highlight te-card-03">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle-inverted">{card03.num}</div>
+                  <ArrowUpRight size={18} style={{ color: 'rgba(255,255,255,0.7)' }} />
+                </div>
+                <div>
+                  <h3 className="te-card-title-inverted">{card03.title}</h3>
+                  <p className="te-card-desc-inverted">{card03.desc}</p>
+                </div>
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Card 02 (Top Wide) + Middle Row (Card 04 & Card 05 Product Shoot) + Card 06 (Bottom Wide Performance Marketing) */}
+          <div className="te-services-col-right">
+            {/* Card 02: Digital / Social Media Marketing (Wide) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link href={card02.href} className="te-card-light te-card-02">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card02.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card02.title}</h3>
+                  <p className="te-card-desc-light">{card02.desc}</p>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Middle Row: Card 04 (App Development) & Card 05 (Product Shoot & Commercials) */}
+            <div className="te-services-right-middle">
               <motion.div
-                key={service.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                style={{ display: 'contents' }}
+                transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                style={{ display: 'flex' }}
               >
-                <Link
-                  href={service.href}
-                  className={`service-bento-card ${service.isLavender ? 'lavender-cell' : ''}`}
-                >
-                  <div className="service-bento-card-top">
-                    <div className="service-bento-icon">
-                      <Icon size={18} />
-                    </div>
-                    <div className="service-bento-arrow-mini">
-                      <ArrowUpRight size={16} />
-                    </div>
+                <Link href={card04.href} className="te-card-light te-card-04" style={{ flex: 1 }}>
+                  <div className="te-card-top-row">
+                    <div className="te-badge-circle">{card04.num}</div>
+                    <ArrowUpRight size={18} className="te-arrow-hint" />
                   </div>
-
                   <div>
-                    <h3 className="service-bento-card-title">{service.title}</h3>
-                    <p className="service-bento-card-desc">{service.description}</p>
+                    <h3 className="te-card-title-light">{card04.title}</h3>
+                    <p className="te-card-desc-light">{card04.desc}</p>
                   </div>
                 </Link>
               </motion.div>
-            );
-          })}
-        </div>
 
-        {/* ── MOBILE VIEW (<= 768px): Header + Horizontal Scrollable Carousel ── */}
-        <div className="services-mobile-layout">
-          <div className="services-mobile-header">
-            <div className="services-bento-badge">
-              <span>✦</span>
-              <span>CORE CAPABILITIES</span>
-              <span>✦</span>
-            </div>
-
-            <h2 className="services-bento-title">
-              FULL-STACK <em className="te-serif-italic">SERVICES</em>
-            </h2>
-
-            <p className="services-bento-sub">
-              High-performance engineering, scroll-stopping creative, and 360° growth architecture
-              crafted to dominate your category.
-            </p>
-
-            <div className="services-mobile-swipe-pill">
-              <span>Swipe to explore</span>
-              <ArrowRight size={13} />
-            </div>
-          </div>
-
-          {/* Horizontal Scroll Track */}
-          <div className="services-mobile-carousel">
-            {SERVICES_DATA.map((service) => {
-              const Icon = service.icon;
-              return (
-                <Link
-                  key={service.id}
-                  href={service.href}
-                  className={`services-mobile-card ${service.isLavender ? 'lavender-cell' : ''}`}
-                >
-                  <div className="services-mobile-card-top">
-                    <div className="services-mobile-icon-box">
-                      <Icon size={20} />
-                    </div>
-                    <div className="services-mobile-arrow">
-                      <ArrowUpRight size={16} />
-                    </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                style={{ display: 'flex' }}
+              >
+                <Link href={card05.href} className="te-card-light te-card-05" style={{ flex: 1 }}>
+                  <div className="te-card-top-row">
+                    <div className="te-badge-circle">{card05.num}</div>
+                    <ArrowUpRight size={18} className="te-arrow-hint" />
                   </div>
-
                   <div>
-                    <div className="services-mobile-card-num">{service.num}</div>
-                    <h3 className="services-mobile-card-title">{service.title}</h3>
-                    <p className="services-mobile-card-desc">{service.description}</p>
+                    <h3 className="te-card-title-light">{card05.title}</h3>
+                    <p className="te-card-desc-light">{card05.desc}</p>
                   </div>
                 </Link>
-              );
-            })}
+              </motion.div>
+            </div>
+
+            {/* Card 06: Performance & Meta Ads (Bigger Wide Card just like Card 02) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <Link href={card06.href} className="te-card-light te-card-06">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card06.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card06.title}</h3>
+                  <p className="te-card-desc-light">{card06.desc}</p>
+                </div>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* ── MOBILE VIEW (<= 768px): Horizontal Swipeable Cards ── */}
+        <div className="te-services-mobile-container">
+          <div className="te-swipe-pill">
+            <span>Swipe to explore</span>
+            <ArrowRight size={13} />
+          </div>
+
+          <div className="te-services-mobile-track">
+            {/* Card 01 */}
+            <div className="te-mobile-card-wrapper">
+              <Link href={card01.href} className="te-card-light">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card01.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card01.title}</h3>
+                  <p className="te-card-desc-light">{card01.desc}</p>
+                </div>
+              </Link>
+            </div>
+
+            {/* Card 02 */}
+            <div className="te-mobile-card-wrapper">
+              <Link href={card02.href} className="te-card-light">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card02.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card02.title}</h3>
+                  <p className="te-card-desc-light">{card02.desc}</p>
+                </div>
+              </Link>
+            </div>
+
+            {/* Card 03 (Highlight) */}
+            <div className="te-mobile-card-wrapper">
+              <Link href={card03.href} className="te-card-highlight">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle-inverted">{card03.num}</div>
+                  <ArrowUpRight size={18} style={{ color: 'rgba(255,255,255,0.7)' }} />
+                </div>
+                <div>
+                  <h3 className="te-card-title-inverted">{card03.title}</h3>
+                  <p className="te-card-desc-inverted">{card03.desc}</p>
+                </div>
+              </Link>
+            </div>
+
+            {/* Card 04 */}
+            <div className="te-mobile-card-wrapper">
+              <Link href={card04.href} className="te-card-light">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card04.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card04.title}</h3>
+                  <p className="te-card-desc-light">{card04.desc}</p>
+                </div>
+              </Link>
+            </div>
+
+            {/* Card 05 */}
+            <div className="te-mobile-card-wrapper">
+              <Link href={card05.href} className="te-card-light">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card05.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card05.title}</h3>
+                  <p className="te-card-desc-light">{card05.desc}</p>
+                </div>
+              </Link>
+            </div>
+
+            {/* Card 06 */}
+            <div className="te-mobile-card-wrapper">
+              <Link href={card06.href} className="te-card-light">
+                <div className="te-card-top-row">
+                  <div className="te-badge-circle">{card06.num}</div>
+                  <ArrowUpRight size={18} className="te-arrow-hint" />
+                </div>
+                <div>
+                  <h3 className="te-card-title-light">{card06.title}</h3>
+                  <p className="te-card-desc-light">{card06.desc}</p>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

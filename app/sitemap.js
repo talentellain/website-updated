@@ -49,9 +49,9 @@ export default async function sitemap() {
 
   const blogPostPages = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.id}`,
-    lastModified: new Date(post.date).toISOString().split('T')[0],
-    changeFrequency: 'monthly',
-    priority: 0.6,
+    lastModified: post.updatedISO || post.dateISO || (post.date ? new Date(post.date).toISOString().split('T')[0] : '2026-06-01'),
+    changeFrequency: 'weekly',
+    priority: 0.7,
   }))
 
   const allCities = [

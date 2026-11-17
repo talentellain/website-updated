@@ -61,7 +61,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   }
 
   .te-av-kicker {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -70,7 +70,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   }
 
   .te-av-top-title {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-size: clamp(2rem, 3.4vw, 3rem);
     font-weight: 700;
     line-height: 1.15;
@@ -124,7 +124,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   }
 
   .te-av-action-tag {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.12em;
@@ -227,7 +227,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   }
 
   .te-av-col-title {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-size: 11.5px;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -342,7 +342,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
   }
 
   .te-av-wordmark-svg text {
-    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   }
 
   /* ── Bottom Bar ── */
@@ -373,7 +373,7 @@ const TALENT_ELLA_AVANDE_STYLES = `
     border: none;
     border-radius: 3px;
     padding: 9px 18px;
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -561,7 +561,7 @@ const Footer = () => {
             <text
               x="0"
               y="114"
-              fontFamily="'Space Grotesk', system-ui, -apple-system, sans-serif"
+              fontFamily="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
               fontWeight="800"
               fontSize="140"
               letterSpacing="-0.03em"
@@ -576,7 +576,7 @@ const Footer = () => {
               <text
                 x="34"
                 y="44"
-                fontFamily="'Space Grotesk', system-ui, -apple-system, sans-serif"
+                fontFamily="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif"
                 fontWeight="800"
                 fontSize="28"
                 fill="#0D0D0D"

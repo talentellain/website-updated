@@ -70,7 +70,7 @@ const WhyTalentElla = () => {
             <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'auto 1fr', gap: isMobile ? '2rem' : '3rem', marginBottom: isMobile ? '4rem' : '6rem', alignItems: 'center', position: 'relative' }}>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <span style={{ fontSize: '0.75rem', color: '#7C3AED', letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: '1rem', display: 'block', fontWeight: 700 }}>[our winning formula]</span>
-                <h2 style={{ fontSize: 'clamp(5rem, 15vw, 12rem)', fontWeight: 900, lineHeight: 0.8, color: '#0f1015', letterSpacing: '-0.05em', margin: 0, fontFamily: "'Space Grotesk', sans-serif" }}>360°</h2>
+                <h2 style={{ fontSize: 'clamp(5rem, 15vw, 12rem)', fontWeight: 900, lineHeight: 0.8, color: '#0f1015', letterSpacing: '-0.05em', margin: 0, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>360°</h2>
                 <p style={{ marginTop: '1.5rem', color: '#555562', maxWidth: '400px', fontSize: '1.1rem', lineHeight: 1.6 }}>A comprehensive, full-circle approach that transforms every aspect of your brand into a measurable success.</p>
               </div>
               <div style={{ display: 'grid', gap: '0.8rem', position: 'relative', maxWidth: isMobile ? '100%' : '350px' }}>
@@ -236,7 +236,7 @@ const WhyTalentElla = () => {
                       whileHover="hover"
                       style={{ position: 'relative', zIndex: 2, textAlign: 'center', cursor: 'pointer' }}
                     >
-                      <motion.div variants={{ hover: { scale: 1.1, color: '#AC58E9' } }} transition={{ duration: 0.2 }} style={{ fontWeight: 900, color: '#0f1015', fontSize: '1.2rem', marginBottom: '1.5rem', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{level.pct}</motion.div>
+                      <motion.div variants={{ hover: { scale: 1.1, color: '#AC58E9' } }} transition={{ duration: 0.2 }} style={{ fontWeight: 900, color: '#0f1015', fontSize: '1.2rem', marginBottom: '1.5rem', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>{level.pct}</motion.div>
                       
                       {/* Node with Pulse on Hover */}
                       <div style={{ position: 'relative', width: '16px', height: '16px', margin: '0 auto' }}>
@@ -250,7 +250,7 @@ const WhyTalentElla = () => {
                 </div>
               </div>
               <div style={{ textAlign: isMobile ? 'left' : 'right', alignSelf: 'flex-end' }}>
-                <h3 style={{ fontSize: '1.4rem', color: '#0f1015', fontWeight: 800, lineHeight: 1.2, marginBottom: '1.5rem', textTransform: 'uppercase', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+                <h3 style={{ fontSize: '1.4rem', color: '#0f1015', fontWeight: 800, lineHeight: 1.2, marginBottom: '1.5rem', textTransform: 'uppercase', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
                   WE DON'T JUST MEET <br /> MILESTONES; WE ELEVATE THEM <br /> INTO LASTING ACHIEVEMENTS.
                 </h3>
                 <p style={{ fontSize: '0.85rem', color: '#555562', lineHeight: 1.6, maxWidth: isMobile ? '100%' : '500px', marginLeft: 'auto' }}>

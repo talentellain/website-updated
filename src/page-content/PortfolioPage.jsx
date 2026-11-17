@@ -356,7 +356,7 @@ const HorizontalWork = ({ setSelectedProject }) => {
                             fontSize: isMobile ? '1.6rem' : 'clamp(1.8rem, 2.8vw, 2.6rem)',
                             color: '#ffffff', fontWeight: 900, margin: 0,
                             letterSpacing: '-0.02em', lineHeight: 1.15,
-                            fontFamily: "'Space Grotesk', system-ui, sans-serif"
+                            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif"
                           }}>
                             {project.title}
                           </h3>
@@ -561,7 +561,7 @@ const RemainingWork = ({ isMobile = false }) => {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3.5rem', gap: '1rem', flexWrap: 'wrap' }}>
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <span style={{ fontSize: '0.65rem', color: '#7C3AED', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.8rem' }}>More Featured</span>
-            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Rest of Websites</h2>
+            <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', color: '#0f1015', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>Rest of Websites</h2>
           </motion.div>
           <div style={{ display: 'flex', gap: '0.8rem', flexShrink: 0 }}>
             <motion.button
@@ -1060,7 +1060,7 @@ const PortfolioTestimonial = ({ isMobile }) => {
             <span key={i} style={{ color: '#AC58E9', fontSize: '1.5rem', margin: '0 4px' }}>★</span>
           ))}
         </div>
-        <h2 style={{ fontSize: isMobile ? '1.8rem' : '3.2rem', fontWeight: 800, color: '#0f1015', lineHeight: 1.25, margin: '0 0 2rem 0', letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+        <h2 style={{ fontSize: isMobile ? '1.8rem' : '3.2rem', fontWeight: 800, color: '#0f1015', lineHeight: 1.25, margin: '0 0 2rem 0', letterSpacing: '-0.02em', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
           "TalentElla didn't just build us a website; they engineered a digital experience that completely transformed how our clients perceive us. The ROI has been absolutely astronomical."
         </h2>
       </motion.div>
@@ -1135,7 +1135,7 @@ const PortfolioPage = () => {
               <span style={{ fontSize: '0.65rem', color: '#7C3AED', fontWeight: 800, letterSpacing: '0.3em', textTransform: 'uppercase', display: 'block', marginBottom: '0.6rem' }}>
                 Explore By Category
               </span>
-              <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 4.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', textTransform: 'uppercase', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+              <h2 style={{ fontSize: 'clamp(2.2rem, 6vw, 4.5rem)', fontWeight: 900, margin: 0, letterSpacing: '-0.03em', textTransform: 'uppercase', color: '#0f1015', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
                 All Creatives
               </h2>
             </div>
@@ -1188,14 +1188,14 @@ const PortfolioPage = () => {
               >
                 {landscapeVideos.length > 0 && (
                   <div style={{ marginBottom: isMobile ? '3rem' : '4rem' }}>
-                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.4rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f1015', letterSpacing: '0.02em', textTransform: 'uppercase', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Cinematic & Landscape</h3>
+                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.4rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f1015', letterSpacing: '0.02em', textTransform: 'uppercase', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>Cinematic & Landscape</h3>
                     <LandscapeMarquee videos={landscapeVideos} setSelectedProject={setSelectedProject} isMobile={isMobile} />
                   </div>
                 )}
 
                 {portraitVideos.length > 0 && (
                   <div>
-                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.4rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f1015', letterSpacing: '0.02em', textTransform: 'uppercase', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>Reels & Portrait</h3>
+                    <h3 style={{ fontSize: isMobile ? '1.2rem' : '1.4rem', fontWeight: 800, marginBottom: '1.5rem', color: '#0f1015', letterSpacing: '0.02em', textTransform: 'uppercase', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>Reels & Portrait</h3>
                     <div style={{
                       display: 'grid',
                       gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
@@ -1284,7 +1284,7 @@ const PortfolioPage = () => {
                     )}
                   </div>
                   
-                  <h3 style={{ fontSize: isMobile ? '2rem' : '2.5rem', fontWeight: 900, color: '#0f1015', margin: 0, lineHeight: 1.1, letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+                  <h3 style={{ fontSize: isMobile ? '2rem' : '2.5rem', fontWeight: 900, color: '#0f1015', margin: 0, lineHeight: 1.1, letterSpacing: '-0.02em', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
                     {selectedProject.title}
                   </h3>
                 </div>

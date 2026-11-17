@@ -52,7 +52,7 @@ const HomeFAQ = ({ faqs }) => {
             wordBreak: isMobile ? 'break-word' : 'normal',
             overflowWrap: isMobile ? 'break-word' : 'normal',
             whiteSpace: isMobile ? 'normal' : 'nowrap',
-            fontFamily: "'Space Grotesk', system-ui, sans-serif"
+            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif"
           }}>
             QUESTIONS<br /><span style={{ color: '#AC58E9', fontFamily: "'Bespoke Serif', Georgia, serif", fontStyle: 'italic', fontWeight: 400, textTransform: 'none', letterSpacing: '-0.01em', paddingRight: '0.06em' }}>Answered</span>
           </h2>
@@ -117,7 +117,7 @@ const HomeFAQ = ({ faqs }) => {
                   maxWidth: '85%',
                   transition: '0.3s ease',
                   lineHeight: 1.4,
-                  fontFamily: "'Space Grotesk', system-ui, sans-serif"
+                  fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif"
                 }}>
                   {faq.question}
                 </h3>

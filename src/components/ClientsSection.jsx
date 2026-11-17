@@ -74,7 +74,7 @@ const ClientsSection = () => {
           padding: 6px 14px;
           border-radius: 9999px;
           margin-bottom: 20px;
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
 
         .te-clients-title {
@@ -85,7 +85,7 @@ const ClientsSection = () => {
           line-height: 1.05;
           margin: 0 0 16px 0;
           text-transform: uppercase;
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
         }
 
         .te-clients-subtitle {
@@ -149,7 +149,7 @@ const ClientsSection = () => {
           color: #0f1015;
           line-height: 1;
           letter-spacing: -0.04em;
-          font-family: 'Space Grotesk', system-ui, sans-serif;
+          font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
           margin-bottom: 8px;
         }
 

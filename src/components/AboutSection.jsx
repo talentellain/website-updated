@@ -1,29 +1,140 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+const ABOUT_STYLES = `
+  .te-about-section {
+    background-color: #ffffff;
+    padding: clamp(40px, 6vw, 70px) 0 clamp(50px, 7vw, 80px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .te-about-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 36px);
+  }
+
+  /* ── Clean Left-Aligned Stack ── */
+  .te-about-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 820px;
+  }
+
+  /* ── Top Left Label (* ABOUT) ── */
+  .te-about-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #7c3aed;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    margin-bottom: 16px;
+  }
+
+  .te-about-label-icon {
+    font-size: 14px;
+    line-height: 1;
+    color: #7c3aed;
+  }
+
+  /* ── Normal, Clean, Readable Typography (Not Bold, Not Big) ── */
+  .te-about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    text-align: left;
+  }
+
+  .te-about-lead {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(1rem, 1.25vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: #3f3f46;
+    margin: 0;
+  }
+
+  .te-about-accent {
+    color: #7c3aed;
+    font-weight: 600;
+  }
+
+  .te-about-sub {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+    font-weight: 400;
+    line-height: 1.75;
+    letter-spacing: -0.01em;
+    text-transform: none;
+    color: #64748b;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .te-about-label {
+      font-size: 11px;
+      margin-bottom: 12px;
+    }
+
+    .te-about-lead {
+      font-size: 0.98rem;
+      line-height: 1.68;
+    }
+
+    .te-about-sub {
+      font-size: 0.92rem;
+      line-height: 1.68;
+    }
+  }
+`;
+
 const AboutSection = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
     // Force play the video to bypass browser autoplay restrictions
     if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Video autoplay failed:", error);
+      videoRef.current.play().catch((error) => {
+        console.log('Video autoplay failed:', error);
       });
     }
   }, []);
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: ABOUT_STYLES }} />
+
       {/* ── VIDEO SECTION ── */}
-      <section style={{ backgroundColor: '#ffffff', padding: '4rem 0' }}>
-        <div style={{ width: '95%', maxWidth: '1400px', aspectRatio: '21/9', minHeight: '300px', margin: '0 auto', position: 'relative', borderRadius: '24px', overflow: 'hidden', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', backgroundColor: '#f0f2f5' }}>
-          <video 
+      <section style={{ backgroundColor: '#ffffff', padding: '3.5rem 0 1rem 0' }}>
+        <div
+          style={{
+            width: '95%',
+            maxWidth: '1400px',
+            aspectRatio: '21/9',
+            minHeight: '280px',
+            margin: '0 auto',
+            position: 'relative',
+            borderRadius: '24px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 50px rgba(0,0,0,0.08)',
+            backgroundColor: '#f0f2f5',
+          }}
+        >
+          <video
             ref={videoRef}
-            src="/video/Ropes_weaving_with_marketing_terms_202607100004.mp4" 
-            autoPlay 
-            loop 
-            muted 
+            src="/video/Ropes_weaving_with_marketing_terms_202607100004.mp4"
+            autoPlay
+            loop
+            muted
             playsInline
             preload="auto"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
@@ -31,88 +142,44 @@ const AboutSection = () => {
         </div>
       </section>
 
-      <section style={{ 
-        backgroundColor: '#ffffff', 
-        minHeight: '80vh', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        position: 'relative', 
-        overflow: 'hidden', 
-        padding: '4rem 2rem' 
-      }}>
-        <div style={{
-          position: 'relative',
-          zIndex: 10,
-          textAlign: 'center',
-          maxWidth: '900px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center'
-        }}>
-          <motion.h1 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{
-              fontSize: 'clamp(3.5rem, 9vw, 6.5rem)',
-              fontWeight: 800,
-              color: '#7C3AED',
-              fontFamily: "'Space Grotesk', system-ui, sans-serif",
-              margin: '0 0 2rem 0',
-              lineHeight: 1,
-              letterSpacing: '-0.03em',
-              textTransform: 'uppercase'
-            }}
-          >
-            ABOUT <em style={{ fontFamily: "'Bespoke Serif', Georgia, serif", fontStyle: 'italic', fontWeight: 400, textTransform: 'none', paddingRight: '0.06em' }}>TalentElla</em>
-          </motion.h1>
+      {/* ── NORMAL FONT, LEFT-ALIGNED ABOUT SECTION ── */}
+      <section className="te-about-section">
+        <div className="te-about-container">
+          <div className="te-about-stack">
+            {/* Top Left Title: * ABOUT */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="te-about-label"
+            >
+              <span className="te-about-label-icon">*</span>
+              <span>ABOUT</span>
+            </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.3
-                }
-              }
-            }}
-            style={{
-              color: '#4b4d5a',
-              fontSize: 'clamp(1.05rem, 2.2vw, 1.35rem)',
-              lineHeight: 1.8,
-              fontWeight: 400,
-              fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-              marginBottom: '4rem',
-              letterSpacing: '-0.01em',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1.2rem'
-            }}
-          >
-            <motion.p 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
-              style={{ margin: 0 }}
+            {/* Normal, Non-Bold, Compact Content Below */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="te-about-content"
             >
-              With over <strong style={{ color: '#0f1015', fontWeight: 700 }}>5 years of experience</strong> crafting digital products, we merge strategic thinking with cutting-edge design to build category leaders.
-            </motion.p>
-            <motion.p 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
-              style={{ margin: 0 }}
-            >
-              Our expertise spans across building <strong style={{ color: '#0f1015', fontWeight: 700 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
-            </motion.p>
-            <motion.p 
-              variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
-              style={{ margin: 0 }}
-            >
-              We partner with forward-thinking businesses to translate their vision into measurable results through data-driven creative and pixel-perfect engineering.
-            </motion.p>
-          </motion.div>
+              <p className="te-about-lead">
+                We&apos;re a 360° creative &amp; digital agency focused on crafting{' '}
+                <span className="te-about-accent">high-performance web applications</span>,{' '}
+                <span className="te-about-accent">complete brand identities</span>, and intuitive user
+                experiences that dominate categories.
+              </p>
 
+              <p className="te-about-sub">
+                With over 5 years of experience, we partner with forward-thinking founders to
+                translate ambitious visions into measurable results through data-driven creative and
+                pixel-perfect engineering.
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
     </>

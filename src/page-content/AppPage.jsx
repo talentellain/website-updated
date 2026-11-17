@@ -199,7 +199,7 @@ const RelatedServices = ({ currentId, isMobile }) => {
   return (
     <section style={{ padding: isMobile ? '80px 5% 40px' : '120px 5% 60px', backgroundColor: '#ffffff', color: '#0f1015', textAlign: 'center', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
       <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
-        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#0f1015', marginBottom: '1rem', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>EXPLORE MORE SERVICES</h2>
+        <h2 style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, textTransform: 'uppercase', color: '#0f1015', marginBottom: '1rem', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>EXPLORE MORE SERVICES</h2>
         <p style={{ color: '#555562', fontSize: '1rem', marginBottom: '4rem', fontWeight: 500 }}>Discover more ways we can help you grow your brand.</p>
         <div className="services-grid-new" style={{ width: '100%' }}>
           {related.map(s => <ServiceCard key={s.id} s={s} />)}
@@ -279,7 +279,7 @@ const AppPage = () => {
                 <div style={{ width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(172, 88, 233, 0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#7C3AED' }}>
                   <p.icon size={14} />
                 </div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f1015', marginBottom: '0.2rem', letterSpacing: '-0.01em', textTransform: 'uppercase', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{p.label}</h3>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, color: '#0f1015', marginBottom: '0.2rem', letterSpacing: '-0.01em', textTransform: 'uppercase', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>{p.label}</h3>
                 <p style={{ color: '#555562', fontSize: '0.82rem', lineHeight: 1.5, margin: 0, maxWidth: (i === 0 || i === 3 || i === 4) && !isMobile ? '70%' : '100%' }}>{p.desc}</p>
               </motion.div>
             ))}
@@ -335,7 +335,7 @@ const AppPage = () => {
                 )}
 
                 <div style={{ marginBottom: '1rem' }}>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#0f1015', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>{plan.name}</h3>
+                  <h3 style={{ fontSize: '1rem', fontWeight: 900, margin: 0, textTransform: 'uppercase', letterSpacing: '0.05em', color: '#0f1015', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>{plan.name}</h3>
                   <p style={{ color: '#7C3AED', fontSize: '0.65rem', fontWeight: 700, margin: '0.2rem 0 0', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{plan.subtitle}</p>
                 </div>
 
@@ -416,7 +416,7 @@ const AppPage = () => {
         <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '3rem' : '8rem', alignItems: 'flex-start' }}>
           {/* Left Column: Title & CTA */}
           <div style={{ flex: isMobile ? 'none' : '1.5', width: '100%', position: isMobile ? 'static' : 'sticky', top: '120px', textAlign: isMobile ? 'center' : 'left' }}>
-            <h2 style={{ fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, lineHeight: 0.9, color: '#0f1015', margin: '0 0 1.2rem 0', textTransform: 'uppercase', letterSpacing: '-0.04em', wordBreak: isMobile ? 'break-word' : 'normal', overflowWrap: isMobile ? 'break-word' : 'normal', whiteSpace: isMobile ? 'normal' : 'nowrap', fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+            <h2 style={{ fontSize: isMobile ? 'clamp(1.8rem, 8vw, 2.4rem)' : 'clamp(2.5rem, 5vw, 4.5rem)', fontWeight: 900, lineHeight: 0.9, color: '#0f1015', margin: '0 0 1.2rem 0', textTransform: 'uppercase', letterSpacing: '-0.04em', wordBreak: isMobile ? 'break-word' : 'normal', overflowWrap: isMobile ? 'break-word' : 'normal', whiteSpace: isMobile ? 'normal' : 'nowrap', fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
               QUESTIONS<br /><span style={{ color: '#AC58E9' }}>ANSWERED</span>
             </h2>
             <p style={{ color: '#555562', fontSize: '0.9rem', lineHeight: 1.5, marginBottom: '2rem', maxWidth: isMobile ? '100%' : '300px', margin: isMobile ? '0 auto 2rem auto' : '0 0 2rem 0' }}>
@@ -434,7 +434,7 @@ const AppPage = () => {
             {faqs.map((faq, idx) => (
               <div key={idx} style={{ borderBottom: '1px solid rgba(0,0,0,0.08)' }}>
                 <button onClick={() => setExpandedIndex(expandedIndex === idx ? null : idx)} style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: isMobile ? '2.2rem 0' : '2rem 0', background: 'none', border: 'none', cursor: 'pointer', color: '#0f1015', textAlign: 'left' }}>
-                  <h3 style={{ fontSize: isMobile ? '0.9rem' : '0.95rem', fontWeight: 800, margin: 0, color: expandedIndex === idx ? '#AC58E9' : '#0f1015', textTransform: 'uppercase', maxWidth: '85%', transition: '0.3s ease', lineHeight: 1.4, fontFamily: "'Space Grotesk', system-ui, sans-serif" }}>
+                  <h3 style={{ fontSize: isMobile ? '0.9rem' : '0.95rem', fontWeight: 800, margin: 0, color: expandedIndex === idx ? '#AC58E9' : '#0f1015', textTransform: 'uppercase', maxWidth: '85%', transition: '0.3s ease', lineHeight: 1.4, fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}>
                     {faq.q}
                   </h3>
                   <span style={{ fontSize: '1.2rem', color: expandedIndex === idx ? '#AC58E9' : 'rgba(0,0,0,0.25)', fontWeight: 300, transition: '0.3s ease' }}>
@@ -465,7 +465,7 @@ const AppPage = () => {
         .modern-service-card { background-color: #f8f9fc; border: 1px solid rgba(0,0,0,0.08); min-height: 400px; transition: all 0.4s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.02); }
         @media (max-width: 768px) { .modern-service-card { min-height: 250px !important; } }
         .modern-service-card:hover { background-color: #AC58E9; border-color: #AC58E9; transform: translateY(-5px); box-shadow: 0 12px 30px rgba(172, 88, 233, 0.2); }
-        .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #0f1015; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; font-family: 'Space Grotesk', system-ui, sans-serif; }
+        .card-giant-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: clamp(1.2rem,3.5vw,2.8rem); font-weight: 900; color: #0f1015; line-height: 1; letter-spacing: -0.02em; pointer-events: none; transition: left 0.7s cubic-bezier(0.8,0,0.2,1), transform 0.7s cubic-bezier(0.8,0,0.2,1), opacity 0.5s ease; z-index: 1; width: 100%; text-align: center; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
         .modern-service-card:hover .card-giant-text { left: 100%; transform: translate(0%,-50%); opacity: 0.05; }
         .card-hover-content { opacity: 0; transform: translateY(20px) scale(0.95); transition: opacity 0.4s ease, transform 0.4s ease; display: flex; flex-direction: column; align-items: center; gap: 1rem; z-index: 5; padding: 0 8%; text-align: center; }
         .modern-service-card:hover .card-hover-content { opacity: 1; transform: translateY(0) scale(1); transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s; }

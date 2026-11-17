@@ -150,7 +150,7 @@ const Contact = () => {
           lineHeight: 0.8,
           textTransform: 'uppercase',
           letterSpacing: '-0.02em',
-          fontFamily: "'Space Grotesk', Impact, sans-serif"
+          fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif"
         }}>
           CONTACT
         </h1>
