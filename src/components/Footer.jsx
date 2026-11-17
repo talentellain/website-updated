@@ -38,78 +38,98 @@ const TALENT_ELLA_AVANDE_STYLES = `
     margin: 0 auto;
   }
 
-  /* ── Top Banner Card ── */
+  /* ── Top Banner Card: Minimal & Professional ── */
   .te-av-top-card {
-    background-color: var(--card-bg);
-    border-radius: 24px;
-    padding: clamp(36px, 5vw, 64px);
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: clamp(36px, 4.5vw, 56px);
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: clamp(32px, 5vw, 64px);
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(36px, 5vw, 64px);
     align-items: center;
     position: relative;
-    overflow: hidden;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.04);
-  }
-
-  /* Halftone background texture on the top card */
-  .te-av-top-card-texture {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 100%;
-    pointer-events: none;
-    opacity: 0.08;
-    background-image: radial-gradient(circle, #000 1.5px, transparent 1.5px);
-    background-size: 14px 14px;
-    mask-image: linear-gradient(to right, transparent, black 40%);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 40%);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
   }
 
   .te-av-top-card-left {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     position: relative;
     z-index: 2;
+  }
+
+  .te-av-kicker {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-purple);
   }
 
   .te-av-top-title {
     font-family: 'Space Grotesk', system-ui, sans-serif;
-    font-size: clamp(2rem, 3.8vw, 3.4rem);
+    font-size: clamp(2rem, 3.4vw, 3rem);
     font-weight: 700;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -0.03em;
     color: var(--text-primary);
     margin: 0;
-    max-width: 500px;
+    max-width: 520px;
   }
 
-  /* Right Purple Gradient Fast-Track Card */
+  .te-av-top-desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+    font-weight: 400;
+    max-width: 480px;
+  }
+
+  .te-av-direct-contacts {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-dim);
+    font-weight: 500;
+    padding-top: 4px;
+  }
+
+  .te-av-contact-sep {
+    color: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Right Minimalist Dark Action Box */
   .te-av-action-box {
-    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+    background-color: #0c0d12;
     color: #ffffff;
-    border-radius: 18px;
-    padding: clamp(26px, 3.5vw, 38px);
-    position: relative;
-    z-index: 2;
-    box-shadow: 0 16px 40px rgba(124, 58, 237, 0.28);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 16px;
+    padding: clamp(24px, 3.2vw, 32px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .te-av-action-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    gap: 12px;
   }
 
   .te-av-action-tag {
     font-family: 'Space Grotesk', system-ui, sans-serif;
     font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.82);
+    color: #94a3b8;
   }
 
   .te-av-action-status {
@@ -117,27 +137,15 @@ const TALENT_ELLA_AVANDE_STYLES = `
     align-items: center;
     gap: 6px;
     font-size: 11px;
-    color: #a7f3d0;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    background: rgba(16, 185, 129, 0.2);
-    padding: 3px 10px;
-    border-radius: 100px;
-    border: 1px solid rgba(16, 185, 129, 0.35);
+    color: #cbd5e1;
+    font-weight: 500;
   }
 
   .te-av-status-dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background-color: #34d399;
-    box-shadow: 0 0 8px rgba(52, 211, 153, 0.9);
-    animation: te-pulse-dot 2s infinite;
-  }
-
-  @keyframes te-pulse-dot {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.3); opacity: 0.7; }
+    background-color: #10b981;
   }
 
   /* Direct Action Button */
@@ -145,25 +153,28 @@ const TALENT_ELLA_AVANDE_STYLES = `
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     padding: 14px 20px;
-    color: #0f172a !important;
+    color: #09090b !important;
     text-decoration: none !important;
-    font-size: 14.5px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     letter-spacing: -0.01em;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .te-av-direct-btn:hover {
-    background: #09090b;
-    color: #ffffff !important;
-    border-color: #09090b;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    background-color: #f8fafc;
+    color: #000000 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .te-av-direct-btn:hover .te-av-btn-arrow {
+    transform: translate(2px, -2px);
   }
 
   .te-av-btn-left {
@@ -172,12 +183,26 @@ const TALENT_ELLA_AVANDE_STYLES = `
     gap: 10px;
   }
 
+  .te-av-btn-arrow {
+    transition: transform 0.2s ease;
+  }
+
   .te-av-action-sub {
-    font-size: 12px;
+    font-size: 12.5px;
     line-height: 1.55;
-    color: rgba(255, 255, 255, 0.85);
-    margin: 16px 0 0;
+    color: #94a3b8;
+    margin: 0;
     font-weight: 400;
+  }
+
+  .te-av-action-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 11px;
+    color: #64748b;
   }
 
   /* ── Divider ── */
@@ -292,21 +317,32 @@ const TALENT_ELLA_AVANDE_STYLES = `
     color: var(--accent-purple);
   }
 
-  /* ── Giant Segmented Brutalist Wordmark: TALENT ELLA [R] ── */
+  /* ── Giant Modern Agency Wordmark: TALENTELLA ® ── */
   .te-av-wordmark-container {
     margin: clamp(48px, 7vw, 76px) 0 clamp(32px, 5vw, 44px);
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .te-av-wordmark-container:hover {
+    opacity: 0.82;
   }
 
   .te-av-wordmark-svg {
     width: 100%;
     height: auto;
-    max-height: 115px;
+    max-height: 120px;
     display: block;
+  }
+
+  .te-av-wordmark-svg text {
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   }
 
   /* ── Bottom Bar ── */
@@ -353,13 +389,6 @@ const TALENT_ELLA_AVANDE_STYLES = `
 
   /* ── Responsive ── */
   @media (max-width: 1024px) {
-    .te-av-top-card {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    .te-av-top-title {
-      max-width: 100%;
-    }
     .te-av-nav-grid {
       grid-template-columns: repeat(3, 1fr);
       row-gap: 36px;
@@ -368,12 +397,46 @@ const TALENT_ELLA_AVANDE_STYLES = `
 
   @media (max-width: 680px) {
     .te-av-nav-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       row-gap: 32px;
+      text-align: center;
     }
+
+    .te-av-nav-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .te-av-col-title {
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .te-av-social-row {
+      justify-content: center;
+    }
+
+    .te-av-col-list {
+      align-items: center;
+      text-align: center;
+    }
+
+    .te-av-contact-list {
+      align-items: center;
+      text-align: center;
+    }
+
     .te-av-bottom-bar {
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .te-av-bottom-copy {
+      text-align: center;
     }
   }
 
@@ -397,51 +460,7 @@ const Footer = () => {
       <style dangerouslySetInnerHTML={{ __html: TALENT_ELLA_AVANDE_STYLES }} />
 
       <div className="te-av-footer-inner">
-        {/* 1. Top Callout Card: Direct Access & Project Fast-Track (No redundant email input!) */}
-        <div className="te-av-top-card">
-          <div className="te-av-top-card-texture" aria-hidden="true" />
-
-          <div className="te-av-top-card-left">
-            <h2 className="te-av-top-title">
-              Ready to turn<br />
-              your brand into<br />
-              a dominant<br />
-              market leader?
-            </h2>
-          </div>
-
-          <div className="te-av-action-box">
-            <div className="te-av-action-header">
-              <span className="te-av-action-tag">Fast-Track Project</span>
-              <span className="te-av-action-status">
-                <span className="te-av-status-dot" />
-                Team Online
-              </span>
-            </div>
-
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="te-av-direct-btn"
-            >
-              <span className="te-av-btn-left">
-                <MessageCircle size={18} strokeWidth={2.2} />
-                <span>Chat on WhatsApp Directly</span>
-              </span>
-              <ArrowUpRight size={17} strokeWidth={2.5} />
-            </a>
-
-            <p className="te-av-action-sub">
-              Skip waiting for email replies. Connect directly with our lead strategists for immediate project scoping, timeline estimates, and honest quotes.
-            </p>
-          </div>
-        </div>
-
-        {/* 2. Divider */}
-        <div className="te-av-divider" />
-
-        {/* 3. Navigation Columns Grid with TalentElla Info */}
+        {/* Navigation Columns Grid with TalentElla Info */}
         <div className="te-av-nav-grid">
           {/* Col 1: Socials */}
           <div className="te-av-nav-col">
@@ -492,8 +511,8 @@ const Footer = () => {
             <ul className="te-av-col-list">
               <li><Link href="/">Home</Link></li>
               <li><Link href="/about">About Us</Link></li>
-              <li><Link href="/services">Features</Link></li>
-              <li><Link href="/contact">Contact</Link></li>
+              <li><Link href="/portfolio">Portfolio</Link></li>
+              <li><Link href="/blog">Blog</Link></li>
             </ul>
           </div>
 
@@ -501,10 +520,10 @@ const Footer = () => {
           <div className="te-av-nav-col">
             <h3 className="te-av-col-title">Services:</h3>
             <ul className="te-av-col-list">
-              <li><Link href="/services#website-development">Website Development</Link></li>
-              <li><Link href="/services#app-development">App Development</Link></li>
-              <li><Link href="/services#social-media-management">Social Media Marketing</Link></li>
-              <li><Link href="/services#visual-identity-design">Visual Identity</Link></li>
+              <li><Link href="/services/website-development">Website Development</Link></li>
+              <li><Link href="/app-development">App Development</Link></li>
+              <li><Link href="/services/social-media-management">Social Media Marketing</Link></li>
+              <li><Link href="/services/visual-identity-design">Visual Identity</Link></li>
             </ul>
           </div>
 
@@ -529,98 +548,42 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* 4. Giant Segmented Brutalist Wordmark: TALENT ELLA [R] */}
-        <div className="te-av-wordmark-container">
+        {/* 4. Giant Modern Agency Wordmark: TALENTELLA ® */}
+        <div className="te-av-wordmark-container" onClick={scrollToTop} title="Back to top">
           <svg
             className="te-av-wordmark-svg"
-            viewBox="0 0 1280 130"
+            viewBox="0 0 1280 140"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
             role="img"
-            aria-label="TALENT ELLA"
+            aria-label="TALENTELLA"
           >
-            {/* ── T ── */}
-            <path
-              d="M 16 0 L 74 0 L 90 16 L 90 32 L 61 32 L 61 130 L 29 130 L 29 32 L 0 32 L 0 16 Z"
+            <text
+              x="0"
+              y="114"
+              fontFamily="'Space Grotesk', system-ui, -apple-system, sans-serif"
+              fontWeight="800"
+              fontSize="140"
+              letterSpacing="-0.03em"
+              textLength="1145"
+              lengthAdjust="spacing"
               fill="#0D0D0D"
-            />
-
-            {/* ── A ── */}
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M 134 0 L 186 0 L 210 24 L 210 130 L 178 130 L 178 82 L 142 82 L 142 130 L 110 130 L 110 24 Z M 142 52 L 178 52 L 178 34 L 166 22 L 154 22 L 142 34 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── L ── */}
-            <path
-              d="M 230 0 L 262 0 L 262 98 L 312 98 L 312 114 L 296 130 L 230 130 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── E ── */}
-            <path
-              d="M 332 0 L 402 0 L 418 16 L 418 28 L 364 28 L 364 51 L 410 51 L 410 79 L 364 79 L 364 102 L 418 102 L 418 114 L 402 130 L 332 130 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── N ── */}
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M 438 0 L 470 0 L 512 68 L 512 0 L 542 0 L 542 130 L 510 130 L 468 62 L 468 130 L 438 130 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── T ── */}
-            <path
-              d="M 578 0 L 636 0 L 652 16 L 652 32 L 623 32 L 623 130 L 591 130 L 591 32 L 562 32 L 562 16 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── (Space) ── */}
-
-            {/* ── E ── */}
-            <path
-              d="M 686 0 L 756 0 L 772 16 L 772 28 L 718 28 L 718 51 L 764 51 L 764 79 L 718 79 L 718 102 L 772 102 L 772 114 L 756 130 L 686 130 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── L ── */}
-            <path
-              d="M 792 0 L 824 0 L 824 98 L 874 98 L 874 114 L 858 130 L 792 130 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── L ── */}
-            <path
-              d="M 894 0 L 926 0 L 926 98 L 976 98 L 976 114 L 960 130 L 894 130 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── A ── */}
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M 1020 0 L 1072 0 L 1096 24 L 1096 130 L 1064 130 L 1064 82 L 1028 82 L 1028 130 L 996 130 L 996 24 Z M 1028 52 L 1064 52 L 1064 34 L 1052 22 L 1040 22 L 1028 34 Z"
-              fill="#0D0D0D"
-            />
-
-            {/* ── [R] Octagonal Registered Trademark Badge ── */}
-            <g transform="translate(1140, 8)">
-              {/* Octagonal Outer Ring */}
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M 34 0 L 80 0 L 114 34 L 114 80 L 80 114 L 34 114 L 0 80 L 0 34 Z M 38 12 L 76 12 L 102 38 L 102 76 L 76 102 L 38 102 L 12 76 L 12 38 Z"
+            >
+              TALENTELLA
+            </text>
+            <g transform="translate(1196, 18)">
+              <circle cx="34" cy="34" r="30" stroke="#0D0D0D" strokeWidth="5.5" fill="none" />
+              <text
+                x="34"
+                y="44"
+                fontFamily="'Space Grotesk', system-ui, -apple-system, sans-serif"
+                fontWeight="800"
+                fontSize="28"
                 fill="#0D0D0D"
-              />
-              {/* Letter 'R' inside */}
-              <path
-                d="M 38 32 L 66 32 C 73 32 78 37 78 44 C 78 50 74 55 68 56 L 79 82 L 66 82 L 56 58 L 50 58 L 50 82 L 38 82 Z M 50 42 L 50 50 L 64 50 C 66.5 50 68 48.5 68 46 C 68 43.5 66.5 42 64 42 Z"
-                fill="#0D0D0D"
-              />
+                textAnchor="middle"
+              >
+                R
+              </text>
             </g>
           </svg>
         </div>

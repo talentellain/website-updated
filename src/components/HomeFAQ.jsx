@@ -54,7 +54,7 @@ const HomeFAQ = ({ faqs }) => {
             whiteSpace: isMobile ? 'normal' : 'nowrap',
             fontFamily: "'Space Grotesk', system-ui, sans-serif"
           }}>
-            QUESTIONS<br /><span style={{ color: '#AC58E9' }}>ANSWERED</span>
+            QUESTIONS<br /><span style={{ color: '#AC58E9', fontFamily: "'Bespoke Serif', Georgia, serif", fontStyle: 'italic', fontWeight: 400, textTransform: 'none', letterSpacing: '-0.01em', paddingRight: '0.06em' }}>Answered</span>
           </h2>
           <p style={{ 
             color: '#555562', 

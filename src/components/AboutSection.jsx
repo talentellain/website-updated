@@ -56,17 +56,17 @@ const AboutSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             style={{
-              fontSize: 'clamp(4rem, 10vw, 7.5rem)',
-              fontWeight: 900,
+              fontSize: 'clamp(3.5rem, 9vw, 6.5rem)',
+              fontWeight: 800,
               color: '#7C3AED',
               fontFamily: "'Space Grotesk', system-ui, sans-serif",
               margin: '0 0 2rem 0',
               lineHeight: 1,
-              letterSpacing: '-0.02em',
+              letterSpacing: '-0.03em',
               textTransform: 'uppercase'
             }}
           >
-            ABOUT US
+            ABOUT <em style={{ fontFamily: "'Bespoke Serif', Georgia, serif", fontStyle: 'italic', fontWeight: 400, textTransform: 'none', paddingRight: '0.06em' }}>TalentElla</em>
           </motion.h1>
 
           <motion.div
@@ -97,19 +97,19 @@ const AboutSection = () => {
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
               style={{ margin: 0 }}
             >
-              With over <strong style={{ color: '#0f1015', fontWeight: 700 }}>5 years of experience</strong> crafting digital products, I merge strategic thinking with cutting-edge design to solve complex problems.
+              With over <strong style={{ color: '#0f1015', fontWeight: 700 }}>5 years of experience</strong> crafting digital products, we merge strategic thinking with cutting-edge design to build category leaders.
             </motion.p>
             <motion.p 
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
               style={{ margin: 0 }}
             >
-              My expertise spans across building <strong style={{ color: '#0f1015', fontWeight: 700 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
+              Our expertise spans across building <strong style={{ color: '#0f1015', fontWeight: 700 }}>complete brand identities, high-performance web applications, and intuitive user interfaces</strong> that drive engagement and retention.
             </motion.p>
             <motion.p 
               variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } } }} 
               style={{ margin: 0 }}
             >
-              I partner with forward-thinking businesses to translate their vision into measurable results through data-driven design and pixel-perfect development.
+              We partner with forward-thinking businesses to translate their vision into measurable results through data-driven creative and pixel-perfect engineering.
             </motion.p>
           </motion.div>
 

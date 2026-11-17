@@ -1,499 +1,347 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X } from 'lucide-react';
 import logo from '../assets/talentella-logo.png';
 
-// Nav items that are anchor-scroll vs page links
-const PAGE_LINKS = { 
-    HOME: '/',
-    PORTFOLIO: '/portfolio',
-    APP: '/app-development',
-    BLOG: '/blog',
-    WEBSITE: '/services/website-development',
-    'SMM': '/services/social-media-management',
-    IDENTITY: '/services/visual-identity-design'
-};
+const UNIVERSAL_NAVBAR_STYLES = `
+  .te-univ-nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    pointer-events: none;
+    box-sizing: border-box;
+  }
 
-const MobileMenuItem = ({ item, index, handleNavClick }) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const pillImg = "https://images.unsplash.com/photo-1498855926480-d98e83099315?q=80&w=600&auto=format&fit=crop";
+  .te-univ-nav-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: clamp(8px, 1.5vw, 14px) clamp(12px, 2.5vw, 24px);
+    box-sizing: border-box;
+    width: 100%;
+    pointer-events: auto;
+  }
 
-    return (
-        <a 
-            href={PAGE_LINKS[item] ? PAGE_LINKS[item] : `#${item.toLowerCase()}`}
-            onClick={(e) => {
-                if (!PAGE_LINKS[item]) {
-                    handleNavClick(e, item.toLowerCase());
-                } else {
-                    // Let the Link handle it if possible, but this is a raw <a>
-                    // So we'll let it navigate normally and close the menu
-                    if (typeof handleNavClick === 'function') handleNavClick(e, null); 
-                }
-            }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            onFocus={() => setIsHovered(true)}
-            onBlur={() => setIsHovered(false)}
-            style={{ 
-                width: '100%',
-                position: 'relative',
-                overflow: 'hidden',
-                padding: '1.4rem 0',
-                color: isHovered ? '#000000' : 'white', 
-                backgroundColor: isHovered ? '#ffffff' : 'transparent',
-                textDecoration: 'none',
-                borderBottom: '1px solid rgba(255,255,255,0.08)',
-                borderTop: index === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
-                transition: 'background-color 0.4s ease, color 0.4s ease',
-                display: 'block',
-                cursor: 'pointer'
-            }}
-        >
-            {/* Base Text (visible when not hovered) */}
-            <div style={{ opacity: isHovered ? 0 : 1, transition: 'opacity 0.3s ease', fontSize: 'clamp(1.2rem, 5vw, 1.8rem)', fontWeight: 700, letterSpacing: '0.08em' }}>
-                {item}
-            </div>
+  .te-univ-navbar {
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 9999px;
+    padding: 6px 14px 6px 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-            {/* Marquee (visible when hovered) */}
-            <div style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                opacity: isHovered ? 1 : 0,
-                pointerEvents: 'none',
-                transition: 'opacity 0.3s ease'
-            }}>
-                <motion.div
-                    animate={isHovered ? { x: ["0%", "-50%"] } : { x: "0%" }}
-                    transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        whiteSpace: 'nowrap',
-                        width: 'fit-content'
-                    }}
+  .te-univ-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .te-univ-logo-img {
+    height: 38px;
+    width: auto;
+    mix-blend-mode: multiply;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .te-univ-nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.8vw, 28px);
+  }
+
+  .te-univ-nav-link {
+    position: relative;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #0f1015;
+    opacity: 0.75;
+    text-decoration: none;
+    transition: opacity 0.25s ease, color 0.25s ease;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+  }
+
+  .te-univ-nav-link:hover {
+    opacity: 1;
+    color: #AC58E9;
+  }
+
+  .te-univ-nav-link.active {
+    color: #AC58E9;
+    opacity: 1;
+  }
+
+  .te-univ-nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #AC58E9;
+    border-radius: 2px;
+  }
+
+  .te-univ-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .te-univ-get-in-touch-btn {
+    padding: 0.65rem 1.6rem;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 100px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 0.05em;
+    background-color: #0f1015;
+    color: #ffffff;
+    border: 1px solid #0f1015;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .te-univ-get-in-touch-btn:hover {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+    transform: scale(1.04);
+    box-shadow: 0 8px 20px rgba(172, 88, 233, 0.35);
+  }
+
+  /* Mobile Toggle & Sheet */
+  .te-univ-mobile-toggle {
+    display: none;
+    background-color: #0f1015;
+    color: #ffffff;
+    border-radius: 9999px;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .te-univ-sheet-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .te-univ-sheet {
+    background-color: #ffffff;
+    border-radius: 20px 20px 0 0;
+    padding: 24px 20px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+    animation: teUnivSlideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  @keyframes teUnivSlideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  @media (max-width: 900px) {
+    .te-univ-nav-links {
+      display: none;
+    }
+    .te-univ-right {
+      display: none;
+    }
+    .te-univ-mobile-toggle {
+      display: flex;
+    }
+  }
+`;
+
+const NAV_ITEMS = [
+  { label: 'HOME', href: '/' },
+  { label: 'WEBSITE', href: '/services/website-development' },
+  { label: 'SMM', href: '/services/social-media-management' },
+  { label: 'IDENTITY', href: '/services/visual-identity-design' },
+  { label: 'APP', href: '/app-development' },
+  { label: 'PORTFOLIO', href: '/portfolio' },
+  { label: 'BLOG', href: '/blog' },
+];
+
+export default function Navbar() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      const el = document.getElementById('contact') || document.getElementById('footer');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      router.push('/#contact');
+    }
+    setMobileMenuOpen(false);
+  };
+
+  const isItemActive = (href) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  };
+
+  return (
+    <div className="te-univ-nav-wrapper">
+      <style dangerouslySetInnerHTML={{ __html: UNIVERSAL_NAVBAR_STYLES }} />
+
+      <header className="te-univ-nav-container">
+        <nav className="te-univ-navbar">
+          {/* LEFT: Official Logo */}
+          <Link href="/" className="te-univ-logo-link" title="TalentElla">
+            <img
+              src={logo?.src || logo}
+              alt="TalentElla"
+              className="te-univ-logo-img"
+            />
+          </Link>
+
+          {/* CENTER: Exact Nav Links */}
+          <div className="te-univ-nav-links">
+            {NAV_ITEMS.map((item) => {
+              const active = isItemActive(item.href);
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={`te-univ-nav-link ${active ? 'active' : ''}`}
                 >
-                    {/* Repeat exactly elements so we can scroll perfectly 50% */}
-                    {[...Array(6)].map((_, i) => (
-                        <div key={i} style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ fontSize: 'clamp(1.2rem, 5vw, 1.8rem)', fontWeight: 700, letterSpacing: '0.08em', margin: '0 1.5rem', color: '#000000' }}>{item}</span>
-                            <div style={{
-                                width: '70px',
-                                height: '35px',
-                                borderRadius: '50px',
-                                overflow: 'hidden',
-                                display: 'inline-block'
-                            }}>
-                                <img src={pillImg} alt="ocean" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" decoding="async" />
-                            </div>
-                        </div>
-                    ))}
-                </motion.div>
-            </div>
-        </a>
-    );
-};
-
-const Navbar = () => {
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
-    const [isNavigating, setIsNavigating] = useState(false);
-    const router = useRouter();
-    const location = { pathname: usePathname() };
-
-    useEffect(() => {
-        const check = () => setIsMobile(window.innerWidth <= 768);
-        check();
-        window.addEventListener('resize', check);
-        return () => window.removeEventListener('resize', check);
-    }, []);
-
-    useEffect(() => {
-        setIsNavigating(false);
-    }, [location.pathname]);
-
-    const toggleMenu = () => setIsOpen(!isOpen);
-
-    const handleNavClick = (e, targetId) => {
-        if (targetId) {
-            e.preventDefault();
-            if (location.pathname !== '/') {
-                // Navigate to home and then trigger scroll
-                router.push('/');
-                setTimeout(() => {
-                    const el = document.getElementById(targetId);
-                    if (el) {
-                        el.scrollIntoView({ behavior: 'auto' });
-                    }
-                }, 400); // More time for pages with high-quality media
-            } else {
-                const el = document.getElementById(targetId);
-                if (el) {
-                    // Let Lenis handle the smoothing natively
-                    el.scrollIntoView({ behavior: 'auto' });
-                }
-            }
-        }
-        if (isOpen) {
-            setTimeout(() => setIsOpen(false), 150);
-        }
-    };
-
-    // Keep the theme detection logic
-    useEffect(() => {
-        let ticking = false;
-
-        const checkTheme = () => {
-            const sections = [
-                { id: 'footer', isLight: true },
-                { id: 'contact', isLight: false },
-                { id: 'faq', isLight: true },
-                { id: 'process', isLight: true },
-                { id: 'production-portfolio', isLight: true },
-                { id: 'about', isLight: false },
-                { id: 'mobile-showcase', isLight: true },
-                { id: 'features', isLight: false },
-                { id: 'services', isLight: true },
-                { id: 'hero', isLight: false },
-            ];
-            
-            let overLight = false;
-            
-            for (let i = 0; i < sections.length; i++) {
-                let sectionEl = document.getElementById(sections[i].id);
-                if (!sectionEl) continue;
-                const stickyInner = sectionEl.querySelector('.sticky-section');
-                const rect = (stickyInner || sectionEl).getBoundingClientRect();
-                if (rect.top <= 100) {
-                    overLight = sections[i].isLight;
-                    break;
-                }
-            }
-            
-            setIsDarkTheme(overLight);
-            ticking = false;
-        };
-
-        const handleScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(checkTheme);
-                ticking = true;
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        checkTheme();
-        
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [location.pathname]);
-
-    const textColor = '#0f1015';
-    const borderColor = 'rgba(0, 0, 0, 0.08)';
-    const glassBg = 'rgba(255, 255, 255, 0.9)';
-
-    return (
-        <>
-        <motion.nav 
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            style={{ 
-                position: 'fixed', 
-                top: 0, 
-                left: 0, 
-                width: '100%', 
-                zIndex: 1000, 
-                backgroundColor: glassBg,
-                borderBottom: `1px solid ${borderColor}`,
-                backdropFilter: isMobile ? 'none' : 'blur(20px)',
-                WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
-            }}
-        >
-            <div style={{
-                maxWidth: '1400px',
-                margin: '0 auto',
-                padding: '0.8rem 5%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                width: '100%'
-            }}>
-                {/* Logo */}
-                <Link 
-                    href="/" 
-                    onClick={(e) => {
-                        if (location.pathname === '/') {
-                            e.preventDefault();
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        } else {
-                            window.scrollTo(0, 0);
-                        }
-                    }} 
-                    style={{ textDecoration: 'none' }}
-                >
-                    <motion.div 
-                        style={{ 
-                            display: 'flex',
-                            alignItems: 'center',
-                            cursor: 'pointer',
-                            pointerEvents: 'auto'
-                        }}
-                    >
-                        <img 
-                          src={logo?.src || logo} 
-                          alt="Talent Ella Logo" 
-                          fetchPriority="high"
-                          decoding="async"
-                          style={{ 
-                            height: '40px',
-                            width: 'auto',
-                            mixBlendMode: 'multiply',
-                            filter: 'none',
-                            borderRadius: '6px'
-                          }} 
-                        />
-                    </motion.div>
+                  {item.label}
                 </Link>
+              );
+            })}
+          </div>
 
-                {/* Navigation Menu */}
-                <div 
-                    className="hidden-mobile"
-                    style={{ 
-                        display: 'flex', 
-                        gap: '2rem', 
-                        alignItems: 'center',
-                        pointerEvents: 'auto',
-                    }}
-                >
-                            {['HOME', 'WEBSITE', 'SMM', 'IDENTITY', 'APP', 'PORTFOLIO', 'BLOG'].map((item, index) => {
-                        const isPageLink = !!PAGE_LINKS[item];
-                        const isActive = isPageLink ? location.pathname === PAGE_LINKS[item] : false;
-                        const activeColor = '#AC58E9';
-                        const linkColor = isActive ? activeColor : textColor;
-                        const linkOpacity = isActive ? 1 : (hoveredIndex === index ? 1 : 0.7);
+          {/* RIGHT: GET IN TOUCH Button */}
+          <div className="te-univ-right">
+            <a
+              href="#contact"
+              onClick={handleContactClick}
+              className="te-univ-get-in-touch-btn"
+            >
+              GET IN TOUCH
+            </a>
+          </div>
 
-                        return isPageLink ? (
-                            <Link
-                                key={item}
-                                href={PAGE_LINKS[item]}
-                                onClick={() => {
-                                    if (location.pathname !== PAGE_LINKS[item]) {
-                                        setIsNavigating(true);
-                                    }
-                                }}
-                                onMouseEnter={() => setHoveredIndex(index)}
-                                onMouseLeave={() => setHoveredIndex(null)}
-                                style={{
-                                    position: 'relative',
-                                    fontSize: '0.75rem',
-                                    fontWeight: 800,
-                                    letterSpacing: '0.12em',
-                                    color: linkColor,
-                                    opacity: linkOpacity,
-                                    transition: 'opacity 0.3s ease, color 0.3s ease',
-                                    cursor: 'pointer',
-                                    textDecoration: 'none',
-                                    padding: '0.5rem 0',
-                                    outline: 'none'
-                                }}
-                            >
-                                {item}
-                                {hoveredIndex === index && (
-                                    <motion.div
-                                        layoutId="nav-underline"
-                                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                                        style={{ position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '2px', backgroundColor: activeColor, borderRadius: '2px' }}
-                                    />
-                                )}
-                            </Link>
-                        ) : (
-                            <motion.a
-                                key={item}
-                                href={`#${item.toLowerCase()}`}
-                                onClick={(e) => handleNavClick(e, item.toLowerCase())}
-                                onHoverStart={() => setHoveredIndex(index)}
-                                onHoverEnd={() => setHoveredIndex(null)}
-                                style={{
-                                    position: 'relative',
-                                    fontSize: '0.75rem',
-                                    fontWeight: 800,
-                                    letterSpacing: '0.12em',
-                                    color: linkColor,
-                                    opacity: linkOpacity,
-                                    transition: 'opacity 0.3s ease, color 0.3s ease',
-                                    cursor: 'pointer',
-                                    textDecoration: 'none',
-                                    padding: '0.5rem 0'
-                                }}
-                            >
-                                {item}
-                                {hoveredIndex === index && (
-                                    <motion.div
-                                        layoutId="nav-underline"
-                                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                                        style={{ position: 'absolute', bottom: '-2px', left: 0, right: 0, height: '2px', backgroundColor: activeColor, borderRadius: '2px' }}
-                                    />
-                                )}
-                            </motion.a>
-                        );
-                    })}
-                </div>
+          {/* MOBILE: Toggle button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="te-univ-mobile-toggle"
+            aria-label="Toggle Menu"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </nav>
+      </header>
 
-                {/* Action Button */}
-                <div className="hidden-mobile" style={{ pointerEvents: 'auto' }}>
-                        <Link href="/#contact" onClick={(e) => handleNavClick(e, 'contact')} scroll={false} style={{ textDecoration: 'none' }}>
-                        <motion.div 
-                          whileHover={{ scale: 1.05, y: -1, boxShadow: '0 8px 20px rgba(172, 88, 233, 0.3)' }}
-                          whileTap={{ scale: 0.98 }}
-                          style={{ 
-                              padding: '0.65rem 1.6rem', 
-                              fontSize: '0.75rem', 
-                              fontWeight: 800,
-                              borderRadius: '100px',
-                              display: 'inline-flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                              letterSpacing: '0.05em',
-                              backgroundColor: '#0f1015',
-                              color: '#ffffff',
-                              border: '1px solid #0f1015',
-                              transition: 'all 0.3s ease'
-                          }}
-                        >
-                            GET IN TOUCH
-                        </motion.div>
-                    </Link>
-                </div>
-
-                {/* Mobile Hamburger Icon */}
-                <div className="show-mobile" style={{ pointerEvents: 'auto' }}>
-                   <button onClick={toggleMenu} style={{ background: 'none', border: 'none', color: textColor, cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                       <Menu size={28} />
-                   </button>
-                </div>
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="te-univ-sheet-overlay" onClick={() => setMobileMenuOpen(false)}>
+          <div className="te-univ-sheet" onClick={(e) => e.stopPropagation()}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderBottom: '1px solid #f3f4f6',
+                paddingBottom: '14px',
+              }}
+            >
+              <img
+                src={logo?.src || logo}
+                alt="TalentElla"
+                style={{ height: '34px', width: 'auto', mixBlendMode: 'multiply' }}
+              />
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: '9999px',
+                  background: '#f3f4f6',
+                  border: 'none',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <X size={16} />
+              </button>
             </div>
-        </motion.nav>
 
-            {/* Mobile Fullscreen Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: '-100%' }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: '-100%' }}
-                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                        style={{
-                            position: 'fixed',
-                            top: 0, left: 0, right: 0, bottom: 0,
-                            backgroundColor: '#050508',
-                            zIndex: 2000,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            color: 'white',
-                            padding: '2rem'
-                        }}
-                    >
-                        <button onClick={toggleMenu} style={{ position: 'absolute', top: '1.5rem', right: '5%', background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
-                            <X size={36} />
-                        </button>
-                        
-                        <div style={{ display: 'flex', flexDirection: 'column', width: '100%', textAlign: 'center', overflowY: 'auto', flex: 1, justifyContent: 'center' }}>
-                    {['HOME', 'WEBSITE', 'SMM', 'IDENTITY', 'APP', 'PORTFOLIO', 'BLOG'].map((item, index) => {
-                                const isActive = PAGE_LINKS[item] ? location.pathname === PAGE_LINKS[item] : false;
-                                return PAGE_LINKS[item] ? (
-                                    <Link
-                                        key={item}
-                                        href={PAGE_LINKS[item]}
-                                        onClick={() => {
-                                            if (location.pathname !== PAGE_LINKS[item]) {
-                                                setIsNavigating(true);
-                                            }
-                                            setTimeout(() => setIsOpen(false), 150);
-                                        }}
-                                        style={{
-                                            width: '100%',
-                                            padding: '1.4rem 0',
-                                            color: isActive ? '#AC58E9' : 'white',
-                                            textDecoration: 'none',
-                                            borderBottom: '1px solid rgba(255,255,255,0.08)',
-                                            borderTop: index === 0 ? '1px solid rgba(255,255,255,0.08)' : 'none',
-                                            display: 'block',
-                                            fontSize: 'clamp(1.2rem, 5vw, 1.8rem)',
-                                            fontWeight: 700,
-                                            letterSpacing: '0.08em',
-                                            transition: 'color 0.3s ease',
-                                        }}
-                                    >
-                                        {item}
-                                    </Link>
-                                ) : (
-                                    <MobileMenuItem
-                                        key={item}
-                                        item={item}
-                                        index={index}
-                                        handleNavClick={handleNavClick}
-                                    />
-                                );
-                            })}
-                        </div>
-                        <Link href="/#contact" onClick={(e) => { handleNavClick(e, 'contact'); }} scroll={false} style={{ textDecoration: 'none', marginTop: '1.5rem', width: '100%', maxWidth: '280px' }}>
-                            <motion.div
-                                whileTap={{ scale: 0.95 }}
-                                style={{
-                                    padding: '0.9rem 2rem',
-                                    fontSize: '0.8rem',
-                                    fontWeight: 800,
-                                    borderRadius: '100px',
-                                    textAlign: 'center',
-                                    letterSpacing: '0.08em',
-                                    backgroundColor: '#AC58E9',
-                                    color: '#000',
-                                }}
-                            >
-                                GET IN TOUCH
-                            </motion.div>
-                        </Link>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {NAV_ITEMS.map((item) => {
+                const active = isItemActive(item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 700,
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      color: active ? '#AC58E9' : '#0f1015',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
 
-            {/* Navigation Loading Progress Bar */}
-            <AnimatePresence>
-                {isNavigating && (
-                    <motion.div
-                        initial={{ scaleX: 0, opacity: 1 }}
-                        animate={{ scaleX: 1, opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 2, ease: "linear" }}
-                        style={{
-                            position: 'fixed',
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            height: '3px',
-                            backgroundColor: '#AC58E9',
-                            transformOrigin: 'left',
-                            zIndex: 9999,
-                            boxShadow: '0 0 10px #AC58E9'
-                        }}
-                    />
-                )}
-            </AnimatePresence>
-        </>
-    );
-};
-
-export default Navbar;
+            <a
+              href="#contact"
+              onClick={handleContactClick}
+              className="te-univ-get-in-touch-btn"
+              style={{
+                width: '100%',
+                padding: '14px 24px',
+                fontSize: '13px',
+              }}
+            >
+              GET IN TOUCH
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
