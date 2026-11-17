@@ -21,16 +21,15 @@ const row2Logos = [
 const METRICS = [
   { value: '80+', label: 'Projects & Brands Scaled' },
   { value: '75%', label: 'Client Retention Rate' },
-  { value: '1–30', label: 'Team Sizes Supported' },
+  { value: '1–30', label: 'Team Size Supported' },
   { value: '100%', label: 'Founder-Led Attention' },
 ];
 
 const INDUSTRIES = [
-  'Early-Stage Startups',
+  'Startups',
   'E-Commerce & D2C',
   'Mobile & Web Apps',
-  'Regional Growth Brands',
-  'Creators & Media',
+  'Creator Brands',
   'B2B Services',
 ];
 
@@ -40,7 +39,7 @@ const ClientsSection = () => {
       <style dangerouslySetInnerHTML={{ __html: `
         .te-clients-section {
           background-color: #ffffff;
-          padding: clamp(60px, 8vw, 100px) 0 clamp(70px, 9vw, 110px);
+          padding: clamp(64px, 8vw, 108px) 0 clamp(72px, 9vw, 116px);
           position: relative;
           z-index: 38;
           font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
@@ -50,108 +49,91 @@ const ClientsSection = () => {
         .te-clients-container {
           max-width: 1320px;
           margin: 0 auto;
-          padding: 0 clamp(18px, 3vw, 32px);
+          padding: 0 clamp(20px, 4vw, 36px);
           box-sizing: border-box;
         }
 
-        /* ── Header ── */
+        /* ── Minimal Editorial Header ── */
         .te-clients-header {
           text-align: center;
-          max-width: 820px;
-          margin: 0 auto clamp(40px, 5vw, 56px);
+          max-width: 760px;
+          margin: 0 auto;
         }
 
         .te-clients-badge {
           display: inline-flex;
           align-items: center;
-          gap: 6px;
+          gap: 7px;
           font-size: 11px;
           font-weight: 700;
           letter-spacing: 0.18em;
           color: #7c3aed;
           text-transform: uppercase;
-          background: rgba(124, 58, 237, 0.08);
+          background: rgba(124, 58, 237, 0.06);
           border: 1px solid rgba(124, 58, 237, 0.16);
           padding: 6px 14px;
           border-radius: 9999px;
-          margin-bottom: 18px;
+          margin-bottom: 20px;
           font-family: 'Space Grotesk', system-ui, sans-serif;
         }
 
         .te-clients-title {
-          font-size: clamp(2.4rem, 4.8vw, 4rem);
+          font-size: clamp(2.4rem, 4.8vw, 3.8rem);
           font-weight: 800;
-          letter-spacing: -0.03em;
+          letter-spacing: -0.035em;
           color: #0f1015;
-          line-height: 1.06;
+          line-height: 1.05;
           margin: 0 0 16px 0;
           text-transform: uppercase;
           font-family: 'Space Grotesk', system-ui, sans-serif;
         }
 
-        .te-clients-title .te-serif-italic {
-          font-family: 'Bespoke Serif', Georgia, serif;
-          font-style: italic;
-          font-weight: 400;
-          letter-spacing: -0.01em;
-          padding-right: 0.08em;
-        }
-
         .te-clients-subtitle {
-          font-size: clamp(15px, 1.3vw, 17px);
+          font-size: clamp(15px, 1.25vw, 16.5px);
           line-height: 1.65;
           color: #555869;
           margin: 0 auto;
           font-weight: 400;
-          max-width: 680px;
+          max-width: 640px;
         }
 
-        /* ── Industry Pills ── */
-        .te-industry-pills {
+        /* Subtle Industry Tagline */
+        .te-industry-line {
           display: flex;
-          flex-wrap: wrap;
+          align-items: center;
           justify-content: center;
-          gap: 8px 10px;
-          margin-top: 24px;
-        }
-
-        .te-industry-pill {
-          font-size: 12px;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 22px;
+          font-size: 13px;
           font-weight: 600;
-          color: #4b4f63;
-          background: #f8fafc;
-          border: 1px solid rgba(0, 0, 0, 0.06);
-          padding: 6px 14px;
-          border-radius: 9999px;
+          color: #64748b;
           letter-spacing: 0.02em;
-          transition: all 0.25s ease;
         }
 
-        .te-industry-pill:hover {
-          color: #7c3aed;
-          border-color: rgba(124, 58, 237, 0.25);
-          background: #faf5ff;
+        .te-industry-sep {
+          color: #cbd5e1;
+          font-size: 11px;
         }
 
-        /* ── Metrics Bar ── */
-        .te-metrics-bar {
+        /* ── Minimal Hairline Metric Grid (No bulky box) ── */
+        .te-hairline-metrics {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          background: #fcfcfd;
-          border: 1px solid rgba(0, 0, 0, 0.07);
-          border-radius: 20px;
-          padding: clamp(20px, 3vw, 28px) clamp(16px, 2.5vw, 32px);
-          margin-bottom: clamp(48px, 6vw, 68px);
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+          border-top: 1px solid rgba(0, 0, 0, 0.08);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+          padding: clamp(34px, 4vw, 46px) 0;
+          margin: clamp(42px, 5vw, 64px) 0 clamp(50px, 6vw, 76px) 0;
+          width: 100%;
         }
 
-        .te-metric-item {
+        .te-hairline-item {
           text-align: center;
           position: relative;
-          padding: 8px 12px;
+          padding: 0 clamp(12px, 2vw, 24px);
         }
 
-        .te-metric-item:not(:last-child)::after {
+        .te-hairline-item:not(:last-child)::after {
           content: '';
           position: absolute;
           right: 0;
@@ -161,42 +143,42 @@ const ClientsSection = () => {
           background: rgba(0, 0, 0, 0.08);
         }
 
-        .te-metric-number {
-          font-size: clamp(2rem, 3.2vw, 2.8rem);
+        .te-hairline-number {
+          font-size: clamp(2.4rem, 3.8vw, 3.4rem);
           font-weight: 800;
           color: #0f1015;
-          line-height: 1.1;
-          letter-spacing: -0.03em;
+          line-height: 1;
+          letter-spacing: -0.04em;
           font-family: 'Space Grotesk', system-ui, sans-serif;
-          margin-bottom: 6px;
+          margin-bottom: 8px;
         }
 
-        .te-metric-label {
-          font-size: clamp(11.5px, 1.05vw, 13px);
+        .te-hairline-label {
+          font-size: clamp(11.5px, 1.05vw, 12.5px);
           font-weight: 600;
           color: #64748b;
-          letter-spacing: 0.02em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
         }
 
-        /* ── Full-Width Smooth Marquee Tracks ── */
+        /* ── Seamless Full-Width Marquee ── */
         .te-marquee-container {
           position: relative;
           width: 100%;
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          gap: 18px;
-          padding: 10px 0;
+          gap: 16px;
+          padding: 6px 0;
         }
 
-        /* Gradient Edge Fade Out */
+        /* Soft Left & Right Edge Vignettes */
         .te-marquee-fade-left,
         .te-marquee-fade-right {
           position: absolute;
           top: 0;
           bottom: 0;
-          width: clamp(60px, 12vw, 180px);
+          width: clamp(60px, 14vw, 200px);
           z-index: 10;
           pointer-events: none;
         }
@@ -221,7 +203,7 @@ const ClientsSection = () => {
         .te-marquee-track {
           display: flex;
           align-items: center;
-          gap: 20px;
+          gap: 18px;
           width: max-content;
           will-change: transform;
         }
@@ -231,11 +213,11 @@ const ClientsSection = () => {
         }
 
         .te-marquee-left {
-          animation: teScrollLeft 36s linear infinite;
+          animation: teScrollLeft 34s linear infinite;
         }
 
         .te-marquee-right {
-          animation: teScrollRight 36s linear infinite;
+          animation: teScrollRight 34s linear infinite;
         }
 
         @keyframes teScrollLeft {
@@ -256,49 +238,48 @@ const ClientsSection = () => {
           }
         }
 
-        /* ── Sleek Logo Cards ── */
+        /* ── Minimalist Logo Tiles ── */
         .te-logo-card {
-          width: clamp(190px, 17vw, 240px);
-          height: 94px;
+          width: clamp(180px, 16vw, 220px);
+          height: 88px;
           background: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.08);
-          border-radius: 18px;
+          border: 1px solid rgba(0, 0, 0, 0.07);
+          border-radius: 14px;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 16px 26px;
+          padding: 14px 22px;
           box-sizing: border-box;
           flex-shrink: 0;
           cursor: pointer;
-          transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .te-logo-card:hover {
-          transform: translateY(-4px);
-          border-color: rgba(124, 58, 237, 0.35);
-          box-shadow: 0 12px 28px rgba(124, 58, 237, 0.1);
+          transform: translateY(-3px);
+          border-color: rgba(124, 58, 237, 0.3);
+          box-shadow: 0 10px 24px rgba(124, 58, 237, 0.08);
           background: #faf8ff;
         }
 
         .te-logo-img {
-          max-height: 46px;
-          max-width: 150px;
+          max-height: 44px;
+          max-width: 140px;
           width: auto;
           height: auto;
           object-fit: contain;
           filter: grayscale(100%);
           opacity: 0.65;
-          transition: all 0.35s ease;
+          transition: all 0.3s ease;
         }
 
         .te-logo-card:hover .te-logo-img {
           filter: grayscale(0%);
           opacity: 1;
-          transform: scale(1.05);
+          transform: scale(1.04);
         }
 
-        /* Specific rule for white logos on light background */
+        /* White logo inverted for crisp contrast */
         .te-logo-img-darkened {
           filter: brightness(0) grayscale(100%);
           opacity: 0.6;
@@ -307,51 +288,58 @@ const ClientsSection = () => {
         .te-logo-card:hover .te-logo-img-darkened {
           filter: brightness(0);
           opacity: 0.95;
-          transform: scale(1.05);
+          transform: scale(1.04);
         }
 
-        /* ── Responsive Queries ── */
+        /* ── Responsive Refinements ── */
         @media (max-width: 1024px) {
-          .te-metrics-bar {
+          .te-hairline-metrics {
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px 0;
-            padding: 24px 16px;
+            row-gap: 28px;
+            padding: 30px 0;
           }
-          .te-metric-item:nth-child(2)::after {
+          .te-hairline-item:nth-child(2)::after {
             display: none;
           }
-          .te-metric-item::after {
-            top: 20%;
-            height: 60%;
+          .te-hairline-item::after {
+            top: 15%;
+            height: 70%;
           }
         }
 
         @media (max-width: 640px) {
-          .te-metrics-bar {
+          .te-hairline-metrics {
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px 0;
-            padding: 18px 12px;
-            border-radius: 16px;
-            margin-bottom: 36px;
+            row-gap: 22px;
+            padding: 24px 0;
+            margin: 32px 0 44px 0;
+          }
+          .te-hairline-number {
+            font-size: 2.2rem;
+          }
+          .te-hairline-label {
+            font-size: 11px;
+          }
+          .te-industry-line {
+            gap: 8px;
+            font-size: 12px;
           }
           .te-logo-card {
-            width: 160px;
-            height: 80px;
-            padding: 12px 18px;
-            border-radius: 14px;
+            width: 150px;
+            height: 76px;
+            padding: 12px 16px;
+            border-radius: 12px;
           }
           .te-logo-img {
-            max-height: 38px;
-            max-width: 120px;
+            max-height: 36px;
+            max-width: 110px;
           }
           .te-marquee-container {
-            gap: 14px;
+            gap: 12px;
           }
-          .te-marquee-left {
-            animation-duration: 24s;
-          }
+          .te-marquee-left,
           .te-marquee-right {
-            animation-duration: 24s;
+            animation-duration: 22s;
           }
         }
 
@@ -363,37 +351,39 @@ const ClientsSection = () => {
         }
       `}} />
 
-      {/* Main Content Container */}
+      {/* Main Container */}
       <div className="te-clients-container">
-        {/* Header Block */}
+        {/* Clean Minimal Header */}
         <div className="te-clients-header">
           <div className="te-clients-badge">
             <span>✦</span>
             <span>WHO WE SERVE</span>
+            <span>✦</span>
           </div>
 
-          <h2 className="te-clients-title">WHO WE WORK <em className="te-serif-italic">WITH</em></h2>
+          <h2 className="te-clients-title">WHO WE WORK WITH</h2>
 
           <p className="te-clients-subtitle">
             From ambitious founders to growing teams of up to 30 people, we provide dedicated, founder-led engineering and creative direction to launch and scale your business.
           </p>
 
-          {/* Industry Focus Tags */}
-          <div className="te-industry-pills">
+          {/* Minimalist Industry Line (No scattered pill boxes) */}
+          <div className="te-industry-line">
             {INDUSTRIES.map((ind, i) => (
-              <span key={i} className="te-industry-pill">
-                {ind}
-              </span>
+              <React.Fragment key={i}>
+                <span>{ind}</span>
+                {i < INDUSTRIES.length - 1 && <span className="te-industry-sep">•</span>}
+              </React.Fragment>
             ))}
           </div>
         </div>
 
-        {/* Live Metrics Bar */}
-        <div className="te-metrics-bar">
+        {/* Minimal Hairline Metrics Strip (Replaces bulky box) */}
+        <div className="te-hairline-metrics">
           {METRICS.map((m, idx) => (
-            <div key={idx} className="te-metric-item">
-              <div className="te-metric-number">{m.value}</div>
-              <div className="te-metric-label">{m.label}</div>
+            <div key={idx} className="te-hairline-item">
+              <div className="te-hairline-number">{m.value}</div>
+              <div className="te-hairline-label">{m.label}</div>
             </div>
           ))}
         </div>

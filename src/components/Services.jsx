@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -11,6 +11,7 @@ import {
   Camera,
   Palette,
   ArrowUpRight,
+  ArrowRight,
 } from 'lucide-react';
 
 const SERVICES_DATA = [
@@ -81,7 +82,10 @@ const SERVICES_BENTO_STYLES = `
     margin: 0 auto;
   }
 
-  .services-bento-grid {
+  /* ─────────────────────────────────────────────────────────────
+     DESKTOP BENTO GRID (> 768px)
+     ───────────────────────────────────────────────────────────── */
+  .services-bento-desktop-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(260px, auto);
@@ -92,7 +96,7 @@ const SERVICES_BENTO_STYLES = `
     overflow: hidden;
   }
 
-  /* ── Title Cell (Spans 2 columns) ── */
+  /* Title Cell (Spans 2 columns) */
   .services-bento-title-cell {
     grid-column: span 2;
     background-color: #ffffff;
@@ -155,7 +159,7 @@ const SERVICES_BENTO_STYLES = `
     margin-top: 24px;
   }
 
-  /* ── Service Card Cell ── */
+  /* Desktop Service Card */
   .service-bento-card {
     background-color: #ffffff;
     padding: clamp(24px, 2.5vw, 36px);
@@ -229,7 +233,7 @@ const SERVICES_BENTO_STYLES = `
     margin: 0 0 0.5rem 0;
     line-height: 1.2;
     letter-spacing: -0.015em;
-    font-family: 'Bespoke Serif', Georgia, serif;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     transition: color 0.25s ease;
   }
 
@@ -245,45 +249,199 @@ const SERVICES_BENTO_STYLES = `
     font-weight: 400;
   }
 
-  /* ── Responsive Queries ── */
+  /* ─────────────────────────────────────────────────────────────
+     MOBILE HORIZONTAL SCROLL CAROUSEL (<= 768px)
+     ───────────────────────────────────────────────────────────── */
+  .services-mobile-layout {
+    display: none;
+  }
+
   @media (max-width: 1024px) {
-    .services-bento-grid {
+    .services-bento-desktop-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  @media (max-width: 640px) {
-    .services-bento-grid {
-      grid-template-columns: 1fr;
+  @media (max-width: 768px) {
+    .services-bento-section {
+      padding: clamp(60px, 9vw, 80px) 0 clamp(48px, 8vw, 68px) 0;
     }
-    .services-bento-title-cell {
-      grid-column: span 1;
-      padding: 24px 20px;
+
+    .services-bento-desktop-grid {
+      display: none;
     }
-    .service-bento-card {
-      padding: 24px 20px;
-      min-height: 200px;
+
+    .services-mobile-layout {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .services-mobile-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 clamp(18px, 4vw, 24px) 24px clamp(18px, 4vw, 24px);
+    }
+
+    .services-mobile-layout .services-bento-badge {
+      margin: 0 auto 12px auto;
+      font-size: 10px;
+      padding: 5px 12px;
+      align-self: center;
+    }
+
+    .services-mobile-layout .services-bento-title {
+      font-size: clamp(1.9rem, 7.5vw, 2.5rem);
+      line-height: 1.08;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .services-mobile-layout .services-bento-sub {
+      font-size: 13.5px;
+      line-height: 1.5;
+      margin: 10px auto 0 auto;
+      max-width: 100%;
+      text-align: center;
+    }
+
+    .services-mobile-swipe-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #7c3aed;
+      background: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.16);
+      padding: 5px 14px;
+      border-radius: 9999px;
+      margin: 16px auto 0 auto;
+      width: fit-content;
+      align-self: center;
+    }
+
+    /* Horizontal Carousel Track */
+    .services-mobile-carousel {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 8px clamp(18px, 4vw, 24px) 20px clamp(18px, 4vw, 24px);
+      margin: 0;
+    }
+
+    .services-mobile-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Individual Swipeable Card */
+    .services-mobile-card {
+      width: clamp(260px, 78vw, 300px);
+      min-width: clamp(260px, 78vw, 300px);
+      height: 240px;
+      flex-shrink: 0;
+      scroll-snap-align: start;
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 20px;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+      text-decoration: none !important;
+      color: #0f1015 !important;
+      box-sizing: border-box;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .services-mobile-card:active {
+      transform: scale(0.98);
+      box-shadow: 0 6px 20px rgba(124, 58, 237, 0.12);
+    }
+
+    .services-mobile-card.lavender-cell {
+      background-color: #fbf8ff;
+      border-color: rgba(124, 58, 237, 0.18);
+    }
+
+    .services-mobile-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .services-mobile-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background-color: rgba(124, 58, 237, 0.08);
+      border: 1px solid rgba(124, 58, 237, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7c3aed;
+    }
+
+    .services-mobile-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #f8fafc;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7c3aed;
+    }
+
+    .services-mobile-card-num {
+      font-size: 11px;
+      font-weight: 800;
+      color: #AC58E9;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+    }
+
+    .services-mobile-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #0f1015;
+      margin: 0 0 6px 0;
+      line-height: 1.2;
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      letter-spacing: -0.015em;
+    }
+
+    .services-mobile-card-desc {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: #64748b;
+      margin: 0;
     }
   }
 `;
 
 export default function Services() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
   return (
     <section id="services" className="services-bento-section">
       <style dangerouslySetInnerHTML={{ __html: SERVICES_BENTO_STYLES }} />
 
       <div className="services-bento-container">
-        {/* Bento Grid Layout (Exact matching feature design) */}
-        <div className="services-bento-grid">
+        {/* ── DESKTOP VIEW (> 768px): Bento Grid ── */}
+        <div className="services-bento-desktop-grid">
           {/* Main Title Box (Spans 2 columns) */}
           <div className="services-bento-title-cell">
             <div>
@@ -324,14 +482,14 @@ export default function Services() {
             </div>
           </div>
 
-          {/* All 6 Services rendered cleanly as Bento Cells */}
+          {/* All 6 Services rendered cleanly as Desktop Bento Cells */}
           {SERVICES_DATA.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={service.id}
-                initial={isMobile ? {} : { opacity: 0, y: 20 }}
-                whileInView={isMobile ? {} : { opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
                 style={{ display: 'contents' }}
@@ -357,6 +515,60 @@ export default function Services() {
               </motion.div>
             );
           })}
+        </div>
+
+        {/* ── MOBILE VIEW (<= 768px): Header + Horizontal Scrollable Carousel ── */}
+        <div className="services-mobile-layout">
+          <div className="services-mobile-header">
+            <div className="services-bento-badge">
+              <span>✦</span>
+              <span>CORE CAPABILITIES</span>
+              <span>✦</span>
+            </div>
+
+            <h2 className="services-bento-title">
+              FULL-STACK <em className="te-serif-italic">SERVICES</em>
+            </h2>
+
+            <p className="services-bento-sub">
+              High-performance engineering, scroll-stopping creative, and 360° growth architecture
+              crafted to dominate your category.
+            </p>
+
+            <div className="services-mobile-swipe-pill">
+              <span>Swipe to explore</span>
+              <ArrowRight size={13} />
+            </div>
+          </div>
+
+          {/* Horizontal Scroll Track */}
+          <div className="services-mobile-carousel">
+            {SERVICES_DATA.map((service) => {
+              const Icon = service.icon;
+              return (
+                <Link
+                  key={service.id}
+                  href={service.href}
+                  className={`services-mobile-card ${service.isLavender ? 'lavender-cell' : ''}`}
+                >
+                  <div className="services-mobile-card-top">
+                    <div className="services-mobile-icon-box">
+                      <Icon size={20} />
+                    </div>
+                    <div className="services-mobile-arrow">
+                      <ArrowUpRight size={16} />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="services-mobile-card-num">{service.num}</div>
+                    <h3 className="services-mobile-card-title">{service.title}</h3>
+                    <p className="services-mobile-card-desc">{service.description}</p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
