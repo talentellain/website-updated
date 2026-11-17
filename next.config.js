@@ -1,8 +1,15 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  transpilePackages: ['shaders'],
   images: {
     formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 86400,
@@ -63,14 +70,18 @@ const nextConfig = {
     ]
   },
   webpack(config, { isServer }) {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'shaders/react$': path.resolve(__dirname, 'node_modules/shaders/dist/react/index.js'),
+    };
     config.module.rules.push({
       test: /\.(mp4|webm|ogg)$/i,
       type: 'asset/resource',
       generator: {
         filename: 'static/media/[name].[hash][ext]',
       },
-    })
-    return config
+    });
+    return config;
   },
 }
 
